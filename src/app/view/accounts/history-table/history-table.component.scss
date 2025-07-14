@@ -1,0 +1,38 @@
+.history_table{
+    .mat-mdc-header-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  
+    }
+  
+    .mat-mdc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  
+  
+    }
+  }
+
+.history_table_his {
+  .mat-mdc-header-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .mat-mdc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  &.layout__1 {
+    .mat-mdc-header-row {
+      display: grid;
+      grid-template-columns: 0.5fr 1fr 0.6fr 1fr 4fr;
+    }
+
+    .mat-mdc-row {
+      display: grid;
+      grid-template-columns: 0.5fr 1fr 0.6fr 1fr 4fr;
+    }
+  }
+}

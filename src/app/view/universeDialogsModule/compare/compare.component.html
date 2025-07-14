@@ -1,0 +1,191 @@
+<div class="close-l-popup" (click)="close()"><span class="material-icons">close</span></div>
+@if(showSpinnerAcc_loaded){
+<div class="mat-spinner-loader-popup">
+  <mat-spinner class="reviewloader-spinner" style=""></mat-spinner>
+</div>
+}
+<div class="equity_index_comp" id="compare__Comp">
+  <div class="basedOn__sec__popup" style="z-index:999" *ngIf="selectedCat != null">
+    <span class="indName" *ngIf="selectedCat.indexName != null">
+      {{selectedCat.indexName}}
+    </span>
+    <span class="indName" *ngIf="sharedData.nullCheck(selectedCat, 'ETFIndex')">
+      {{selectedCat.ETFIndex}}
+    </span>
+    @if(sharedData.nullCheck(selectedCat, 'ETFIndex') || sharedData.nullCheck(selectedCat, 'indexName')){
+    <span class="divided ml0rem mr0_5rem" style="padding-left: 0.25rem;"> | </span>
+    }
+    <span class="basedOn" *ngIf="sharedData.nullCheck(selectedCat, 'name') && selectedCat.name != null">
+      {{selectedCat.name}}
+    </span>
+
+  </div>
+  <div class="left-l">
+    <h4 class="subHead mb2rem pl0_5rem">Compare</h4>
+    <h3 class="timeTitle">
+      <span>{{selectedCompName}}</span>
+      <span *ngIf="selectedCompTicker != ''" class="" style="padding-left: 0.25rem; color: var(--leftSideText-B); ">({{selectedCompTicker}})</span>
+    </h3>
+  </div>
+  <div class="center-l">
+    <svg id="compareCircle" class="commonSVGCircle" viewBox="180 41 1220 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <!--<circle class="start-ring1" fill="var(--primary-color)" id="maincircle1" r="395" transform="translate(810, 405)"></circle>-->
+      <g id="gchart" transform="translate(810 ,402)">
+        <g id="crlChart"></g>
+        <g class="HF_Val Sel_midComp" transform="translate(0,0)">
+          <g>
+
+            <g>
+              <text class="SelCompName" x="0" y="0"></text>
+            </g>
+            <!-- <text class="clicked__comp__value probabilityScore" x="115" y="17">{{selectedProbability}}</text> -->
+          </g>
+        </g>
+        <g transform="translate(-30, 90)">
+          <text y="0" x="0" class="header" style="font-family: var(--ff-regular);; text-anchor: start; font-size: 11.5px; fill: var(--paraFontColorAlt) !important; cursor: inherit !important;">Rank:</text>
+          <text y="0" x="35" class="compRank" style="font-family: var(--ff-medium); text-anchor: start; font-size: 11.5px; fill: var(--leftSideText-B) !important; cursor: inherit !important;">{{selectedRank}}</text>
+        </g>
+        <g class="RCsince-info" transform="translate(9, 105)">
+          <g style="transform: translate(-18px, -4px);cursor: pointer;">
+            <rect width="20" height="20" x="2" style="fill:transparent"></rect>
+            <svg width="18.5" height="18.5" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
+              <path d="M32 59C39.4261 59 46.548 56.05 51.799 50.799C57.05 45.548 60 38.4261 60 31C60 23.5739 57.05 16.452 51.799 11.201C46.548 5.94999 39.4261 3 32 3C24.5739 3 17.452 5.94999 12.201 11.201C6.94999 16.452 4 23.5739 4 31C4 38.4261 6.94999 45.548 12.201 50.799C17.452 56.05 24.5739 59 32 59V59ZM35.255 26.058L31.755 42.5255C31.51 43.7155 31.8565 44.391 32.819 44.391C33.498 44.391 34.5235 44.146 35.22 43.53L34.912 44.986C33.9075 46.197 31.692 47.079 29.7845 47.079C27.324 47.079 26.2775 45.602 26.9565 42.4625L29.5395 30.3245C29.7635 29.299 29.5605 28.928 28.535 28.6795L26.9565 28.396L27.2435 27.0625L35.2585 26.058H35.255ZM32 22.25C31.0717 22.25 30.1815 21.8813 29.5251 21.2249C28.8687 20.5685 28.5 19.6783 28.5 18.75C28.5 17.8217 28.8687 16.9315 29.5251 16.2751C30.1815 15.6187 31.0717 15.25 32 15.25C32.9283 15.25 33.8185 15.6187 34.4749 16.2751C35.1313 16.9315 35.5 17.8217 35.5 18.75C35.5 19.6783 35.1313 20.5685 34.4749 21.2249C33.8185 21.8813 32.9283 22.25 32 22.25V22.25Z" fill="white" style=" fill: var(--prim-button-color)"></path>
+            </svg>
+          </g>
+          <g class="RCsince" transform="translate(-4, -48)" style="display:none">
+            <g style="transform: translate(2px, 42px);">
+              <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+            </g>
+            <rect width="158" height="40" fill="transparent" style="stroke: #444455; fill: var(--topNavbar) !important;" rx="5" ry="5" x="-83" y="-5.5"></rect>
+            <!-- <text style="font-family: var(--ff-medium); text-anchor: start; font-style: italic; font-size: 11px; fill: var(--leftSideText-B); text-transform: unset;" x="-73" y="18">Holdings as of: </text> -->
+            <text id="sinceRCIncep" y="18" x="-3" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 11px;    text-transform: inherit; fill: var(--leftSideText-B);"></text>
+          </g>
+        </g>
+      </g>
+
+    </svg>
+  </div>
+  <div class="right-l">
+    @if((sharedData.checkMenuPer(2027, 2236) == 'Y' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2252) == 'Y')){
+    @if(showSelectAllBtn){
+    <div class="mat__Div">
+      <mat-slide-toggle [checked]="compSelectAll" class="example-margin preLabel" (change)="onSelAllChange($event)"> Select All</mat-slide-toggle>
+    </div>
+    }
+    <div class="icon__details">
+      <div class="d-flex align-items-center justify-content-between comp__head pb0rem pl1rem pr1rem">
+        @if(compGridData.length>0){
+        <h4 class="d-flex align-items-center">
+          Components
+          <span class="count d-flex">{{compGridData.length}}</span>
+        </h4>
+        }@else{
+        <h4 class="d-flex align-items-center">Components</h4>
+        }
+        <span class="no_line_height d-flex align-items-center">
+          <span class="material-icons mr0_5rem" (click)="openSearch()">
+            search
+          </span>
+          <div class="dropdown">
+            <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              swap_vert
+            </span>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <!-- <div class="component sortbyComp" style="margin-top: 0.5rem; margin-bottom: 0; ">
+                <div class="dropSpace">
+                  <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+                  <div class="component sortbyComp">
+                    <span class="title">Ascending</span>
+                    <div class="mat__toggle">
+                      <mat-slide-toggle [checked]="ascending_val" (change)="onToggleAscending($event)" class="example-margin preLabel"></mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <ul>
+                <li class="d-flex">
+                  <a class="dropdown-item sort_btn">Sort by
+                    <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('R','compare')"><span  class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem"> refresh</span> Reset</button>
+                  </a>
+               
+                </li>
+                <li *ngFor="let item of FilterList">
+                  <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                  <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                    @if(ascending_val){
+                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                            fill="#fff" />
+                      <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                            fill="#fff" style="opacity: 0.2;" />
+                    </svg>
+                    }
+                    @else{
+                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                            fill="#fff" style="opacity: 0.2;" />
+                      <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                            fill="#fff" />
+                    </svg>
+                    }
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </span>
+      </div>
+      <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+        <div class="d-flex align-items-center">
+          <span class="material-icons disable">
+            search
+          </span>
+          <input appRemoveSpecialCharacters (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchText" (input)="filterItems()" #searchBox>
+          <span class="material-icons" (click)="searchClose()">
+            close
+          </span>
+        </div>
+      </div>
+      <div class="scrollbox outerScroll__Div">
+        <div class="construction h-100">
+          @if(compGridData.length>0){
+          <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+            <div *cdkVirtualFor="let data of compGridData;" class="list__sec" [class.added]="checkActive(data)" [class.active]="data.stockKey == highlightList">
+              <div [attr.data-index]="data.stockKey" [style.border-color]="cl(data.colorVal)" class="d__border">
+                <p class="ind__name">{{data['companyName'] | nullDashPipe:''}}</p>
+                <div class="d-flex align-items-center">
+                  <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                  <span class="price w-50 text-right" style="color: var(--paraFontColorAlt)">{{data['country'] | nullDashPipe :''}}</span>
+                  <span class="price text-right">
+                    @if(selKey==data['stockKey']){}
+                    @else if(data['addComp']){
+                    <a class="excRemoveBtn_comp remove" (click)="remComp(data);data['addComp']=false">
+                      <span class="material-icons">remove_circle_outline</span>
+                    </a>
+                    }@else{
+                    <a class="excRemoveBtn_comp add" (click)="addComp(data);data['addComp']=true">
+                      <span class="material-icons">add_circle_outline</span>
+                    </a>
+                    }
+                  </span>
+                </div>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+          }@else{
+          <div class="no-r-f text-center">No results found. Revise your search.</div>
+          }
+        </div>
+      </div>
+    </div>
+    }
+    @else if((sharedData.checkMenuPer(2027, 2236) == 'D' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2252) == 'D')){
+    <div class="icon__details disabled" style="top:2rem;position:relative;">
+      <div class="d-flex align-items-center justify-content-between comp__head pb0rem pl0_5rem pr1rem">
+        <h4 class="d-flex align-items-center">Components</h4>
+      </div>
+    </div>
+    }
+  </div>
+</div>

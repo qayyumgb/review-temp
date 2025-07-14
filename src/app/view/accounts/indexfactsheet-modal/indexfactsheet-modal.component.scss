@@ -1,0 +1,557 @@
+@use '../../../core/layout/styles/mixins' as *;
+.trade_Page {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+
+  .p-rel {
+    width: 100%;
+    background: var(--cardsHighlightColorDark);
+    height: calc(100vh - 8rem);
+    overflow: auto;
+  }
+
+  .reviewFact__inner {
+    width: 100%;
+    height: 100%;
+    /* background: var(--primary-color);*/
+    max-width: 1550px;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+
+    .perfDate {
+      font-size: 0.7rem;
+      color: var(--leftSideText);
+      padding-top: 0.5rem;
+      display: block;
+    }
+
+    .enable_trading_check {
+      font-size: 0.75rem;
+      color: var(--leftSideText);
+      text-align: right;
+
+      span {
+        font-size: 0.75rem !important;
+        color: var(--leftSideText-B);
+        text-align: right;
+      }
+    }
+
+    #openFactsheet__loader {
+      position: absolute;
+      top: 0px;
+      height: calc(100vh - 2.5rem);
+      width: 75%;
+      z-index: 1;
+      background: var(--primary-color);
+
+      .per-loader {
+        width: 20rem;
+        height: auto;
+        padding: 0.5rem;
+        flex-direction: column;
+        border-radius: 0.465rem;
+        margin-top: -4rem;
+      }
+    }
+
+    .reviewFact__inner__left {
+      width: 75%;
+
+
+
+      .scrollableheight {
+        height: calc(100vh - 15rem);
+        overflow: auto;
+      }
+
+      h3 {
+        color: var(--leftSideText-B);
+        font-size: 0.9rem;
+        font-family: var(--ff-medium);
+
+        .ind-name {
+          color: var(--leftSideText);
+          font-size: 0.85rem;
+        }
+      }
+
+      .reviewFact__dropdown {
+        .reviewFact__dropdown_button {
+          @include flex-align-center;
+
+          .selectOptions {
+            color: var(--leftSideText);
+            font-size: .75rem;
+          }
+
+          .selecticons {
+            display: flex;
+            cursor: pointer;
+            color: var(--leftSideText);
+            margin-left: 0.5rem;
+            background-color: var(--topNavbar);
+
+            &::after {
+              display: none;
+            }
+
+            span {
+              font-size: 1.2rem;
+              color: var(--linkColor);
+              background: var(--topNavbar);
+            }
+          }
+
+          ul {
+            @include reset-list;
+
+            li {
+              color: var(--leftSideText-B);
+              font-size: .7rem;
+              padding: 0.5rem;
+              @include flex-align-center;
+              cursor: pointer;
+
+              span {
+                // display: none;
+              }
+            }
+          }
+        }
+        // Enable For Trading Css
+        #account_Exclusions {
+          span {
+            font-size: 1rem;
+          }
+
+          .mat-mdc-checkbox {
+            .mdc-form-field {
+              label {
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+        // Enable For Trading Css End
+      }
+      /*Performance Table*/
+      .reviewFact__inner__table {
+        background-color: var(--topNavbar);
+        border-radius: 0.265rem;
+
+        .chartHeight {
+          min-width: 25rem;
+          min-height: 27rem;
+        }
+
+        .reviewFact__inner__table_title {
+          @include flex-align-center;
+          justify-content: space-between;
+
+          .tableNav {
+            display: flex;
+
+            a {
+              color: var(--prim-button-color);
+              border: 1px solid var(--prim-button-color);
+              background-color: transparent;
+              cursor: pointer;
+              border-radius: 0.2rem;
+
+              span {
+                @include flex-middle-center;
+                height: 100%;
+                font-size: 1rem;
+              }
+
+              &.scrollBtn {
+                cursor: no-drop;
+                opacity: 0.2;
+              }
+            }
+          }
+        }
+
+        span.title {
+          font-size: .8rem;
+          color: var(--leftSideText-B);
+          font-family: var(--ff-regular);
+        }
+
+        .reviewFact__inner__table_data {
+          .table-grid {
+            width: 100%;
+
+            tbody {
+              .table-grid-row {
+                &:first-child {
+                  td {
+                    padding: 0.4rem 0;
+                    padding-left: 0;
+                    color: var(--leftSideText-B);
+                    font-weight: 500;
+                    font-family: var(--ff-medium);
+                    font-size: .7rem;
+                    vertical-align: bottom;
+                    border-bottom: 3px solid var(--border);
+                    line-height: 1.2;
+                  }
+                }
+
+                &:not(:first-child) {
+                  /*  background: var(--primary-color);*/
+                  border-bottom: 0.1px dashed var(--border);
+
+                  td {
+                    padding: 0.45rem 0;
+                  }
+                }
+
+                &:last-child {
+                  background: transparent;
+                  border-bottom: 0 dashed var(--border);
+
+                  td {
+                    padding: 0.3rem 0;
+                  }
+                }
+
+                td {
+                  font-family: var(--ff-regular);
+                  font-size: .65rem;
+                  color: var(--leftSideText);
+                  text-align: right;
+                  width: 16%;
+
+                  &:first-child {
+                    padding-left: 0.3rem;
+                    width: 20%;
+                    text-align: left;
+                    white-space: nowrap;
+
+                    span.ellips {
+                      max-width: 10rem;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      display: block;
+                    }
+                  }
+
+                  &:last-child {
+                    padding-right: 0.3rem;
+                  }
+                }
+              }
+            }
+          }
+
+          &.reviewFact__inner__table_fixed_data {
+            margin-left: 28%;
+            overflow: hidden;
+
+            .table-grid {
+              table-layout: fixed;
+              width: 100%;
+
+              tbody {
+                .table-grid-row {
+                  &:not(:first-child) {
+                    td {
+                      /* background: var(--primary-color);*/
+                      border-bottom: 0.1px dashed var(--border);
+                    }
+                  }
+
+                  &:last-child {
+                    background: transparent;
+
+                    td {
+                      background: transparent;
+                      border-bottom: 0 dashed var(--border);
+                    }
+                  }
+
+                  td {
+                    &:first-child {
+                      padding-left: 0.3rem;
+                      // width: 18rem;
+                      text-align: left;
+                      width: 28% !important;
+                      position: absolute;
+                      left: 0;
+                      text-align: left;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      overflow: hidden;
+                    }
+
+                    &:last-child {
+                      padding-right: 0.3rem;
+                    }
+
+                    &.wi_4r {
+                      width: 4.5rem;
+                    }
+                  }
+                }
+              }
+            }
+
+            &.widthExt1 {
+              margin-left: 0;
+
+              table {
+                tbody {
+                  tr {
+                    td {
+                      width: 5.1rem !important;
+                      position: relative;
+
+                      &:first-child {
+                        position: static;
+                        left: 0;
+                      }
+
+                      &.calendYr {
+                        width: 100%;
+                      }
+                    }
+
+                    &:nth-child(2) {
+                      td {
+                        &:first-child {
+                          // width: 100%;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &.reviewFact__inner__table_fixed_data_taxGain {
+            margin-left: 28%;
+            overflow: hidden;
+
+            .table-grid {
+              // table-layout: fixed;
+              width: 100%;
+
+              tbody {
+                .table-grid-row {
+                  &:not(:first-child) {
+                    td {
+                      /* background: var(--primary-color);*/
+                      border-bottom: 0.1px dashed var(--border);
+                    }
+                  }
+
+                  &:last-child {
+                    background: transparent;
+
+                    td {
+                      background: transparent;
+                      border-bottom: 0 dashed var(--border);
+                      white-space: nowrap;
+                    }
+                  }
+
+                  td {
+                    &:first-child {
+                      padding-left: 0.3rem;
+                      // width: 18rem;
+                      text-align: left;
+                      width: 28%;
+                      position: absolute;
+                      left: 0;
+                      text-align: left;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      overflow: hidden;
+                    }
+
+                    &:last-child {
+                      padding-right: 0.3rem;
+                    }
+
+                    &.wi_4r {
+                      min-width: 6rem;
+                      max-width: 8rem;
+                      padding-left: 0.3rem;
+                      padding-right: 0.3rem;
+                    }
+                  }
+                }
+              }
+            }
+
+            &.widthExt1 {
+              margin-left: 0;
+
+              table {
+                tbody {
+                  tr {
+                    td {
+                      width: 5.1rem;
+                      min-width: auto !important;
+                      position: relative;
+
+                      &:first-child {
+                        position: static;
+                        left: 0;
+                      }
+
+                      &.calendYr {
+                        width: 100%;
+                      }
+                    }
+
+                    &:nth-child(2) {
+                      td {
+                        &:first-child {
+                          // width: 100%;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          // &.reviewFact__inner__table_fixed_data_taxGain {
+          //   .table-grid {
+          //     tbody {
+          //       .table-grid-row {
+          //         &:last-child {
+          //           td {
+          //             background: transparent;
+          //             border-bottom: 0 dashed var(--border);
+          //           }
+          //         }
+          //       }
+          //     }
+          //   }
+          // }
+
+          &.reviewFact__inner__table_data_portfolio {
+            .table-grid {
+              tbody {
+                .table-grid-row {
+                  &:last-child {
+                    td {
+                      background: transparent;
+                      border-bottom: 0 dashed var(--border);
+                      text-align: center;
+                    }
+                  }
+
+                  td {
+                    width: auto;
+                    text-align: center;
+                  }
+                }
+              }
+            }
+          }
+
+          &.reviewFact__inner__table_data_top_security {
+            .table-grid {
+              tbody {
+                .table-grid-row {
+                  background: transparent;
+                }
+              }
+            }
+          }
+        }
+      }
+      /*Performance Table End*/
+    }
+
+    .reviewFact__inner__right {
+      width: 25%;
+
+      h4 {
+        background: var(--topNavbar);
+        padding: 0.3rem 0.75rem;
+        margin: 0.5rem 0 0;
+        font-size: 0.75rem;
+        color: var(--leftSideText-B);
+        border-radius: 0.2rem;
+      }
+
+      .top__section {
+        padding: 0.5rem;
+        border-radius: 0.3rem;
+        background: var(--topNavbar);
+        min-height: 3rem;
+        display: flex;
+        align-items: center;
+
+        .D_btn {
+          padding: 0.2rem 0.6rem;
+          font-size: 0.7rem;
+
+          span {
+            font-size: .8rem;
+            margin-right: 0.25rem;
+            color: var(--leftSideText-B);
+          }
+        }
+
+        p {
+          color: var(--leftSideText-B);
+          font-size: 0.85rem;
+          margin-bottom: 0 !important;
+          font-family: var(--ff-medium);
+        }
+      }
+
+      .bottom__section {
+        max-height: calc(100vh - 18rem);
+        overflow: auto;
+
+        .list__view {
+          line-height: 1.2;
+          padding: 0.2rem 0.4rem;
+          border: 1px solid #1f1f3a;
+          background: var(--cardsHighlightColorModalAlt);
+          margin-bottom: 0.2rem;
+        }
+
+        .ind__name {
+          margin-bottom: 0 !important;
+          font-size: 0.70rem;
+          color: var(--leftSideText);
+        }
+
+        .ticker {
+          width: 40%;
+          font-size: 0.65rem;
+          color: var(--leftSideText-B);
+        }
+
+        .price {
+          width: 30%;
+          font-size: 0.65rem;
+          color: var(--leftSideText-B);
+        }
+      }
+    }
+  }
+}
+.accountIndexFactsheetModal .reviewFact__inner__right .count {
+  color: var(--linkColor);
+  font-family: var(--ff-semibold);
+  border-left: 1px solid var(--leftSideText);
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+  line-height: 1;
+  font-size: 0.75rem;
+}
+@import '../../../core/layout/styles/responsive/responsive.scss'

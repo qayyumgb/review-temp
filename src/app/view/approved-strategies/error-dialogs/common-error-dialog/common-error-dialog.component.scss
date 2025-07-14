@@ -1,0 +1,49 @@
+
+.dialog-content.errormodal {
+  .content-btm {
+    border: 0 !important;
+  }
+
+  p {
+    color: var(--leftSideText);
+  }
+}
+
+/*.content-btm {
+  .label {
+    font-size: .8rem;
+    color: var(--leftSideText);
+    font-family: var(--ff-regular);
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+      border-bottom: 0px solid var(--border);
+    }
+
+    p {
+      font-size: .8rem;
+      color: var(--leftSideText);
+      font-family: var(--ff-regular);
+      margin: 0 !important;
+      width: 33%;
+      line-height: 1.5 !important;
+      text-align: left;
+    }
+
+    .right_port {
+      width: 67%;
+      cursor: pointer;
+
+      input {
+        position: relative;
+        -webkit-transition: all ease .1s;
+      }
+    }
+  }
+}*/

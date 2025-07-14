@@ -1,0 +1,167 @@
+@media only screen and (max-width: 1260px) and (min-height:750px){
+    #directIndex__Comp .left-l{
+        position: fixed !important;
+        flex-direction: column;
+        justify-content: center;
+        left: 0;
+        top: 0;
+        display: flex;
+    }
+
+    .reviewFact__DirectIndex{
+        display: block !important;
+        position: relative;
+       
+        .reviewFact__inner__right{
+            width: 33% !important;
+            background: var(--accordion);
+            padding: 0.8rem;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transition: transform 0.3s ease;
+            transform: translate(0, -50%) translateX(100%);
+            span.reviewFact__inner__right_components_toggle{
+                display: flex !important;
+                flex-direction: column;
+            }
+          
+            &.open{
+                transform: translate(0, -50%) translateX(0);
+            }
+            .bottom__section{
+                max-height: calc(100vh - 12.9rem) !important;
+            }
+        }
+        .reviewFact__inner__left{
+            width: 94%;
+            .reviewFact__inner__table{
+                &.pb_md_3{
+                    // padding-bottom: 3rem;
+                }
+            }
+            .scrollableDiv{
+                height: calc(100vh - 10rem) !important;
+            }
+        }
+    }
+    #myexistingModalNew{
+        .existing_popup_height{
+            max-height: calc(100vh - 30rem);
+            height: auto !important;
+        }
+    }
+    .custom-modalbox{
+        width: 47% !important;
+    }
+    .indexcustommodalbox{
+        width: 60% !important;
+    }
+}
+@media(max-width: 1024px){
+    .reviewFact__DirectIndex{
+        display: block !important;
+        position: relative;
+       
+        .reviewFact__inner__right{
+            width: 33% !important;
+            background: var(--accordion);
+            padding: 0.8rem;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transition: transform 0.3s ease;
+            transform: translate(0, -50%) translateX(100%);
+            span.reviewFact__inner__right_components_toggle{
+                display: flex !important;
+                flex-direction: column;
+            }
+          
+            &.open{
+                transform: translate(0, -50%) translateX(0);
+            }
+            .bottom__section{
+                max-height: calc(100vh - 12.9rem) !important;
+            }
+        }
+        .reviewFact__inner__left{
+            width: 94%;
+            .reviewFact__inner__table{
+                &.pb_md_3{
+                    // padding-bottom: 3rem;
+                }
+            }
+            .scrollableDiv{
+                height: calc(100vh - 10rem) !important;
+            }
+        }
+    }  
+}
+ // Ipad air Portrait
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
+    .reviewFactsheet_Direct{
+        padding-left: 21rem;
+    }
+    .reviewFact__inner .reviewFact__inner__left .reviewFact__inner__table .directIndexChart{
+        height: auto;
+    }
+    .indexcustommodalbox{
+        width: 60% !important;
+    }
+    .direct__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 50rem);
+    }
+}
+  // Ipad air Portrait
+  // Ipad air Landscape
+  @media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape){
+
+  }
+  // Ipad air Landscape
+  // Ipad pro
+  @media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait){
+    .reviewFactsheet_Direct{
+        padding-left: 21rem;
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait){
+    .reviewFactsheet_Direct{
+        padding-left: 21rem;
+    }
+    .buildYourIndex__sec .icon__details{
+        width: 13rem;
+    }
+    .reviewFact__Prebuild{
+        .reviewFact__inner__left{
+            width: 95%;
+        }
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1194px) and (orientation: landscape){
+    .reviewFact__inner .reviewFact__inner__left .reviewFact__inner__table .directIndexChart{
+        height: auto;
+        width: 100%;
+    }
+    .direct__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 20rem);
+    }
+    #myexistingModalNew{
+        .existing_popup_height{
+            max-height: calc(100vh - 30rem);
+            height: auto !important;
+        }
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: landscape){
+    .reviewFact__inner .reviewFact__inner__left .reviewFact__inner__table .directIndexChart{
+        height: auto;
+        width: 100%;
+    }
+  }
+  @media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: landscape){
+    // .reviewFact__inner .reviewFact__inner__left .reviewFact__inner__table .directIndexChart{
+    //     height: auto;
+    //     width: 100%;
+    // }
+  }
+// Ipad pro

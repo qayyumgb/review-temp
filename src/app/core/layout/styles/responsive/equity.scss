@@ -1,0 +1,246 @@
+$breakpointtablet_minWidth: 768px;
+$breakpointtablet_maxWidth: 1024px;
+/* Login page */
+// @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+//     .main-layout .center-l svg{
+//         transform: translate(-50%, -50%) scale(0.9) !important;
+//     }
+// }
+// @media only screen and (min-device-width: 810px) and (max-device-width: 740px) and (-webkit-min-device-pixel-ratio: 2){
+   
+// }
+@media only screen and (max-width: 1260px) and (min-height: 500px) and (max-height:750px) {
+  svg#hisTimelineCircle {
+      width: 70%;
+  }
+}
+@media only screen and (max-width: 1260px) and (min-height:750px) {
+    .main-layout .center-l svg{
+        top: 50% !important;
+    }
+    #equity__Comp .left-l{
+        position: fixed !important;
+        flex-direction: column;
+        justify-content: center;
+        left: 0;
+        top: 0;
+        display: flex;
+    }
+  
+  .scrollHeight {
+    max-height: calc(100vh - 23rem);
+    height: auto !important;
+    overflow: auto;
+  }
+    svg#hisTimelineCircle{
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+    #hisTimeline__Comp{
+        height: 100vh;
+        overflow: hidden;
+        .left-l{
+      
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            height: auto !important;
+        }
+        .year-list-l ng-scrollbar{
+            height: auto !important;
+            display: block;
+            max-height: calc(100vh - 34rem);
+            overflow: auto;
+        }
+    }
+    #compare__Comp{
+        height: 100vh;
+        .right-l{
+            .mat__Div{
+                top: 3.8rem !important;
+            }
+        }
+        svg.commonSVGCircle{
+            transform: translate(-50%, -50%) scale(0.9) !important;
+        }
+        .left-l{
+            h3{
+                display: block;
+                span{
+                    white-space: normal;
+                }
+            }
+        }
+    }
+    #timeline__Comp{
+        height: 100vh;
+        overflow: hidden;
+        .left-l{
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            height: auto !important;
+        }
+        svg.commonSVGCircle{
+            transform: translate(-50%, -50%) scale(0.9) !important;
+        }
+    }
+}
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
+    #hisTimeline__Comp{
+        .left-l{
+            width: 29%;
+        }
+    }
+    #timeline__Comp{
+        .left-l{
+            width: 29%;
+        }
+        .right-l{
+            width: 25%;
+        }
+    }
+    #compare__Comp {
+        .right-l {
+            width: 24%; 
+        }
+    }
+   .equity__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 50rem);
+    }
+}
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape){
+    #hisTimeline__Comp{
+        .left-l{
+            width: 25%;
+        }
+    }
+    #timeline__Comp{
+        .left-l{
+            width: 22%;
+        }
+        .right-l{
+            width: 20%;
+        }
+    }
+    #compare__Comp {
+        .right-l {
+            width: 24%; 
+        }
+    }
+
+}
+@media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait){
+    #hisTimeline__Comp{
+        .left-l{
+            width: 25%;
+        }
+    }
+}
+@media (min-device-width: 834px) and (max-device-width: 1194px) and (orientation: landscape){
+    #hisTimeline__Comp{
+        .left-l{
+            width: 25%;
+        }
+    }
+    .equity__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 20rem);
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: landscape){
+    #hisTimeline__Comp{
+        .left-l{
+            width: 25%;
+        }
+    }
+  }
+  @media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: landscape){
+    // #hisTimeline__Comp{
+    //     .left-l{
+    //         width: 25%;
+    //     }
+    // }
+    // #timeline__Comp{
+    //     .left-l{
+    //         width: 22%;
+    //     }
+    //     .right-l{
+    //         width: 20%;
+    //     }
+    // }
+    // #compare__Comp {
+    //     .right-l {
+    //         width: 20%; 
+    //     }
+    // }
+  }
+  @media(max-width: 1024px){
+    #hisTimeline__Comp ,#timeline__Comp,#compare__Comp{
+        height: 100vh;
+        overflow: hidden;
+    }
+    svg#hisTimelineCircle{
+        transform: translate(-50%, -50%) scale(0.76);
+    }
+    #compare__Comp svg.commonSVGCircle{
+        transform: translate(-50%, -50%) scale(0.86);
+    }
+    #compare__Comp{
+
+        .left-l{
+            h3{
+                display: block;
+                span{
+                    white-space: normal;
+                }
+            }
+        }
+    }
+  }
+@media only screen and (min-device-width: 1366px) and (max-device-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  body.fs--15, html.fs--15, body.fs--16, html.fs--16, body.fs--17, html.fs--17, body.fs--18, html.fs--18, body.fs--19, html.fs--19 {
+    font-size: 12px !important;
+  }
+
+  #hisTimeline__Comp {
+    .outerScroll__Div {
+      height: calc(100vh - 23rem) !important;
+    }
+  }
+
+  #timeline__Comp {
+    .outerScroll__Div {
+      height: calc(100vh - 23rem) !important;
+    }
+  }
+
+  #compare__Comp {
+    .outerScroll__Div {
+      height: calc(100vh - 23rem) !important;
+    }
+  }
+}
+  @media only screen 
+  and (min-width: 1024px) 
+  and (max-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    body.fs--15, html.fs--15 ,body.fs--16, html.fs--16,body.fs--17, html.fs--17,body.fs--18, html.fs--18 ,body.fs--19, html.fs--19{
+        font-size: 12px !important;
+    }
+    #hisTimeline__Comp{
+        .outerScroll__Div{
+            height: calc(100vh - 23rem) !important;
+        }
+    }
+    #timeline__Comp{
+        .outerScroll__Div{
+            height: calc(100vh - 23rem) !important;
+        }
+    }
+    #compare__Comp{
+        .outerScroll__Div{
+            height: calc(100vh - 23rem) !important;
+        }
+    }
+   
+}

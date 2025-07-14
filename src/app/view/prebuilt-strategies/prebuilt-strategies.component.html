@@ -1,0 +1,60 @@
+<div class="prebuilt_index_comp" id="prebuilt__Comp" style="padding-top:3rem">
+  <div class="left-l" [style.display]="sharedData._showDefaultSideGrids?'block':'none'" (mouseenter)="sharedData.onSidebarEnter()" (mouseleave)="sharedData.onSidebarLeave()">
+    <pre-breadcrumb-list></pre-breadcrumb-list>
+    @if(!showStartIndex){
+    <pre-dilldown-list></pre-dilldown-list>
+    <!--@if(sharedData.checkMenuPer(4,2274) == 'Y'){
+    <div>
+      <div (click)="viewReport()" class="viewReportBtn" [class.selected]="showViewReport">
+        <span class="report_icon" [class.selected]="showViewReport">
+          <img src="../../../assets/images/report_File.svg" />
+        </span><span>View Report</span>
+      </div>
+    </div>
+    }@else if(sharedData.checkMenuPer(4,2274) == 'D'){
+    <div>
+      <div class="viewReportBtn disabled">
+        <span class="report_icon">
+          <img src="../../../assets/images/report_File.svg" />
+        </span><span>View Report</span>
+      </div>
+    </div>
+    }-->
+    } @else{ <pre-build-your-index></pre-build-your-index> }
+  </div>
+
+  <div class="center-l" [style.opacity]="(showReviewIndexLoaded || showViewReport)?'0':'1'">
+    <app-circle-loader-svg></app-circle-loader-svg>
+    @if(showFamylyIndex){ <pre-strategy-circle></pre-strategy-circle> }
+    @else if(showStgy){ <pre-strategy-circle></pre-strategy-circle> }
+    @else if(showStartIndex && !showStgy){<pre-exclusion-circle></pre-exclusion-circle> }
+    @else{ <pre-default-circle></pre-default-circle> }
+  </div>
+  @if(showStartIndex && (sharedData.checkMenuPer(4,102) == 'Y' || sharedData.checkMenuPer(4,102) == 'D' ||
+  sharedData.checkMenuPer(4,104) == 'Y'  || sharedData.checkMenuPer(4,104) == 'D' || sharedData.checkMenuPer(4,101) == 'Y' ||
+  sharedData.checkMenuPer(4,101) == 'D' || sharedData.checkMenuPer(4,103) == 'Y' || sharedData.checkMenuPer(4,103) == 'D' ||
+  sharedData.checkMenuPer(4,105) == 'Y' || sharedData.checkMenuPer(4,105) == 'D' || sharedData.checkMenuPer(4,106) == 'Y'||
+  sharedData.checkMenuPer(4,106) == 'D')){
+  <div class="right-l" [style.display]="(showReviewIndexLoaded || showViewReport)?'none':'block'" (mouseenter)="sharedData.onSidebarRightEnter()" (mouseleave)="sharedData.onSidebarRightLeave()"
+        [style.visibility]="sharedData._showDefaultSideGrids?'visible':'hidden'" [style.opacity]="sharedData._showDefaultSideGrids?1:0">
+    <pre-performance-components></pre-performance-components>
+  </div>
+  }
+  @if(showReviewIndexLoaded && !showViewReport){
+  <div class="reviewFactsheet_Direct">
+    <pre-review-factsheet></pre-review-factsheet>
+  </div>
+  }
+  <!--@if(showStartIndex && preBuiltService._selNaaIndex!=undefined){
+  <div class="basedOn__sec">
+    <span class="indName">{{preBuiltService._selNaaIndex.indexname}}</span>
+    <span class="divided ml0_5rem mr0_5rem" *ngIf="preBuiltService._selNaaIndex.CommonTicker != undefined && preBuiltService._selNaaIndex.CommonTicker != ''">|</span>
+    <span class="basedOn">{{preBuiltService._selNaaIndex.CommonTicker}}</span>
+  </div>
+  }-->
+  @if(showViewReport){
+  <div class="reviewFactsheet_Direct w-95">
+    <app-view-report></app-view-report>
+  </div>
+  }
+</div>

@@ -1,0 +1,65 @@
+<div class="dialog-content" id="myexistingModalNew">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal(true)"><span class="material-icons">close</span></div>
+      <div class="content-top" style="">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>
+      <div class="content-btm" style="background: var(--cardsHighlightColorDark);">
+        <div class="w-100 min_height" style="">
+          <p>{{sharedData.checkMyAppMessage(3,72)}}</p>
+          <div class="scroll-event scrollbox1 dropdownScroll min_height existing_popup_height existingScroll_Div">
+           
+            <ul class="exist-stat exist-newStat">
+              <ng-container *ngFor="let item of existing_stat_list">
+                <li *ngIf="item.shortname != null && item.shortname != ''" (click)="startLoadIndex(item.rowno, item.assetId, item )" data-bs-dismiss="modal">
+                  <span class="exist-newStatSName">{{item.shortname}}</span>
+                  <span class="exist-newStatName" *ngIf="checkStrName(item).length <= 18">
+                    {{checkStrName(item)}}
+                  </span>
+                  <span class="exist-newStatName" *ngIf="checkStrName(item).length > 18" [matTooltip]="item.name" [matTooltipPosition]="'above'">
+                    {{checkStrName(item)}}
+                  </span>
+                  <span class="enable_t" *ngIf="item.enableTrading == 'Y'">
+                    <svg width="16" height="16" viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" [attr.stroke]="!cusIndexService.checkTrade(item)?'var(--successColor)':'var(--warningColor)'" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="var(--warning)" [attr.stroke]="!cusIndexService.checkTrade(item)?'var(--successColor)':'var(--warningColor)'" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="foot-l">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div>
+              <span class="enable_t mr0_5rem" style="font-size: 0.7rem;color: var(--leftSideText);">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.25rem;">
+                <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke-linecap="round" stroke-linejoin="round" stroke="var(--warningColor)"></path>
+                <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="var(--warningColor)" stroke-linecap="round" stroke-linejoin="round"></path></svg>Enabled for trading
+              </span>
+
+              <span class="enable_t mr0_5rem" style="font-size: 0.7rem;color: var(--leftSideText);">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.25rem;">
+                  <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke-linecap="round" stroke-linejoin="round" stroke="var(--successColor)"></path>
+                  <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>Traded strategy
+              </span>
+            </div>
+          </div>
+          <div>
+            <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="createNewStrategy()">Create New</button>
+            <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="closeModal(true)">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

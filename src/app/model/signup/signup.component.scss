@@ -1,0 +1,311 @@
+.mat-form-field {
+  width: 100%;
+}
+
+.signup-outer {
+  background-color: #d3d8dc;
+  margin-top: 80px;
+  margin-bottom: 90px;
+  padding: 2.5rem 4rem;
+  border-radius: 20px;
+}
+
+.signup-outer .container-fill {
+  background: transparent;
+  background-size: cover;
+  height: 100%;
+  height: -webkit-fill-available;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.login-title h2 {
+  color: #00aeef;
+  padding-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.mright-2 .mat-form-field:first-child {
+  margin-right: 2rem;
+}
+
+.btn.btn-contact {
+  opacity: 1;
+  background: #00b9ff;
+  color: #fff;
+  cursor: pointer;
+  width: 280px;
+}
+
+.btn-contact .spinner-border {
+  position: relative;
+  bottom: 3px;
+  right: 2px;
+}
+
+.btn.disabled, .btn:disabled {
+  opacity: .5;
+  background: #00b9ff;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.logIn-container .d-flex {
+  width: 100%;
+}
+
+.logIn-container label {
+  margin-bottom: 0px;
+  color: #fff;
+  font-size: 12px;
+  font-family: 'Open Sans semibold';
+  padding-left: 5px;
+}
+
+.logIn-container label .asterisk-valid {
+  color: #f44336;
+}
+
+.logIn-container .mat-form-field-infix {
+  padding: 15px 0 12px !important;
+  margin-top: 0;
+  border-top: 0;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 0;
+  border-right-style: none;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 0;
+  border-left-style: none;
+  flex-grow: 1;
+}
+
+a.userLogIn {
+  background: #fff;
+  color: #2b468f !important;
+  width: 280px;
+  font-family: 'Open Sans semiBold';
+  font-size: 17px;
+  transition: .2s;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+
+a.userLogIn:hover {
+  background: #ddd !important;
+}
+
+.policy-link {
+  font-size: 12px;
+  line-height: 1.8;
+  padding-top: 0px;
+}
+
+.sign-log {
+  padding-top: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.valTick {
+  position: absolute;
+  top: 21px;
+  right: 5px;
+  z-index: 2;
+  line-height: 34px;
+  text-align: center;
+  pointer-events: none;
+  color: #3c763d;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.valTick.activate_tick:before {
+  content: "\2713";
+}
+
+.checkmark {
+  font-size: 11px;
+  color: #fff;
+  position: absolute;
+  right: 0;
+  top: 2px;
+}
+
+@media (max-width:1024px) {
+  .checkmark {
+    font-size: 11px;
+    color: #fff;
+    position: relative;
+    right: 0;
+    top: 0px;
+    line-height: 1;
+  }
+
+  .valTick {
+    position: absolute;
+    top: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .signup-outer {
+    min-height: 700px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .signup-outer .logIn-container {
+    width: 600px;
+  }
+}
+
+@media (max-width: 991px) {
+  .logIn-container {
+    padding: 2rem;
+  }
+
+  .signup-outer {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logIn-container .d-flex {
+    flex-direction: column;
+  }
+
+  .res-label-top {
+    margin-top: 10px;
+  }
+
+  .full-policy1 {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .logIn-container {
+    padding: 3rem 1rem 2rem 1rem;
+  }
+
+  .full-policy {
+    display: none;
+  }
+
+  .fd-col-res {
+    flex-direction: column;
+  }
+
+  .valTick {
+    position: absolute;
+    top: 32px;
+  }
+
+  .signup-outer {
+    padding: 2rem;
+    margin-bottom: 50px;
+  }
+
+  .btn.btn-contact {
+    width: 100%;
+  }
+
+  .userLogIn {
+    width: 100% !important;
+  }
+
+  button.userLogIn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .signup-outer {
+    padding: 1rem;
+  }
+
+  .signup-outer .container-fill {
+    height: 100%;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  .full-resp {
+    padding: 0 !important;
+  }
+
+  .full-resp .signup-outer {
+    border-radius: 0px;
+    margin-top: 57px;
+    margin-bottom: 0;
+  }
+
+  .policy-link a {
+    font-size: 11px !important;
+    padding-left: 0px !important;
+    padding-top: 0px;
+  }
+
+  .policy-link {
+    font-size: 11px !important;
+    padding-left: 0px !important;
+    padding-top: 0px;
+  }
+
+  .signup-outer .container-fill {
+    overflow: auto;
+    padding-top: 1rem !important;
+    padding: 0;
+  }
+
+  .logIn-container {
+    padding: 1rem 0.5rem 2rem 0.5rem;
+  }
+}
+
+@media screen and (orientation:landscape) {
+  a.userLogIn {
+    width: 280px !important;
+  }
+
+  .btn-contact {
+    width: 280px !important;
+  }
+}
+
+@media (max-width:767px) and (orientation:landscape) {
+  .mainComp {
+    height: auto !important;
+    background-color: #d7dcdf;
+    min-height: 100%;
+  }
+
+  .mainComp .container-fluid {
+    height: 100% !important;
+  }
+
+  #ass_Hgt {
+    height: auto !important;
+  }
+
+  .signup-outer .container-fill {
+    height: auto !important;
+    align-items: normal !important;
+    overflow: auto !important;
+  }
+}
+
+a {
+  color: #00b9ff;
+  font-family: "opensans-regular",sans-serif;
+  font-weight: 600;
+}

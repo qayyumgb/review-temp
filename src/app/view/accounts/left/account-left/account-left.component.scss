@@ -1,0 +1,127 @@
+.funded_sec {
+  background: var(--topNavbar);
+  border-radius: 0.265rem;
+  margin-bottom: 0.5rem;
+  padding: 0 1rem;
+
+  .refreshBtn_funded {
+    background-color: var(--cardsHighlightColor);
+    color: var(--prim-button-color-text) !important;
+    font-size: .8rem;
+    padding: .25rem;
+    border: 0;
+    border-radius: .25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s;
+  }
+
+  .nav-tabs {
+    border: none;
+    padding: 0 1rem;
+
+    .nav-link {
+      display: block;
+      padding: 0.5rem 0.25rem;
+      font-size: .8rem;
+      margin-right: 1.7rem;
+      font-family: var(--ff-medium);
+      color: var(--leftSideText);
+      border: none !important;
+      border-bottom: 0.15rem solid transparent !important;
+    }
+
+    .nav-link.active {
+      color: var(--prim-button-color-text);
+      background-color: transparent;
+      border: none;
+      border-bottom: 0.15rem solid var(--prim-button-color) !important;
+    }
+  }
+}
+.acc-tabs-content {
+  ul:not(#accNavTab1) {
+    padding: 0;
+    list-style: none;
+    // height: calc(100vh - 11.9rem);
+    li {
+      &:hover {
+        color: var(--leftSideText-B);
+      }
+
+      &.active {
+        color: var(--prim-button-color-text) !important;
+
+        .acctlist {
+          color: var(--prim-button-color-text) !important;
+
+          span.subTitle {
+            color: var(--prim-button-color-text) !important;
+          }
+        }
+      }
+
+      .acctlist {
+        list-style-type: none;
+        background: var(--topNavbar);
+        font-size: 0.70rem;
+        padding: 0.3rem 1rem;
+        padding-right: 0.25rem;
+        border-radius: 0.265rem;
+        color: var(--leftSideText-B);
+        font-family: var(--ff-medium);
+        margin-bottom: .2rem;
+        transition: all .15s;
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 100%;
+
+        span.subTitle {
+          color: var(--leftSideText);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 12rem;
+          margin-left: 0.25rem;
+        }
+      }
+    }
+  }
+}
+
+  .norec {
+    font-size: .8rem;
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+    padding-right: 1.75rem;
+    color: var(--leftSideText);
+  }
+
+  .rotate {
+    animation: rotation 1.2s infinite linear;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
+  .example-viewport-r {
+    height: calc(100vh - 10.5rem);
+  }
+#vsSrcCls{
+  position: relative;
+  top: 0.1rem;
+}
+  @import '../../../../core/layout/styles/responsive/responsive.scss';

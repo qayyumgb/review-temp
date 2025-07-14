@@ -1,0 +1,208 @@
+@media only screen and (max-width: 1260px) and (min-height:750px){
+    body.fs--16, html.fs--16{
+        font-size: 12px !important;
+    }
+    #approved__Comp{
+    
+        .left-l{
+            position: fixed !important;
+            flex-direction: column;
+            justify-content: center;
+            left: 0;
+            top: 0;
+            display: flex;
+            padding-top: 0 !important;
+        }
+        .right-l{
+            z-index: 99 !important;
+        }
+       
+    }
+    .reviewFactsheet_approved{
+        display: block !important;
+        position: relative;
+        padding-top: 0;
+        .reviewFact__inner__left{
+         
+            .reviewFact__inner__table{
+                .reviewFact__inner__table_data.reviewFactPerformance{
+                    .table-grid{
+                        tbody{
+                            tr{
+                                td{
+                                    min-width: auto !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .reviewFact__inner__right{
+    
+            background: var(--accordion);
+            padding: 0.8rem;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transition: transform 0.3s ease;
+            transform: translate(0, -50%) translateX(100%);
+            span.reviewFact__inner__right_components_toggle{
+                display: flex !important;
+                flex-direction: column;
+            }
+          
+            &.open{
+                transform: translate(0, -50%) translateX(0);
+            }
+            .bottom__section{
+                max-height: calc(100vh - 14.2rem) !important;
+            }
+        }
+    }
+    .reviewFact__inner .reviewFact__inner__left{
+        width: 94%;
+    }
+    .indexcustommodalbox{
+        width: 60% !important;
+    }
+    .reviewFact__inner .reviewFact__inner__right{
+        width: 35%;
+    }
+}
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
+   .reviewFactsheet_approved{
+    padding-left: 18rem;
+    }
+    .approvedStrategyChart{
+        width: 100%;
+        height: auto;
+    }
+    .indexcustommodalbox{
+        width: 60% !important;
+    }
+    .reviewFact__inner .reviewFact__inner__right{
+        width: 40%;
+    }
+    #approved__Comp{
+        .buildYourIndex__sec{
+            .icon__details{
+                width: 13rem;  
+            }
+        }
+    }
+    .bcum-list-l-n .b-text-n-d.fontxs{
+        max-width: 15rem;
+    }
+    .clientaccountHeight{
+        height: calc(100vh - 45rem);
+    }
+    .approved__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 50rem);
+    }
+}
+@media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait){
+    // .reviewFactsheet_approved{
+    //     padding-left: 21rem;
+    // }
+    // .approvedStrategyChart{
+    //     width: 100%;
+    //     height: auto;
+    // }
+    // .indexcustommodalbox{
+    //     width: 60% !important;
+    // }
+  }
+  /*Ipad Pro*/
+  @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait){
+    .reviewFactsheet_approved{
+        padding-left: 21rem;
+    }
+    .approvedStrategyChart{
+        width: 100%;
+        height: auto;
+    }
+    .indexcustommodalbox{
+        width: 60% !important;
+    }
+    #approved__Comp{
+        .buildYourIndex__sec{
+            .icon__details{
+                width: 16rem;  
+            }
+        }
+    }
+    .reviewFact__inner .reviewFact__inner__right{
+        width: 30%;
+    }
+    .bcum-list-l-n .b-text-n-d.fontxs{
+        max-width: 18rem;
+    }
+    .clientaccountHeight{
+        height: calc(100vh - 49rem);
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1194px) and (orientation: landscape){
+    .approved__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 20rem);
+    }
+  }
+    /*Ipad Pro*/
+    @media(max-width: 1024px){
+        .reviewFactsheet_approved{
+            display: block !important;
+                    .reviewFact__inner__left{
+             
+                .reviewFact__inner__table{
+                    .reviewFact__inner__table_data.reviewFactPerformance{
+                        .table-grid{
+                            tbody{
+                                tr{
+                                    td{
+                                        min-width: auto !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .reviewFact__inner__right{
+        
+                background: var(--accordion);
+                padding: 0.8rem;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transition: transform 0.3s ease;
+                transform: translate(0, -50%) translateX(100%);
+                span.reviewFact__inner__right_components_toggle{
+                    display: flex !important;
+                    flex-direction: column;
+                }
+              
+                &.open{
+                    transform: translate(0, -50%) translateX(0);
+                }
+                .bottom__section{
+                    max-height: calc(100vh - 14.2rem) !important;
+                }
+            }
+        }
+        .reviewFact__inner .reviewFact__inner__left{
+            width: 94%;
+        } 
+        .reviewFact__inner .reviewFact__inner__right{
+            width: 35%;
+        }
+    }
+    @media (max-width: 991px) and (max-height: 900px){
+        #approved__Comp .left-l{
+            width: 22% !important;
+        }
+    }
+    @media (max-width: 1380px) and (max-height: 900px){
+        #approved__Comp .left-l{
+            width: 18% !important;
+        }
+    }

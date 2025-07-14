@@ -1,0 +1,124 @@
+<svg style="display:contents" viewBox="180 45 1220 700">
+  <g class="innerC__section" width="800">
+    <circle cx="160" cy="160" r="235" fill="var(--primary-color)" style="transform: translate(-160px, 10px)" />
+  
+
+    <g  style="transform: translate(-210px, 120px) scale(1.4);">
+      <foreignObject x="0" y="0" width="300" height="50">
+        <div class="topNav_GlobalSearch w-100 sunBrustGlobalSearch">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="default-search-item alt_bg_color darkBg p-rel">
+            <form>
+              <mat-form-field class="p-rel">
+                <input appRemoveSpecialCharacters minlength="1" maxlength="50" class="pr1rem" type="text" #glbSearchBox matInput placeholder="Search" [formControl]="glbSearch" [(ngModel)]="inputValue" (keyup.enter)="filtering($event)" (keydown)="restrictDoubleSpace($event)"
+                       [matAutocomplete]="auto" (focus)="inputFocused($event,'in')" (ngModelChange)="onInputChange($event)">
+  
+                @if(showSearchLoader){
+                <span class="input_spinner">
+                  <mat-spinner class="reviewloader-spinner" style="top: 0px !important;"></mat-spinner>
+                </span>
+                }@else{
+                @if(inputValue){
+                <span class="material-icons cp" (click)="clearInput()">
+                  search_off
+                </span>
+                }@else{
+                <span class="material-icons">
+                  search
+                </span>
+                }
+                }
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class="DrilldownSearchBar" (optionSelected)="gloSrcEnter($event)">
+                  <mat-option *ngIf="noDataFound" class="autocompletedNoData">No data found</mat-option>
+                  @for (data of filteredOptions; track data) {
+                  @if(data['type']== "Equity Universe"){
+                  <mat-optgroup label="Equity">
+                    <mat-option *ngFor="let d of data['items']" [value]="d">
+                      @if(d['category']== "Index"){
+                      <span class="d-flex justify-content-between align-items-center">
+                        <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                        <span class="pbName">{{d.country}}</span>
+                      </span>
+                      }@else{
+                      <span class="">
+                        <span class="w-100 d-flex justify-content-start align-items-center">
+                          <span class="indName">{{d.company}}</span>
+                          <span class="pbName_ticker">({{d.ticker}})</span>
+                        </span>
+                        <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                          <span class="indName_sub">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                          <span class="pbName">{{d.country}}</span>
+                        </span>
+                      </span>
+                      }
+                    </mat-option>
+                  </mat-optgroup>
+                  }
+                  @else if(data['type']== "ETF"){
+                  <mat-optgroup label="ETF">
+                    <mat-option *ngFor="let d of data['items']" [value]="d">
+                      <span class="d-flex justify-content-between align-items-center">
+                        <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                        <span class="pbName">{{d.ticker}}</span>
+                      </span>
+                    </mat-option>
+                  </mat-optgroup>
+                  }
+                  @else if(data['type']== "PreBuilt"){
+                  <mat-optgroup label="PreBuilt">
+                    <mat-option *ngFor="let d of data['items']" [value]="d">
+                      <span class="">
+                        <span class="w-100 d-flex justify-content-start align-items-center">
+                          <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+  
+                        </span>
+                        <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                          <span class="indName_sub">
+                            @if(d.ticker != null && d.ticker != undefined && d.ticker != ""){
+                            ({{d.ticker}})
+                            }
+                          </span>
+                          <span class="indName_sub">&nbsp;</span>
+                          <span class="pbName">{{d.country}}</span>
+                        </span>
+                      </span>
+                    </mat-option>
+                  </mat-optgroup>
+                  }
+                  @else if(data['type']== "Thematic"){
+                  <mat-optgroup label="Thematic">
+                    <mat-option *ngFor="let d of data['items']" [value]="d">
+                      <span class="d-flex justify-content-between align-items-center">
+                        <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                      </span>
+                    </mat-option>
+                  </mat-optgroup>
+                  }
+                  @else if(data['type']== "DirectIndexing"){
+                  <mat-optgroup [label]="(sharedData.checkMyUserType()?'Approved':'Direct')">
+                    <mat-option *ngFor="let d of data['items']" [value]="d">
+                      <span class="w-100 d-flex justify-content-start align-items-center">
+                        <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                      </span>
+                      <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                        <span class="indName_sub">{{d.company}}</span>
+                        <span class="pbName">{{d.country}}</span>
+                      </span>
+                    </mat-option>
+                  </mat-optgroup>
+                  }
+                  }
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+      </foreignObject>
+    </g>
+    <g transform="translate(-30, 210)" style="cursor:pointer !important" (click)="close()">
+      <g transform="" class="innerC__apply_btn">
+        <rect width="30" height="30" stroke="var(--border)" fill="var(--accordionChild)" rx="5" ry="5"></rect>
+        <text y="10" x="35" >Cancel</text>
+      </g>
+    </g>
+  </g>
+</svg>

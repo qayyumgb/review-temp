@@ -1,0 +1,13 @@
+@media only screen and (max-width: 1260px) and (min-height:750px){
+    #myModal .bodyOuter{
+        height: auto;
+    }
+    #myModal .custom_radio input[type=radio] + label{
+        padding-left: 1.5rem;
+    }
+    /*Change Passord*/
+    .logIn-container{
+        width: 58%;
+    }
+    /*Change Passord*/
+}

@@ -1,0 +1,1898 @@
+<div class="buildYourIndex__sec">
+  <div class="icon__select">
+    @if(sharedData.checkMenuPer(3, 93) == 'Y' && (sharedData.checkMenuPer(3, 177) == 'Y' || sharedData.checkMenuPer(3, 177) == 'D')){
+    <div class="__selectIco select__alpha" [class.active]="showDefault_select == 'Alpha'" (click)="leftMenuClick('Alpha')">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.99996 15.8332C13.2216 15.8332 15.8333 13.2215 15.8333 9.99984C15.8333 6.77818 13.2216 4.1665 9.99996 4.1665C6.7783 4.1665 4.16663 6.77818 4.16663 9.99984C4.16663 13.2215 6.7783 15.8332 9.99996 15.8332ZM9.99996 18.3332C14.6023 18.3332 18.3333 14.6022 18.3333 9.99984C18.3333 5.39746 14.6023 1.6665 9.99996 1.6665C5.39759 1.6665 1.66663 5.39746 1.66663 9.99984C1.66663 14.6022 5.39759 18.3332 9.99996 18.3332Z"
+                fill="white" />
+          <path d="M1.66663 9.99984C1.66663 5.39746 5.39759 1.6665 9.99996 1.6665V4.1665C6.7783 4.1665 4.16663 6.77818 4.16663 9.99984H1.66663Z"
+                fill="white" />
+        </svg>
+      </span>
+    
+      <p>Alpha</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(3, 93) == 'D' && (sharedData.checkMenuPer(3, 177) == 'Y' || sharedData.checkMenuPer(3, 177) == 'D')){
+    <div class="__selectIco select__factsheet disableMenu">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.99996 15.8332C13.2216 15.8332 15.8333 13.2215 15.8333 9.99984C15.8333 6.77818 13.2216 4.1665 9.99996 4.1665C6.7783 4.1665 4.16663 6.77818 4.16663 9.99984C4.16663 13.2215 6.7783 15.8332 9.99996 15.8332ZM9.99996 18.3332C14.6023 18.3332 18.3333 14.6022 18.3333 9.99984C18.3333 5.39746 14.6023 1.6665 9.99996 1.6665C5.39759 1.6665 1.66663 5.39746 1.66663 9.99984C1.66663 14.6022 5.39759 18.3332 9.99996 18.3332Z"
+                fill="white" />
+          <path d="M1.66663 9.99984C1.66663 5.39746 5.39759 1.6665 9.99996 1.6665V4.1665C6.7783 4.1665 4.16663 6.77818 4.16663 9.99984H1.66663Z"
+                fill="white" />
+        </svg>
+      </span>
+     
+      <p>Alpha</p>
+    </div>
+    }
+    <!-- Filters Menu-->
+    @if(sharedData.checkMenuPer(3, 82) == 'Y'){
+    <div class="__selectIco select__filters" [class.active]="showDefault_select == 'Filters'" (click)="leftMenuClick('Filters')">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.125 10L10.625 10" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M13.125 10L16.875 10" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M3.125 15.625L4.375 15.625" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M6.875 15.625L16.875 15.625" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M6.875 13.75L6.875 17.5" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M3.125 4.375L6.875 4.375" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M9.375 4.375L16.875 4.375" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M9.375 6.25L9.375 2.5" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M13.125 8.125L13.125 11.875" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Filters</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(3, 82) == 'D'){
+    <div class="__selectIco select__filters disableMenu">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.125 10L10.625 10" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M13.125 10L16.875 10" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M3.125 15.625L4.375 15.625" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M6.875 15.625L16.875 15.625" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M6.875 13.75L6.875 17.5" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M3.125 4.375L6.875 4.375" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M9.375 4.375L16.875 4.375" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M9.375 6.25L9.375 2.5" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M13.125 8.125L13.125 11.875" stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Filters</p>
+    </div>
+    }
+
+    <!-- Filters Menu-->
+    <!-- Factors -->
+    @if(sharedData.checkMenuPer(3, 177) == 'Y'){
+    <div class="__selectIco select__filters" [class.active]="showDefault_select == 'Factors'" (click)="leftMenuClick('Factors');loadFactInit();accotdionHighlight=''">
+      <span class="material-icons-outlined">
+        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.5 18.3665C14.6421 18.3665 18 15.0086 18 10.8665C18 6.72432 14.6421 3.36646 10.5 3.36646C6.35786 3.36646 3 6.72432 3 10.8665C3 15.0086 6.35786 18.3665 10.5 18.3665Z"
+                stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M10.5 15.8665C13.2614 15.8665 15.5 13.6279 15.5 10.8665C15.5 8.10503 13.2614 5.86646 10.5 5.86646C7.73858 5.86646 5.5 8.10503 5.5 10.8665C5.5 13.6279 7.73858 15.8665 10.5 15.8665Z"
+                stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Factors</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(3, 177) == 'D'){
+    <div class="__selectIco select__filters disableMenu">
+      <span class="material-icons-outlined">
+        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.5 18.3665C14.6421 18.3665 18 15.0086 18 10.8665C18 6.72432 14.6421 3.36646 10.5 3.36646C6.35786 3.36646 3 6.72432 3 10.8665C3 15.0086 6.35786 18.3665 10.5 18.3665Z"
+                stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M10.5 15.8665C13.2614 15.8665 15.5 13.6279 15.5 10.8665C15.5 8.10503 13.2614 5.86646 10.5 5.86646C7.73858 5.86646 5.5 8.10503 5.5 10.8665C5.5 13.6279 7.73858 15.8665 10.5 15.8665Z"
+                stroke="var(--iconColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Factors</p>
+    </div>
+    }
+    <!-- Factors end -->
+    @if(sharedData.checkMenuPer(3, 84) == 'Y'){
+    <div class="__selectIco select__alpha" [class.active]="showDefault_select == 'Selection'" (click)="leftMenuClick('Selection')">
+      <span class="material-icons-outlined">
+
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 4C3 3.44772 3.44772 3 4 3H12C12.5523 3 13 3.44772 13 4C13 4.55228 12.5523 5 12 5H4C3.44772 5 3 4.55228 3 4Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path d="M3 12C3 11.4477 3.44772 11 4 11H12C12.5523 11 13 11.4477 13 12C13 12.5523 12.5523 13 12 13H4C3.44772 13 3 12.5523 3 12Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path d="M3 16C3 15.4477 3.44772 15 4 15H12C12.5523 15 13 15.4477 13 16C13 16.5523 12.5523 17 12 17H4C3.44772 17 3 16.5523 3 16Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path d="M3 20C3 19.4477 3.44772 19 4 19H12C12.5523 19 13 19.4477 13 20C13 20.5523 12.5523 21 12 21H4C3.44772 21 3 20.5523 3 20Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.1707 9C15.5825 10.1652 16.6938 11 18 11C19.6569 11 21 9.65685 21 8C21 6.34315 19.6569 5 18 5C16.6938 5 15.5825 5.83481 15.1707 7H4C3.44772 7 3 7.44772 3 8C3 8.55228 3.44772 9 4 9H15.1707ZM19 8C19 8.55228 18.5523 9 18 9C17.4477 9 17 8.55228 17 8C17 7.44772 17.4477 7 18 7C18.5523 7 19 7.44772 19 8Z"
+                fill="#7171A6" />
+        </svg>
+      </span>
+      <p>Selection & Weighting</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(3, 84) == 'D'){
+    <div class="__selectIco select__alpha disableMenu">
+      <span class="material-icons-outlined">
+
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 4C3 3.44772 3.44772 3 4 3H12C12.5523 3 13 3.44772 13 4C13 4.55228 12.5523 5 12 5H4C3.44772 5 3 4.55228 3 4Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path d="M3 12C3 11.4477 3.44772 11 4 11H12C12.5523 11 13 11.4477 13 12C13 12.5523 12.5523 13 12 13H4C3.44772 13 3 12.5523 3 12Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path d="M3 16C3 15.4477 3.44772 15 4 15H12C12.5523 15 13 15.4477 13 16C13 16.5523 12.5523 17 12 17H4C3.44772 17 3 16.5523 3 16Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path d="M3 20C3 19.4477 3.44772 19 4 19H12C12.5523 19 13 19.4477 13 20C13 20.5523 12.5523 21 12 21H4C3.44772 21 3 20.5523 3 20Z"
+                fill="var(--iconColor)" fill-opacity="0.5" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.1707 9C15.5825 10.1652 16.6938 11 18 11C19.6569 11 21 9.65685 21 8C21 6.34315 19.6569 5 18 5C16.6938 5 15.5825 5.83481 15.1707 7H4C3.44772 7 3 7.44772 3 8C3 8.55228 3.44772 9 4 9H15.1707ZM19 8C19 8.55228 18.5523 9 18 9C17.4477 9 17 8.55228 17 8C17 7.44772 17.4477 7 18 7C18.5523 7 19 7.44772 19 8Z"
+                fill="#7171A6" />
+        </svg>
+      </span>
+      <p>Selection & Weighting</p>
+    </div>
+    }
+    @if(sharedData.checkShowLeftTab(3) == 'A'){
+    <div class="__selectIco select__accounts" id="CIaccountSelect" [class.active]="showDefault_select == 'Accounts'" (click)="checkDefaultAccountPopup = ''; leftMenuClick('Accounts');">
+      <span class="material-icons-outlined">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7ZM14 7C14 8.10457 13.1046 9 12 9C10.8954 9 10 8.10457 10 7C10 5.89543 10.8954 5 12 5C13.1046 5 14 5.89543 14 7Z"
+                fill="var(--iconColor)" />
+          <path d="M17 15C17 14.4477 16.5523 14 16 14H8C7.44772 14 7 14.4477 7 15V21H5V15C5 13.3431 6.34315 12 8 12H16C17.6569 12 19 13.3431 19 15V21H17V15Z"
+                fill="var(--iconColor)" />
+        </svg>
+      </span>
+      <p>Select Accounts</p>
+    </div>
+    }
+    @if((checkEnableStepsFactSheet(true) && sharedData.checkMenuPer(3, 87) == 'Y') || (sharedData.checkMenuPer(3, 87) == 'D')){
+    <div class="__selectIco_disable __selectIco">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M2.5 10L10 14.375L17.5 10" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="var(--iconColor)" stroke-width="1.2"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Index Steps</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(3, 87) == 'Y'){
+    <div class="__selectIco select__steps __selectIco" [class.active]="showDefault_select == 'Steps'" (click)="openIndexRules();leftMenuClick('Steps')">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.5 13.75L10 18.125L17.5 13.75" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M2.5 10L10 14.375L17.5 10" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M2.5 6.25L10 10.625L17.5 6.25L10 1.875L2.5 6.25Z" stroke="var(--iconColor)" stroke-width="1.2"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Index Steps</p>
+    </div>
+    }
+
+    @if((checkEnableStepsFactSheet() && sharedData.checkMenuPer(3, 88) == 'Y') || (sharedData.checkMenuPer(3, 88) == 'D')){
+    <div class="__selectIco_disable __selectIco" [class.active]="showDefault_select == 'Factsheet'">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.5 4.375H17.5V15C17.5 15.1658 17.4342 15.3247 17.3169 15.4419C17.1997 15.5592 17.0408 15.625 16.875 15.625H3.125C2.95924 15.625 2.80027 15.5592 2.68306 15.4419C2.56585 15.3247 2.5 15.1658 2.5 15V4.375Z"
+                stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M2.5 8.125H17.5" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M2.5 11.875H17.5" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M6.875 8.125V15.625" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Factsheet</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(3, 88) == 'Y'){
+    <div class="__selectIco select__factsheet __selectIco" [class.active]="showDefault_select == 'Factsheet'" (click)="leftMenuClick('Factsheet');checkFactsheetOpen()">
+      <span class="material-icons-outlined">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.5 4.375H17.5V15C17.5 15.1658 17.4342 15.3247 17.3169 15.4419C17.1997 15.5592 17.0408 15.625 16.875 15.625H3.125C2.95924 15.625 2.80027 15.5592 2.68306 15.4419C2.56585 15.3247 2.5 15.1658 2.5 15V4.375Z"
+                stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M2.5 8.125H17.5" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M2.5 11.875H17.5" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+          <path d="M6.875 8.125V15.625" stroke="var(--iconColor)" stroke-width="1.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p>Factsheet</p>
+    </div>
+    }
+  </div>
+  <div class="customIndex_icon__details">
+    @if(!cusIndexService.checkEnableFactSheet()){
+    <div class="checkQueue-sec" (click)="openQueueModal()" style="position: absolute; width: 100%; height: 100%; background: transparent; z-index: 999; cursor: pointer;"></div>
+    }
+    @if(sharedData.checkMenuPer(3, 93) == 'Y'){
+    <div class="select__alpha__details top_bg" style="padding: 1rem; display: none" [style.display]="showDefault_select == 'Alpha'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <div class="d-flex align-items-center">
+        <h4 style=" margin-bottom: 0.5rem;">Alpha</h4>
+        <!--@if(!checkStgyAlreadyTraded &&  cusIndexService.checkFactorResetBtn(18)){
+      <span data-bs-toggle="modal" data-bs-target="#myAlphaclearModal" class="mb1rem d-flex align-items-center mr0_5rem cp" style="font-size: 0.62rem; color: var(--linkColor);">
+        <span class="mat-mdc-tooltip-trigger material-icons commonResetFilter ml0_5rem cp" style="padding-right: 0.15rem;"> close </span> Clear all
+      </span>
+      }-->
+      </div>
+      <div class="scrollbox w-100 box-border">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class=" w-100 d-flex align-items-center  ">
+            <p class="drag__txt">Drag by: </p>
+            <div class="btn-group common-btn-group mb1rem ml0_5rem p-rel">
+              <mat-button-toggle-group [disabled]="checkStgyAlreadyTraded" (change)="alphaTog($event)" [(ngModel)]="alphaFactorData['perorval']">
+                <mat-button-toggle [value]='1' [matTooltip]="factorTooltip('h-factor',1)" [matTooltipPosition]="'above'">Val</mat-button-toggle>
+                <mat-button-toggle [value]='0' [matTooltip]="factorTooltip('h-factor',0)" [matTooltipPosition]="'above'">%</mat-button-toggle>
+              </mat-button-toggle-group>
+              @if(!checkStgyAlreadyTraded &&  cusIndexService.checkFactorResetBtn(18)){
+              <div class="triggerSwitchDiv cp abs_overlay" data-bs-toggle="modal" data-bs-target="#factorSwitchTab" (click)="storefactorData(alphaFactorData)"></div>
+              }
+            </div>
+          </div>
+          @if(!checkStgyAlreadyTraded &&  cusIndexService.checkFactorResetBtn(18)){
+          <span (click)="alphaReset()" style="font-size: 0.62rem;color: var(--linkColor);" class="mb1rem d-flex align-items-center mr0_5rem cp">
+            <span class="material-icons commonResetFilter ml0_5rem cp" style="" matTooltip='Reset' [matTooltipPosition]="'above'" #tooltip="matTooltip">
+              replay
+            </span> Reset
+          </span>
+          }
+        </div>
+        @if(alphaFactorData['perorval']==0 && !checkStgyAlreadyTraded){
+        <div class="alpha__re__list d-flex align-items-center">
+          @for (data of alpharemovePercentage; track data) {
+          <div class="__rem" (click)="alphaFactorData['startval']=data.value">{{data.name}}%</div>
+          }
+        </div>
+        }
+        <h5 class="sub__h mb0rem lowercase">h-factor</h5>
+        <div class="drag__range" style="width:92%">
+          @if(alphaFactorData['perorval']==1){
+          <ngx-slider (valueChange)="al($event);alphaApplyBtn=true" [(ngModel)]="alphaFactorData['endval']" [options]="dragoptions"></ngx-slider>
+          }@else{
+          <ngx-slider (valueChange)="al($event);alphaApplyBtn=true" [(ngModel)]="alphaFactorData['startval']" [options]="dragoptions"></ngx-slider>
+          }
+        </div>
+        <h5 class="sub__h">Select Range</h5>
+        <div class="input-range d-flex align-items-center">
+          @if(alphaFactorData['perorval']==1){
+          <div class="input-group" style="width:60%">
+            <input (keydown)="valKeyDown($event)" maxlength="10" min="0" max="100" [class.errorBorder]="checkAllError()" [disabled]='checkStgyAlreadyTraded' [ngModel]="alphaFactorData['endval'] | factorFormat" (change)="alphaval($event)" type="number" class="form-control text-right" title="">
+            <span class="input-group-text">to</span>
+            <input [ngModel]="alphaFactorData['startval'] | factorFormat" type="number" class="form-control" disabled style="background: var(--border) !important;" title="">
+          </div>
+          }@else{
+          <div class="input-group" style="width:60%">
+            <!--<input maxlength="3"  min="0" max="100" step="1"  (input)="alphaIN($event)"  [class.errorBorder]="checkAllError()" (change)="alphaApplyBtn=true" [disabled]='checkStgyAlreadyTraded' [(ngModel)]="alphaFactorData['startval']" type="number" class="form-control text-right" title="">-->
+            <input (keydown)="perKeyDown($event)" type="text" [class.errorBorder]="checkAllError()" (input)="alphaIN($event)" maxlength="2" (change)="alphaApplyBtn=true" [disabled]='checkStgyAlreadyTraded' [value]="alphaFactorData['startval']" class="form-control text-right" required />
+            <span class="input-group-text">to</span>
+            <input [(ngModel)]="alphaFactorData['endval']" type="number" class="form-control" disabled style="background: var(--border) !important;" title="">
+          </div>
+          }
+          <button *ngIf="!checkStgyAlreadyTraded && alphaApplyBtn && !checkAllError()" class="sub__button" (click)="alphaApply()">Apply</button>
+        </div>
+        @if(checkAllError()){
+        @if(alphaFactorData['perorval']==1){
+        <span class="fact-Acc-Error">Value out of range. Please select a value within '{{alphaFactorData['orgTopValue'] | factorFormat }}' to '{{alphaFactorData['orgBottomValue'] | factorFormat}}'</span>        
+        }@else{
+        <span class="fact-Acc-Error">Value out of range. Please select a value within 0 to 100</span>
+        }
+        }
+      </div>
+    </div>
+    }
+    <div class="select__alpha__details top_bg" style="padding: 1rem; display: none" [style.display]="showDefault_select == 'Filters'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <div class="d-flex align-items-center">
+        <h4>Filters</h4>
+        @if(!checkStgyAlreadyTraded && (remCompData.length> 0 ||remGicsData.length> 0)){
+        <span data-bs-toggle="modal" data-bs-target="#myclearcompanyModal" class="mb1rem d-flex align-items-center mr0_5rem cp" style="font-size: 0.65rem; color: var(--linkColor);">
+          <span class="mat-mdc-tooltip-trigger material-icons commonResetFilter ml0_5rem cp" style="padding-right: 0.15rem;"> close </span> Clear all
+        </span>
+        }
+        <div class="company_ex_mul">
+          <div class="dropdown" style="cursor:pointer">
+            <span class="material-icons dropdown-toggle" id="exclude_multiple_G" data-bs-toggle="dropdown" style="font-size:1rem">
+              more_horiz
+            </span>
+            <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="exclude_multiple_G">
+              <div class="ex-mul-text d-flex align-items-center justify-content-center">
+                <div class="mat__toggle">
+                  <mat-slide-toggle style="transform: scale(0.75) !important; padding: 0 !important;" (change)="onToggleExclude($event)" [checked]="exclude_multiple_G" class="example-margin preLabel"></mat-slide-toggle>
+                </div>
+                Exclude Multiple
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scrollbox">
+        <div class="scrollbox default_mat_tabs">
+          <mat-tab-group animationDuration="0ms" (selectedTabChange)="filterChange($event)">
+            @if(sharedData.checkMenuPer(3,90) == 'Y'){
+            <mat-tab label="Companies">
+              @if(remCompData.length>0){
+              <div class="view_rem d-flex align-items-center cp" style="line-height:normal" (click)="showRemovedComp()">
+                <span class="material-icons" style="font-size: 0.6rem; padding-left: 0.2rem" *ngIf="showRemComp">arrow_back_ios</span> View removed companies
+              </div>
+              }
+              <div class="search_sec w-100">
+                <div class="default-search-item d-flex align-items-center w-100">
+                  <form>
+                    <mat-form-field class="SearchFormField">
+                      <input appRemoveSpecialCharacters minlength="1" maxlength="50" type="text" matInput placeholder="Search" [formControl]="companySearch" [(ngModel)]="inputValue">
+                      <mat-icon id="eScBtn" *ngIf="!inputValue" matPrefix>search</mat-icon>
+                      <mat-icon id="close_btn" matPrefix *ngIf="inputValue" (click)="clearInput()">close</mat-icon>
+                    </mat-form-field>
+                  </form>
+                  <div class="no_line_height d-flex align-items-center comp__head ml0_5rem">
+                    <div class="dropdown">
+                      <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        swap_vert
+                      </span>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <!-- <div class="component sortbyComp" style="margin-top: 0; margin-bottom: 0; ">
+                          <div class="dropSpace">
+                            <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+                            <div class="component sortbyComp EQ_sorting">
+                              <span class="title">Ascending</span>
+                              <div class="mat__toggle">
+                                <mat-slide-toggle (change)="onToggleAscending($event)" [checked]="ascending_val" class="example-margin preLabel"></mat-slide-toggle>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+                        <ul>
+                          <li>
+                            <a class="dropdown-item sort_btn">Sort by
+                              <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('L','ci')"><span  class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem"> refresh</span> Reset</button>
+                            </a>
+                          
+                          </li>
+                          <li *ngFor="let item of FilterList">
+                            <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                            <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                              @if(ascending_val){
+                              <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                      fill="#fff" />
+                                <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                      fill="#fff" style="opacity: 0.2;" />
+                              </svg>
+                              }
+                              @else{
+                              <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                      fill="#fff" style="opacity: 0.2;" />
+                                <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                      fill="#fff" />
+                              </svg>
+                              }
+                            </span>
+                          </li>
+                        </ul>
+                   
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div>
+
+                <mat-table matSort [dataSource]="companydataSource.data.length > 0 ? companydataSource : emptyData" class="common_mat_table accounts_table pb2rem outerScroll__filter componentScroll_account" *ngIf="companydataSource.data.length > 0" matSortDisableClear id="company-mat-table"
+                           matSortDirection="asc" (matSortChange)="announceSortChange($event)">
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef style=" justify-content: flex-start;"> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element" (mouseenter)="companyenter(element)" (mouseleave)="companyleave(element)">
+                      <div [style.opacity]="check_a_r_class(element)? '0.25':'1'">{{element.name}}</div>
+                      <div [style.opacity]="check_a_r_class(element)? '0.25':'1'">{{element.scores}}</div>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="ticker">
+                    <mat-header-cell *matHeaderCellDef class="pr1_5rem"> Ticker</mat-header-cell>
+                    <mat-cell class="pr1_5rem" *matCellDef="let element" style="position: relative;" (mouseenter)="companyenter(element)" (mouseleave)="companyleave(element)">
+                      <div class="nw" [style.opacity]="check_a_r_class(element)? '0.25':'1'">{{element.ticker}}</div>
+                      <ng-container *ngIf="cusIndexService.checkTrade(cusIndexService._currentSList)">
+                        <span class="material-icons-outlined icons hov_action_Icons_pos">
+                          @if(check_a_r_class(element)){
+                          <span (click)="AddComp(element)" class="material-icons hov_action_Icons">
+                            control_point
+                          </span>
+                          }@else{
+                          <span (click)="remComp(element)" class="material-icons hov_action_Icons">
+                            remove_circle_outline
+                          </span>
+                          }
+                        </span>
+                      </ng-container>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="empty-row">
+                    <mat-cell *matCellDef="let element">No Data</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: companydataSource.data.length > 0 ? displayedColumns : ['empty-row'];"></mat-row>
+                </mat-table>
+                <p class="no-r-f componentScroll_account d-flex align-items-center justify-content-center" *ngIf="companydataSource.data.length == 0">No Result Found</p>
+              </div>
+              @if((checkApplyBtn || remCompData.length> 0) && exclude_multiple_G){
+              <div class="input-range apply__exclu__section d-flex align-items-center justify-content-end">
+                @if(!checkStgyAlreadyTraded && checkApplyBtn){<button (click)="applyFilter()" class="dialog_btn_P small">Apply Exclusions</button>}
+                @if(!checkStgyAlreadyTraded && remCompData.length> 0){<button (click)="clearFilter()" class="ml0_5rem dialog_btn_S small ">Clear Stocks</button>}
+              </div>
+              }
+            </mat-tab>
+            }@else if(sharedData.checkMenuPer(3,90) == 'D'){
+            <mat-tab label="Companies" disabled>
+              <ng-container>
+                <span class="d-flex justify-content-center align-items-center" style="font-family: var(--ff-regular) !important; font-size: 0.65rem; color: var(--leftSideText); min-height:10rem ">No Data</span>
+              </ng-container>
+            </mat-tab>
+            }
+            @if(sharedData.checkMenuPer(3,91) == 'Y'){
+            <mat-tab label="Sectors (GICS)">
+              <div class="d-flex align-items-center gicsDrop" *ngIf="selectedGicsPath.length > 0">
+                <div class="b-drop-n d-flex">
+                  <span class="material-icons" style="font-size: 1.2rem;color: #727884;cursor: pointer;"
+                        (click)="GicsMenuClick('pre')">arrow_back</span>
+                  <div class="dropdown B-drpdwn-l" style="line-height: 0;">
+                    <span class="material-icons dropdown-toggle"
+                          style="font-size: 1.2rem;color: #727884;padding-left:0.2rem" data-bs-toggle="dropdown">
+                      more_vert
+                    </span>
+                    <div class="dropdown-menu">
+                      <ul>
+                        <li (click)="GicsMenuClick('home')"><span>Home</span></li>
+                        <li (click)="lefBrutExcluClick(data)" *ngFor="let data of selectedGicsPath">
+                          <span>{{data.name}}</span>
+                          <span class="med-l">{{data.med}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <span class="b-text-n" *ngIf="GicsdataSource.data.length > 0">Select {{modetxt(GicsdataSource.data[0].type)}}</span>
+                  <span class="b-text-n" *ngIf="GicsdataSource.data.length == 0">Go back</span>
+                </div>
+              </div>
+              <div [style.height]="selectedGicsPath.length > 0 ? 'calc(100vh - 18rem)':'calc(100vh - 17rem)'" class="componentScroll_account">
+                <mat-table matSort (matSortChange)="GicsSortChange($event)"
+                           [dataSource]="GicsdataSource.data.length > 0 ? GicsdataSource : emptyData" class="common_mat_table tableRowPadding accounts_table gics_table componentScroll_account outerScroll__filter" *ngIf="GicsdataSource.data.length > 0" matSortDisableClear id="company-mat-table"
+                           matSortDirection="asc" [style.height]="selectedGicsPath.length > 0 ? 'calc(100vh - 18rem)':'calc(100vh - 17rem)'">
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef style=" justify-content: flex-start;"> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element" (click)="GicsClick(element);leaveGics()" (mouseenter)="enterGics(element)" (mouseleave)="leaveGics()">
+                      <div [style.opacity]="check_Gics_class(element)? '0.25':'1'">{{element.name}}</div>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="code">
+                    <mat-header-cell *matHeaderCellDef style=" justify-content: flex-start;"> &nbsp; </mat-header-cell>
+                    <mat-cell *matCellDef="let element" (mouseenter)="enterGics(element)" (mouseleave)="leaveGics()">
+                      <ng-container *ngIf="cusIndexService.checkTrade(cusIndexService._currentSList)">
+                        <span class="material-icons-outlined icons" style="line-height: 0;position: absolute;right: 0.1rem;cursor: pointer;">
+                          @if(check_Gics_class(element)){
+                          <!-- Add -->
+                          <span (click)="addGicsClick(element)" class="material-icons" style="font-size: 1.2rem;background: var(--topNavbar) !important; color: var(--prim-button-color);">
+                            control_point
+                          </span>
+                          <!-- Add End -->
+                          }@else{
+                          <!-- Minus -->
+                          <span (click)="remGicsClick(element)" class="material-icons" style="font-size: 1.2rem;background: var(--topNavbar) !important; color: var(--prim-button-color);">
+                            remove_circle_outline
+                          </span>
+                          <!-- Minus end -->
+                          }
+                        </span>
+                      </ng-container>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="empty-row">
+                    <mat-cell *matCellDef="let element">No Data</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedSecColumns;sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: GicsdataSource.data.length > 0 ? displayedSecColumns : ['empty-row'];"></mat-row>
+                </mat-table>
+              </div>
+              @if((checkApplyBtn || remGicsData.length> 0) && exclude_multiple_G){
+              <div class="input-range apply__exclu__section d-flex align-items-center justify-content-end">
+                @if(!checkStgyAlreadyTraded && checkApplyBtn){<button (click)="applyFilter()" class="dialog_btn_P small">Apply Exclusions</button>}
+                @if(!checkStgyAlreadyTraded && remGicsData.length> 0){<button (click)="clearGics()" class="ml0_5rem dialog_btn_S small">Clear Sectors</button>}
+              </div>
+              }
+            </mat-tab>
+            }@else if(sharedData.checkMenuPer(3,91) == 'D'){
+            <mat-tab label="Sectors (GICS)" disabled>
+              <ng-container>
+                <span class="d-flex justify-content-center align-items-center" style="font-family: var(--ff-regular) !important; font-size: 0.65rem; color: var(--leftSideText); min-height:10rem ">No Data</span>
+              </ng-container>
+            </mat-tab>
+            }
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+    <!-- Factors -->
+    <div class="select__alpha__details top_bg factors_accordion" style="padding: 1rem 0.5rem 1rem 1rem; display: none" [style.display]="showDefault_select == 'Factors'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <div class="d-flex align-items-center">
+        <h4>Factors</h4>
+        @if(!checkStgyAlreadyTraded && checkClearFact()){
+        <span data-bs-toggle="modal" data-bs-target="#myFactclearModal" class="mb1rem d-flex align-items-center mr0_5rem cp" style="font-size: 0.65rem; color: var(--linkColor);">
+          <span class="mat-mdc-tooltip-trigger material-icons commonResetFilter ml0_5rem cp" style="padding-right: 0.15rem;"> close </span>
+          Clear all
+        </span>
+        }
+      </div>
+      <div class="scrollbox outerScroll__Div p-rel" id="accordionFactors">
+        <!-- @if(openFactorLoader){
+        <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--topNavbar); z-index: 99;">
+          <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+        </div>
+        } -->
+        @for(data of factorMenu; track data) {
+        <h5 class="sub__h" [class.disabled]="data['subMenu'].length == 0">{{data['menu']}}</h5>
+        @if(data['subMenu'].length>0){
+        <div class="accordion accordion-flush">
+          @for(sub of data['subMenu']; track sub; let i = $index) {
+          <div class="accordion_item p-rel">
+            @if(cusIndexService.checkFactorResetBtn(sub['id'])){
+            <span class="material-icons verified" style="display: flex;position: absolute;right: 0rem;top: 0.2rem;font-size: 1rem;color: var(--prim-button-color);"> verified </span>
+            }
+            @if(sub['data']['showfactor']){
+            <h2 class="accordion_header">
+              <a class="accordion_button collapsed" [class.highlight]="sub.displayname == accotdionHighlight" data-bs-toggle="collapse" [id]="'accordH'+sub.id" (click)="FactorClick(sub)"
+                 [attr.data-bs-target]="hrefpar1(sub.id)" aria-expanded="false" aria-controls="flush-collapseOne">
+                <span class="material-icons">chevron_right</span>
+                {{sub.displayname}}
+              </a>
+            </h2>
+            }@else{
+            <h2 class="accordion_header disabled">
+              <a class="accordion_button collapsed" aria-expanded="false" aria-controls="flush-collapseOne">
+                <span class="material-icons">chevron_right</span>
+                {{sub.displayname}}
+              </a>
+            </h2>
+            }
+            @if(sub['data']['showfactor']){
+            <div [id]="collapsepar1(sub.id)" class="accordion-collapse position-relative collapse" data-bs-parent="#accordionFactors">
+              <div class="accordion_body scrollbox w-100 box-border pb1rem" style="background: var(--primary-color)">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class=" w-100 d-flex align-items-center  ">
+                    <p class="drag__txt">Drag by: </p>
+                    <div class="btn-group common-btn-group mb1rem ml0_5rem p-rel">
+                      <mat-button-toggle-group [disabled]="checkStgyAlreadyTraded" (change)="factorTog($event,sub)" [(ngModel)]="sub['data']['perorval']">
+                        <mat-button-toggle [value]='1' [matTooltip]="factorTooltip(sub.displayname,1)" [matTooltipPosition]="'above'">Val</mat-button-toggle>
+                        <mat-button-toggle [value]='0' [matTooltip]="factorTooltip(sub.displayname,0)" [matTooltipPosition]="'above'">%</mat-button-toggle>
+                      </mat-button-toggle-group>
+                      @if(!checkStgyAlreadyTraded && cusIndexService.checkFactorResetBtn(sub['id'])){
+                      <div class="triggerSwitchDiv cp abs_overlay" data-bs-toggle="modal" data-bs-target="#factorSwitchTab" (click)="storefactorData(sub)"></div>
+                      }
+                    </div>
+                  </div>
+                  @if(cusIndexService.checkFactorResetBtn(sub['id'])){
+                  <span *ngIf="!checkStgyAlreadyTraded" (click)="factorReset(sub)" style="font-size: 0.62rem;color: var(--linkColor);" class="mb1rem d-flex align-items-center cp">
+                    <span class="material-icons commonResetFilter ml0_5rem cp" style="" matTooltip='Reset' [matTooltipPosition]="'above'" #tooltip="matTooltip">
+                      replay
+                    </span> Reset
+                  </span>
+                  }
+                </div>
+                <h5 class="sub__h mb0rem" style="margin:0 !important">Range</h5>
+                @if(sub['data']['perorval']==1){
+                <div class="drag__range combine__range dual__Drag" style="width:98%">
+                  <ngx-slider (valueChange)="sub['data']['showApplyBtn']=true" [(value)]="sub['data']['startval']" [(highValue)]="sub['data']['endval']" [options]="sub['data']['sliderOption']"></ngx-slider>
+                </div>
+                <div class="input-range d-flex align-items-center">
+                  <div class="input-group" style="width:60%">
+                    <input (keydown)="valKeyDown($event)" [attr.maxlength]="(sub['id'] ==17)?25:10" [attr.id]="('factST'+sub['id'])" [class.errorBorder]="sub['data']['factErrorStart']" [disabled]='checkStgyAlreadyTraded' [ngModel]="sub['data']['startval'] | factorinputFormat : sub['id']" (change)="factval($event,sub,'startval')" type="number" step="any" class="form-control">
+                    <span class="input-group-text">to</span>
+                    <input (keydown)="valKeyDown($event)"  [attr.maxlength]="(sub['id'] ==17)?25:10" [attr.id]="('factED'+sub['id'])" [class.errorBorder]="sub['data']['factErrorEnd']" [disabled]='checkStgyAlreadyTraded' [ngModel]="sub['data']['endval'] | factorinputFormat : sub['id']" (change)="factval($event,sub,'endval')" class="form-control text-right" type="number" step="any">
+                  </div>
+                  @if(sub['data']['showApplyBtn']){
+                  <button *ngIf="!checkStgyAlreadyTraded" class="sub__button" (click)="sub['data']['showApplyBtn']=false;factorApply(sub)">Apply</button>
+                  }
+                </div>
+                }@else{
+                <div class="drag__range combine__range dual__Drag" style="width:98%">
+                  <ngx-slider (valueChange)="sub['data']['showApplyBtn']=true" [(value)]="sub['data']['startval']" [(highValue)]="sub['data']['endval']" [options]="sub['data']['sliderOption']"></ngx-slider>
+                </div>
+                <div class="input-range d-flex align-items-center">
+                  <div class="input-group" style="width:60%">
+                    <input (keydown)="perKeyDown($event)" type="text" [class.errorBorder]="sub['data']['factErrorStart']" maxlength="2" (change)="factRange($event,sub,'startval')" [disabled]='checkStgyAlreadyTraded' [ngModel]="sub['data']['startval']" class="form-control text-right" required />
+                    <!--<input [class.errorBorder]="sub['data']['factErrorStart']" min="0" max="100" (input)="factRange($event,sub,'startval')" [disabled]='checkStgyAlreadyTraded' [(ngModel)]="sub['data']['startval']" type="number" step="any" class="form-control text-right">-->
+                    <span class="input-group-text">to</span>
+                    <input (keydown)="perKeyDown($event)" type="text" [class.errorBorder]="sub['data']['factErrorEnd']" maxlength="3" (change)="factRange($event,sub,'endval')" [disabled]='checkStgyAlreadyTraded' [ngModel]="sub['data']['endval']" class="form-control text-right" required />
+                    <!--<input [class.errorBorder]="sub['data']['factErrorEnd']" min="0" max="100" (input)="factRange($event,sub,'endval')" [disabled]='checkStgyAlreadyTraded' [(ngModel)]="sub['data']['endval']" type="number" step="any" class="form-control">-->
+                  </div>
+                  @if(sub['data']['showApplyBtn']){
+                  <button *ngIf="!checkStgyAlreadyTraded" class="sub__button" (click)="sub['data']['showApplyBtn']=false;factorApply(sub)">Apply</button>
+                  }
+                </div>
+                }
+                @if(sub['data']['factErrorStart'] || sub['data']['factErrorEnd']){
+                @if(sub['data']['perorval']==1){
+                <span class="fact-Acc-Error">Value out of range. Please select a value within '{{sub['data']['orgTopValue'] | factorinputFormat : sub['id']}}' to '{{sub['data']['orgBottomValue'] | factorinputFormat : sub['id']}}'</span>
+                }@else{
+                <span class="fact-Acc-Error">Value out of range. Please select a value within 0 to 100</span>
+                }
+                }
+              </div>
+              @if(openFactorLoader){
+                <div style="    position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 100%;
+                height: 100%;
+                background: var(--topNavbar);
+                z-index: 99;
+                opacity: 0.8;
+                transform: translate(-50%, -50%);">
+                  <mat-spinner class="reviewloader-spinner"></mat-spinner>
+                </div>
+                }
+            </div>
+            }
+          </div>
+          }
+        </div>
+        }
+        }
+      </div>
+    </div>
+    <!-- Factors -->
+    <div class="select__selection__details top_bg" style="padding: 1rem; display: none" [style.display]="showDefault_select == 'Selection'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <div class="d-flex align-items-center">
+        <h4>Selection & Weighting</h4>
+      </div>
+      <div class="scrollbox default_mat_dropdown" style="max-height: calc(100vh - 19rem); overflow: auto;">
+
+        <div class="w-100 box-border">
+          <h5 class="sub__h mb1rem sub__hWeight" style="margin-top: 0rem; margin-bottom: 0.5rem;">Selection</h5>
+          @if(sharedData.checkMenuPer(3, 95) == 'Y'){
+          <!--- Without Trade --->
+          @if(cusIndexService.checkTrade(cusIndexService._currentSList)){
+          <div class="d-flex align-items-center justify-content-between inline__form mt0_5rem">
+            <label for="inputComp" class="col-form-label m0">Enter No of Components</label>
+            <input [disabled]='checkStgyAlreadyTraded' (input)="checkslider()" (change)="changeBldSlider('')" [(ngModel)]="inbldMyIndselNoCompVal" (keydown)="keyPressNumbers($event, bldMyIndselNoCompinput)" #bldMyIndselNoCompinput
+                   [class.errorBorder]="noOfCompError" type="number" id="inputComp" class="form-control">
+          </div>
+          <div class="drag__range mb0_5rem combine__range d-flex align-items-center" [class.sameSlide]="cusIndexService.minCustInd.count == bldMyIndselNoCompmax" style="width:100%">
+            <ngx-slider (userChange)="changeBldSlider($event)" [(ngModel)]="custToolNoOfComp" [options]="selectionOptions"></ngx-slider>
+            <div class="p-rel trans__bg" style="width:25%" *ngIf="showSliderIcon">
+              <span class="info-hover-tooltip">
+                <svg width="15" height="15" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     style="position: relative;top: 1.35rem;margin-right: 0.4rem;    right: -1.5rem;">
+                  <path d="M32 59C39.4261 59 46.548 56.05 51.799 50.799C57.05 45.548 60 38.4261 60 31C60 23.5739 57.05 16.452 51.799 11.201C46.548 5.94999 39.4261 3 32 3C24.5739 3 17.452 5.94999 12.201 11.201C6.94999 16.452 4 23.5739 4 31C4 38.4261 6.94999 45.548 12.201 50.799C17.452 56.05 24.5739 59 32 59V59ZM35.255 26.058L31.755 42.5255C31.51 43.7155 31.8565 44.391 32.819 44.391C33.498 44.391 34.5235 44.146 35.22 43.53L34.912 44.986C33.9075 46.197 31.692 47.079 29.7845 47.079C27.324 47.079 26.2775 45.602 26.9565 42.4625L29.5395 30.3245C29.7635 29.299 29.5605 28.928 28.535 28.6795L26.9565 28.396L27.2435 27.0625L35.2585 26.058H35.255ZM32 22.25C31.0717 22.25 30.1815 21.8813 29.5251 21.2249C28.8687 20.5685 28.5 19.6783 28.5 18.75C28.5 17.8217 28.8687 16.9315 29.5251 16.2751C30.1815 15.6187 31.0717 15.25 32 15.25C32.9283 15.25 33.8185 15.6187 34.4749 16.2751C35.1313 16.9315 35.5 17.8217 35.5 18.75C35.5 19.6783 35.1313 20.5685 34.4749 21.2249C33.8185 21.8813 32.9283 22.25 32 22.25V22.25Z" fill="white" style="fill: var(--prim-button-color-text);"></path>
+                </svg>
+                <span class="abs">
+                  Your index must have at least 10% fewer components than
+                  starting universe.
+                </span>
+              </span>
+            </div>
+          </div>
+          <!--- Without Trade --->
+          }@else if(!cusIndexService.checkTrade(cusIndexService._currentSList)){
+          <!--- After Traded --->
+          <div class="d-flex align-items-center justify-content-between inline__form">
+            <label for="inputComp" class="col-form-label m0">Enter No of Components</label>
+            <input readonly [(ngModel)]="inbldMyIndselNoCompVal" [class.errorBorder]="noOfCompError" type="number" id="inputComp" class="form-control">
+          </div>
+          <!--- After Traded --->
+          }
+          }@else if(sharedData.checkMenuPer(3, 95) == 'D'){
+          <div class="d-flex align-items-center justify-content-between inline__form">
+            <label for="inputComp" class="col-form-label m0">Enter No of Components</label>
+            <input readonly [(ngModel)]="inbldMyIndselNoCompVal" [class.errorBorder]="noOfCompError" type="number" id="inputComp" class="form-control">
+          </div>
+          }
+          @if(sharedData.checkMenuPer(3, 94) == 'Y'){
+          <span class="w-100">
+            <mat-form-field FloatLabelType="never" appearance="outline" class="w-100" [class.matFormError]="checkbildError(custToolSelectByValue,'')" [style.opacity]="!cusIndexService.checkTrade(cusIndexService._currentSList)?'0.5':'1'">
+               <mat-label style="padding-right: 0.5rem">--Selected by--</mat-label> 
+              <mat-select [(value)]="custToolSelectByValue" panelClass="selectList" (selectionChange)="selectedByChange($event.value)" [disabled]="!cusIndexService.checkTrade(cusIndexService._currentSList)" placeholder="--Selected by--">
+                <!--<mat-option value="0">--Selected by--</mat-option>-->
+                @for (dta of selectionSorting; track dta) {
+                <mat-option *ngIf="dta.Type == 'S' && dta.Name != ''" [value]="dta.Id" [disabled]="checkDisabled(dta)">
+                  <p [class.active]="dta.Id == custToolSelectByValue" [class.disabled]="checkDisabled(dta)">{{dta.Name}}</p>
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </span>
+          <div class="d-flex align-items-center justify-content-between input-range inline__form mt1rem">
+            <label for="inputComp" class="col-form-label m0">Cash Target</label>
+            @if(cusIndexService.checkTrade(cusIndexService._currentSList)){
+            <div class="input-group" style="width:5rem;flex-wrap:nowrap">
+              <input type="number" class="form-control" [class.errorBorder]="(cashTargetMiMx.min > custToolCashTarget || custToolCashTarget > cashTargetMiMx.max || !checkCashTargetVal(custToolCashTarget, zeroAccMarketVal) )"
+                     min="cashTargetMiMx.min" max="cashTargetMiMx.max" step="1"
+                     [(ngModel)]="custToolCashTarget" (change)="changecashTarget()"
+                     onkeydown="if($event.key==='.'){$event.preventDefault();}"
+                     aria-label="cash target 2 to 100 percentage">
+              <span class="input-group-text">%</span>
+            </div>
+            }@else if(!cusIndexService.checkTrade(cusIndexService._currentSList)){
+            <div class="input-group" style="width:5rem;flex-wrap:nowrap">
+              <input type="text" class="form-control"
+                     min="cashTargetMiMx.min" max="cashTargetMiMx.max" step="1"
+                     [(ngModel)]="custToolCashTarget" aria-label="cash target 2 to 100 percentage" readonly>
+              <span class="input-group-text">%</span>
+            </div>
+            }
+          </div>
+          }@else if(sharedData.checkMenuPer(3, 94) == 'D'){
+          <span class="w-100">
+            <mat-form-field FloatLabelType="never" appearance="outline" class="w-100" [class.matFormError]="checkbildError(custToolSelectByValue,'')" style="opacity: .5">
+               <mat-label style=" padding-right: 0.5rem">--Selected by--</mat-label> 
+              <mat-select [(value)]="custToolSelectByValue" panelClass="selectList" placeholder="--Selected by--" disabled>
+                <!--<mat-option value="0">--Selected by--</mat-option>-->
+                @for (dta of selectionSorting; track dta) {
+                <mat-option *ngIf="dta.Type == 'S' && dta.Name != ''" [value]="dta.Id" [disabled]="checkDisabled(dta)">
+                  <p [class.active]="dta.Id == custToolSelectByValue" [class.disabled]="checkDisabled(dta)">{{dta.Name}}</p>
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </span>
+          }
+        </div>
+        <div class="w-100 box-border">
+          <h5 class="sub__h mb1rem sub__hWeight" style="margin-top: 0rem; margin-bottom: 0.5rem;">Weighting</h5>
+          @if(sharedData.checkMenuPer(3, 96) == 'Y'){
+          <span class="w-100" style="    display: inline-block;
+          margin-top: 0.8rem;">
+            <mat-form-field FloatLabelType="never" appearance="outline" class="w-100" [class.matFormError]="checkbildError(custToolWeightByValue,'')" [style.opacity]="!cusIndexService.checkTrade(cusIndexService._currentSList)?'0.5':'1'">
+              <mat-label style="padding-right:0.5rem">--Weighted by--</mat-label>
+              <mat-select [(value)]="custToolWeightByValue" panelClass="selectList" [disabled]="!cusIndexService.checkTrade(cusIndexService._currentSList)" (selectionChange)="weightByChange($event.value)" placeholder="--Weighted by--">
+                <!--<mat-option value="0">--Weighted by--</mat-option>-->
+                @for (dta of selectionSorting; track dta) {
+                <mat-option *ngIf="dta.Type == 'W' && dta.Name != ''" [value]="dta.Id" [disabled]="checkDisabled(dta)">
+                  <p [class.active]="dta.Id == custToolWeightByValue" [class.disabled]="checkDisabled(dta)">{{dta.Name}}</p>
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </span>
+          }@else if(sharedData.checkMenuPer(3, 96) == 'D'){
+          <span class="w-100">
+            <mat-form-field FloatLabelType="never" appearance="outline" class="w-100" [class.matFormError]="checkbildError(custToolWeightByValue,'')" style="opacity: .5">
+              <mat-label style=" padding-right: 0.5rem">--Weighted by--</mat-label>
+              <mat-select [(value)]="custToolWeightByValue" panelClass="selectList" placeholder="--Weighted by--" disabled>
+                <!--<mat-option value="0">--Weighted by--</mat-option>-->
+                @for (dta of selectionSorting; track dta) {
+                <mat-option *ngIf="dta.Type == 'W' && dta.Name != ''" [value]="dta.Id" [disabled]="checkDisabled(dta)">
+                  <p [class.active]="dta.Id == custToolWeightByValue" [class.disabled]="checkDisabled(dta)">{{dta.Name}}</p>
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </span>
+          }
+          <div class="w-100 box-border p-rel" [style.background]="expand_weight_show?'var(--cardsHighlightColorDark)':'transparent'">
+            <!-- Weight Limit Loader --->
+            @if(openWeightLoader){
+            <div style="position: absolute; left:0; top:0; width: 100%; height: 100%; background: #1f1f2ed9; z-index: 9;">
+              <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+            </div>
+            }
+            <!-- Weight Limit Loader --->
+            <div class="d-flex align-items-center justify-content-between input-range inline__form">
+              <label for="inputComp" class="col-form-label m0">Maximum security weight:</label>
+              <mat-slide-toggle [disabled]="checkStgyAlreadyTraded" (change)="weightChangeShow($event)" [(ngModel)]="expand_weight_show" class="example-margin preLabel" style="transform: scale(0.75) !important; padding: 0 !important;"></mat-slide-toggle>
+            </div>
+            <div class="w-100" style="transition: all .2s; display: none; overflow: hidden; border: 0px dashed var(--border); padding: 0.5rem 0rem;" [style.display]="expand_weight_show?'block':'none'">
+              <ng-container *ngIf="cusIndexService.checkTrade(cusIndexService._currentSList)">
+                <div class="d-flex align-items-center justify-content-between inline__form">
+                  <label for="inputComp" class="col-form-label m0">Enter weight (%)</label>
+                  <input type="number" id="inputComp" class="form-control" (input)="checksliderWeight()" (change)="changeBldSliderWeight('')" [class.errorBorder]="weightLimitError" [(ngModel)]="bldMyIndselNoCompWeight" #bldMyIndselNoWeightinput>
+                </div>
+                <div class="selNoMatSlider" style=" position: relative; left: 2.5%;">
+                  <div style="position:relative" class="selectWeightSlider drag__range combine__range" *ngIf="!openWeightLoader">
+                    <ngx-slider [(value)]="bldMyIndselNoCompWeightSlider" [options]="selectionOptionsWeight" (userChangeEnd)="selNoMatSliderInputWeight($event)"></ngx-slider>
+                  </div>
+                </div>
+                <div class="w-100 text_center" *ngIf="weightLimitError">
+                  <span style="color: var(--danger) !important;font-size: 0.65rem;">Weight should range from {{bldMyIndselNoWeightmin}}% to 100%</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!cusIndexService.checkTrade(cusIndexService._currentSList)">
+                <div class="d-flex align-items-center justify-content-between inline__form">
+                  <label for="inputComp" class="col-form-label m0">Enter weight (%)</label>
+                  <input type="number" id="inputComp" class="form-control" [(ngModel)]="bldMyIndselNoCompWeight" #bldMyIndselNoWeightinput readonly>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between input-range inline__form mt1rem">
+            <label for="inputComp" class="col-form-label m0">Rebalance</label>
+            @if(cusIndexService.checkTrade(cusIndexService._currentSList)){
+            <mat-form-field FloatLabelType="never" appearance="outline" style="width: 7rem;">
+              <mat-select panelClass="selectList " class="rebalanceSelect" (selectionChange)="rebalanceChange($event.value)"  [(ngModel)]="custToolRebalanceType">
+                @for (rebalancePeriod of rebalancePeriod; track rebalancePeriod) {
+                <mat-option [value]="rebalancePeriod.rebalancefreq"><p class="nw">{{rebalancePeriod.rebalancefreqName}}</p></mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            }@else if(!cusIndexService.checkTrade(cusIndexService._currentSList)){
+            <mat-form-field FloatLabelType="never" appearance="outline" style="width: 7rem;">
+              <mat-select panelClass="selectList " class="rebalanceSelect" [(ngModel)]="custToolRebalanceType" disabled>
+                @for (rebalancePeriod of rebalancePeriod; track rebalancePeriod) {
+                <mat-option [value]="rebalancePeriod.rebalancefreq"><p class="nw">{{rebalancePeriod.rebalancefreqName}}</p></mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            }
+          </div>
+          <span style="font-size: 0.6rem; color: var(--paraFontColorAlt); display: block; padding-top: 0.25rem; ">( Next rebalance date <span style="font-family:'poppins-medium';">{{nxtrebalance(custToolRebalanceType)}}</span> )</span>
+         
+        </div>
+        <div class="w-100 box-border">
+          @if(sharedData.checkMenuPer(3, 97) == 'Y' && cusIndexService.checkTrade(cusIndexService._currentSList)){
+          <div class="d-flex align-items-center justify-content-between input-range inline__form">
+            <label for="inputComp" class="col-form-label m0">Tax Optimization</label>
+            <mat-slide-toggle [disabled]="checkStgyAlreadyTraded" (change)="taxEffChange($event)" [(ngModel)]="custToolTaxEffAwareness" class="example-margin preLabel" style="transform: scale(0.75) !important; padding: 0 !important;"></mat-slide-toggle>
+          </div>
+          }@else if(sharedData.checkMenuPer(3, 97) == 'D' || !cusIndexService.checkTrade(cusIndexService._currentSList)){
+          <div class="d-flex align-items-center justify-content-between input-range inline__form">
+            <label for="inputComp" class="col-form-label m0">Tax Optimization</label>
+            <mat-slide-toggle disabled [(ngModel)]="custToolTaxEffAwareness" class="example-margin preLabel" style="transform: scale(0.75) !important; padding: 0 !important;"></mat-slide-toggle>
+          </div>
+          }
+        </div>
+        <!--<div class="d-flex justify-content-end apply__sec mt1rem">
+      <a class="apply-btn" (click)="applySelection()">APPLY</a>-->
+        <!--<a class="cancel-btn">Cancel</a>-->
+        <!--</div>-->
+      </div>
+    </div>
+
+    <div class="select__accounts__details top_bg p-rel h-auto" style="padding: 1rem 0.5rem 1rem 1rem;display:none" [class.hidden__sec]="checkDefaultAccountPopup != ''" [style.display]="showDefault_select == 'Accounts'?'block':'none'">
+      <div class="checkQueue-sec" *ngIf="!cusIndexService.checkEnableFactSheet()" (click)="openQueueModal()" style="position: absolute; width: 100%; height: 100%; background: transparent; z-index: 9; cursor: pointer;left:0;top:0;"></div>
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <div class="d-flex align-items-center acc-head">
+        <h4>Accounts</h4>
+        <span class="material-icons mr0_5rem" (click)="openSearch()">
+          search
+        </span>
+      </div>
+      <!---- Search Box popups -->
+      <div class="search-block-account mat-elevation-z4" [class.active]="toggleSearch">
+        <div class="d-flex align-items-center">
+          <span class="material-icons disable"> search </span>
+          <input appalphanumCharacters minlength="1" maxlength="10" class="search-control" [(ngModel)]="accSearchText" type="text" placeholder="Filter account" #searchBox #filterInput>
+          <span class="material-icons" (click)="accSearchText='';searchClose()"> close </span>
+        </div>
+      </div>
+      <!---- Search Box popups -->
+      <div id="account_Exclusions" class="p-rel accountSelectBg h-auto">
+        <div class="build-my-sec-l">
+          <div *ngIf="myAcclistList.length <= 0" class="noAcc d-flex align-items-center justify-content-center" style="min-height: 10rem;">
+            <span style="font-size: 0.7rem;color: var(--leftSideText);">No accounts assigned!</span>
+          </div>
+          @if(showSpinnerAcc_settings){
+          <div class="mat-spinner-loader">
+            <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+          </div>
+          }
+          
+          <div  class="build-my-sec-l p-rel" *ngIf="myAcclistList.length>0">
+            <form [formGroup]="accountForm" novalidate name="accountForm" class="">
+              <div formArrayName="accountItem" class="outerScroll__Div__18 outerScroll__Div_account componentScroll_account">
+                @if((getFormAccount.controls | accountFilter:filterInput.value).length == 0 ){
+                <div class="no-records-abs">
+                  <span>No record found</span>
+                </div>
+                }
+                <div class="h-100">
+                  <cdk-virtual-scroll-viewport itemSize="20" minBufferPx="700" maxBufferPx="700" class="account-viewport w-100 scrollbox h-100 acc-selc-h " id="accSelect">
+                    <div *cdkVirtualFor="let item of getFormAccount.controls | accountFilter:filterInput.value; let i = index;" [formGroup]="item" class="example-item accountSelect">
+                      <ng-container *ngIf="!isTooltipDisabled">
+                        <div class="cashFlowAccount p-rel" [matTooltip]="accountTooltip(item)" [matTooltipPosition]="'above'">
+                          <ng-container>
+                            <mat-checkbox formControlName="account" class="example-margin" (change)="acccountChange($event,item)">{{checkAccName(item)}}</mat-checkbox>
+                          </ng-container>
+                          <span class="material-icons dollar_ico ng-star-inserted" style="margin: 0;position: absolute;right: 2rem;line-height:0.5" *ngIf="checkAcctradedDisable(item)">
+                            <svg width="16" height="16" viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                          </span>
+                          <span class="fill-remaining-space" style=" position: absolute; right: 0;">
+                            <button [disabled]="!checkAccActive(item)" mat-icon-button (click)="accountInit(item);accountmore(item)">
+                              <mat-icon>more_horiz</mat-icon>
+                            </button>
+                          </span>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="isTooltipDisabled">
+                        <div class="cashFlowAccount p-rel">
+                          <ng-container>
+                            <mat-checkbox formControlName="account" class="example-margin" (change)="acccountChange($event,item)">{{checkAccName(item)}}</mat-checkbox>
+                          </ng-container>
+                          <span class="material-icons dollar_ico ng-star-inserted" style="margin: 0;position: absolute;right: 2rem;line-height:0.5" *ngIf="checkAcctradedDisable(item)">
+                            <svg width="16" height="16" viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                          </span>
+                          <span class="fill-remaining-space" style=" position: absolute; right: 0;">
+                            <button [disabled]="!checkAccActive(item)" mat-icon-button (click)="accountInit(item);accountmore(item)">
+                              <mat-icon>more_horiz</mat-icon>
+                            </button>
+                          </span>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </cdk-virtual-scroll-viewport>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="account__details__popup" [style.display]="checkDefaultAccountPopup=='details_popup'?'block':'none'">
+        <span class="material-icons-outlined close__card" (click)="checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account: <span style="color: var(--prim-button-color); text-transform: capitalize; letter-spacing: normal; ">{{checkAccName(accModalGroup)}}</span></h4>
+        <form [formGroup]="accModalGroup">
+          <div class="accEditValues">
+            <div class="panel-collapse cashFlowWrapper">
+              <div class="cashFlowValue">
+                <ul style="margin:0;padding:0">
+                  <li class="cashFlow hrLine" style="height: 1.8rem;">
+                    <p>Market Value</p>
+                    <p class="text_right nw" style="width: 30%;">{{defaultMarketCurrency}} {{checkMV(accModalGroup)}}</p>
+                    <a (click)="accountInit(accModalGroup)" class="cp lh_D">
+                      <span class="material-icons market-info">refresh</span>
+                    </a>
+                  </li>
+
+                  <li class="cashFlow w-100" [style.display]="(cusIndexService.checkAccTrans(checkMyaccID()))?'block':'none'">
+                    <div class="w-100 d-flex align-items-center">
+                      <p>Transition By Date<br> <span class="high_text">(Max.no of Rebalance: {{rebalanceCount}})</span> </p>
+                      <mat-form-field FloatLabelType="never" [class.errorBorder]="checkFormInvalid('transitionDate')">
+                        <input class="date_inp" readonly matInput [matDatepicker]="dp1" (dateChange)="transitionDateCange($event)"
+                               formControlName="transitionDate" [min]="minDate" [max]="maxDate" placeholder="Select">
+                        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                        <mat-datepicker #dp1></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </li>
+                  <li class="w-100 hrLine" [style.display]="(cusIndexService.checkAccTrans(checkMyaccID()))?'block':'none'">
+                    <div class="w-100 d-flex align-items-center">
+                      <p>Transition Gain Target</p>
+                      <input formControlName="transitionGainTgt" type="number" class="form-control" required>
+                    </div>
+                  </li>
+                  <li class="ct_nobg hrLine">
+                    <div class="w-100">
+                      <div class="p-rel w-100 d-flex align-items-center">
+                        <div class="cashT_invest text_left" style="width:75%">
+                          <p>Cash Target</p>
+                          <div class="d-flex align-items-center" style="flex-wrap:wrap;margin-top:0.2rem">
+                            <span class="high_text" *ngIf="!checkFormInvalid('cashTarget')">Investing <span class="bold nw">{{defaultMarketCurrency}} {{checkRemainingCashTarget('cashTarget', 'updatedCash')}}</span> leaving a balance of <span class="bold nw">{{defaultMarketCurrency}} {{checkRemainingCashTarget('cashTarget', 'remainingCash')}}</span></span>
+                          </div>
+                        </div>
+                        <div class="p-rel" style="width:25%">
+                          <input id="cashTargetIn" [class.errorBorder]="checkFormInvalid('cashTarget')" onkeydown="if($event.key==='.'){$event.preventDefault();}" step="1" formControlName="cashTarget" type="number" class="form-control" required style="width:100%;padding-right: 1.7rem;box-shadow: none;">
+                          <span class="per_sym">%</span>
+                        </div>
+                      </div>
+                      <div class="w-100 text_right" *ngIf="checkFormInvalid('cashTarget')">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;">Value should range from 2% to 99%</span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li *ngIf="isAccountAccor" class="cashFlow " style="flex-direction: column;">
+                    <div class="w-100">
+                      <div class="w-100 d-flex">
+                        <p class="cashFlowTax d-flex align-items-center">
+                          <span>Tax</span>
+                          <span class=" cashFlowMat defaulttheme_Mat">
+                            <mat-form-field FloatLabelType="never" appearance="outline" style="width: 5rem;margin: 0 0.3rem;">
+                              <mat-select (selectionChange)="taxChange($event.value)" panelClass="selectList gainMat" formControlName="cashTargetType">
+                                <ng-container>
+                                  <mat-option *ngFor="let ga of gainList" [value]="ga.value">
+                                    <span>{{ga.name}}</span>
+                                  </mat-option>
+                                </ng-container>
+                              </mat-select>
+                            </mat-form-field>
+                          </span>
+                          <span class="d-flex align-items-center cursor-pointer">
+                            Target.
+                            <span *ngIf="checkFormValue('cashTargetType') =='L'" class="d-flex buiToolTip">
+                              <mat-icon class="market-info" matTooltip='Must not surpass 20% market value' [matTooltipPosition]="'above'" #tooltip="matTooltip">info_outline</mat-icon>
+                              <!--<span class="ACCtooltiptext">Must not surpass 20% market value</span>-->
+                            </span>
+                          </span>
+                        </p>
+                        <input type="number" class="form-control" formControlName="taxTarget" required>
+                      </div>
+                      <div class="w-100 text_right">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;" *ngIf="(checkFormValue('cashTargetType') =='L' && checkFormInvalid('taxTarget'))">Exceeds 20% of Market Value</span>
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;" *ngIf="(checkFormValue('cashTargetType') =='G' && checkFormInvalid('taxTarget'))">Exceeds Market Value</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="cashFlow hrLine" *ngIf="isAccountAccor" style="flex-direction: column;">
+                    <div class="bt_nobg w-100 d-flex align-items-center">
+                      <p>Buffer {{checkTax(checkFormValue('cashTargetType'))}} Target</p>
+                      <mat-form-field FloatLabelType="never" appearance="outline" style="width: 25%;">
+                        <mat-select formControlName="bufferTarget" panelClass="selectList CTOption bufferTgt">
+                          <ng-container>
+                            <mat-option *ngFor="let ct of bufferTargetData" [value]="ct"><p>{{ct}}%</p></mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </li>
+                  <li *ngIf="exclude_tax" class="cashFlow" style="white-space: nowrap;flex-direction:column;">
+                    <div class="w-100">
+                      <div class="p-rel w-100 d-flex align-items-center">
+                        <p>Long term tax rate</p>
+                        <input style="padding-right: 1.7rem;" type="number" [class.errorBorder]="checkFormInvalid('longTermtaxRate')" class="form-control" step="0.01" formControlName="longTermtaxRate" required>
+                        <span class="per_sym">%</span>
+                      </div>
+                      <div class="w-100 text_right" *ngIf="checkFormInvalid('longTermtaxRate')">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;">Value should range from 0.00% to 100.00%</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li *ngIf="exclude_tax" class="cashFlow" style="white-space: nowrap;flex-direction:column;">
+                    <div class="w-100">
+                      <div class="p-rel w-100 d-flex align-items-center">
+                        <p>Short term tax rate</p>
+                        <input style="padding-right: 1.7rem;" type="number" [class.errorBorder]="checkFormInvalid('shortTermtaxRate')" class="form-control" step="0.01" formControlName="shortTermtaxRate" required>
+                        <span class="per_sym">%</span>
+                      </div>
+                      <div class="w-100 text_right" *ngIf="checkFormInvalid('shortTermtaxRate')">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;">Value should range from 0.00% to 100.00%</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="foot_btn d-flex align-items-center justify-content-end">
+            @if(!updateBtn){
+            <button *ngIf="!updateBtn" class="save mr0_5rem" (click)="updateAccModal()">Update</button>
+            <button class="close" (click)="checkDefaultAccountPopup = ''">Cancel</button>
+            }@else{
+            <button class="close" (click)="checkDefaultAccountPopup = ''">Cancel</button>
+            }
+
+          </div>
+        </form>
+      </div>
+      @switch (checkDefaultAccountPopup) {
+      @case ("traded_popup") {
+      <div class="traded__sec__popup top_bg">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY TRADED</h4>
+        <div class="accEditValues">
+          <p class="para_txt">This account {{accountAlertInfo.account}} is currently being used for trading by another user.</p>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{accountAlertInfo.username}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{accountAlertInfo.stgyname}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Traded date:</b></p>
+            <p class="text-right">{{accountAlertInfo.tradedate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          <p class="para_txt">Do you wish to proceed with reallocating this account?</p>
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="accountInit(changeFormValue);">Reallocate</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      @case ("saved_popup") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY SAVED</h4>
+        <div class="accEditValues" *ngIf="strat_savedAccount.length>0">
+          <p class="para_txt">This account <b>{{checkAccName(changeFormValue)}}</b> has been saved by the below user in their strategy.</p>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{strat_savedAccount[0].username}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{strat_savedAccount[0].name}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Traded date:</b></p>
+            <p class="text-right">{{strat_savedAccount[0].updatedDatetime+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          <p class="para_txt">Saving this account in your strategy will lead to its removal from the previously saved strategies. Do you want to continue?</p>
+        </div>
+
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="PostRemoveAccLinks()">Proceed</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      @case ("locked_popup_single") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY LOCKED</h4>
+        <div class="accEditValues" *ngIf="strat_savedAccount.length>0">
+          <p class="para_txt">{{sharedData.checkMyAppMessage(6,100)}}</p>
+
+          @for (data of lockedDataInfo; track data.id) {
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{checkAccValName(data.id)}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{data.lockedUserName}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Locked date:</b></p>
+            <p class="text-right">{{data.lockedDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          }
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save" (click)="removeAccount(); checkDefaultAccountPopup = ''">OK</button>
+        </div>
+      </div>
+      }
+      @case ("paused_popup_single") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY PAUSED</h4>
+        <div class="accEditValues" *ngIf="pausedDataInfo.length>0">
+          <p class="para_txt">{{sharedData.checkMyAppMessage(3,61)}}</p>
+
+          @for (data of pausedDataInfo; track data.id) {
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{checkAccValName(data.id)}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{data.pauseUserName}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Locked date:</b></p>
+            <p class="text-right">{{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          }
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="checkPostInit(changeFormValue);">Proceed</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      } @case ("paused_popup") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY PAUSED</h4>
+        <div class="accEditValues" *ngIf="pausedDataInfo.length>0">
+          <p class="para_txt">{{sharedData.checkMyAppMessage(3,61)}}</p>
+
+          @for (data of pausedDataInfo; track data.id) {
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{checkAccValName(data.id)}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{data.pauseUserName}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Locked date:</b></p>
+            <p class="text-right">{{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          }
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="checkPostInit(changeFormValue)">Proceed</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      @case ("lockAccounts_popup") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Paused/Locked Accounts</h4>
+        <div class="accEditValues">
+          <p class="para_txt" *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length>0">{{sharedData.checkMyAppMessage(12,62)}}</p>
+          <p class="para_txt" *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length<=0">{{sharedData.checkMyAppMessage(12,63)}}</p>
+          <p class="para_txt" *ngIf="pausedDataInfo.length>0 && lockedDataInfo.length<=0">{{sharedData.checkMyAppMessage(12,64)}}</p>
+          <div class="mb1rem" *ngIf="lockedDataInfo.length>0">
+            <div class="w-100">
+              <span class="acc d-flex" style=" font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--leftSideText-B);">Locked Accounts:</span>
+              <!--begin::Text-->
+              @for (data of lockedDataInfo; track data.accid) {
+              <div class="fw-mormal timeline-content" style=" font-size: 0.72rem; color: var(--leftSideText);">
+                <span class="acc" style=" color: var(--linkColor);">{{checkAccValName(data.accid)}} </span>
+                <span><span style="color: var(--leftSideText-B)"> by&nbsp;</span> {{data.lockedUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.lockedDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="mb1rem" *ngIf="pausedDataInfo.length>0">
+            <div class="w-100">
+              <span class="acc" style=" font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--leftSideText-B);">Paused Accounts:</span>
+              <!--begin::Text-->
+              @for (data of pausedDataInfo; track data.accid) {
+              <div class="fw-mormal timeline-content" style=" font-size: 0.72rem; color: var(--leftSideText);">
+                <span class="acc" style=" color: var(--linkColor);">{{checkAccValName(data.accid)}} </span>
+                <span><span style="color: var(--leftSideText-B)"> by&nbsp;</span>{{data.pauseUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+              </div>
+              }
+            </div>
+          </div>
+
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="builIndexCalculate();">Continue</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      }
+    </div>
+    <div class="select__steps__details top_bg tool_cust tool_calcu mt1rem" style="padding: 1rem;display:none" [style.display]="showDefault_select == 'Accounts'?'block':'none'" [class.hidden__sec]="checkDefaultAccountPopup != ''">
+      <p class="semi_text">Clicking "Calculate" engages selected accounts and their custom settings, initiating the calculation.</p>
+      <div class="calBtn__abs mt0_5rem">
+        @if(sharedData.checkMenuPer(3,88)=='D'){
+        <button class="dialog_btn_P w-100 disableButton" style="opacity:.5 !important">
+          <span class="svg-icon svg-icon-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3"
+                    d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                    fill="currentColor"></path>
+              <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          Calculate
+        </button>
+        }
+        @else if(weightLimitError){
+        <button class="dialog_btn_P w-100 disableButton" style="opacity:.5 !important" (click)="showDefault_select = 'Selection'">
+          <span class="svg-icon svg-icon-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3"
+                    d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                    fill="currentColor"></path>
+              <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          Calculate
+        </button>
+        }
+        @else if(!cusIndexService.checkEnableFactSheet() || cusIndexService.CIcalculateBtnEnable){
+        <button class="dialog_btn_P w-100 disabled" (click)="openQueueModal()" style="opacity:.5 !important">
+          <span class="svg-icon svg-icon-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3"
+                    d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                    fill="currentColor"></path>
+              <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          Calculate
+        </button>
+        }
+        @else{
+        <button class="dialog_btn_P w-100" (click)="checkLockedAcc()">
+          <span class="svg-icon svg-icon-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3"
+                    d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                    fill="currentColor"></path>
+              <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          Calculate
+        </button>
+        }
+      </div>
+    </div>
+    <div class="select__steps__details top_bg position-relative" id="indexRulesModalInner" style="padding: 1rem 0.5rem 1rem 1rem;min-height:15rem;display:none" [style.display]="showDefault_select == 'Steps'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <h4>Index Steps</h4>
+      @if(showIndexRulesLoader){
+      <div class="mat-spinner-loader" style="left:0">
+        <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+      </div>
+      }
+      <div class="scrollbox outerScroll__Div" *ngIf="indexRulesData.length>0">
+        <div class="construction h__line">
+          <span class="d-flex justify-content-between align-items-center">
+            <span class="sub__head">Index Construction</span>
+            <span class="sub__ico" (click)="openIndexConstruction();">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="transparent" xmlns="http://www.w3.org/2000/svg"><path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path><path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path></svg>
+            </span>
+          </span>
+        </div>
+        <div *ngIf="factorsGrp.length > 0">
+          <!--<div class="pe-3 mb-1 indexTimelinetext" *ngIf="indexRulesData[0].range != '100'"><h4>Expectation Risk Factor <span style="font-size: 0.6rem;color: var(--leftSideText);font-family: 'poppins-medium';opacity: .6;float: right;">(Excluded)</span></h4></div>-->
+          <ng-container *ngFor="let f_data of factorsGrp">
+            <ng-container *ngIf="f_data.factorid == 18">
+              <div class="overflow-auto">
+                <div class="filtersList avoidFilter">
+                  <span class="timelinetitle" style="padding-left: 0.7rem;">{{checkfactorName(f_data.factorid)}}</span>
+                  <!---- percentage -->
+                  <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 0">
+                    <div class="popuprangeSlider">
+                      <div class="progress-container">
+                        <div class="progress" [ngStyle]="{'width.%':(f_data.startval)}"></div>
+                        <div class="range-flex" [ngStyle]="{'left.%': f_data.startval>=93 ? f_data.startval>=99 ?  (f_data.startval)-7: (f_data.startval)-10 : (f_data.startval)-3}">
+                          <div class="percentage" style="background: #343553">{{f_data.startval}}%</div>
+                          <span class="range-round"></span>
+                        </div>
+                      </div>
+                      <div class="rangeFlex">
+                        <span>0%</span>
+                        <span>100%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!---- percentage -->
+                  <!---- value -->
+                  <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 1">
+                    <div class="popuprangeSlider">
+                      <div class="progress-container">
+                        <div class="progress" [ngStyle]="{'width.%':(100-f_data.eRange)}"></div>
+                        <div class="range-flex" [ngStyle]="{'left.%':(100-f_data.eRange)-3}">
+                          <div class="percentage" style="background: #343553">{{convert2digits(f_data.endval*100, f_data.factorid)}}%</div>
+                          <span class="range-round"></span>
+                        </div>
+                      </div>
+                      <div class="rangeFlex">
+                        <span>{{convert2digits(f_data.dmax*100, f_data.factorid) | number: '1.2-2'}}%</span>
+                        <span>{{convert2digits(f_data.dmin*100, f_data.factorid) | number: '1.2-2'}}%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!---- value -->
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="SW__section">
+          @if(indexrulesCmpy.length > 0){
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            @if(indexrulesCmpy.length>1){
+            <span class="sub__head">{{indexrulesCmpy.length}} Companies <span class="exclu">(Excluded)</span></span>
+            }@else{
+            <span class="sub__head">{{indexrulesCmpy.length}} Company <span class="exclu">(Excluded)</span></span>
+            }
+
+          </div>
+          <div class="indexTimeline-ticker scrollboxD">
+            <div *ngFor="let item of indexrulesCmpy" class="example-item"
+                 style="margin: 0; margin-top: 0.2rem;">
+              <div class="mat-CusVirTable gridlist-e">
+                <div class="d-flex">
+                  <div class="details-e border-d">
+                    <div class="top-e">{{item.name}}</div>
+                    <div class="bottm-e">
+                      <span class="tick-l-e">{{item.ticker}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+          @if(indexrulesGICS.length > 0){
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">{{indexrulesGICS.length}} Sector(s) <span class="exclu">(Excluded)</span></span>
+          </div>
+          <div class="indexTimeline-ticker scrollboxD">
+            <div class="grid-list-T w-100 excGicsList" style="padding-top: 0rem ">
+              <ul style=" margin: 0; margin-top: 0.2rem;">
+                <li *ngFor="let data of indexrulesGICS" style="cursor:default !important;">
+                  <span class="D_list" style="cursor:default !important;">
+                    <span class="d-flex w-100 align-items-center justify-content-between">
+                      <span style="cursor:default !important;">{{data.name}}</span>
+                     </span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          }
+        </div>
+        <div *ngIf="factorsGrp.length > 0">
+          <ng-container *ngFor="let f_data of factorsGrp">
+            <ng-container *ngIf="f_data.factorid != 18 && f_data.stype== 'F'">
+              <div class="overflow-auto">
+                <div class="filtersList avoidFilter">
+                  <span class="timelinetitle" style="padding-left: 0.7rem;">{{checkfactorName(f_data.factorid)}}</span>
+                  <!---- percentage -->
+                  <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 0">
+                    <div class="popuprangeSlider">
+                      <div class="progress-container factors" [style.width]="functionPercentage(f_data.endval-2) ? '90%':'94%'">
+                        <div class="progress" [ngStyle]="{'width.%':((f_data.endval) - f_data.startval),'left.%':(f_data.startval+3)}"></div>
+                        <div class="range-flex" [ngStyle]="{'left.%':f_data.startval}">
+                          <div class="percentage">{{f_data.startval}}%</div>
+                          <span class="range-round"></span>
+                        </div>
+                        <div class="range-flex" [ngStyle]="{'left.%':f_data.endval!=100?(f_data.endval-2):90}">
+                          <div class="percentage">{{f_data.endval}}%</div>
+                          <span class="range-round"></span>
+                        </div>
+                      </div>
+                      <div class="rangeFlex">
+                        <span>0%</span>
+                        <span>100%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!---- percentage -->
+                  <!---- value -->
+                  <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 1">
+                    <div class="popuprangeSlider">
+                      <div class="progress-container factors" [style.width]="function(f_data.eRange-2) ? '98%':'98%'">
+                        <div class="progress" [ngStyle]="{'width.%':convert2width(f_data.eRange, f_data.sRange),'left.%':(f_data.sRange+3)}"></div>
+                        <div class="range-flex" [ngStyle]="{'left.%':f_data.sRange}">
+                          <div class="percentage">
+                            {{convert2digits(f_data.startval, f_data.factorid)}}<span class="perc" *ngIf="checkFac_per(f_data.factorid)">%</span>
+                          </div>
+                          <span class="range-round"></span>
+                        </div>
+                        <div class="range-flex" [ngStyle]="{'left.%':f_data.eRange!=100?(f_data.eRange-2):90}">
+                          <div class="percentage">{{convert2digits(f_data.endval, f_data.factorid)}}<span class="perc" *ngIf="checkFac_per(f_data.factorid)">%</span></div>
+                          <span class="range-round"></span>
+                        </div>
+                      </div>
+                      <div class="rangeFlex" *ngIf="MK == true">
+                        <span>{{convert2digits(f_data.dmin, f_data.factorid)}}<span class="perc" *ngIf="checkFac_per(f_data.factorid)">%</span></span>
+                        <span>{{convert2digits(f_data.dmax, f_data.factorid)}}<span class="perc" *ngIf="checkFac_per(f_data.factorid)">%</span></span>
+                      </div>
+                      <div class="rangeFlex" *ngIf="MK == false">
+                        <span>{{convert2digits(f_data.dmin, f_data.factorid) | number: '1.2-2'}}<span class="perc">%</span></span>
+                        <span>{{convert2digits(f_data.dmax, f_data.factorid) | number: '1.2-2'}}<span class="perc">%</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <!---- value -->
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        @if(checkSelectionWeight_Steps()){
+        <div class="SW__section pb0_5rem pt0_5rem ">
+          <h5>Selection & Weighting</h5>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            @if(indexRulesData[0].selectBy.length > 0){
+            <span class="sub__head">Selected By</span>
+            <span class="sub__text">{{indexRulesData[0].selectBy[0].Name}}</span>
+            }
+          </div>
+          @if(indexRulesData[0].noofComp != null){
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Number of Components</span>
+            <span class="sub__text">{{indexRulesData[0].noofComp}}</span>
+          </div>
+          }
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Cash Target</span>
+            <span class="sub__text">{{indexRulesData[0].cashTarget != null ? indexRulesData[0].cashTarget+'%' : '-'}}</span>
+          </div>
+          @if(indexRulesData[0].weightBy.length > 0){
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Weighted By</span>
+            <span class="sub__text">{{indexRulesData[0].weightBy[0].Name}}</span>
+          </div>
+          }
+          @if(indexRulesData[0]['strData'].weightlimitflag == 'Y' && indexRulesData[0]['strData'].weightlimit != null){
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Maximum security weight</span>
+            <span class="sub__text">{{indexRulesData[0]['strData'].weightlimit}}%</span>
+          </div>
+          }
+          @if(indexRulesData[0].taxEffAwareness != null){
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Tax Optimization</span>
+            <span class="sub__text">
+              @if(indexRulesData[0].taxEffAwareness =='Y'){Yes}@else{No}
+            </span>
+          </div>
+          }
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Rebalance</span>
+            <span class="sub__text">{{sharedData.checkRebalanceType(indexRulesData[0]['strData'])}}</span>
+          </div>
+        </div>
+        }
+
+      </div>
+    </div>
+    <div class="select__factsheet__details top_bg" style="padding: 1rem 0.5rem 1rem 1rem; display: none;width: 16rem;position: relative;" [style.display]="showDefault_select == 'Factsheet'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <a class="collapsed card-link" (click)="leftMenuClick('Accounts');" style="font-size: 0.65rem;color: var(--prim-button-color-text) !important;position: absolute;right: 0.5rem;cursor: pointer;z-index: 99;top: -1.25rem;font-family: var(--ff-medium);">+ Assign account</a>
+      <h4>Index Factsheet</h4>
+      <div class="scrollbox outerScroll__Div ">
+        <div class="fact__list" (click)="openFactsheet(0)" [class.disabled]="checkfactDisable(0)">
+          <span class="d-flex align-items-center mb-2" [class.active]="reviewIndextab == 0">
+            <span class="material-icons-outlined ico">
+              fiber_manual_record
+            </span>
+            <span class="sub__head">View Factsheet</span>
+          </span>
+        </div>
+        <div class="fact__list" *ngIf="bldIndAccData.length>0">
+          @for(accDt of bldIndAccData;track accDt.accountId){
+          <span (click)="openFactsheet(accDt.accountId)" class="d-flex align-items-center mb-2" [class.disabled]="checkfactDisable(accDt.accountId)" [class.active]="reviewIndextab == accDt.accountId">
+            <span class="material-icons-outlined ico">
+              fiber_manual_record
+            </span>
+            <span class="sub__head">{{accDt['accountNo'] | nullDashPipe}}</span>
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div class="modal fade warningautoModel w_Table" id="accCashTargetModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; padding: 0 1rem 1rem;">{{sharedData.checkMyAppMessage(12, 93)}}</p>
+            <div class="w-100" *ngIf="accMtData.length>0">
+              <table class="table" style=" padding: 0 5rem;width: 80%; margin: auto; margin-bottom: 1rem;">
+                <tbody>
+                  <tr>
+                    <td style="text-align: left;">Account</td>
+                    <td style="text-align: right;">Market value</td>
+                    <td style="text-align: right;">Cash Target</td>
+                  </tr>
+                  <ng-container *ngFor="let data of accMtData">
+                    <tr>
+                      <td style="text-align: left;">{{data.account}}</td>
+                      <td style="text-align: right;">{{sharedData.numberWithCommas(data.marketValue.toFixed(2))  }}</td>
+                      <td style="text-align: right;">{{data.cashTarget}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+<div class="modal fade warningautoModel" id="myFactclearModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: 0.7;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="var(--red)" />
+                </svg>
+
+              </span>
+            </p>
+            <h3>Clear Factors</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(3,52)}}</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="factorClearAll()" data-bs-dismiss="modal">Yes</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="myAlphaclearModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: 0.7;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="var(--red)" />
+                </svg>
+
+              </span>
+            </p>
+            <h3>Clear Factor</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(3,53)}}</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="ClearERFFact()" data-bs-dismiss="modal">Yes</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="myclearcompanyModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: 0.7;">
+
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="var(--red)" />
+                </svg>
+
+              </span>
+            </p>
+            <h3>Clear Filters</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(3,51)}}</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="clearFilerAll()">Yes</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---- Convert switch tab center circle ---->
+<div class="modal fade warningautoModel" id="factorSwitchTab" tabindex="-1" role="dialog" aria-labelledby="factorSwitchTab" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="close-l" data-bs-dismiss="modal" aria-label="Close" style="z-index:9;"><span class="material-icons">close</span></div>
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(3,76)}}</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="openfactorswitch()" data-bs-dismiss="modal">Yes, reset it!</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="subMenufactorData = undefined">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---- Convert switch tab center circle ---->
+
+<div class="modal fade warningautoModel" id="lockInfoTradeModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:36%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <div style="max-height: 60vh; overflow: auto;">
+              <p *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length>0" style="font-size: 0.8rem; padding: 1rem !important">{{sharedData.checkMyAppMessage(3,62)}}</p>
+
+              <p *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length<=0" style="font-size: 0.8rem; padding: 1rem !important">{{sharedData.checkMyAppMessage(3,63)}}</p>
+              <div class="cal_lockDesign d-flex p-rel" *ngIf="lockedDataInfo.length>0">
+                <div class="timeline-badge">
+                  <span class="material-icons">
+                    lock
+                  </span>
+                </div>
+                <div class="timeline-item">
+                  <span class="acc" style="margin: 0.5rem 1rem 1rem; display: flex; color: var(--leftSideText-B);">Locked Accounts</span>
+                  <!--begin::Text-->
+                  <div class="fw-mormal timeline-content text-muted ps-3" *ngFor="let data of lockedDataInfo">
+                    <span class="acc">{{checkAccValName(data.accid)}}</span>
+                    <span><span style="color: var(--leftSideText-B)">by&nbsp;</span> {{data.lockedUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.lockedDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <p *ngIf="pausedDataInfo.length>0 && lockedDataInfo.length<=0" style="font-size: 0.8rem; padding: 1rem !important">{{sharedData.checkMyAppMessage(3,64)}}</p>
+              <div class="cal_lockDesign d-flex p-rel" *ngIf="pausedDataInfo.length>0">
+                <div class="timeline-badge">
+                  <span class="material-icons">
+                    admin_panel_settings
+                  </span>
+                </div>
+                <div class="timeline-item">
+                  <span class="acc" style="margin: 0.5rem 1rem 1rem; display: flex; color: var(--leftSideText-B);">Paused Accounts</span>
+                  <!--begin::Text-->
+                  <div class="fw-mormal timeline-content text-muted ps-3" *ngFor="let data of pausedDataInfo">
+                    <span class="acc">{{checkAccValName(data.accid)}}</span>
+                    <span><span style="color: var(--leftSideText-B)">by&nbsp;</span>{{data.pauseUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="foot-l" style="margin-top:2rem !important">
+              <button *ngIf="!updateBtn" type="button" class="mod-foot-btn-activeP mr_p_5" (click)="builIndexCalculate();unPauseAcc()">Continue</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade warningautoModel w_Table" id="accMtCalModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; padding: 0 1rem 1rem;">{{sharedData.checkMyAppMessage(3,65)}}</p>
+            <div class="w-100" *ngIf="accMtData.length>0 && MarketValueModalCheck">
+              <table class="table" style=" padding: 0 5rem;width: 80%; margin: auto; margin-bottom: 1rem;">
+                <tbody>
+                  <tr>
+                    <td style="text-align: left;">Account</td>
+                    <td style="text-align: right;">Market value</td>
+                    <td style="text-align: right;">Required value</td>
+                  </tr>
+                  <ng-container *ngFor="let data of accMtData">
+                    <tr>
+                      <td style="text-align: left;">{{checkAccValName(data.accountId)}}</td>
+                      <td style="text-align: right;">{{sharedData.numberWithCommas(data.marketValue) }}</td>
+                      <td style="text-align: right;">{{sharedData.numberWithCommas(data.acValue)}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="remAccCalculate()">Remove account and calculate</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel w_Table" id="accCashTargetModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; padding: 0 1rem 1rem;">{{sharedData.checkMyAppMessage(3,66)}}</p>
+            <div class="w-100" *ngIf="accMtData.length>0 && !MarketValueModalCheck">
+              <table class="table" style=" padding: 0 5rem;width: 80%; margin: auto; margin-bottom: 1rem;">
+                <tbody>
+                  <tr>
+                    <td style="text-align: left;">Account</td>
+                    <td style="text-align: right;">Market value</td>
+                    <td style="text-align: right;">Cash Target</td>
+                  </tr>
+                  <ng-container *ngFor="let data of accMtData">
+                    <tr>
+                      <td style="text-align: left;">{{data.account}}</td>
+                      <td style="text-align: right;">{{sharedData.numberWithCommasToFixed(data.marketValue)}}</td>
+                      <td style="text-align: right;">{{data.cashTarget}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

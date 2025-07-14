@@ -1,0 +1,139 @@
+////// New theme ///////
+.cdk-overlay-container:not(.selection-weighting-container) {
+  .cdk-overlay-connected-position-bounding-box {
+    /* left: -1rem !important;
+    top: 0.2rem !important;*/
+  }
+}
+
+.cdk-overlay-container {
+  .mat-mdc-menu-panel {
+    background: var(--mod-body-alt);
+    width: 14rem;
+  }
+
+  .cashFlowMat {
+    .mat-form-field-appearance-outline {
+      .mat-mdc-text-field-wrapper {
+        height: 1.8rem;
+        border-radius: 0.3rem;
+        background: var(--border);
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        width: 5rem;
+
+        .mat-mdc-form-field-flex {
+          .mat-mdc-form-field-infix {
+            height: 1.8rem;
+            min-height: auto;
+            padding: 0.2rem;
+
+            .mat-mdc-select {
+              width: 100%;
+              font-size: .7rem;
+              font-family: var(--ff-regular);
+              color: var(--leftSideText) !important;
+
+              .mat-mdc-select-trigger {
+                .mat-mdc-select-value {
+                  font-size: .7rem;
+                  font-family: var(--ff-regular);
+                  color: var(--leftSideText) !important;
+
+                  .mat-mdc-select-value-text {
+                    position: relative;
+                    top: -0.2rem;
+
+                    @media (min-width: 1600px) and (max-height: 1200px) {
+                      top: -0.1rem;
+                    }
+                  }
+                }
+              }
+            }
+
+            .mat-mdc-select-arrow-wrapper {
+              position: relative;
+              top: -0.2rem;
+
+              @media (min-width: 1600px) and (max-height: 1200px) {
+                top: -0.1rem;
+              }
+            }
+
+            .mat-mdc-select-arrow {
+              color: var(--leftSideText);
+            }
+          }
+
+          label {
+            top: 50%;
+            font-size: .7rem;
+            font-family: var(--ff-regular);
+            color: var(--leftSideText) !important;
+            overflow: inherit;
+            cursor: pointer;
+
+            mat-label {
+              position: relative;
+              top: -0.4rem;
+            }
+          }
+
+          .mdc-notched-outline__leading {
+            width: 3px;
+            border-color: var(--border) !important;
+          }
+
+          .mdc-notched-outline__notch {
+            border-color: var(--border) !important;
+          }
+
+          .mdc-notched-outline__trailing {
+            border-color: var(--border) !important;
+          }
+        }
+      }
+
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+
+
+      &.mat-form-field-can-float.mat-form-field-should-float {
+        .mat-form-field-label {
+          display: none;
+        }
+      }
+
+      &.matFormError {
+        .mat-mdc-text-field-wrapper {
+          border: 1px solid var(--danger);
+        }
+      }
+
+      .mat-form-field-wrapper {
+        margin: 0;
+      }
+    }
+
+    .mat-mdc-form-field .mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+      display: none;
+    }
+  }
+}
+
+.cdk-overlay-container.selection-weighting-container {
+  .cdk-overlay-connected-position-bounding-box {
+    margin-top: -2rem !important;
+    margin-left: 2rem !important;
+
+    .cdk-overlay-pane .mat-mdc-menu-panel {
+    }
+  }
+
+  .mat-mdc-menu-panel {
+    background: var(--mod-body-alt);
+    width: 14rem;
+  }
+}

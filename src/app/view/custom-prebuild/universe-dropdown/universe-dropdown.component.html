@@ -1,0 +1,9 @@
+<p class="label">Universe:</p>
+@if(universeDataList.length > 0){
+<mat-form-field>
+  <mat-select panelClass="selectListPrebuildMultiple" placeholder="Select Universe" [formControl]="universe" [(value)]="selectedUniverse" multiple (selectionChange)="universeChange($event)">
+    <mat-option *ngFor="let list of universeDataList" [value]="list.assetId">{{list.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+}
+

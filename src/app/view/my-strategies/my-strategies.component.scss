@@ -1,0 +1,350 @@
+//copied from https://github.com/angular/material2/blob/master/src/lib/table/table.scss
+$mat-header-row-height: 56px;
+$mat-row-height: 48px;
+$mat-row-horizontal-padding: 24px;
+.tab-pane{
+  position: relative;
+}
+#my-strategies {
+  padding-top: 4.5rem;
+.left-g-s{
+  border-bottom: 1px solid var(--border);
+  height: 3rem;
+}
+  .nav {
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+    /*padding: 0 15px;*/
+    li {
+      a {
+        color: var(--leftSideText);
+        background-color: transparent;
+        border-bottom: .2rem solid transparent;
+        border-radius: 0;
+        font-size: .8rem;
+        padding: .8rem .4rem;
+        margin: 0 .5rem;
+        font-family: var(--ff-medium);
+
+        &.active {
+          color: var(--leftSideText-B);
+          background-color: transparent;
+          border-bottom: .2rem solid var(--prim-button-color);
+        }
+      }
+    }
+  }
+
+  .customIndex-container {
+    height: calc(100vh - 13rem);
+    overflow: auto;
+    box-shadow: none;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .element-row {
+    position: relative;
+
+    &.disable {
+      pointer-events: none;
+    }
+  }
+
+  .element-row:not(.expanded) {
+    cursor: pointer;
+  }
+  /*.element-row:not(.expanded):hover {
+    background: #f5f5f5;
+  }*/
+  .element-row.expanded {
+    // border-bottom-color: transparent;
+  }
+}
+.mystrategies_accordion {
+  height: calc(100vh - 9rem);
+
+  .mystrategies_accordion_child {
+    height: 100%;
+
+    &.mystrategies_accordion_TRstrategy {
+      mat-table {
+        &.mat-mdc-table {
+          table-layout: auto;
+          white-space: normal;
+          background: var(--topNavbar);
+        }
+
+        .subChild-table {
+          .d-grid {
+            grid-template-columns: 0.5fr 1.2fr 1fr 0.8fr 0.8fr 0.8fr 1.2fr;
+          }
+        }
+
+        .mat-mdc-header-row {
+          grid-template-columns: 0.5fr 1.2fr 1fr 0.8fr 0.8fr 0.8fr 1.2fr;
+        }
+
+        .detail-row {
+          mat-row.mat-mdc-row {
+            grid-template-columns: 0.5fr 1.2fr 1fr 0.8fr 0.8fr 0.8fr 1.2fr;
+          }
+        }
+      }
+    }
+
+    .norecords {
+      height: calc(100vh - 9rem);
+
+      p {
+        color: var(--leftSideText);
+      }
+    }
+
+    .customIndex-header {
+      margin-top: 1rem;
+
+      .mat-mdc-form-field {
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+          background-color: transparent;
+        }
+      }
+
+      .mat-focused .placeholder {
+        color: var(--leftSideText-B);
+      }
+
+      .mat-icon {
+        color: var(--iconColor);
+        font-size: 1.2rem;
+        line-height: 1.25;
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0.2rem;
+        right: -1rem;
+
+        @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait) {
+          top: 0;
+        }
+
+        @media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+          top: 0;
+        }
+      }
+    }
+
+    mat-table {
+      &.mat-mdc-table {
+        table-layout: auto;
+        white-space: normal;
+        background: var(--topNavbar);
+      }
+
+      .expandedList {
+        /* max-height: 15rem;
+        overflow: auto;*/
+        mat-header-row {
+          display: none;
+
+          .mat-mdc-header-cell {
+            &:first-child {
+              /*max-width: 25%;*/
+            }
+          }
+        }
+      }
+
+      .accordion-extend {
+        font-size: 1.1rem;
+        /* width: 1rem;
+        height: 1rem;*/
+        transition: all .5s;
+        /*border: 1px solid rgba(127, 133, 245, .231372549);*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        color: var(--prim-button-color-text);
+
+        .arrow-border {
+          border: 1px solid var(--border);
+        }
+
+        .expand-down-arrow-outer {
+          background: var(--accordion);
+        }
+
+        span {
+          color: var(--prim-button-color);
+          font-size: 1rem;
+          padding: 0.2rem;
+          height: 1.3rem;
+          width: 1.3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0.2rem;
+          cursor: pointer;
+          margin-right: 0.2rem;
+          background: var(--accordion);
+
+          &.expand-down-arrow {
+            transform: rotate(270deg);
+            transition: all .3s;
+            background: none;
+            margin-right: 0rem;
+          }
+
+          &.delete-ico {
+            color: var(--errorColor);
+            pointer-events: auto;
+          }
+
+          &.edit-ico {
+            color: var(--prim-button-color);
+            pointer-events: auto;
+          }
+
+          &.clone-ico {
+            color: var(--prim-button-color);
+            pointer-events: auto;
+          }
+        }
+      }
+
+      .subChild-table {
+        background: var(--primary-color-dark);
+        margin: 0;
+
+        .d-grid {
+          display: grid;
+          grid-template-columns: 0.5fr 1fr 1fr 0.8fr 0.8fr 0.8fr 1.2fr;
+          border-bottom: 1px dashed var(--modalBodyColor);
+
+          p {
+            color: var(--leftSideText);
+            padding: 0.6rem 0;
+            font-size: 0.75rem;
+            margin: 0 !important;
+            height: 2.5rem;
+            min-height: 2.5rem;
+          }
+        }
+      }
+
+      .mat-mdc-header-row {
+        font-size: .75rem;
+        border-bottom: 2px solid var(--border);
+        color: var(--leftSideText-B);
+        min-height: 2.8rem;
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr 0.8fr 0.8fr 0.8fr 1.2fr;
+        background: var(--topNavbar);
+        position: sticky;
+        top: 0;
+        z-index: 9;
+
+        .mat-mdc-header-cell {
+          padding: 0;
+          font-family: var(--ff-medium);
+
+          &:first-child {
+            padding-left: 16px;
+          }
+
+          &:last-child {
+            padding-right: 16px;
+          }
+        }
+      }
+
+      mat-row.mat-mdc-row {
+        color: var(--leftSideText);
+        background: var(--topNavbar);
+        border-bottom: 1px solid var(--accordion);
+        display: grid;
+        grid-template-columns: 0.6fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        height: 2.6rem;
+        min-height: 2.5rem;
+
+        &.expanded {
+          .accordion-extend {
+            span {
+              transform: rotate(360deg);
+              cursor: pointer;
+
+              &.parent_arrow {
+                background-color: var(--defButtonBgColor);
+                color: var(--leftSideText-B);
+                border: 1px solid var(--defButtonBgColor);
+              }
+            }
+          }
+        }
+
+        .mat-mdc-cell {
+          font-size: 0.75rem;
+          padding: 0;
+          font-family: var(--ff-regular);
+
+          &:first-child {
+            padding-left: 16px;
+          }
+
+          &:last-child {
+            padding-right: 16px;
+          }
+        }
+      }
+
+      .detail-row {
+        background: var(--primary-color);
+
+        .mat-mdc-header-row {
+          background: var(--primary-color);
+        }
+
+        mat-row.mat-mdc-row {
+          background: var(--primary-color-Alt);
+          display: grid;
+          grid-template-columns: 0.5fr 1fr 1fr 0.8fr 0.8fr 0.8fr 1.2fr;
+          border-bottom: 1px solid var(--topNavbar);
+
+          &:hover {
+            background: var(--cardsHighlightColorDark);
+          }
+        }
+      }
+    }
+  }
+}
+.strategies-expand {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 0.8fr 0.8fr 0.8fr 1.2fr !important;
+}
+.strategies-expand-custom{
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 0.8fr 0.8fr 0.8fr 0.2fr !important;
+}
+.TRstrategies-expand-custom{
+  display: grid;
+  grid-template-columns: 0.5fr 1.9fr 0.3fr 0.8fr 0.8fr 0.8fr 1.2fr !important;
+}
+.view-factsheet-btn {
+  color: var(--prim-button-color-text);font-size: 0.75rem;
+  transition: all .2s;
+  cursor:pointer;
+  &:hover{
+      opacity:0.75;
+  }
+}

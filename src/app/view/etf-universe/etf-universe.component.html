@@ -1,0 +1,19 @@
+<div class="etf_index_comp" id="etf__Comp" style="padding-top: 3rem; height: 100vh; overflow: hidden; position: relative;">
+
+  <div class="left-l" [style.display]="sharedData._showDefaultSideGrids?'block':'none'" (mouseenter)="sharedData.onSidebarEnter()" (mouseleave)="sharedData.onSidebarLeave()">
+    <etfBreadcrumbList></etfBreadcrumbList>
+    <etfLeftGrid></etfLeftGrid>
+  </div>
+  @defer(on timer(700ms)) {
+  <div class="center-l">
+    <etfCenterCircle></etfCenterCircle>
+  </div>
+
+  <div class="right-l" [style.visibility]="sharedData._showDefaultSideGrids?'visible':'hidden'" [style.opacity]="sharedData._showDefaultSideGrids?1:0" (mouseenter)="sharedData.onSidebarRightEnter()" (mouseleave)="sharedData.onSidebarRightLeave()">
+    <etfRightGrid></etfRightGrid>
+  </div>
+  }
+  @placeholder {
+  <app-circle-loader-standalone></app-circle-loader-standalone>
+  }
+</div>

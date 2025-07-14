@@ -1,0 +1,348 @@
+<div class="trade_Page accountIndexFactsheetModal">
+    <div class="dialog-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+          <div class="content-top" style="background: var(--topNavbar);">
+            <p>
+              Review Factsheet
+            </p>
+          </div>
+          <div class="d-flex p-rel p1rem">
+            <div class="reviewFact__inner p0rem p-rel">
+              <!---- Loader Modal ----->
+              <div class="rev_main_tradeLoad" [style.display]="(showSpinner_factsheet?'flex':'none')" id="factsheet_loaderA" style="position: absolute; top: 0px; height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; z-index: 999; background: var(--cardsHighlightColorDark); ">
+                <div class="common-prog-loader per-loader" style="width: 20rem; height: auto;padding:0.5rem;display: flex; align-items: center; justify-content: center; flex-direction: column; border-radius: 0.465rem; margin-top: -4rem;">
+                  <span class="div_n">Loading <span style="font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace">{{factsheet_progress}}</span></span>
+                  <mat-progress-bar mode="determinate" [value]="0" style="padding-left: 10px; padding-right: 10px;margin-right:10px; width: 80%; transition: all .10s"></mat-progress-bar>
+                  <span class="div_n div_n_load" style="margin-top: 0.5rem; padding: 0; opacity: .5; font-family: var(--ff-regular);">Implementing filtering and selection</span>
+                </div>
+              </div>
+              <!---- Loader Modal ----->
+              <div class="reviewFact__inner__left scrollbox">
+                <div class="d-flex justify-content-between">
+                  <div class="lh_D mb1rem">
+                    <h3 class="m0">Strategy Name:<span class="ind-name ml0_5rem">{{alreadyselected_strategy.name}} ({{alreadyselected_strategy.shortname}})</span></h3>
+                    <span class="perfDate">
+                      Performance as of:
+                      <span style="color: var(--leftSideText-B)"><b>{{asOfDate}}</b></span>
+                    </span>
+                  </div>
+                  <div class="reviewFact__dropdown pr1rem">
+                    <div id="account_Exclusions" class="mb1rem enable_trading_check">
+                      <p class="mb0">Account: <span>{{alreadyselected_strategy.accountNo}}</span></p>
+                      <p class="mb0">Market Value: <span>{{defaultMarketCurrency}} {{alreadyselected_strategy.marketValue | number: '1.2-2'}}</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="scrollableheight scrollbox">
+                  <div class="reviewFact__inner__table p1rem mb1rem">
+                    <!-- Performance Annualized Trailing Returns -->
+                    <div>
+                      <div class="reviewFact__inner__table_title mb1rem">
+                        <span class="title">Performance Annualized Trailing Returns (Gross of fees) </span>
+                      </div>
+                      <div class="reviewFact__inner__table_data overflow_auto" id="account_Exclusions">
+                        <table class="table-grid">
+                          <tbody>
+                            <tr class="table-grid-row">
+                              <td class="">
+                                Product Name
+                              </td>
+                              <td>YTD</td>
+                              <td>1 Year</td>
+                              <td>3 Years</td>
+                              <td>5 Years</td>
+                              <!--<td>7 Years</td>-->
+                              <td>10 Years</td>
+                            </tr>
+                            <tr class="table-grid-row" *ngIf="factsheetPerfData.length>0" [style.background]="(taxOptFactSheet) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                              <td class="">
+                                <span class="d-flex">
+                                  <span class="ellips"> {{cusindexName}} </span>
+                                  <span class="pl0_25rem" *ngIf="taxOptFactSheet">(Before Tax)</span>
+                                </span>
+                              </td>
+                              <td>{{factsheetPerfData[0]['ytdReturn'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['y1Return'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['y3Return'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['y5Return'] | percentFormat}}</td>
+                              <!--<td>{{factsheetPerfData[0]['y7Return'] | percentFormat}}</td>-->
+                              <td>{{factsheetPerfData[0]['y10Return'] | percentFormat}}</td>
+                            </tr>
+                            <tr class="table-grid-row" [style.background]="(taxOptFactSheet) ? 'var(--cardsHighlightColorDark)':'transparent'" *ngIf="factsheetPerfData.length>2 && (taxOptFactSheet)">
+                              <td class="">
+                                <span class="d-flex">
+                                  <span class="ellips"> {{cusindexName}} </span>
+                                  <span class="pl0_25rem" *ngIf="taxOptFactSheet">(After Tax)</span>
+                                </span>
+                              </td>
+                              <td>{{factsheetPerfData[2]['ytdReturn'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[2]['y1Return'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[2]['y3Return'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[2]['y5Return'] | percentFormat}}</td>
+                              <!--<td>{{factsheetPerfData[2]['y7Return'] | percentFormat}}</td>-->
+                              <td>{{factsheetPerfData[2]['y10Return'] | percentFormat}}</td>
+                            </tr>
+                            <tr class="table-grid-row" *ngIf="factsheetPerfData.length>1">
+                              <td class="">
+                                <span class="d-flex"> <span class="ellips"> {{cusindexBM_Name}}</span> <span *ngIf="cusindexBM_Ticker != ''">({{cusindexBM_Ticker}})</span> </span>
+                              </td>
+                              <td>{{factsheetPerfData[1]['ytdReturn'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[1]['y1Return'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[1]['y3Return'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[1]['y5Return'] | percentFormat}}</td>
+                              <!--<td>{{factsheetPerfData[1]['y7Return'] | percentFormat}}</td>-->
+                              <td>{{factsheetPerfData[1]['y10Return'] | percentFormat}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- Performance Annualized Trailing Returns End -->
+                    <!-- Calendar Year Returns -->
+                    <div class="mt2rem position-relative">
+                      <div class="reviewFact__inner__table_title mb1rem">
+                        <span class="title">Calendar Year Returns (Gross of fees) </span>
+                        <div id="tableNavBuy" class="text-right tableNav">
+                          <a class="nav-prev arrow scrollBtn" id="calArrowleft" (click)="scrollLeft('calendarYearReturnsLeft')">
+                            <span class="material-icons">chevron_left</span>
+                          </a>
+                          <a class="nav-next arrow ml0_5rem" id="calArrowright" (click)="scrollRight('calendarYearReturnsRight')">
+                            <span class="material-icons">chevron_right</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="reviewFact__inner__table_data reviewFact__inner__table_fixed_data calendarYearReturns" #calendarYearReturns (scroll)="onScroll($event,'calendarYearReturns')" id="account_Exclusions">
+                        <table class="table-grid" *ngIf="perfData.years.length>0">
+                          <tbody>
+                            <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                              <td class="">
+                                Product Name
+                              </td>
+                              <td class="wi_4r" *ngFor="let d of perfData.years">{{d}}</td>
+                            </tr>
+                            <tr class="table-grid-row" *ngIf="checkEmptyObj(perfData.Uindex)" [style.background]="(taxOptFactSheetCal) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                              <td class="" [style.background]="(taxOptFactSheetCal) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                                <span class="d-flex">
+                                  <span class="ellips"> {{cusindexName}} </span>
+                                  <span class="pl0_25rem" *ngIf="taxOptFactSheetCal">(Before Tax)</span>
+                                </span>
+                              </td>
+                              <td class="wi_4r" *ngFor="let d of perfData.years">{{ perfData.Uindex[d] | weightFormat:'per' }}</td>
+                            </tr>
+                            <tr class="table-grid-row" *ngIf="checkEmptyObj(perfData.AUindex) && taxOptFactSheetCal" [style.background]="(taxOptFactSheetCal) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                              <td class="" [style.background]="(taxOptFactSheetCal) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                                <span class="d-flex">
+                                  <span class="ellips"> {{cusindexName}} </span>
+                                  <span class="pl0_25rem" *ngIf="taxOptFactSheetCal">(After Tax)</span>
+                                </span>
+                              </td>
+                              <td class="wi_4r" *ngFor="let d of perfData.years">{{ perfData.AUindex[d] | weightFormat:'per' }}</td>
+                            </tr>
+                            <tr class="table-grid-row" *ngIf="checkEmptyObj(perfData.ETFind)">
+                              <td class="">
+                                <span class="d-flex">
+                                  <span class="ellips"> {{cusindexBM_Name}}</span>
+                                  <span *ngIf="cusindexBM_Ticker != ''"> ({{cusindexBM_Ticker}})</span>
+                                </span>
+                              </td>
+                              <td class="wi_4r" *ngFor="let d of perfData.years">{{ perfData.ETFind[d] | weightFormat:'per' }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- Calendar Year Returns End-->
+                  </div>
+                  <!-- Tax Gain / Loss -->
+                  <!--@if(taxOptFactSheet || taxOptFactSheet_optional){-->
+                  <div class="reviewFact__inner__table p1rem mb1rem" [style.display]="(taxOptFactSheet || taxOptFactSheetCal)?'block':'none'" *ngIf="taxGainLossData.length>0">
+                    <div class="position-relative">
+                      <div class="reviewFact__inner__table_title mb1rem">
+                        <span class="title">Tax Gain / Loss </span>
+                        <div id="tableNavBuy2" class="text-right tableNav">
+                          <a class="nav-prev arrow scrollBtn" id="taxArrowleft" (click)="scrollLeft('taxGainLossLeft')">
+                            <span class="material-icons">chevron_left</span>
+                          </a>
+                          <a class="nav-next arrow ml0_5rem" id="taxArrowright" (click)="scrollRight('taxGainLossRight')">
+                            <span class="material-icons">chevron_right</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="reviewFact__inner__table_data  reviewFact__inner__table_fixed_data_taxGain taxGainLoss pb0_5rem AccounttaxGainLoss" #taxGainLoss (scroll)="onScrolltaxGainLoss($event,'taxGainLoss')">
+                        <table class="table-grid">
+                          <tbody>
+                            <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                              <td class="">
+                                Strategy Name
+                              </td>
+                              <td class="wi_4r" *ngFor="let d of taxGainLossData">{{d.year}}</td>
+                            </tr>
+                            <tr class="table-grid-row">
+                              <td class="">
+                                <span class="d-flex">
+                                  <span class="ellips"> {{cusindexBM_Name}}</span>
+                                  <span *ngIf="cusindexBM_Ticker != ''"> ({{cusindexBM_Ticker}})</span>
+                                </span>
+                              </td>
+                              <td class="wi_4r" *ngFor="let d of taxGainLossData">{{taxgainlossFormat(d)}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <span style="font-size: 0.7rem; color: var(--paraFontColorAlt);font-style: italic;">* Based on market value</span>
+                    </div>
+                  </div>
+                  <!--}-->
+                  <!-- Tax Gain / Loss End -->
+                  <!-- Portfolio Characteristics-->
+                  <div class="reviewFact__inner__table p1rem mb1rem">
+                    <div class="position-relative">
+                      <div class="reviewFact__inner__table_title mb1rem">
+                        <span class="title">Portfolio Characteristics</span>
+                      </div>
+                      <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_portfolio overflow_auto">
+                        <table class="table-grid">
+                          <tbody>
+                            <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                              <td class="">
+                                Annualized <br>Alpha
+                              </td>
+                              <td class="">Information <br>Ratio </td>
+                              <td class="">Beta</td>
+                              <td class="">Upside <br>Capture </td>
+                              <td class="">Downside <br>Capture </td>
+                              <td class="">Correlation</td>
+                              <td *ngIf="factsheetPerfData.length>0 && sharedData.checkDivYield(factsheetPerfData[0])">Yield</td>
+                              <td class="">Batting <br>Average </td>
+                              <td class="">Standard <br>Deviation </td>
+                              <td class="">Tracking <br>Error </td>
+                              <td class="">Turnover</td>
+                            </tr>
+                            <tr class="table-grid-row" *ngIf="factsheetPerfData.length>0">
+                              <td>{{factsheetPerfData[0]['annulaizedAlpha'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['informationRatio'] | numValueFormat}}</td>
+                              <td>{{factsheetPerfData[0]['beta'] | numValueFormat }}</td>
+                              <td>{{factsheetPerfData[0]['upsideCapture'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['downSideCapture'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['correlation'] | numValueFormat}}</td>
+                              <td *ngIf="sharedData.checkDivYield(factsheetPerfData[0])">{{GetETFStrData[0]['divYield'] | weightFormat:'per'}}</td>
+                              <td>{{factsheetPerfData[0]['battingAverage'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['stdDeviation'] | percentFormat}}</td>
+                              <td>{{factsheetPerfData[0]['trackingError'] | weightFormat:'per'}}</td>
+                              <td>{{factsheetPerfData[0]['turnOver'] | weightFormat:'per'}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Portfolio Characteristics End-->
+                  <!--line Chart start-->
+                  <div class="reviewFact__inner__table p1rem mb1rem">
+                    <div class="reviewFact__inner__table_title mb1rem">
+                      <span class="title">Chart</span>
+                    </div>
+                    <div style="width:100%;" id="lineChartBuyModel"></div>
+                  </div>
+                  <!--line Chart end-->
+                  <!-- Top Security Weights-->
+                  <div class="reviewFact__inner__table p1rem pb_md_3">
+                    <div class="d-flex justify-content-between overflow_auto">
+                      <div class="position-relative w-100 pr2rem">
+                        <div class="reviewFact__inner__table_title mb1rem">
+                          <span class="title">Top Security Weights</span>
+                        </div>
+                        <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_top_security">
+                          <table class="table-grid">
+                            <tbody *ngIf="bldMyIndexMntHPortfolioData.length > 0">
+                              <tr class="table-grid-row" style="border-bottom: 2px solid var(--border);">
+                                <td class="">Security</td>
+                                <td class="">Weight</td>
+                              </tr>
+                              <tr class="table-grid-row" *ngFor="let data of bldMyIndexMntHPortfolioData.slice(0, 10)">
+                                <td class="">{{data['compname']}}</td>
+                                <td class="">{{data['weight'] | weightFormat :'per'}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="position-relative w-100">
+                        <div class="reviewFact__inner__table_title mb1rem">
+                          <span class="title">Sector Weights</span>
+                        </div>
+                        <div class="chartHeight">
+                          <div id="barChartBuyModel_popup1" class="factsheetChartresize"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- Top Security Weights End-->
+                </div>
+
+              </div>
+              @if(!showSpinner_factsheet){
+              @defer(when bldMyIndexMntHPortfolioData.length > 0 && factsheetPerfData.length > 0){
+              <div class="reviewFact__inner__right pl1rem">
+                <div class="top__section lh_D">
+                  <div class="d-flex justify-content-between">
+                    <ng-container *ngIf="top10HoldingCheck()"> <p>Top 10 Components</p></ng-container>
+                    <ng-container *ngIf="!top10HoldingCheck()">
+                      <p>Components</p>
+                      <span class="count" style="">{{bldMyIndexMntHPortfolioData.length}}</span>
+                    </ng-container>
+
+                    <!--<button class="dialog_btn_P D_btn d-flex align-items-center" *ngIf="sharedData.checkMenuPer(13,111) == 'Y' && sharedData.checkShowLeftTab(5) == 'A'" (click)="download()">
+          <span class="material-icons">download</span>
+          Download
+        </button>
+        <button class="dialog_btn_P D_btn d-flex align-items-center disabled" *ngIf="sharedData.checkMenuPer(13,111) == 'D' && sharedData.checkShowLeftTab(5) == 'D'">
+          <span class="material-icons">download</span>
+          Download
+        </button>-->
+                  </div>
+                  <!--<span class="perfDate" *ngIf="bldMyIndexMntHPortfolioData.length>0">
+        Price as of:
+        <span>{{checkPriceDate(bldMyIndexMntHPortfolioData[0]) | date: 'MM/dd/yyyy'}}</span>
+      </span>-->
+                </div>
+                <div class="bottom__section scrollbox mt0_5rem" *ngIf="bldMyIndexMntHPortfolioData.length>0">
+                  @for(data of bldMyIndexMntHPortfolioData;track data.stockKey){
+                  <div class="list__view">
+                    <p class="ind__name">{{data['compname']}}</p>
+                    <div class="d-flex align-items-center">
+                      <span class="ticker text-left">{{data['ticker']}}</span>
+                      <span class="price text-right" style="color: var(--paraFontColorAlt); ">{{data['price'] | priceFormat  :',.2f':data['currency']}}</span>
+                      <span class="price text-right">{{data['weight'] | weightFormat :'per'}}</span>
+                      <!--<span class="price text-right"></span>-->
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                  }@empty{ }
+                </div>
+                <h4 class="d-flex align-items-center" style="">
+                  <span class="d-flex align-items-center justify-content-between" style="width: 73%;">
+                    <span class="d-flex align-items-center">Cash Target:</span>
+                    <span *ngIf="checkTarget() != '-'" class="d-flex align-items-center" style="padding: 0.35rem;font-size: 0.7rem;">
+                      {{checkTarget()}}%
+                    </span>
+                    <span *ngIf="checkTarget() == '-'" class="d-flex align-items-center" style="padding: 0.35rem;font-size: 0.7rem;">
+                      {{checkTarget()}}
+                    </span>
+                  </span>
+                </h4>
+              </div>
+              }
+              }
+            </div>
+              
+          </div>
+      
+        </div>
+      </div>
+    </div>
+  </div>

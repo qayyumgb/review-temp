@@ -1,0 +1,515 @@
+@use '../styles/fonts' as *;
+@use '../styles/mixins' as *;
+/* Padding css starts */
+.p0 {
+  padding: 0 !important;
+}
+.p0_5rem {
+  padding: 0.5rem;
+}
+.p1rem {
+  padding: 1rem;
+}
+.p1_5rem {
+  padding: 1.5rem;
+}
+.p2rem {
+  padding: 2rem;
+}
+.p2_5rem {
+  padding: 2.5rem;
+}
+.p3rem {
+  padding: 3rem;
+}
+.p3_5rem {
+  padding: 3.5rem;
+}
+.p4rem {
+  padding: 4rem;
+}
+.p4_5rem {
+  padding: 4.5rem;
+}
+.p5rem {
+  padding: 5rem;
+}
+.p5_5rem {
+  padding: 5.5rem;
+}
+/*====== Padding css ends ======*/
+/*====== Padding-left css starts ======*/
+.pl0 {
+  padding-left: 0 !important;
+}
+.pl0_25rem {
+  padding-left: 0.25rem;
+}
+.pl0_5rem {
+  padding-left: 0.5rem;
+}
+.pl1rem {
+  padding-left: 1rem;
+}
+.pl1_5rem {
+  padding-left: 1.5rem !important;
+}
+.pl2rem {
+  padding-left: 2rem;
+}
+.pl2_5rem {
+  padding-left: 2.5rem;
+}
+.pl3rem {
+  padding-left: 3rem;
+}
+.pl3_5rem {
+  padding-left: 3.5rem;
+}
+.pl4rem {
+  padding-left: 4rem;
+}
+.pl4_5rem {
+  padding-left: 4.5rem;
+}
+.pl5rem {
+  padding-left: 5rem;
+}
+.pl5_5rem {
+  padding-left: 5.5rem;
+}
+/*====== Padding-left css ends ======*/
+/*====== Padding-top css starts ======*/
+.pt0 {
+  padding-top: 0 !important;
+}
+.pt0_5rem {
+  padding-top: 0.5rem;
+}
+.pt1rem {
+  padding-top: 1rem;
+}
+.pt1_5rem {
+  padding-top: 1.5rem;
+}
+.pt2rem {
+  padding-top: 2rem;
+}
+.pt2_5rem {
+  padding-top: 2.5rem;
+}
+.pt3rem {
+  padding-top: 3rem;
+}
+.pt3_5rem {
+  padding-top: 3.5rem;
+}
+.pt4rem {
+  padding-top: 4rem;
+}
+.pt4_5rem {
+  padding-top: 4.5rem;
+}
+.pt5rem {
+  padding-top: 5rem;
+}
+.pt5_5rem {
+  padding-top: 5.5rem;
+}
+/*====== Padding-top css ends ======*/
+/*====== Padding-bottom css starts ======*/
+.pb0 {
+  padding-bottom: 0;
+}
+.pb0_5rem {
+  padding-bottom: 0.5rem;
+}
+.pb1rem {
+  padding-bottom: 1rem;
+}
+.pb1_5rem {
+  padding-bottom: 1.5rem;
+}
+.pb2rem {
+  padding-bottom: 2rem;
+}
+.pb2_5rem {
+  padding-bottom: 2.5rem;
+}
+.pb3rem {
+  padding-bottom: 3rem;
+}
+.pb3_5rem {
+  padding-bottom: 3.5rem;
+}
+.pb4rem {
+  padding-bottom: 4rem;
+}
+.pb4_5rem {
+  padding-bottom: 4.5rem;
+}
+.pb5rem {
+  padding-bottom: 5rem;
+}
+.pb5_5rem {
+  padding-bottom: 5.5rem;
+}
+/*====== Padding-bottom css ends ======*/
+/*====== Padding-right css starts ======*/
+.pr0 {
+  padding-right: 0 !important;
+}
+.pr0_25rem {
+  padding-right: 0.25rem;
+}
+.pr0_5rem {
+  padding-right: 0.5rem !important;
+}
+.pr1rem {
+  padding-right: 1rem;
+}
+.pr1_5rem {
+  padding-right: 1.5rem !important;
+}
+.pr2rem {
+  padding-right: 2rem !important;
+}
+.pr2_5rem {
+  padding-right: 2.5rem;
+}
+.pr3rem {
+  padding-right: 3rem;
+}
+.pr3_5rem {
+  padding-right: 3.5rem;
+}
+.pr4rem {
+  padding-right: 4rem;
+}
+.pr4_5rem {
+  padding-right: 4.5rem;
+}
+.pr5rem {
+  padding-right: 5rem;
+}
+.pr5_5rem {
+  padding-right: 5.5rem;
+}
+/*====== Padding-right css ends ======*/
+/*====== Margin css starts ======*/
+.m0 {
+  margin: 0 !important;
+}
+.m0_25rem {
+  margin: 0.25rem;
+}
+.m0_5rem {
+  margin: 0.5rem;
+}
+.m1rem {
+  margin: 1rem;
+}
+.m1_5rem {
+  margin: 1.5rem;
+}
+.m2rem {
+  margin: 2rem;
+}
+.m2_5rem {
+  margin: 2.5rem;
+}
+.m3rem {
+  margin: 3rem;
+}
+.m3_5rem {
+  margin: 3.5rem;
+}
+.m4rem {
+  margin: 4rem;
+}
+.m4_5rem {
+  margin: 4.5rem;
+}
+.m5rem {
+  margin: 5rem;
+}
+.m5_5rem {
+  margin: 5.5rem;
+}
+/*====== Margin css ends ======*/
+/*====== Margin-top css starts ======*/
+.mt0 {
+  margin-top: 0;
+}
+.mt0_5rem {
+  margin-top: 0.5rem;
+}
+.mt1rem {
+  margin-top: 1rem;
+}
+.mt1_5rem {
+  margin-top: 1.5rem;
+}
+.mt2rem {
+  margin-top: 2rem;
+}
+.mt2_5rem {
+  margin-top: 2.5rem;
+}
+.mt3rem {
+  margin-top: 3rem;
+}
+.mt3_5rem {
+  margin-top: 3.5rem;
+}
+.mt4rem {
+  margin-top: 4rem;
+}
+.mt4_5rem {
+  margin-top: 4.5rem;
+}
+.mt5rem {
+  margin-top: 5rem;
+}
+.mt5_5rem {
+  margin-top: 5.5rem;
+}
+/*====== Margin-top css ends ======*/
+/*====== Margin-Bottom css starts ======*/
+.mb0 {
+  margin-bottom: 0 !important;
+}
+.mb0_5rem {
+  margin-bottom: 0.5rem;
+}
+.mb1rem {
+  margin-bottom: 1rem;
+}
+.mb1_5rem {
+  margin-bottom: 1.5rem !important;
+}
+.mb2rem {
+  margin-bottom: 2rem !important;
+}
+.mb2_5rem {
+  margin-bottom: 2.5rem !important;
+}
+.mb3rem {
+  margin-bottom: 3rem;
+}
+.mb3_5rem {
+  margin-bottom: 3.5rem;
+}
+.mb4rem {
+  margin-bottom: 4rem;
+}
+.mb4_5rem {
+  margin-bottom: 4.5rem;
+}
+.mb5rem {
+  margin-bottom: 5rem;
+}
+.mb5_5rem {
+  margin-bottom: 5.5rem;
+}
+/*====== Margin-Bottom css ends ======*/
+/*====== Margin-left css starts ======*/
+.ml0 {
+  margin-left: 0;
+}
+.ml0_5rem {
+  margin-left: 0.5rem;
+}
+.ml1rem {
+  margin-left: 1rem;
+}
+.ml1_5rem {
+  margin-left: 1.5rem;
+}
+.ml2rem {
+  margin-left: 2rem;
+}
+.ml2_5rem {
+  margin-left: 2.5rem;
+}
+.ml3rem {
+  margin-left: 3rem;
+}
+.ml3_5rem {
+  margin-left: 3.5rem;
+}
+.ml4rem {
+  margin-left: 4rem;
+}
+.ml4_5rem {
+  margin-left: 4.5rem;
+}
+.ml5rem {
+  margin-left: 5rem;
+}
+.ml5_5rem {
+  margin-left: 5.5rem;
+}
+/*====== Margin-left css ends ======*/
+/*====== Margin-right css starts ======*/
+.mr0 {
+  margin-right: 0;
+}
+.mr0_5rem {
+  margin-right: 0.5rem;
+}
+.mr1rem {
+  margin-right: 1rem;
+}
+.mr1_5rem {
+  margin-right: 1.5rem;
+}
+.mr2rem {
+  margin-right: 2rem;
+}
+.mr2_5rem {
+  margin-right: 2.5rem;
+}
+.mr3rem {
+  margin-right: 3rem;
+}
+.mr3_5rem {
+  margin-right: 3.5rem;
+}
+.mr4rem {
+  margin-right: 4rem;
+}
+.mr4_5rem {
+  margin-right: 4.5rem;
+}
+.mr5rem {
+  margin-right: 5rem;
+}
+.mr5_5rem {
+  margin-right: 5.5rem;
+}
+/*====== Margin-right css ends ======*/
+/* Button css starts */
+
+.btn_primary_xs {
+  font-size: $font-size_xss !important;
+}
+.btn_primary_sm {
+  font-size: $font-size_sm !important;
+}
+.btn_primary_md {
+  font-size: $font-size_md !important;
+}
+.btn_primary_lg {
+  font-size: $font-size_lg !important;
+}
+
+/* Button css end */
+/*====== Card title css starts ======*/
+.card_heading {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+}
+.top_nav_heading {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+}
+.page_heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+}
+/*====== Card title css end ======*/
+/*====== Text-Align css starts ======*/
+.text_center {
+  text-align: center !important;
+}
+.text_right {
+  text-align: right !important;
+}
+.text_left {
+  text-align: left !important;
+}
+
+/*====== Text-Align css ends ======*/
+/*====== lineheight css ends ======*/
+.no_line_height{
+  line-height: 0;
+}
+/*====== lineheight css ends ======*/
+/*====== No Border ======*/
+.no_border {
+  border-top: 0 !important;
+  grid-template-columns: minmax(270px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr);
+}
+
+// Width
+.w10{
+  width: 10%;
+}
+// .disableMenu {
+//     position:relative;
+//   &:after {
+//     content: "";
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     left: 0;
+//     top: 0;
+//     z-index: 9;
+//     opacity: .6;
+//     background: var(--topNavbar);
+//     cursor: not-allowed;
+//   }
+// }
+.avoid_losers_chart {
+  .ngx-slider.animate .ngx-slider-pointer {
+    transition: all linear .3s;
+    transform: scale(0.75) !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  .ngx-slider .ngx-slider-pointer {
+    background-color: var(--border) !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  .ngx-slider .ngx-slider-selection {
+    z-index: 2;
+    background: var(--border) !important;
+  }
+
+  .ngx-slider .ngx-slider-tick-legend {
+    position: absolute;
+    top: 24px;
+    transform: translate(-50%);
+    max-width: 50px;
+    white-space: normal;
+    color: var(--paraFontColor);
+    font-size: 0.75rem;
+  }
+
+  .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+    background: transparent !important;
+  }
+
+  .ngx-slider .ngx-slider-bubble {
+    display: none !important;
+  }
+
+  .ngx-slider .ngx-slider-bar {
+    background: linear-gradient(90deg, rgb(242 83 48), rgb(167 209 65), rgb(78 184 89));
+  }
+
+  .ngx-slider .ngx-slider-tick {
+    background: transparent;
+  }
+
+  .ngx-slider .ngx-slider-pointer:after {
+    background: var(--prim-button-color) !important;
+  }
+}

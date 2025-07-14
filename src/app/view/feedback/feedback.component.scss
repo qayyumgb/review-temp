@@ -1,0 +1,20 @@
+input::-webkit-file-upload-button {
+  cursor: pointer !important;
+}
+
+#SpinLoader-modal {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--btn-bg-alt);
+}
+
+.invalid-feedback p {
+  margin: 0;
+  text-align: left;
+  font-size: 0.8rem;
+}

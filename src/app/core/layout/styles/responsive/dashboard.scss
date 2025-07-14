@@ -1,0 +1,25 @@
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
+    .leftGrid_comp{
+        width: 25%;
+    }
+}
+@media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait){
+    .leftGrid_comp{
+        width: 25%;
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait){
+    .leftGrid_comp{
+        width: 25%;
+    }
+  }
+  @media only screen and (max-width: 1260px) and (min-height:750px){
+    .leftGrid_comp{
+        width: 25%;
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1194px) and (orientation: landscape){
+    .leftGrid_comp{
+        width: 18%;
+    }
+  }

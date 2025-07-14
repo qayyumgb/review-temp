@@ -1,0 +1,292 @@
+
+<svg id="excluFactorCircle" class="noselect_mousepointer commonSVGCircle" viewBox="180 45 1220 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <circle class="start-ring1" fill="var(--primary-color)" id="maincircle1" r="395" transform="translate(810, 405)"></circle>
+  <g class="Homecenter noselect_mousepointer" style="" transform="translate(810,285)">
+    <g id="gCircleSlider" class="Circle_Slider" transform="scale(0.84)translate(0,26)" style="display: flex">
+      <g viewBox="0 0 120 120">
+        <defs><clipPath id="excluRHSCirclemyMask"><circle cx="160" cy="160" r="160" fill="white" /></clipPath></defs>
+        <g clip-path="url(#excluRHSCirclemyMask)" id="ToolSvgSlider" transform="translate(-160, -40)">
+          <rect width="330" height="330" fill="var(--primary-color)" />
+          <g id="slidingSVG" transform="translate(0, 0)">
+            <g class="slider3" transform="translate(0, -5)" style="display:block">
+              <rect width="330" height="330" fill="transparent" />
+              <text [style.visibility]="cusIndexService._selCompany == undefined?'visible':'hidden'" id="factorsHeader" y="160" x="161" style="font-family: var(--ff-medium); text-anchor: middle; font-size: 18px; fill: var(--leftSideText-B);"></text>
+              <g class="STh_top">
+                @if(showApplyBtn){
+                <g transform="translate(150, 140)" style="cursor:pointer !important" (click)="applyChange()">
+                  <g transform="" class="apply_btn">
+                    <rect width="30" height="30" stroke="var(--border)" fill="var(--prim-button-color)" style="transform: translate(-7px, -10px)" rx="25" ry="25"></rect>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 15 12" fill="none">
+                      <path d="M6 0L7.42 1.42L3.83 5H13V0H15V7H3.83L7.42 10.58L6 12L0 6L6 0Z" fill="var(--leftSideText-B)"></path>
+                    </svg>
+                  </g>
+                  <text y="40" x="8" style="font-family: var(--ff-bold); text-anchor: middle; font-size: 12px; fill: var(--paraFontColorAlt); ">RUN</text>
+                </g>
+                }
+                <g transform="translate(150, 264)" class="total_components">
+                  <text class="header" y="10" style="font-family: var(--ff-medium);text-anchor: start;font-size: 11.5px;fill: var(--leftSideText) !important;" x="-45">Components:</text>
+                  <text class="value c_remaining_slide1" y="10" style="font-family: var(--ff-bold); text-anchor: start; font-size: 11.5px; fill: var(--prim-button-color) !important;" x="37">{{exclCompData.length}}</text>
+                </g>
+                <g class="RCsince-info" transform="translate(162, 290)" *ngIf="cusIndexService._returnAsOfDate != ''">
+                  <g style="transform: translate(-14px, -4px);cursor: pointer;">
+                    <rect width="20" height="20" x="2" style="fill:transparent !important"></rect>
+                    <svg width="22" height="22" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
+                      <path d="M32 59C39.4261 59 46.548 56.05 51.799 50.799C57.05 45.548 60 38.4261 60 31C60 23.5739 57.05 16.452 51.799 11.201C46.548 5.94999 39.4261 3 32 3C24.5739 3 17.452 5.94999 12.201 11.201C6.94999 16.452 4 23.5739 4 31C4 38.4261 6.94999 45.548 12.201 50.799C17.452 56.05 24.5739 59 32 59V59ZM35.255 26.058L31.755 42.5255C31.51 43.7155 31.8565 44.391 32.819 44.391C33.498 44.391 34.5235 44.146 35.22 43.53L34.912 44.986C33.9075 46.197 31.692 47.079 29.7845 47.079C27.324 47.079 26.2775 45.602 26.9565 42.4625L29.5395 30.3245C29.7635 29.299 29.5605 28.928 28.535 28.6795L26.9565 28.396L27.2435 27.0625L35.2585 26.058H35.255ZM32 22.25C31.0717 22.25 30.1815 21.8813 29.5251 21.2249C28.8687 20.5685 28.5 19.6783 28.5 18.75C28.5 17.8217 28.8687 16.9315 29.5251 16.2751C30.1815 15.6187 31.0717 15.25 32 15.25C32.9283 15.25 33.8185 15.6187 34.4749 16.2751C35.1313 16.9315 35.5 17.8217 35.5 18.75C35.5 19.6783 35.1313 20.5685 34.4749 21.2249C33.8185 21.8813 32.9283 22.25 32 22.25V22.25Z" fill="white" style="
+                     fill: var(--prim-button-color-text);"></path>
+                    </svg>
+                  </g>
+                  <g class="RCsince" transform="translate(-4, -48)" style="display:none">
+                    <g style="transform: translate(8px, 42px);">
+                      <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+                    </g>
+                    <rect width="160" height="40" fill="transparent" style="stroke: #444455;fill: var(--topNavbar) !important;" rx="5" ry="5" x="-80" y="-5.5"></rect>
+                    @if(cusIndexService._selCompany == undefined){
+                    <text style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 11px; fill: var(--leftSideText-B);" y="10">Returns calculated from</text>
+                    <text id="sinceRCIncep" y="25" x="0" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 11px; fill: var(--leftSideText-B);">{{cusIndexService._returnAsOfDate}}</text>
+                    }@else{
+                    <text style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 11px; fill: var(--leftSideText-B);" y="10">Price & Scores</text>
+                    <text id="sinceRCIncep" y="25" x="0" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 11px; fill: var(--leftSideText-B);">as of: {{sharedData.PSasOfDate}}</text>
+                    }
+                  </g>
+                </g>
+              </g>
+              <!--- Company Selected --->
+              <g class="clkdSlider" transform="translate(40, 40)" [style.visibility]="cusIndexService._selCompany != undefined?'visible':'hidden'">
+                <g class="Sel_midCompS1" transform="translate(40, 51)" [style.display]="cusIndexService.checkShowStockPrice()?'block':'none'">
+                  <text class="circle-SelCompName text-G-Def" x="80" y="0" style="text-anchor: middle; font-family: var(--ff-medium); font-size: 14px; fill: var(--leftSideText-B);">{{selCompText}}</text>
+                  <text class="circle-ticker" x="80" y="18" style="text-anchor: middle; font-family: var(--ff-medium); fill: var(--leftSideText-B); font-size: 12px;"></text>
+                </g>
+                <g id="fil_STW_Price" class="fil_STW_Price_path" transform="translate(83, 95)" [attr.transform]="(cusIndexService.checkcompTrans() == 4)?'translate(84, 95)':'translate(0, 160)'">
+                  <g *ngIf="sharedData.checkMenuPer(3,141) !='N'" [class.disabled]="sharedData.checkMenuPer(3,141) =='D'">
+                    <rect width="210" height="28" rx="0" ry="1" x="-68" y="-1" style="fill: transparent !important;"></rect>
+                    <text class="STW_PriceHead" x="-79" y="17"
+                          style="font-family: var(--ff-medium);text-anchor: start;font-size: 11.5px;fill: var(--leftSideText) !important;cursor: inherit !important;">Stock Price</text>
+                    <text x="150" y="17" style="fill: var(--leftSideText-B); font-size: 12px; font-family: var(--ff-semibold); text-anchor: end;">{{STW_Pricecurrency}}</text>
+                  </g>
+                  @if(impRevValue !=undefined && impRevValue != null){
+                  <g class="impRev" transform="translate(0, 28)" *ngIf="sharedData.checkMenuPer(3,118) !='N'">
+                    <rect width="210" height="28" rx="0" ry="1" x="-68" y="-1" style="fill: transparent !important;"></rect>
+                    <text class="name-txt h-fact" x="-79" y="17"
+                          style="font-size: 11.5px;fill: var(--leftSideText);font-family: var(--ff-medium);text-anchor: start;">Indicated Growth Rate </text>
+                    <text class="impRevValue" x="150" y="17" style="fill: var(--leftSideText-B); font-size: 12px; font-family: var(--ff-semibold); text-anchor: end;">{{impRevValue>0?'+':''}}{{impRevValue}}%</text>
+                  </g>
+                  <rect *ngIf="sharedData.checkMenuPer(3,118) =='Y'" width="210" height="28" rx="0" ry="0" x="-68" y="56" style="fill: transparent !important;"></rect>
+                  <g transform="translate(0, 56)" *ngIf="sharedData.checkMenuPer(3,118) =='Y'" style="cursor:pointer" (click)="cusIndexService.openImpliedRevenue()">
+                    <text class="name-txt h-fact" x="-80" y="18" style=" text-anchor: start; fill: var(--linkColor) !important; font-size: 11.5px; font-family: var(--ff-medium);">Probability of Failure (h-factor)</text>
+                    <text class="SelCompScore" x="150" y="18" style="font-size: 12px; font-family: var(--ff-semibold); fill: var(--leftSideText-B); text-anchor: end; ">{{HFscore}}</text>
+                  </g>
+                  <rect *ngIf="sharedData.checkMenuPer(3,118) =='D'" width="210" height="28" rx="0" ry="0" x="-68" stroke="var(--border)" y="56" style="fill: var(--topNavbar)"></rect>
+                  <g transform="translate(0, 56)" *ngIf="sharedData.checkMenuPer(3,118) =='D'" style="cursor:pointer">
+                    <text class="name-txt h-fact" x="-80" y="18" style=" text-anchor: start; fill: var(--linkColor) !important; font-size: 11px; font-family: var(--ff-medium);">Probability of Failure (h-factor)</text>
+                    <text class="SelCompScore" x="150" y="18" style="font-size: 12px; font-family: var(--ff-semibold); fill: var(--leftSideText-B); text-anchor: end; ">{{HFscore}}</text>
+                  </g>
+                  }
+                </g>
+              </g>
+              <!--- Company Selected --->
+            </g>
+
+            <g class="sliderCumAnn" transform="translate(320, 0)">
+              <rect width="330" height="330" fill="transparent" />
+              <g transform="translate(30, 10)">
+                <g class="SMi_top_table" transform="translate(85, 100)">
+                  <g>
+                    <text class="text-G-Def bold" x="60">Excess Cumulative return</text>
+                    <text class="text-G-Def" x="75" y='30'>
+                      @if(excessCumReturns >= 0){+}{{excessCumReturns | numWithCommaRtnPercent}}
+                      @if(excessCumReturns >= 0){
+                      <tspan class="material-icons __pos" dy="15" dx="-5" style="fill: var(--successColor); font-size: 40px">
+                        arrow_drop_up
+                      </tspan>
+                      }@else{
+                      <tspan class="material-icons __neg" dy="15" dx="-5" style="fill: var(--danger); font-size: 40px">
+                        arrow_drop_down
+                      </tspan>
+                      }
+                    </text>
+                    <g style="transform: translate(-58px, -8px);">
+                      <rect width="40" height="40" fill="transparent" style="stroke: var(--border);" rx="5" ry="5"></rect>
+                      <image href="../../../../assets/images/matico/cumulative_ico.svg" width="30" height="30" style="transform: translate(6px, 5px);"></image>
+                    </g>
+                  </g>
+                  <g transform="translate(0, 65)">
+                    <text class="text-G-Def bold" x="60">Excess Annualized return</text>
+                    <text class="text-G-Def" x="75" y='30'>
+                      @if(excessAnnReturns >= 0){+}{{excessAnnReturns | numWithCommaRtnPercent}}
+                      @if(excessAnnReturns >= 0){
+                      <tspan class="material-icons __pos" dy="15" dx="-5" style="fill: var(--successColor); font-size: 40px">
+                        arrow_drop_up
+                      </tspan>
+                      }@else{
+                      <tspan class="material-icons __neg" dy="15" dx="-5" style="fill: var(--danger); font-size: 40px">
+                        arrow_drop_down
+                      </tspan>
+                      }
+                    </text>
+                    <g style="transform: translate(-58px, -8px)">
+                      <rect width="40" height="40" fill="transparent" style="stroke: var(--border);" rx="5" ry="5"></rect>
+                      <image href="../../../../assets/images/matico/annualized_ico.svg" width="30" height="30" style="transform: translate(6px, 5px);"></image>
+                    </g>
+                  </g>
+                </g>
+              </g>
+              @if(showSlider2 || cusIndexService.returnAsOfDate.value != ''){
+              <g transform="translate(160, 240)">
+                <text *ngIf="cusIndexService.returnAsOfDate.value != ''" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 9px; fill: var(--leftSideText); text-transform: unset;" x="0" y="18">Returns calculated from </text>
+                <text id="sinceRCIncep" y="33" x="0" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 9px; fill: var(--leftSideText);">{{cusIndexService.returnAsOfDate.value}}</text>
+              </g>
+              }
+              <g class="loading-analysis" style=" transform: translate(50px, 10px);" [style.display]="showanaLoading ? 'block' : !sharedData._showSpinner ? 'none' : 'block'">
+                <rect class="mainrect" fill="var(--primary-color)" height="150" rx="2" ry="2" stroke="224d9d" style="fill: var(--primary-color); stroke: none;" width="220" x="0" y="75"></rect>
+                <text class="txt " style="text-anchor: middle; font-size: 12px; font-family: var(--ff-medium); fill: var(--iconColor);" x="115" y="150">Loading...</text>
+              </g>
+            </g>
+          </g>
+          <g *ngIf="cusIndexService.checkTrade(cusIndexService._currentSList)">
+            @if(cusIndexService.checkFactorResetBtn(factorid)){
+            <g transform="translate(116, -5)" (click)="factorReset()" id="resetAL" class="STw_top_ico" style="cursor:pointer">
+              <g>
+                <g style="transform: translate(24px, 19px);"><svg width="8" height="8" viewBox="0 0 7 7" fill="none"><path d="M3.5 7C4.47708 7 5.30469 6.66094 5.98281 5.98281C6.66094 5.30469 7 4.47708 7 3.5C7 2.52292 6.66094 1.69531 5.98281 1.01719C5.30469 0.339062 4.47708 0 3.5 0C2.99688 0 2.51562 0.103979 2.05625 0.311937C1.59687 0.519604 1.20312 0.816667 0.875 1.20312V0H0V3.0625H3.0625V2.1875H1.225C1.45833 1.77917 1.77727 1.45833 2.18181 1.225C2.58665 0.991667 3.02604 0.875 3.5 0.875C4.22917 0.875 4.84896 1.13021 5.35938 1.64062C5.86979 2.15104 6.125 2.77083 6.125 3.5C6.125 4.22917 5.86979 4.84896 5.35938 5.35938C4.84896 5.86979 4.22917 6.125 3.5 6.125C2.93854 6.125 2.43177 5.96458 1.97969 5.64375C1.5276 5.32292 1.21042 4.9 1.02813 4.375H0.109375C0.313542 5.14792 0.729167 5.77865 1.35625 6.26719C1.98333 6.75573 2.69792 7 3.5 7Z" fill="var(--prim-button-color-text)" fill-opacity="0.8"></path></svg></g>
+                <text x="36" y="26" class="ptext" style="font-size: 11px;fill: var(--prim-button-color-text) !important;font-family: var(--ff-medium);">Reset</text>
+              </g>
+            </g>
+            }
+          </g>
+        </g>
+      </g>
+      <!------------ tabs -------------->
+      <g id="Circle_SliderDots"></g>
+      <!------------ reset -------------->
+      <g class="controls" style="display: none; transform: translate(-160px, -42px);" [style.display]="cusIndexService.checkCircleAnnCum() && cusIndexService._custSelectFactor ? 'block' : 'none'">
+        <g id="left" transform="translate(47, 164)" class="disable">
+          <g (click)="exclControlLeft()" style="cursor:pointer" transform="translate(-39, -54)">
+            <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(0px, 31px);"></rect>
+            <path class="st1" d="M13.8,47l4.9-4.9 c0.4-0.4,0.4-0.9,0-1.3s-0.9-0.4-1.3,0l-5.5,5.5c-0.3,0.3-0.4,0.9,0,1.3l5.5,5.5c0.4,0.4,0.9,0.4,1.3,0c0.4-0.4,0.4-0.9,0-1.3l0,0 L13.8,47z" style="fill: var(--iconColor);" />
+          </g>
+          <circle class="disableLeftCircle" cx="-35" cy="0" r="60" fill="var(--primary-color)" stroke="transparent" style="opacity:0" />
+        </g>
+        <g id="right" transform="translate(255, 164)" class="disable">
+          <g (click)="exclControlRight()" style="cursor: pointer; transform: translate(19px, -54px);">
+            <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(8px, 31px);"></rect>
+            <path id="Icon_ionic-ios-arrow-back-2" class="st1" d="M25,47l-4.9-4.9c-0.4-0.4-0.4-0.9,0-1.3c0.4-0.4,0.9-0.4,1.3,0l5.5,5.5 c0.3,0.3,0.4,0.9,0,1.3l-5.5,5.5c-0.4,0.4-0.9,0.4-1.3,0c-0.4-0.4-0.4-0.9,0-1.3L25,47z" style=" fill: var(--iconColor)" />
+          </g>
+          <circle class="disableRightCircle" cx="53" cy="0" r="60" fill="var(--primary-color)" stroke="transparent" style="opacity:0;" />
+        </g>
+      </g>
+    </g>
+  
+  </g>
+  <g id="excluBeta12charts" transform="translate(810 ,405)">
+    <g id="crlChart"></g>
+    <g class="text-drag leftGrid_drag" [style.opacity]="!sharedData._showSpinner ? '1' : '0'" *ngIf="cusIndexService.checkTrade(cusIndexService._currentSList)">
+      <svg class="trag-arw2" y="-6" x="-2" width="20" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path style="transform: rotate(-5deg);" fill-rule="evenodd" clip-rule="evenodd" d="M13.1364 3.11361C13.4879 3.46508 13.4879 4.03493 13.1364 4.3864L7.5228 10L13.1364 15.6136C13.4879 15.9651 13.4879 16.5349 13.1364 16.8864C12.7849 17.2379 12.2151 17.2379 11.8636 16.8864L5.61361 10.6364C5.26214 10.2849 5.26214 9.71508 5.61361 9.36361L11.8636 3.11361C12.2151 2.76214 12.7849 2.76214 13.1364 3.11361Z" fill="white" fill-opacity="0.95" />
+      </svg>
+      <svg class="trag-arw1" y="-5" x="-10" width="20" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path style="transform: rotate(-5deg);" fill-rule="evenodd" clip-rule="evenodd" d="M13.1364 3.11361C13.4879 3.46508 13.4879 4.03493 13.1364 4.3864L7.5228 10L13.1364 15.6136C13.4879 15.9651 13.4879 16.5349 13.1364 16.8864C12.7849 17.2379 12.2151 17.2379 11.8636 16.8864L5.61361 10.6364C5.26214 10.2849 5.26214 9.71508 5.61361 9.36361L11.8636 3.11361C12.2151 2.76214 12.7849 2.76214 13.1364 3.11361Z" fill="white" fill-opacity="0.95" />
+      </svg>
+      <!-- <text class="trag-arw1" y="5" x="-2" style="transform: rotate(-10deg);">&lt;</text>
+      <text class="trag-arw2" y="5" x="5" style="transform: rotate(-8deg);">&lt;</text> -->
+    </g>
+    <g transform="translate(-160,-160)" [style.display]="!sharedData._showSpinner ? 'none' : 'block'">
+      <rect width="350" height="350" style="fill: transparent" rx="350" ry="350" x="-10" y="-10"></rect>
+    </g>
+  </g>
+ 
+</svg>
+<!--@if(cusIndexService.checkCircleAnnCum() && !sharedData._showCenterLoader){
+@if(sharedData._showSpinner){
+<div class="cum__return align-items-end">
+  <div class="gravatar">
+    <ngx-skeleton-loader appearance="circle" [theme]="{ width: '3rem', height: '3rem', 'border-radius': '10px' }">
+    </ngx-skeleton-loader>
+  </div>
+  <div class="gravatar-title">
+    <div>
+      <ngx-skeleton-loader [theme]="{
+            width: '7rem',
+            'border-radius': '0',
+            height: '10px',
+            'margin-bottom': '5px',
+                           'background-color': 'var(--border)'
+          }"></ngx-skeleton-loader>
+    </div>
+    <div>
+      <ngx-skeleton-loader [theme]="{
+            width: '4rem',
+            'border-radius': '0',
+            height: '20px'
+          }"></ngx-skeleton-loader>
+    </div>
+  </div>
+</div>
+<div class="cum__return ann_return align-items-end">
+  <div class="gravatar">
+    <ngx-skeleton-loader appearance="circle" [theme]="{ width: '3rem', height: '3rem', 'border-radius': '10px' }">
+    </ngx-skeleton-loader>
+  </div>
+  <div class="gravatar-title">
+    <div>
+      <ngx-skeleton-loader [theme]="{
+            width: '7rem',
+            'border-radius': '0',
+            height: '10px',
+            'margin-bottom': '5px'
+          }"></ngx-skeleton-loader>
+    </div>
+    <div>
+      <ngx-skeleton-loader [theme]="{
+            width: '4rem',
+            'border-radius': '0',
+            height: '20px'
+          }"></ngx-skeleton-loader>
+    </div>
+  </div>
+</div>
+}@else{
+<div class="cum__return" [matTooltip]="cusIndexService.checkMyToolTip()" matTooltipClass="custom-tooltip">
+  <div class="ico">
+    <span class="material-icons-outlined">
+      ssid_chart
+    </span>
+  </div>
+  <div class="details">
+    <p>Excess <span>Cumulative return</span></p>
+    <p class="return d-flex align-items-end">
+      @if(excessCumReturns >= 0){+}{{excessCumReturns | numWithCommaRtnPercent}}
+      @if(excessCumReturns >= 0){
+      <span class="material-icons __pos" style="color: var(--successColor); font-size: 1.2rem;">
+        arrow_drop_up
+      </span>
+      }@else{
+      <span class="material-icons __neg" style="color: var(--danger); font-size: 1.2rem;">
+        arrow_drop_down
+      </span>
+      }
+    </p>
+  </div>
+</div>
+<div class="cum__return ann_return" [matTooltip]="cusIndexService.checkMyToolTip()" matTooltipClass="custom-tooltip">
+  <div class="ico">
+    <span class="material-icons-outlined">
+      bar_chart
+    </span>
+  </div>
+  <div class="details">
+    <p>Excess <span>Annualized return</span></p>
+    <p class="return d-flex align-items-end">
+      @if(excessAnnReturns >= 0){+}{{excessAnnReturns | numWithCommaRtnPercent }}
+      @if(excessAnnReturns >= 0){
+      <span class="material-icons __pos" style="color: var(--successColor); font-size: 1.2rem;">
+        arrow_drop_up
+      </span>
+      }@else{
+      <span class="material-icons __neg" style="color: var(--danger); font-size: 1.2rem;">
+        arrow_drop_down
+      </span>
+      }
+    </p>
+  </div>
+</div>
+}
+}-->

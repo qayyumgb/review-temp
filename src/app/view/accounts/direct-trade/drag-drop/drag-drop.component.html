@@ -1,0 +1,481 @@
+<div id="myConvert" class="position-relative" style="overflow: hidden;">
+  <div class="close-l-popup" (click)="isResetBtn=true;close()"><span class="material-icons">close</span></div>
+  <div class="mat-spinner-loader-popup" [style.display]="showSpinner_loaded?'flex':'none'">
+    <mat-spinner class="reviewloader-spinner"></mat-spinner>
+  </div>
+  @if(saveMatLoader){
+  <div class="mat-spinner-loader-popup" style="opacity:0.85">
+    <mat-spinner class="reviewloader-spinner"></mat-spinner>
+  </div>
+  }
+
+
+  @if(SavedDirectTradeData.length>0){
+  <div id="directTrade">
+    <div class="content-btm p2rem" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+      <p class="title_head">Direct Trade</p>
+      <div class="close-l-popup" (click)="close()"><span class="material-icons">close</span></div>
+      <div class="d-flex col-md-12 align-items-end upload_sec justify-content-between pr1rem">
+        <div class="d-flex align-items-center w-100">
+          <p>Account:  <b>{{currentAccount.accountVan}}</b></p>
+
+          <div class="d-flex align-items-center">
+            <button class="dialog_btn_S ml2rem mr0_5rem d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#uploadWar">
+              <span class="material-icons">
+                file_upload
+              </span>
+              Upload here
+            </button>
+            <!--<button class="dialog_btn_P mr0_5rem">Save</button>-->
+            @if(showTradeBtn && !iserrorMsgFileStatus){<button class="dialog_btn_P" (click)="checkAcc()">Trade Now</button>}
+            @else{<button class="dialog_btn_P disabled">Trade Now</button>}
+          </div>
+        </div>
+        <div class="d-flex">
+          <p class="d-flex align-items-center" style="font-size:0.8rem">Count:&nbsp; <b>{{dataSource_DD.data.length}}</b></p>
+          <button (click)="downloadUploadStockFile()" class="mod-foot-btn-activeP d-flex align-items-center ml1rem" style="font-size: 0.65rem; border-radius: 0.265rem; min-width: auto;">
+            <span class="material-icons" style="font-size: 0.8rem;margin-right: 0.25rem;">file_download</span>Download
+          </button>
+        </div>
+      </div>
+      <div class="row d-flex mt1rem" id="account_Exclusions">
+        <div class="col-md-12">
+          <div class="example-container mat-elevation-z8">
+
+            <mat-table #table [dataSource]="dataSource_DD" class="common_mat_table dragTable" matSort matSortDisableClear matSortDirection="asc" (matSortChange)="onSortTrd($event)">
+
+              <!--<ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef class="" style="width: 6%;max-width: 6%;">
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                  </mat-checkbox>
+                  <span class="material-icons delete_ico cursor-pointer" data-bs-toggle="modal" data-bs-target="#deleteConf">
+                    delete_outline
+                  </span>
+
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" style="width: 6%;max-width: 6%;">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)">
+                  </mat-checkbox>
+                </mat-cell>
+              </ng-container>-->
+              <ng-container matColumnDef="companyName">
+                <mat-header-cell mat-sort-header *matHeaderCellDef style="width: 30%; max-width: 30%; min-width: 30%; "> Company Name </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="width: 30%; max-width: 30%; min-width: 30%; ">{{element.company | nullDashPipe :''}}  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="ticker">
+                <mat-header-cell mat-sort-header *matHeaderCellDef style="justify-content: flex-start; width: 10%; max-width: 10%; min-width: 10%; "> Ticker </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="justify-content: flex-start; width: 10%; max-width: 10%; min-width: 10%; "> {{element.ticker | nullDashPipe :''}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="quantity">
+                <mat-header-cell mat-sort-header *matHeaderCellDef class="row_reverse" style="justify-content: flex-end; width: 15%; max-width: 15%; min-width: 15%; "> Quantity </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="justify-content: flex-end; width: 15%; max-width: 15%; min-width: 15%; "> {{element.shares | nullDashPipe :''}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef style="justify-content: flex-start; padding-left: 3rem; width: 25%; max-width: 25%; "> Action </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="justify-content: flex-start; padding-left: 3rem; width: 25%; max-width: 25%; "> {{element.buySell | nullDashPipe :''}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Status">
+                <mat-header-cell *matHeaderCellDef style="justify-content: flex-start;width: 30%;max-width: 30%;min-width: 30%;"> Status </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="justify-content: flex-start;width: 30%;max-width: 30%;min-width: 30%;">
+                  <span *ngIf="element.rlFlag === 'N' && element.dbFlag === 'N' && element.dnsFlag === 'N' && element.tickerValidFlag  ==='Y'; else statusTemplate">- </span>
+                  <ng-template #statusTemplate>
+                    @if(element.rlFlag == 'Y' && element.dbFlag == 'Y'){
+                    <span>This ticker is in <b>Restricted List</b> and <b>Don't Buy</b></span>
+                    }
+                    @else {
+                    <span *ngIf="element.rlFlag === 'Y'">This ticker is in <b>Restricted List</b> </span>
+                    <span *ngIf="element.dbFlag === 'Y'">This ticker is in <b>Don't Buy</b>  </span>
+                    <span *ngIf="element.dnsFlag === 'Y'">This ticker is in <b>Don't Sell </b> </span>
+                    <span style="color: var(--linkColor);" (click)="suggestedTickers(element)" [matTooltipPosition]="'above'" matTooltip="View Suggested Tickers" class="cursor-pointer" *ngIf="element.tickerValidFlag === 'N'">This ticker is unavailable</span>
+                    }
+
+                  </ng-template>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"
+                       (click)="selection.toggle(row)" [ngClass]="{ 'errorBg': shouldHighlight(row) }">
+              </mat-row>
+            </mat-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  }@else{
+  <div class="content-btm p2rem pt2rem" style="border-radius: 0.5rem !important; border: none; text-align: center;">
+
+    <div class=" d-flex" style="height:84vh;overflow:auto;">
+      <div class="d-flex left_dropzone" style=" ">
+        <p class="title_head">Account: <b>{{currentAccount.accountVan}}</b></p>
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="title_head_sub pb0_5rem">Upload a document you want to trade.</p>
+
+          <div class="reviewFact__dropdown_button d-flex justify-content-end mb1rem">
+            <span class="selectOptions">
+              <svg _ngcontent-ng-cli-universal-c173="" fill="none" height="13" viewBox="0 0 24 24" width="13"
+                   xmlns="http://www.w3.org/2000/svg" style="position: relative;">
+                <path _ngcontent-ng-cli-universal-c173=""
+                      d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z"
+                      fill="currentColor" opacity="1"></path>
+                <rect _ngcontent-ng-cli-universal-c173="" fill="currentColor" height="2" rx="1"
+                      transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path _ngcontent-ng-cli-universal-c173=""
+                      d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z"
+                      fill="currentColor"></path>
+              </svg>
+              Templates
+            </span>
+            <span class="selecticons dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+              <span class="material-icons">expand_more</span>
+            </span>
+            <div class="dropdown-menu" x-placement="bottom-start">
+              <ul>
+                <li class="justify-content-between" (click)="templateFile('csv')">CSV Format</li>
+                <li class="justify-content-between" (click)="templateFile('xlsx')">XLSX Format</li>
+                <li class="justify-content-between" (click)="templateFile('xml')">XML Format</li>
+                <li class="justify-content-between" (click)="templateFile('json')">JSON Format</li>
+              </ul>
+            </div>
+          </div>
+          <!--<button (click)="sampleFile('csv')" class="mod-foot-btn-activeP d-flex align-items-center" style="font-size: 0.65rem; border-radius: 0.265rem; min-width: auto;">
+        <span class="material-icons" style="font-size: 0.8rem;margin-right: 0.25rem;">file_download</span>Sample Format
+      </button>-->
+        </div>
+        <dropzone class="dropzone" [config]="config" [message]="'Drag and Drop or Click to Upload files in any of the following formats: CSV, XLSX, XML, JSON, or XLS'"
+                  (error)="onUploadError($event)" (addedFile)="onFileAdded($event)">
+          <div class="mat-spinner-loader-popup" style="opacity:0.85;z-index:100;height:96%;display:none" id="dropzoneMatSpinner">
+            <mat-spinner class="reviewloader-spinner"></mat-spinner>
+          </div>
+        </dropzone>
+        <textarea placeholder="Paste Your Data Directly (Supports: CSV, XLSX, XML, JSON, XLS)" #dataTextarea [value]="xlsContent" rows="10" cols="40"></textarea>
+        <div class="d-flex">
+          <button (click)="convertData()" class="mod-foot-btn-activeP mr0_5rem w-100">View Table</button>
+          @if(xlsContent == ''){
+          <button style="margin: 0; opacity: 0.2 !important;" class="mod-foot-btn-activeP w-100 disabled" >Reset</button>
+          }@else{
+          <button style="margin: 0" class="mod-foot-btn-activeP w-100" data-bs-toggle="modal" data-bs-target="#resetDataModal">Reset</button>
+          }
+        </div>
+      </div>
+      <!-- Right Side Table -->
+      <div class="d-flex right_dropzone" *ngIf="tableData" [style.visibility]="tableData.length>0?'visible':'hidden'">
+        <div style="height:100%;">
+          <div class="d-flex align-items-center justify-content-between">
+            <p class="w-100" style=" color: var(--leftSideText-B); font-family: 'poppins-semibold'; font-size: 0.9rem; text-align: left !important;">Table View:</p>
+            <div class="d-flex justify-content-end w-100" style=" margin-bottom: 0.5rem;" *ngIf="tableData.length>0">
+              <p class="d-flex align-items-center count pr0_5rem" style="font-size:0.8rem">Count:&nbsp; <b>{{tableData.length}}</b></p>
+              <button class="mod-foot-btn-activeP" style="font-size: 0.7rem;border-radius: 0.265rem;min-width: auto;" (click)="UploadToRes()">Save & Preview</button>
+            </div>
+          </div>
+          <div style="height:92%;overflow:auto;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th *ngFor="let header of tableHeaders">
+                    {{ header }}
+                    <span (click)="clickedHeader = header;loadMapHeader()" data-bs-toggle="modal" data-bs-target="#convertHeader" class="material-icons" style=" font-size: 0.7rem; color: var(--prim-button-color-text); cursor: pointer; position: relative; top: 2px; padding-left: 0.2rem;">
+                      edit
+                    </span>
+                  </th>
+                </tr>
+                <tr>
+                  <th *ngFor="let header of tableHeaders">
+                    <span *ngIf="checksubHeader(header) != ''" style="background: var(--primary-color); padding: 0.1rem 0.5rem; border-radius: 1rem; font-size: 0.65rem; color: var(--prim-button-color); ">{{ checksubHeader(header) }}</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of tableData">
+                  <td *ngFor="let header of tableHeaders">{{ formatTableValue(item[header]) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Right Side Table -->
+    </div>
+
+    <div class="foot-l" style="text-align: center;margin-bottom:1rem">
+    </div>
+  </div>
+
+  }
+</div>
+<div class="modal fade warningautoModel" id="resStockVerifyPopup" tabindex="-1" role="dialog" aria-labelledby="resStockVerifyPopupModal"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error
+              </span>
+            </p>
+            <h3>Error</h3>
+            <p style="font-size: 0.9rem;">Tickers, Shares & Action (Buy or Sell) must be present in your data header.<br /> Click edit icon to map your table header.</p>
+
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="convertHeader" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:25%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; padding: 0;">
+            <div class="w-head">
+              <p>Map Header</p>
+              <div class="close-l" data-bs-dismiss="modal" aria-label="Close"><span class="material-icons">close</span></div>
+            </div>
+            <div class="accEditValues">
+              <!--<p style="text-align: left !important; margin-bottom: 1.5rem !important;" *ngIf="!sharedData._viewPortFolio">Please map your ticker/symbol using below.</p>-->
+              <!--<p style="text-align: left !important; margin-bottom: 1.5rem !important;" *ngIf="sharedData._viewPortFolio">Please map your ticker & shares using below.</p>-->
+              <div>
+                <p style="text-align: left !important; margin-bottom: 1.5rem !important;" *ngIf="sharedData._viewPortFolio">Suggested header list for <b>{{clickedHeader}}</b></p>
+              </div>
+              <!-- Restricted List -->
+              <div style="text-align:left">
+                <label [style.display]="disableMapHeaderCheckbox('ticker')?'none':'flex'">
+                  <input type="radio" name="group1" [attr.checked]="false" [checked]="mapHeaderCheckbox('ticker')" (change)="mapHeaderChange($event,'ticker')" value="ticker"> Ticker
+                </label>
+                <label [style.display]="disableMapHeaderCheckbox('shares')|| disableMapHeaderCheckbox('quantity')?'none':'flex'">
+                  <input type="radio" name="group1" [attr.checked]="false" [checked]="mapHeaderCheckbox('shares')||mapHeaderCheckbox('quantity')" (change)="mapHeaderChange($event,'shares')" value="shares"> Shares/Quantity
+                </label>
+                <label [style.display]="disableMapHeaderCheckbox('action')?'none':'flex'">
+                  <input type="radio" name="group1" [attr.checked]="false" [checked]="mapHeaderCheckbox('action')" (change)="mapHeaderChange($event,'action')" value="action"> Action
+                </label>
+              </div>
+              <div [style.display]="disableMapHeaderCheckbox('ticker') && disableMapHeaderCheckbox('shares')&& disableMapHeaderCheckbox('action') ?'block':'none'"><p style="text-align: left !important;">Headers already mapped in another column.</p></div>
+
+            </div>
+
+            <div class="foot-l accUpdate">
+              <a (click)="clearMapHeader();saveMapHeaderChange()" [style.display]="disableMapHeaderCheckbox('ticker') && disableMapHeaderCheckbox('shares') && disableMapHeaderCheckbox('action') ?'none':'block'">Clear & Save</a>
+              <button [style.display]="disableMapHeaderCheckbox('ticker') && disableMapHeaderCheckbox('shares') && disableMapHeaderCheckbox('action') ?'none':'block'" type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="saveMapHeaderChange()">
+                Save
+              </button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="loadMapHeader()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="uploadWar" tabindex="-1" role="dialog" aria-labelledby="resStockVerifyPopupModal"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error
+              </span>
+            </p>
+            <h3>Replace Existing List</h3>
+            <p style="font-size: 0.9rem;">Uploading a new file will replace the existing list. This action cannot be undone. Are you sure you want to continue?</p>
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="openDirectUpload()">Proceed</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="resetDataModal" tabindex="-1" role="dialog" aria-labelledby="resetDataModal"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3>Are you sure?</h3>
+            <p style="font-size: 0.9rem;">Do you really want to reset this data.</p>
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="toggleAutoReset()">Reset</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="deleteConf" tabindex="-1" role="dialog" aria-labelledby="resStockVerifyPopupModal"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error
+              </span>
+            </p>
+            <h3>Confirm Deletion</h3>
+            <p style="font-size: 0.9rem;">You are about to delete the selected company/companies from the list. This action cannot be undone. Are you sure you want to proceed?</p>
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="removeSelectedRows()">Delete</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="errorTradeVerifyPopup" tabindex="-1" role="dialog" aria-labelledby="errorTradeVerifyPopup"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error
+              </span>
+            </p>
+            <h3>Error</h3>
+            @if(iserrorMsgFileStatus){
+            <p style="font-size: 0.9rem;">{{errorMsgFileUploadStatus}}</p>
+            }
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="commonErrorJsonConvert" tabindex="-1" role="dialog" aria-labelledby="commonErrorJsonConvert"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error
+              </span>
+            </p>
+            <h3>Error</h3>
+            <p style="font-size: 0.9rem;">{{commonErrorJsonValue}}</p>
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="errorsuggestedTickers" tabindex="-1" role="dialog" aria-labelledby="errorsuggestedTickers"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">           
+            <div class="w-head">
+              <p>Suggested Tickers</p>
+              <div class="close-l" data-bs-dismiss="modal" aria-label="Close"><span class="material-icons">close</span></div>
+            </div>
+            <!--<h3>Suggested Tickers</h3>-->
+            <div class="topNav_GlobalSearch" style="width:100%;margin:1rem 2rem">
+              <div class="default-search-item alt_bg_color darkBg p-rel">
+                <form>
+                  <mat-form-field class="p-rel">
+                    <input appRemoveSpecialCharacters minlength="1" maxlength="50" class="pr1rem" type="text" #glbSearchBox matInput placeholder="Search Company or Ticker"
+                           [formControl]="glbSearch" [(ngModel)]="inputValue" (keyup.enter)="filtering($event)" (keydown)="restrictDoubleSpace($event)"
+                           (focus)="inputFocused($event,'in')" (ngModelChange)="onInputChange($event)">
+                    <!--<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class="DrilldownSearchBar" (optionSelected)="gloSrcEnter($event)">
+            <mat-option *ngIf="noDataFound" class="autocompletedNoData">No data found</mat-option>
+            @for (d of filteredOptions; track d) {
+            <mat-option [value]="d">
+              <span class="">
+                <span class="w-100 d-flex justify-content-start align-items-center">
+                  <span class="indName">{{d.company}}</span>
+                  <span class="pbName_ticker">({{d.ticker}})</span>
+                </span>
+                <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+
+                  <span class="pbName">{{d.country}}</span>
+                </span>
+              </span>
+            </mat-option>
+            }
+          </mat-autocomplete>-->
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+            <div class="taxlotInfoOuter defaultTablePopup w-100" style="text-align: left; max-height: 50vh; min-height: 50vh; overflow: auto;">
+
+              <table class="table">
+                <thead><tr><th>Company</th><th>Ticker</th></tr></thead>
+                <tbody>
+                  @if(invalidtickerData.length>0){
+                  @for(sugTic of invalidtickerData;track sugTic){
+                  <tr>
+                    <td>{{sugTic.companyName | nullDashPipe :''}}</td>
+                    <td>{{sugTic.ticker | nullDashPipe :''}}</td>
+                  </tr>
+                  }
+                  }@else{
+                  <tr>
+                    <td colspan="2" style="text-align:center;">no data</td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+
+            </div>
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeP" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

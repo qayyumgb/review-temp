@@ -1,0 +1,129 @@
+.buildYourIndex__sec {
+  .__selectIco {
+    cursor: pointer;
+    background: var(--topNavbar);
+    padding: 0.75rem 0.5rem;
+    padding-left: 1rem;
+    border-radius: 0.4rem;
+
+    &:hover:not(.selected) {
+      .ico {
+        color: var(--leftSideText);
+      }
+    }
+
+    &.selected {
+      background: var(--prim-button-color) !important;
+
+      .ico {
+        background: var(--bs-border-color-translucent);
+      }
+
+      .r_sec {
+        span {
+          color: var(--leftSideText-B);
+        }
+
+        p {
+          color: var(--leftSideText-B);
+        }
+      }
+    }
+
+    .ico {
+      font-size: 1.2rem;
+      background: var(--cardsHighlightColorDark);
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--leftSideText-B);
+      margin-right: 1rem;
+      transition: none;
+    }
+
+    .r_sec {
+      span {
+        margin-bottom: 0.2rem !important;
+        font-size: 0.8rem;
+        color: var(--leftSideText);
+        font-family: var(--ff-light);
+      }
+
+      p {
+        margin: 0;
+        text-transform: capitalize;
+        font-size: 0.80rem;
+        color: var(--leftSideText-B);
+        font-family: var(--ff-semibold);
+      }
+    }
+  }
+
+  .tool_cust {
+    transition: all .4s;
+    cursor: pointer;
+    background: var(--topNavbar);
+    border-radius: 0.4rem;
+
+    &:hover {
+      box-shadow: inset 18em 0 0 0 var(--cardsHighlightColor);
+    }
+
+    &.disabledMenu {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: var(--cardBgColor2);
+      box-shadow: none !important;
+
+      svg {
+        path {
+          stroke: var(--iconColor) !important;
+        }
+      }
+
+      &:hover {
+      }
+    }
+
+
+    .btn__sec {
+      background: var(--prim-button-color);
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+    }
+
+    .icon_bg {
+      /* background: #9b1bfa;*/
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--leftSideText-B);
+      margin-right: 1rem;
+      overflow:hidden;
+
+      span {
+        font-size: 1.2rem;
+      }
+    }
+
+    p {
+      margin-bottom: 0.2rem !important;
+      font-size: 0.8rem;
+      color: var(--leftSideText);
+      font-family: var(--ff-regular);
+    }
+
+    h5 {
+      margin: 0;
+      text-transform: capitalize;
+      font-size: 1rem;
+      color: var(--leftSideText-B);
+    }
+  }
+}

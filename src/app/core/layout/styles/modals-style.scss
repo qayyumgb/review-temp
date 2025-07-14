@@ -1,0 +1,383 @@
+/*** All modals ****/
+#myexistingModal, #strategyModal, #indexRulesModal, #myDownloadModal, #myErrorModal, #myErrorModal_PR, #myTradeErrorModal, #myTradeBuyModal, #myTradeBuySucessModal, #myDirectIndErrorModal, #preModal {
+  .modal-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: var(--modalBodyColor);
+    background-clip: padding-box;
+    border-top: 0 solid #f14e4e;
+    border-radius: 0.5rem !important;
+    outline: 0;
+    padding: 0;
+  }
+
+  .split-mod-l {
+    display: flex;
+  }
+
+  .split-mod-right {
+    width: 100%;
+    padding: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: flex-start;
+  }
+
+  .close-l {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+
+    span {
+      font-size: 1.2rem;
+      color: var(--closeIcon);
+    }
+  }
+
+  .content-top {
+    /* background: var(--modalcontentBody);*/
+    width: 100%;
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+
+    p {
+      margin: 0 !important;
+      font-size: 0.9rem;
+      font-family: "var(--ff-medium)";
+      color: var(--modalcontenttext);
+    }
+
+    p.ico {
+      margin: 0;
+      font-size: 0;
+      font-family: var(--ff-light);
+      color: #f14e4e;
+
+      span {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .content-btm {
+    /* background: var(--modalcontentBody);*/
+    text-align: center;
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    border-radius: 0 0 0.5rem 0.5rem !important;
+    position: relative;
+
+    &.disable {
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: .25;
+        background: #1e1e2d;
+        left: 0;
+        cursor: not-allowed;
+      }
+    }
+
+    .foot-l {
+      width: 100%;
+      text-align: end;
+      margin-top: 1rem;
+      border-top: 0px dashed var(--border);
+      padding: 1rem;
+      margin-top: 2rem;
+      background: var(--topNavbar);
+    }
+
+    p {
+      font-size: 0.8rem;
+      color: var(--leftSideText);
+      font-family: var(--ff-regular);
+      margin-top: 0;
+      text-align: center;
+      line-height: 1.5 !important;
+      width: 100%;
+      text-align: left;
+    }
+
+    .foot-l {
+      .btn-secondary {
+        background: var(--clkdIndex);
+        font-size: 0.8rem;
+        font-family: var(--ff-medium);
+        padding: 0.5rem 1rem;
+        color: var(--leftSideText);
+        border-color: transparent;
+        width: auto;
+        line-height: 1;
+
+        &.btnclse {
+          border: 0 solid #f14e4e !important;
+          background: var(--clkdIndex);
+        }
+      }
+
+      .btn-primary {
+        background: var(--prim-button-color);
+        font-size: 0.8rem;
+        font-family: var(--ff-medium);
+        padding: 0.5rem 1rem;
+        border: 0 solid #f14e4e !important;
+        margin-right: 0.5rem;
+        line-height: 1;
+        width: auto;
+        color: var(--leftSideText-B);
+      }
+    }
+  }
+}
+///Warning popup
+.warningautoModel {
+  .modal-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: transparent;
+    background-clip: padding-box;
+    border-top: 0 solid #f14e4e;
+    border-radius: 0.5rem !important;
+    outline: 0;
+    padding: 0;
+  }
+
+  .split-mod-l {
+    display: flex;
+  }
+
+  .split-mod-right {
+    width: 100%;
+    padding: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: flex-start;
+  }
+
+  .close-l {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+
+    span {
+      font-size: 1.2rem;
+      color: var(--prim-button-color-text);
+    }
+  }
+
+  .content-top {
+    background: var(--modalcontentBody);
+    width: 100%;
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: flex-start;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+
+    p {
+      margin: 0 !important;
+      font-size: 0.9rem;
+      font-family: "var(--ff-medium)";
+      color: var(--modalcontenttext);
+    }
+
+    p.ico {
+      margin: 0;
+      font-size: 0;
+      font-family: var(--ff-light);
+      color: #f14e4e;
+
+      span {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .content-btm {
+    background: var(--primary-color);
+    text-align: center;
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: flex-start;
+    align-items: f;
+    ms-flex-pack: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    border-radius: 0 0 0.5rem 0.5rem !important;
+    position: relative;
+    z-index: 1001;
+
+    &.disable {
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: .25;
+        background: #1e1e2d;
+        left: 0;
+        cursor: not-allowed;
+      }
+    }
+
+    .foot-l {
+      width: 100%;
+      text-align: center !important;
+      margin-top: 1rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+      color: var(--leftSideText);
+      font-family: var(--ff-regular);
+      margin-top: 0;
+      text-align: center !important;
+      line-height: 1.5 !important;
+      width: 100%;
+    }
+
+    h3 {
+      color: var(--leftSideText-B);
+      font-family: var(--ff-medium);
+      text-align: center;
+      width: 100%;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .foot-l {
+      .btn-secondary {
+        background: var(--clkdIndex);
+        font-size: 0.8rem;
+        font-family: "var(--ff-medium)";
+        padding: 0.5rem 1rem;
+        color: var(--leftSideText);
+        border-color: transparent;
+        width: auto;
+        line-height: 1;
+
+        &.btnclse {
+          border: 0 solid #f14e4e !important;
+          background: var(--clkdIndex);
+        }
+      }
+
+      .btn-primary {
+        background: var(--prim-button-color);
+        font-size: 0.8rem;
+        font-family: var(--ff-medium);
+        padding: 0.5rem 1rem;
+        border: 0 solid #f14e4e !important;
+        margin-right: 0.5rem;
+        line-height: 1;
+        width: auto;
+        color: var(--leftSideText-B);
+      }
+    }
+  }
+
+  &#myAccount_TitleEdit {
+    .content-btm {
+      padding: 0;
+
+      .titleDiv {
+        padding: 2rem 1.5rem;
+        width: 100%;
+
+        p {
+          text-align: left !important;
+        }
+
+        input {
+          background: var(--btn-bg-alt);
+          padding: 0.2rem 0.6rem;
+          color: var(--leftSideText);
+          border: none;
+          border-radius: 0.1rem;
+          font-size: 0.7rem !important;
+          border: 1px solid #484d55;
+          min-width: 15rem;
+
+
+          &:focus {
+            outline: none;
+            border: 1px solid #484d55;
+          }
+        }
+      }
+
+      .foot-l {
+        margin-bottom: 0rem !important;
+        background: var(--topNavbar);
+        text-align: right !important;
+        padding: 0.8rem 1.5rem;
+        border-radius: 0 0 0.3rem 0.3rem;
+      }
+    }
+
+    .close-l span {
+      font-size: 1.2rem;
+      color: var(--prim-button-color-text);
+      z-index: 999;
+      /* display: block; */
+      position: relative;
+    }
+  }
+}
+///Warning popup
+/////// All modals

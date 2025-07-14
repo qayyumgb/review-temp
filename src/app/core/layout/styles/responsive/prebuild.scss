@@ -1,0 +1,205 @@
+@media only screen and (max-width: 1260px) and (min-height:750px){
+    body.fs--16, html.fs--16{
+        font-size: 12px !important;
+    }
+    #prebuilt__Comp{
+    
+        .left-l{
+            position: fixed !important;
+            flex-direction: column;
+            justify-content: center;
+            left: 0;
+            top: 0;
+            display: flex;
+            padding-top: 0 !important;
+        }
+        .right-l{
+            z-index: 99 !important;
+        }
+    }
+    .reviewFact__Prebuild{
+        display: block !important;
+        position: relative;
+        .reviewFact__inner__left{
+            width: 94%;
+            .reviewFact__inner__table{
+                .reviewFact__inner__table_data.reviewFactPerformance{
+                    .table-grid{
+                        tbody{
+                            tr{
+                                td{
+                                    min-width: auto !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .reviewFact__inner__right{
+            width: auto !important;
+            background: var(--accordion);
+            padding: 0.8rem;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transition: transform 0.3s ease;
+            transform: translate(0, -50%) translateX(100%);
+            span.reviewFact__inner__right_components_toggle{
+                display: flex !important;
+                flex-direction: column;
+            }
+          
+            &.open{
+                transform: translate(0, -50%) translateX(0);
+            }
+            .bottom__section{
+                max-height: calc(100vh - 10.2rem) !important;
+            }
+        }
+    }
+    .trade_Page .index_construction.index_construction_height{
+        height: auto !important;
+    }
+    .main-layout .center-l #naaLineChart svg{
+        transform: inherit !important;
+    }
+    .bcum-list-l-n .b-text-n-d.fontxs{
+        max-width: 23rem;
+    }
+    .reviewFactsheet_Direct{
+        padding-left: 21rem;
+    }
+    .bcum-list-l-n .b-text-n-d.maxW{
+        max-width: 18rem !important;
+    }
+    .reviewFact__Prebuild{
+        .reviewFact__inner__left{
+            width: 94%;
+        }
+    }
+}
+@media(max-width: 1024px){
+    .reviewFact__Prebuild{
+        display: block !important;
+        position: relative;
+        .reviewFact__inner__left{
+            width: 94%;
+            .reviewFact__inner__table{
+                .reviewFact__inner__table_data.reviewFactPerformance{
+                    .table-grid{
+                        tbody{
+                            tr{
+                                td{
+                                    min-width: auto !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .reviewFact__inner__right{
+            width: auto !important;
+            background: var(--accordion);
+            padding: 0.8rem;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transition: transform 0.3s ease;
+            transform: translate(0, -50%) translateX(100%);
+            span.reviewFact__inner__right_components_toggle{
+                display: flex !important;
+                flex-direction: column;
+            }
+          
+            &.open{
+                transform: translate(0, -50%) translateX(0);
+            }
+            .bottom__section{
+                max-height: calc(100vh - 10.2rem) !important;
+            }
+        }
+    } 
+}
+// Ipad air
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    body.fs--15, html.fs--15{
+        font-size: 11px !important;
+    }
+    #cumulativeLineChart_Default{
+        min-height: calc(100vh - 50rem) !important;
+        height: auto;
+    }
+    .bcum-list-l-n .b-text-n-d.maxW {
+        max-width: 13rem !important;
+    }
+    .reviewFactsheet_Direct {
+        padding-left: 18rem;
+    }
+    .prebuild_indexconstruction{
+        height: auto !important;
+    }
+    .prebuild__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 50rem);
+    }
+  }
+  // Ipad air
+  // Ipad pro
+  @media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait){
+    .reviewFactsheet_Direct{
+        padding-left: 21rem;
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait){
+    .reviewFactsheet_Direct{
+        padding-left: 22rem;
+    }
+    .prebuild_indexconstruction{
+        height: auto !important;
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1194px) and (orientation: landscape){
+    .prebuild_indexconstruction{
+        height: auto !important;
+    }
+    .trade_Page .index_construction.index_construction_height{
+        height: auto !important;
+    }
+    .prebuildChart{
+        width: 100%;
+    }
+    .prebuild__Comp__rightG .outerScroll__Div{
+        height: calc(100vh - 20rem);
+    }
+       .prebuild_indexconstruction{
+        height: auto !important;
+    }
+    .trade_Page .index_construction.index_construction_height{
+        height: auto !important;
+    }
+  }
+  @media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: landscape){
+    .prebuild_indexconstruction{
+        height: auto !important;
+    }
+    .trade_Page .index_construction.index_construction_height{
+        height: auto !important;
+    }
+    .prebuildChart{
+        width: 100%;
+    }
+    
+  }
+  @media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: landscape){
+    // .prebuild_indexconstruction{
+    //     height: auto !important;
+    // }
+    // .trade_Page .index_construction.index_construction_height{
+    //     height: auto !important;
+    // }
+    // .prebuildChart{
+    //     width: 100%;
+    // }
+  }
+// Ipad pro

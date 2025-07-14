@@ -1,0 +1,102 @@
+<svg id="excluCircle_di" class="commonSVGCircle" viewBox="180 45 1220 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+     version="1.1">
+  <circle class="start-ring1" fill="var(--primary-color)" id="maincircle1" r="395" transform="translate(810, 405)"></circle>
+
+  <g id="exclusionchart" transform="translate(810 ,405)">
+    <g transform="translate(0, 0)" class="mid_fulltext" style="visibility: visible;">
+      <g class="slider1">
+        <g transform="translate(0, 0)">
+          <!-- Default Median -->
+          <g class="mainsectorTxt" [style.visibility]="selFilComp == undefined?'visible':'hidden'">
+            <text class="med__title" x="0" y="10"></text>
+          </g>
+          <!--- Company Selected --->
+          <g class="clkdSlider" transform="translate(-30, -30)" [style.visibility]="selFilComp != undefined?'visible':'hidden'">
+            <g class="Sel_midCompS1" transform="translate(0, 0)">
+              <text class="circle-SelCompName text-G-Def" x="25" y="-30" style="text-anchor: middle; font-family: var(--ff-medium); font-size: 0.65rem; fill: var(--leftSideText-B); ">{{selCompText}}</text>
+              <text class="circle-ticker" x="80" y="18" style="text-anchor: middle; font-family: var(--ff-medium); fill: var(--leftSideText-B); font-size: 0.65rem "></text>
+            </g>
+            <g id="fil_STW_Price" class="fil_STW_Price_path" transform="translate(0, 0)">
+              <g>
+                <rect width="210" height="28" rx="0" ry="1" x="-67" y="-1" style="fill: transparent !important;"></rect>
+                <text class="STW_PriceHead" x="-79" y="17"
+                      style="font-family: var(--ff-medium); text-anchor: start; font-size: 10px; fill: var(--leftSideText) !important; cursor: inherit !important; ">Stock Price</text>
+                <text x="135" y="17" style="fill: var(--leftSideText-B); font-size: 10px; font-family: var(--ff-semibold); text-anchor: end; ">{{STW_Pricecurrency}}</text>
+              </g>
+              @if(impRevValue !=undefined && impRevValue != null){
+              <g class="impRev" transform="translate(0, 25)">
+                <rect width="210" height="28" rx="0" ry="1" x="-67" y="-1" style="fill: transparent !important;"></rect>
+                <text class="name-txt h-fact" x="-79" y="17"
+                      style="font-size: 10px; fill: var(--leftSideText) !important; font-family: var(--ff-medium); text-anchor: start;">Indicated Growth Rate </text>
+                <text class="impRevValue" x="135" y="17" style="fill: var(--leftSideText-B); font-size: 10px; font-family: var(--ff-semibold); text-anchor: end; ">{{impRevValue>0?'+':''}}{{impRevValue}}%</text>
+              </g>
+              <rect width="210" height="28" rx="0" ry="0" x="-67" y="56" style="fill: transparent !important;"></rect>
+              <g transform="translate(0, 50)" style="cursor:pointer" (click)="dirIndexService.openImpliedRevenue(selFilComp)">
+                <text class="name-txt h-fact" x="-80" y="18" style=" text-anchor: start; fill: var(--linkColor) !important; font-size: 10px; font-family: var(--ff-medium);">Probability of Failure (h-factor)</text>
+                <text class="SelCompScore" x="135" y="18" style="font-size: 10px; font-family: var(--ff-semibold); fill: var(--leftSideText-B); text-anchor: end; ">{{HFscore}}</text>
+              </g>
+              }
+            </g>
+          </g>
+          <!--- Company Selected --->
+        </g>
+      </g>
+      <g transform="translate(5, 70)" class="total_components">
+        <text y="15" x="-52" class="header" style="font-family: var(--ff-medium) !important; text-anchor: start; font-size: 10.5px;fill: var(--paraFontColorAlt) !important; cursor: inherit !important;">Components:</text>
+        @if(circleData.length>0){
+        <text y="15" x="21.5" class="value c_remaining_slide1" style="font-family: var(--ff-semibold); text-anchor: start; font-size: 10.5px;fill: var(--leftSideText-B) !important; cursor: inherit !important;">{{circleData.length}}</text>
+        }
+      </g>
+      <g transform="translate(-3, 100)" class="RCsince-info" style="display: block;" [attr.transform]="sharedData.checksideGridsVisible()?'translate(-3, 100)':'translate(2, 100)'">
+        <g style="transform: translate(-14px, -4px); cursor: default;">
+          <rect width="14" height="14" x="2" style="fill: var(--linkColor);" rx="10" ry="10" y="2"></rect>
+          <svg width="18" height="18" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 59C39.4261 59 46.548 56.05 51.799 50.799C57.05 45.548 60 38.4261 60 31C60 23.5739 57.05 16.452 51.799 11.201C46.548 5.94999 39.4261 3 32 3C24.5739 3 17.452 5.94999 12.201 11.201C6.94999 16.452 4 23.5739 4 31C4 38.4261 6.94999 45.548 12.201 50.799C17.452 56.05 24.5739 59 32 59V59ZM35.255 26.058L31.755 42.5255C31.51 43.7155 31.8565 44.391 32.819 44.391C33.498 44.391 34.5235 44.146 35.22 43.53L34.912 44.986C33.9075 46.197 31.692 47.079 29.7845 47.079C27.324 47.079 26.2775 45.602 26.9565 42.4625L29.5395 30.3245C29.7635 29.299 29.5605 28.928 28.535 28.6795L26.9565 28.396L27.2435 27.0625L35.2585 26.058H35.255ZM32 22.25C31.0717 22.25 30.1815 21.8813 29.5251 21.2249C28.8687 20.5685 28.5 19.6783 28.5 18.75C28.5 17.8217 28.8687 16.9315 29.5251 16.2751C30.1815 15.6187 31.0717 15.25 32 15.25C32.9283 15.25 33.8185 15.6187 34.4749 16.2751C35.1313 16.9315 35.5 17.8217 35.5 18.75C35.5 19.6783 35.1313 20.5685 34.4749 21.2249C33.8185 21.8813 32.9283 22.25 32 22.25V22.25Z" fill="white" style="fill: var(--primary-color);stroke: var(--leftSideText);"></path>
+          </svg>
+        </g>
+        <g transform="translate(-6, -45)" class="RCsince" style="display: none;">
+          <g style="transform: translate(8px, 42px);"><path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path></g>
+          <rect width="160" height="40" fill="transparent" rx="5" ry="5" x="-80" y="-5.5" style="stroke: #444455; fill: var(--topNavbar) !important;"></rect>
+          @if(selFilComp == undefined){
+          <text y="10" style="font-family: var(--ff-medium) !important; text-anchor: middle; font-style: italic !important; font-size: 10px;">Returns calculated from</text>
+          <text id="sinceRCIncep" y="25" x="0" style="font-family: var(--ff-medium) !important; text-anchor: middle; font-style: italic !important; font-size: 10px;">{{returnAsof}}</text>
+          }@else{
+          <text y="10" style="font-family: var(--ff-medium) !important; text-anchor: middle; font-style: italic !important; font-size: 9px;">Price & Scores</text>
+          <text id="sinceRCIncep" y="25" x="0" style="font-family: var(--ff-medium) !important; text-anchor: middle; font-style: italic !important; font-size: 9px;">as of: {{sharedData.PSasOfDate}}</text>
+          }
+        </g>
+      </g>
+      <!--@if(sharedData.checksideGridsVisible()){
+      <g transform="translate(5, 97) scale(0.8)" class="viewSideGrids cp" (click)="sharedData.showCompSideGrids()">
+        <rect width="20" height="20" x="0" stroke="var(--borderAlt)" style="fill: var(--primary-color) " rx="20" ry="20"></rect>
+        <g style="transform: translate(1px, 1px);">
+          @if(sharedData._showDefaultSideGrids){
+          <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+            <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+            <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+            <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+            <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+          </svg>
+          }@else{
+          <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+            <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+            <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+            <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+            <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+            <rect width="4" height="26" fill="var(--prim-button-color)" style="transform: translate(20px, 2px) rotate(45deg);fill: #454555; stroke: var(--primary-color);"></rect>
+          </svg>
+          }
+        </g>
+        <g transform="translate(46, -42)" class="RCsince" style="display: none;">
+          <g style="transform: translate(-30px, 39px);">
+            <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+          </g>
+          <rect width="84" height="30" fill="transparent" rx="5" ry="5" x="-80" y="0" style="stroke: #444455; fill: var(--topNavbar) !important;"></rect>
+          <text x="-68" y="18" style="font-family: var(--ff-regular);text-anchor: start;font-size: 11px;fill: var(--leftSideText-B);text-transform: unset;font-weight: 500;">{{sharedData._showDefaultSideGrids ? 'Hide Grids':'Show Grids'}}</text>
+        </g>
+      </g>
+      }-->
+    </g>
+    <g id="crlChart"></g>
+  </g>
+</svg>

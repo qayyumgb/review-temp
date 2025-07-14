@@ -1,0 +1,219 @@
+.trade_Page {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+
+  .construction-chart {
+    padding: 1rem 0rem;
+
+
+    .type-1 {
+      display: flex;
+
+      .c-box {
+        padding: 0 3rem;
+        width: 25%;
+
+        span {
+          border: 1px dashed var(--border);
+          border-radius: 0.3rem;
+          min-width: 9rem;
+          display: inline-block;
+          padding: 0.9rem 0.7rem;
+          color: var(--leftSideText);
+          font-size: 1.1rem;
+          font-family: var(--ff-medium);
+          position: relative;
+          top: 2rem;
+          left: -1.8rem;
+          z-index: 0;
+        }
+
+        p.title-box {
+          border-radius: 0.3rem;
+          width: 9rem;
+          display: block;
+          padding: 0.9rem 0.7rem;
+          font-size: 0.9rem;
+          background-color: var(--svgbg);
+          font-family: var(--ff-medium);
+          color: #ffffff;
+          text-align: center;
+          position: relative;
+          margin-bottom: 1.5rem !important;
+        }
+
+        .c-box-content {
+          p {
+            font-size: 0.75rem;
+            color: var(--leftSideText);
+            width: 13rem;
+            padding: 1.1rem 0 !important;
+            position: relative;
+            margin: 0 !important;
+            line-height: 1.5rem;
+
+            &:before {
+              content: "";
+              position: absolute;
+              top: 0rem;
+              border-bottom: 1px solid var(--leftSideText);
+              width: 7rem;
+            }
+
+            &:first-child {
+              padding-top: 0 !important;
+
+              &:before {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .type-2 {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+
+      .c-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .c-box-content {
+          background-color: var(--devWorldBg);
+          color: #ffffff;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          text-align: center;
+          width: 14rem;
+          height: 18rem;
+          position: relative;
+
+          span.eyeicon {
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+          }
+
+          p {
+            font-size: 1.5rem;
+            line-height: 1.7;
+            padding-top: 1.5rem;
+            cursor: pointer;
+          }
+        }
+
+        .value-box {
+          color: #ffffff;
+          background-color: var(--prim-button-color);
+          font-size: 1.5rem;
+          border-radius: 0.5rem;
+          text-align: center;
+          width: 16rem;
+          padding: 0.8rem;
+          position: relative;
+          top: -4.7rem;
+          height: 4rem;
+        }
+      }
+    }
+  }
+
+  .linesPoly {
+    opacity: 1;
+    stroke: #4b4b4b;
+    stroke-width: 1.2px;
+    fill: none;
+  }
+
+  .title {
+    color: var(--svgbg);
+  }
+
+  .desc {
+    color: var(--leftSideText);
+  }
+
+  .material-icons {
+    color: var(--closeIcon);
+  }
+
+  .st8 {
+    fill: var(--leftSideText);
+  }
+
+  .const8 .st9 {
+    fill: var(--leftSideText);
+  }
+
+  .const8 .st2 {
+    fill: var(--svgbg);
+  }
+
+  .const8 .st1 {
+    stroke: var(--border);
+  }
+
+  .st2 {
+    fill: var(--svgbg) !important;
+  }
+
+  .st1 {
+    stroke: var(--border);
+  }
+
+  .const210 .st9 {
+    fill: var(--leftSideText);
+  }
+
+  .index_construction {
+    
+    &.index_construction_height{
+      height: calc(100vh - 8rem);overflow: auto;
+    }
+    .title {
+      font-size: 1.2rem;
+      font-family: var(--ff-medium);
+      color: var(--linkColor);
+    }
+
+    .desc {
+      font-size: 0.8rem;
+      color: var(--leftSideText);
+      margin-top: 0.7rem;
+      display: inline-block;
+    }
+  }
+}
+
+.asofDate{
+  font-size: 11px;
+  color: var(--leftSideText) !important;
+}
+.go-back-ico{
+  margin-top: 0.5rem;
+
+  span{
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+}
+.value-loading{
+    display: block;
+    opacity: 0.7;
+}
+
+.asofDateF {
+  font-size: 0.7rem;
+  color: var(--leftSideText) !important;
+  width: 100%;
+  display: block;
+  text-align: right;
+  padding-right: 1rem;
+}

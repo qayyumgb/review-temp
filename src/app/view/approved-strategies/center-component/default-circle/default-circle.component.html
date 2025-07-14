@@ -1,0 +1,49 @@
+<svg id="excluDirectCircle" class="noselect_mousepointer commonSVGCircle sp_500Circle" viewBox="180 45 1220 700" width="100%" height="100%"
+     xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <circle class="start-ring1" fill="var(--primary-color)" style="fill:var(--primary-color)" id="maincircle1" r="395" transform="translate(810, 405)">
+  </circle>
+  <g class="Homecenter slider1" style="" transform="translate(810,285)">
+    <circle id="maincircle" class="start-ring" fill="var(--primary-color)" r="154" style="stroke-width: 0px;"
+            transform="translate(0, 120)"></circle>
+    <!-- Default Median -->
+    <g class="STw_middle Sel_defComp" transform="translate(0, -10)" style="display:block">
+      <g class="mainsectorTxt">
+        <text class="med__title" x="0" y="140">Approved Strategies</text>
+      </g>
+    </g>
+    @if(sharedData.checksideGridsVisible()){
+    <g transform="translate(-10, 215) scale(0.8)" class="viewSideGrids cp" (click)="sharedData.showCompSideGrids()">
+      <rect width="20" height="20" x="0" stroke="var(--borderAlt)" style="fill: var(--primary-color) " rx="20" ry="20"></rect>
+      <g style="transform: translate(1px, 1px);">
+        @if(sharedData._showDefaultSideGrids){
+        <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+          <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+          <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+          <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+          <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+        </svg>
+        }@else{
+        <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+          <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+          <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+          <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+          <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+          <rect width="4" height="26" fill="var(--prim-button-color)" style="transform: translate(20px, 2px) rotate(45deg);fill: #454555; stroke: var(--primary-color);"></rect>
+        </svg>
+        }
+      </g>
+      <g transform="translate(46, -42)" class="RCsince" style="display: none;">
+        <g style="transform: translate(-30px, 39px);">
+          <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+        </g>
+        <rect width="84" height="30" fill="transparent" rx="5" ry="5" x="-80" y="0" style="stroke: #444455; fill: var(--topNavbar) !important;"></rect>
+        <text x="-68" y="18" style="font-family: var(--ff-regular);text-anchor: start;font-size: 11px;fill: var(--leftSideText-B);text-transform: unset;font-weight: 500;">{{sharedData._showDefaultSideGrids ? 'Hide Grids':'Show Grids'}}</text>
+      </g>
+    </g>
+    }
+    <!-- Default Median -->
+  </g>
+  <g id="exclusionDirectChart" transform="translate(810 ,405)">
+    <g id="DirectcrlChart"></g>
+  </g>
+</svg>

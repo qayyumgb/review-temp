@@ -1,0 +1,34 @@
+<div class="equity_index_comp" id="equity__Comp" style="padding-top: 3rem; height: 100vh; overflow: hidden; position: relative;">
+  <div class="left-l" [style.display]="sharedData._showDefaultSideGrids?'block':'none'" (mouseenter)="sharedData.onSidebarEnter()" (mouseleave)="sharedData.onSidebarLeave()">
+
+    <app-breadcrumb-list></app-breadcrumb-list>
+    <equityDefaultLeftgrid [style.display]="sharedData._openPinnedLeftSide?'block':'block'"></equityDefaultLeftgrid>
+  </div>
+  @defer(on timer(700ms)) {
+  <div class="center-l">
+    <equityDefaultCenterCircle></equityDefaultCenterCircle>
+  </div>
+  <div class="right-l" [style.visibility]="sharedData._showDefaultSideGrids?'visible':'hidden'" [style.opacity]="sharedData._showDefaultSideGrids?1:0" (mouseenter)="sharedData.onSidebarRightEnter()" (mouseleave)="sharedData.onSidebarRightLeave()">
+    <!--@if(sharedData.checkMenuPer(2027, 2236) == 'Y' || sharedData.checkMenuPer(2027, 2236) == 'D' ||
+    sharedData.checkMenuPer(2027, 2237) == 'Y' || sharedData.checkMenuPer(2027, 2237) == 'D'){-->
+    <equityDefaultRightGrid></equityDefaultRightGrid>
+    <!-- } -->
+  </div>
+  }@placeholder {
+  <app-circle-loader-standalone></app-circle-loader-standalone>
+  }
+  <!--@if(!sharedData.checkPPTCenterCircle()){
+  <div class="revertPPTMode" [class.active]="showRevertPPT">
+    <div class="box cp" (click)="resetPPTSlidesTicker()">Close presentation mode</div>
+    @if(!showRevertPPT){
+    <span class="material-icons cp" (click)="showRevertPPT = true">
+      expand_more
+    </span>
+    }@else{
+    <span class="material-icons cp" (click)="showRevertPPT = false">
+      close
+    </span>
+    }
+  </div>
+  }-->
+</div>

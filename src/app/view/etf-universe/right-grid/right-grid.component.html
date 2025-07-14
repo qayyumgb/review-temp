@@ -1,0 +1,464 @@
+ @if(etfService.checkFillCompCreation() &&(sharedData.checkMenuPer(2028, 2252) == 'Y' || sharedData.checkMenuPer(2028, 2252) == 'D'||
+ sharedData.checkMenuPer(2028, 2253) == 'Y' || sharedData.checkMenuPer(2028, 2253) == 'D')){
+
+<div class="buildYourIndex__sec__rightG etf__Comp__rightG">
+  <div>
+    <div class="icon__select">
+      @if(sharedData.checkMenuPer(2028, 2252) == 'Y'){
+      <div class="__selectIco select__steps" [class.active]="showDefault_select == 'company'" (mouseenter)="showDefault_select_hover('company');sharedData.openRightSideGrid();trigger();" (click)="toggleIconSelect('company');eventTrack('company');trigger();">
+        <span class="material-icons-outlined">
+          attach_file
+        </span>
+        <p>Components</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2028, 2252) == 'D'){
+      <div class="__selectIco select__steps disableMenu">
+        <span class="material-icons-outlined">
+          attach_file
+        </span>
+        <p>Components</p>
+      </div>
+      }
+      @if(showPerf && sharedData.checkMenuPer(2028, 2253) == 'Y'){
+      <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'performance'" (mouseenter)="showDefault_select_hover('performance');sharedData.openRightSideGrid();" (click)="toggleIconSelect('performance');eventTrack('company')">
+        <span class="material-icons-outlined">
+          query_stats
+        </span>
+        <p>Performance</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2028, 2253) != 'N') {
+      <div class="__selectIco select__accounts disableMenu">
+        <span class="material-icons-outlined">
+          query_stats
+        </span>
+        <p>Performance</p>
+      </div>
+      }
+    </div>
+    @if(etfService.checkFillCompCreation()){
+    <div class="icon__select__top" [class.activeBdr]="checkIconsVisible()">
+
+      @if(sharedData.checkMenuPer(2028, 2257) =='Y'){
+      <div class="__selectIco select__accounts" (click)="openHisTimeline()">
+        <!-- <img class="material-icons-outlined cp" src="../../../../assets/images/footer_ico/his_timeline_ico.svg" alt="new age alpha history timeline" /> -->
+        <span>
+          <svg width="17" height="17" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.9946 12.375L10.7695 9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5.0625 7.06348H1V3.00098" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.7695 5.0625V9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.4532 16.2547C5.7028 17.5054 7.2953 18.3573 9.0292 18.7027C10.7631 19.0482 12.5605 18.8716 14.1941 18.1954C15.8276 17.5191 17.2239 16.3736 18.2063 14.9037C19.1886 13.4338 19.713 11.7055 19.713 9.9375C19.713 8.1695 19.1886 6.4413 18.2063 4.9713C17.2239 3.5014 15.8276 2.3559 14.1941 1.6796C12.5605 1.0034 10.7631 0.8268 9.0292 1.1723C7.2953 1.5177 5.7028 2.3697 4.4532 3.6203L1 7.0633" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>History Timeline</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2028, 2257)=='D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <!-- <img class="material-icons-outlined" src="../../../../assets/images/footer_ico/his_timeline_ico.svg" alt="new age alpha history timeline" /> -->
+        <span>
+          <svg width="17" height="17" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.9946 12.375L10.7695 9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5.0625 7.06348H1V3.00098" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.7695 5.0625V9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.4532 16.2547C5.7028 17.5054 7.2953 18.3573 9.0292 18.7027C10.7631 19.0482 12.5605 18.8716 14.1941 18.1954C15.8276 17.5191 17.2239 16.3736 18.2063 14.9037C19.1886 13.4338 19.713 11.7055 19.713 9.9375C19.713 8.1695 19.1886 6.4413 18.2063 4.9713C17.2239 3.5014 15.8276 2.3559 14.1941 1.6796C12.5605 1.0034 10.7631 0.8268 9.0292 1.1723C7.2953 1.5177 5.7028 2.3697 4.4532 3.6203L1 7.0633" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>History Timeline</p>
+      </div>
+      }
+      @if(sharedData.checkMenuPer(2028, 2256)=='Y'){
+      <div class="__selectIco select__accounts" (click)="openVsCompare()">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H14.4244L7.83505 12.9198L0 12.9192V0ZM1.14465 1.03934V11.7893H7.03905L12.5009 1.03934H1.14465ZM13.0194 9.1103L22 9.1733V22H21.6171V21.6174C21.6171 22 21.6171 22 21.6171 22H7.64465L7.81505 21.4952L8.17795 21.6174C7.81505 21.4952 7.81505 21.4952 7.81505 21.4952L13.0194 9.1103ZM9.19915 20.9372H20.7649V10.2016H13.7539L9.19915 20.9372Z" fill="#D1D1D4"></path><path d="M8.06584 2.9751L8.01774 3.1089L6.05424 8.5711L6.03044 8.6373H5.96004H5.32054H5.25024L5.22644 8.5711L3.26294 3.1089L3.21484 2.9751H3.35704H4.02274H4.09334L4.11694 3.0416L5.39584 6.6389C5.39584 6.6388 5.39594 6.639 5.39584 6.6389C5.44864 6.7844 5.49534 6.9243 5.53574 7.0579C5.57384 7.1768 5.60804 7.2919 5.63834 7.4031C5.66874 7.2895 5.70304 7.173 5.74134 7.0536M8.06584 2.9751L5.83664 7.0839ZM8.06584 2.9751H7.92364H7.25044H7.17974L7.15614 3.0417L5.88454 6.6282M8.06584 2.9751L5.88454 6.6282ZM5.74134 7.0536C5.74134 7.0537 5.74144 7.0535 5.74134 7.0536L5.83664 7.0839ZM5.74134 7.0536C5.74134 7.0537 5.74144 7.0535 5.74134 7.0536L5.83664 7.0839ZM5.74134 7.0536C5.78414 6.9179 5.83184 6.7761 5.88454 6.6282ZM5.83664 7.0839C5.87904 6.9494 5.92644 6.8087 5.97874 6.6617ZM5.88454 6.6282L5.97874 6.6617ZM5.88454 6.6282L5.97874 6.6617ZM5.88454 6.6282L5.97874 6.6617ZM5.63844 7.8237C5.65414 7.7516 5.67134 7.678 5.68994 7.603L5.63844 7.8237ZM7.92364 3.0751L7.88764 3.1751H7.92364V3.0751Z" fill="#D1D1D4"></path><path d="M8.06584 2.9751L8.01774 3.1089L6.05424 8.5711L6.03044 8.6373H5.96004H5.32054H5.25024L5.22644 8.5711L3.26294 3.1089L3.21484 2.9751H3.35704H4.02274H4.09334L4.11694 3.0416L5.39584 6.6389M8.06584 2.9751L5.83664 7.0839M8.06584 2.9751H7.92364H7.25044H7.17974L7.15614 3.0417L5.88454 6.6282M8.06584 2.9751L5.88454 6.6282M5.39584 6.6389C5.39594 6.639 5.39584 6.6388 5.39584 6.6389ZM5.39584 6.6389C5.44864 6.7844 5.49534 6.9243 5.53574 7.0579C5.57384 7.1768 5.60804 7.2919 5.63834 7.4031C5.66874 7.2895 5.70304 7.173 5.74134 7.0536M5.74134 7.0536C5.74144 7.0535 5.74134 7.0537 5.74134 7.0536ZM5.74134 7.0536L5.83664 7.0839M5.74134 7.0536C5.78414 6.9179 5.83184 6.7761 5.88454 6.6282M5.83664 7.0839C5.87904 6.9494 5.92644 6.8087 5.97874 6.6617L5.88454 6.6282M5.63844 7.8237C5.65414 7.7516 5.67134 7.678 5.68994 7.603L5.63844 7.8237ZM7.92364 3.0751L7.88764 3.1751H7.92364V3.0751Z" stroke="#D1D1D4" stroke-width="0.2"></path><path d="M14.8086 18.2852V18.2215V17.6126V17.4631L14.9468 17.5201C15.1278 17.5949 15.3509 17.6657 15.6168 17.7321C15.8779 17.7949 16.1516 17.8264 16.4383 17.8264C16.7041 17.8264 16.923 17.7913 17.0978 17.7248C17.2728 17.6557 17.3988 17.5606 17.4825 17.4426C17.5685 17.3223 17.6136 17.1761 17.6136 16.9998C17.6136 16.8277 17.5758 16.6925 17.5068 16.5879C17.4369 16.48 17.315 16.3748 17.1318 16.2774L17.1305 16.2767C16.9477 16.1759 16.6941 16.067 16.3675 15.9508C16.1316 15.8672 15.922 15.7755 15.7394 15.6753L15.7385 15.6747C15.5544 15.5711 15.3979 15.4533 15.2703 15.3206C15.1412 15.1862 15.043 15.0302 14.9759 14.8534L14.9755 14.8522C14.9109 14.6748 14.8797 14.4748 14.8797 14.2538C14.8797 13.9448 14.958 13.6747 15.1189 13.4486C15.2803 13.2228 15.5016 13.0522 15.7786 12.9362C16.0573 12.8181 16.3739 12.7603 16.7263 12.7603C17.0242 12.7603 17.3008 12.7882 17.5558 12.8448L17.5341 12.9424M14.8086 18.2852L16.1799 14.9882C16.0131 14.8942 15.8979 14.7912 15.8269 14.682C15.7598 14.5749 15.723 14.4354 15.723 14.2575C15.723 14.1028 15.7608 13.9749 15.8328 13.8692C15.9052 13.7629 16.0109 13.6783 16.1555 13.6174C16.3017 13.5545 16.4863 13.5207 16.7113 13.5207C16.9378 13.5207 17.1566 13.5471 17.3678 13.5999C17.5851 13.6536 17.7899 13.7205 17.9818 13.8006L18.0785 13.841L18.1143 13.7425L18.3125 13.197L18.3444 13.1094L18.2592 13.0715C18.0454 12.9763 17.8109 12.9008 17.5558 12.8448L17.5341 12.9424M14.8086 18.2852L14.8662 18.3121C14.9907 18.3703 15.1331 18.4184 15.2928 18.457C15.4522 18.4955 15.6261 18.5248 15.8142 18.5451C16.0026 18.5655 16.202 18.5756 16.4121 18.5756C16.8135 18.5756 17.1674 18.5143 17.4713 18.3887C17.7757 18.2628 18.0162 18.0787 18.188 17.8346M14.8086 18.2852L18.188 17.8346ZM17.5341 12.9424C17.7834 12.9972 18.0116 13.0707 18.2185 13.1629L15.8174 13.0284C16.0817 12.9163 16.3847 12.8603 16.7263 12.8603C17.018 12.8603 17.2873 12.8877 17.5341 12.9424ZM18.188 17.8346C18.3638 17.5861 18.4494 17.2887 18.4494 16.9475C18.4494 16.6456 18.3882 16.388 18.2585 16.181C18.1314 15.9758 17.9477 15.8056 17.7116 15.6693C17.4807 15.5335 17.2019 15.4066 16.8764 15.2881L18.188 17.8346Z" fill="#D1D1D4"></path><path d="M14.8086 18.2852V18.2215V17.6126V17.4631L14.9468 17.5201C15.1278 17.5949 15.3509 17.6657 15.6168 17.7321C15.8779 17.7949 16.1516 17.8264 16.4383 17.8264C16.7041 17.8264 16.923 17.7913 17.0978 17.7248C17.2728 17.6557 17.3988 17.5606 17.4825 17.4426C17.5685 17.3223 17.6136 17.1761 17.6136 16.9998C17.6136 16.8277 17.5758 16.6925 17.5068 16.5879C17.4369 16.48 17.315 16.3748 17.1318 16.2774L17.1305 16.2767C16.9477 16.1759 16.6941 16.067 16.3675 15.9508C16.1316 15.8672 15.922 15.7755 15.7394 15.6753L15.7385 15.6747C15.5544 15.5711 15.3979 15.4533 15.2703 15.3206C15.1412 15.1862 15.043 15.0302 14.9759 14.8534L14.9755 14.8522C14.9109 14.6748 14.8797 14.4748 14.8797 14.2538C14.8797 13.9448 14.958 13.6747 15.1189 13.4486C15.2803 13.2228 15.5016 13.0522 15.7786 12.9362C16.0573 12.8181 16.3739 12.7603 16.7263 12.7603C17.0242 12.7603 17.3008 12.7882 17.5558 12.8448M14.8086 18.2852L16.1799 14.9882C16.0131 14.8942 15.8979 14.7912 15.8269 14.682C15.7598 14.5749 15.723 14.4354 15.723 14.2575C15.723 14.1028 15.7608 13.9749 15.8328 13.8692C15.9052 13.7629 16.0109 13.6783 16.1555 13.6174C16.3017 13.5545 16.4863 13.5207 16.7113 13.5207C16.9378 13.5207 17.1566 13.5471 17.3678 13.5999C17.5851 13.6536 17.7899 13.7205 17.9818 13.8006L18.0785 13.841L18.1143 13.7425L18.3125 13.197L18.3444 13.1094L18.2592 13.0715C18.0454 12.9763 17.8109 12.9008 17.5558 12.8448M14.8086 18.2852L14.8662 18.3121C14.9907 18.3703 15.1331 18.4184 15.2928 18.457C15.4522 18.4955 15.6261 18.5248 15.8142 18.5451C16.0026 18.5655 16.202 18.5756 16.4121 18.5756C16.8135 18.5756 17.1674 18.5143 17.4713 18.3887C17.7757 18.2628 18.0162 18.0787 18.188 17.8346M14.8086 18.2852L18.188 17.8346M17.5558 12.8448L17.5341 12.9424M17.5341 12.9424C17.7834 12.9972 18.0116 13.0707 18.2185 13.1629L15.8174 13.0284C16.0817 12.9163 16.3847 12.8603 16.7263 12.8603C17.018 12.8603 17.2873 12.8877 17.5341 12.9424ZM18.188 17.8346C18.3638 17.5861 18.4494 17.2887 18.4494 16.9475C18.4494 16.6456 18.3882 16.388 18.2585 16.181C18.1314 15.9758 17.9477 15.8056 17.7116 15.6693C17.4807 15.5335 17.2019 15.4066 16.8764 15.2881L18.188 17.8346Z" stroke="#D1D1D4" stroke-width="0.2"></path></svg>
+        </span>
+        <p>VS Compare</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2028, 2256)=='D'){
+      <div class="__selectIco select__accounts disableMenu" (click)="openVsCompare()">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H14.4244L7.83505 12.9198L0 12.9192V0ZM1.14465 1.03934V11.7893H7.03905L12.5009 1.03934H1.14465ZM13.0194 9.1103L22 9.1733V22H21.6171V21.6174C21.6171 22 21.6171 22 21.6171 22H7.64465L7.81505 21.4952L8.17795 21.6174C7.81505 21.4952 7.81505 21.4952 7.81505 21.4952L13.0194 9.1103ZM9.19915 20.9372H20.7649V10.2016H13.7539L9.19915 20.9372Z" fill="#D1D1D4"></path><path d="M8.06584 2.9751L8.01774 3.1089L6.05424 8.5711L6.03044 8.6373H5.96004H5.32054H5.25024L5.22644 8.5711L3.26294 3.1089L3.21484 2.9751H3.35704H4.02274H4.09334L4.11694 3.0416L5.39584 6.6389C5.39584 6.6388 5.39594 6.639 5.39584 6.6389C5.44864 6.7844 5.49534 6.9243 5.53574 7.0579C5.57384 7.1768 5.60804 7.2919 5.63834 7.4031C5.66874 7.2895 5.70304 7.173 5.74134 7.0536M8.06584 2.9751L5.83664 7.0839ZM8.06584 2.9751H7.92364H7.25044H7.17974L7.15614 3.0417L5.88454 6.6282M8.06584 2.9751L5.88454 6.6282ZM5.74134 7.0536C5.74134 7.0537 5.74144 7.0535 5.74134 7.0536L5.83664 7.0839ZM5.74134 7.0536C5.74134 7.0537 5.74144 7.0535 5.74134 7.0536L5.83664 7.0839ZM5.74134 7.0536C5.78414 6.9179 5.83184 6.7761 5.88454 6.6282ZM5.83664 7.0839C5.87904 6.9494 5.92644 6.8087 5.97874 6.6617ZM5.88454 6.6282L5.97874 6.6617ZM5.88454 6.6282L5.97874 6.6617ZM5.88454 6.6282L5.97874 6.6617ZM5.63844 7.8237C5.65414 7.7516 5.67134 7.678 5.68994 7.603L5.63844 7.8237ZM7.92364 3.0751L7.88764 3.1751H7.92364V3.0751Z" fill="#D1D1D4"></path><path d="M8.06584 2.9751L8.01774 3.1089L6.05424 8.5711L6.03044 8.6373H5.96004H5.32054H5.25024L5.22644 8.5711L3.26294 3.1089L3.21484 2.9751H3.35704H4.02274H4.09334L4.11694 3.0416L5.39584 6.6389M8.06584 2.9751L5.83664 7.0839M8.06584 2.9751H7.92364H7.25044H7.17974L7.15614 3.0417L5.88454 6.6282M8.06584 2.9751L5.88454 6.6282M5.39584 6.6389C5.39594 6.639 5.39584 6.6388 5.39584 6.6389ZM5.39584 6.6389C5.44864 6.7844 5.49534 6.9243 5.53574 7.0579C5.57384 7.1768 5.60804 7.2919 5.63834 7.4031C5.66874 7.2895 5.70304 7.173 5.74134 7.0536M5.74134 7.0536C5.74144 7.0535 5.74134 7.0537 5.74134 7.0536ZM5.74134 7.0536L5.83664 7.0839M5.74134 7.0536C5.78414 6.9179 5.83184 6.7761 5.88454 6.6282M5.83664 7.0839C5.87904 6.9494 5.92644 6.8087 5.97874 6.6617L5.88454 6.6282M5.63844 7.8237C5.65414 7.7516 5.67134 7.678 5.68994 7.603L5.63844 7.8237ZM7.92364 3.0751L7.88764 3.1751H7.92364V3.0751Z" stroke="#D1D1D4" stroke-width="0.2"></path><path d="M14.8086 18.2852V18.2215V17.6126V17.4631L14.9468 17.5201C15.1278 17.5949 15.3509 17.6657 15.6168 17.7321C15.8779 17.7949 16.1516 17.8264 16.4383 17.8264C16.7041 17.8264 16.923 17.7913 17.0978 17.7248C17.2728 17.6557 17.3988 17.5606 17.4825 17.4426C17.5685 17.3223 17.6136 17.1761 17.6136 16.9998C17.6136 16.8277 17.5758 16.6925 17.5068 16.5879C17.4369 16.48 17.315 16.3748 17.1318 16.2774L17.1305 16.2767C16.9477 16.1759 16.6941 16.067 16.3675 15.9508C16.1316 15.8672 15.922 15.7755 15.7394 15.6753L15.7385 15.6747C15.5544 15.5711 15.3979 15.4533 15.2703 15.3206C15.1412 15.1862 15.043 15.0302 14.9759 14.8534L14.9755 14.8522C14.9109 14.6748 14.8797 14.4748 14.8797 14.2538C14.8797 13.9448 14.958 13.6747 15.1189 13.4486C15.2803 13.2228 15.5016 13.0522 15.7786 12.9362C16.0573 12.8181 16.3739 12.7603 16.7263 12.7603C17.0242 12.7603 17.3008 12.7882 17.5558 12.8448L17.5341 12.9424M14.8086 18.2852L16.1799 14.9882C16.0131 14.8942 15.8979 14.7912 15.8269 14.682C15.7598 14.5749 15.723 14.4354 15.723 14.2575C15.723 14.1028 15.7608 13.9749 15.8328 13.8692C15.9052 13.7629 16.0109 13.6783 16.1555 13.6174C16.3017 13.5545 16.4863 13.5207 16.7113 13.5207C16.9378 13.5207 17.1566 13.5471 17.3678 13.5999C17.5851 13.6536 17.7899 13.7205 17.9818 13.8006L18.0785 13.841L18.1143 13.7425L18.3125 13.197L18.3444 13.1094L18.2592 13.0715C18.0454 12.9763 17.8109 12.9008 17.5558 12.8448L17.5341 12.9424M14.8086 18.2852L14.8662 18.3121C14.9907 18.3703 15.1331 18.4184 15.2928 18.457C15.4522 18.4955 15.6261 18.5248 15.8142 18.5451C16.0026 18.5655 16.202 18.5756 16.4121 18.5756C16.8135 18.5756 17.1674 18.5143 17.4713 18.3887C17.7757 18.2628 18.0162 18.0787 18.188 17.8346M14.8086 18.2852L18.188 17.8346ZM17.5341 12.9424C17.7834 12.9972 18.0116 13.0707 18.2185 13.1629L15.8174 13.0284C16.0817 12.9163 16.3847 12.8603 16.7263 12.8603C17.018 12.8603 17.2873 12.8877 17.5341 12.9424ZM18.188 17.8346C18.3638 17.5861 18.4494 17.2887 18.4494 16.9475C18.4494 16.6456 18.3882 16.388 18.2585 16.181C18.1314 15.9758 17.9477 15.8056 17.7116 15.6693C17.4807 15.5335 17.2019 15.4066 16.8764 15.2881L18.188 17.8346Z" fill="#D1D1D4"></path><path d="M14.8086 18.2852V18.2215V17.6126V17.4631L14.9468 17.5201C15.1278 17.5949 15.3509 17.6657 15.6168 17.7321C15.8779 17.7949 16.1516 17.8264 16.4383 17.8264C16.7041 17.8264 16.923 17.7913 17.0978 17.7248C17.2728 17.6557 17.3988 17.5606 17.4825 17.4426C17.5685 17.3223 17.6136 17.1761 17.6136 16.9998C17.6136 16.8277 17.5758 16.6925 17.5068 16.5879C17.4369 16.48 17.315 16.3748 17.1318 16.2774L17.1305 16.2767C16.9477 16.1759 16.6941 16.067 16.3675 15.9508C16.1316 15.8672 15.922 15.7755 15.7394 15.6753L15.7385 15.6747C15.5544 15.5711 15.3979 15.4533 15.2703 15.3206C15.1412 15.1862 15.043 15.0302 14.9759 14.8534L14.9755 14.8522C14.9109 14.6748 14.8797 14.4748 14.8797 14.2538C14.8797 13.9448 14.958 13.6747 15.1189 13.4486C15.2803 13.2228 15.5016 13.0522 15.7786 12.9362C16.0573 12.8181 16.3739 12.7603 16.7263 12.7603C17.0242 12.7603 17.3008 12.7882 17.5558 12.8448M14.8086 18.2852L16.1799 14.9882C16.0131 14.8942 15.8979 14.7912 15.8269 14.682C15.7598 14.5749 15.723 14.4354 15.723 14.2575C15.723 14.1028 15.7608 13.9749 15.8328 13.8692C15.9052 13.7629 16.0109 13.6783 16.1555 13.6174C16.3017 13.5545 16.4863 13.5207 16.7113 13.5207C16.9378 13.5207 17.1566 13.5471 17.3678 13.5999C17.5851 13.6536 17.7899 13.7205 17.9818 13.8006L18.0785 13.841L18.1143 13.7425L18.3125 13.197L18.3444 13.1094L18.2592 13.0715C18.0454 12.9763 17.8109 12.9008 17.5558 12.8448M14.8086 18.2852L14.8662 18.3121C14.9907 18.3703 15.1331 18.4184 15.2928 18.457C15.4522 18.4955 15.6261 18.5248 15.8142 18.5451C16.0026 18.5655 16.202 18.5756 16.4121 18.5756C16.8135 18.5756 17.1674 18.5143 17.4713 18.3887C17.7757 18.2628 18.0162 18.0787 18.188 17.8346M14.8086 18.2852L18.188 17.8346M17.5558 12.8448L17.5341 12.9424M17.5341 12.9424C17.7834 12.9972 18.0116 13.0707 18.2185 13.1629L15.8174 13.0284C16.0817 12.9163 16.3847 12.8603 16.7263 12.8603C17.018 12.8603 17.2873 12.8877 17.5341 12.9424ZM18.188 17.8346C18.3638 17.5861 18.4494 17.2887 18.4494 16.9475C18.4494 16.6456 18.3882 16.388 18.2585 16.181C18.1314 15.9758 17.9477 15.8056 17.7116 15.6693C17.4807 15.5335 17.2019 15.4066 16.8764 15.2881L18.188 17.8346Z" stroke="#D1D1D4" stroke-width="0.2"></path></svg>
+        </span>
+        <p>VS Compare</p>
+      </div>
+      }
+      @if(etfService._SRValue > 0 && etfService._SRValue < 100){
+      @if(sharedData.checkMenuPer(2028, 2254)=='Y'){
+      <div class="__selectIco select__accounts" (click)="openAvoidLosers()">
+        <!-- <img class="material-icons-outlined cp" src="../../../../assets/images/footer_ico/avoid_losers_ico.svg" alt="new age alpha avoid losers" /> -->
+        <span>
+          <svg width="17" height="17" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 0.769043L9.07694 7.69211L6.19233 4.8075L1 9.99979" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.9982 5.38442V0.769043H11.3828" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>Avoid Losers</p>
+      </div>
+      } @else if(sharedData.checkMenuPer(2028, 2254)=='D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <!-- <img class="material-icons-outlined" src="../../../../assets/images/footer_ico/avoid_losers_ico.svg" alt="new age alpha avoid losers" /> -->
+        <span>
+          <svg width="17" height="17" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 0.769043L9.07694 7.69211L6.19233 4.8075L1 9.99979" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.9982 5.38442V0.769043H11.3828" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>Avoid Losers</p>
+      </div>
+      }
+      }
+      <!-- Watchlist -->
+      @if(showWatchListIcon && sharedData.checkMenuPer(2028, 2250) == 'Y'){
+      @if(watchListIconClicked){
+      <div class="__selectIco select__accounts" (click)="addWatchList()">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.35 19.6875L7.175 15.625L1 19.6875V1.8125C1 1.59701 1.0813 1.39035 1.2261 1.23798C1.3708 1.0856 1.5672 1 1.7719 1H12.5781C12.7828 1 12.9792 1.0856 13.1239 1.23798C13.2687 1.39035 13.35 1.59701 13.35 1.8125V19.6875Z" fill="#D1D1D4" stroke="#D1D1D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75567 8.28379V8.13379H9.60567H7.74228H7.12267H5.25937H5.10938V8.28379V8.93129V9.08129H5.25937H7.12267H7.74228H9.60567H9.75567V8.93129V8.28379Z" fill="#191930" stroke="#191930" stroke-width="0.3"></path></svg>
+        </span>
+        <p>Watchlist</p>
+      </div>
+      }@else{
+      <div class="__selectIco select__accounts" (click)="addWatchList()">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.35 19.6875L7.175 15.625L1 19.6875V1.8125C1 1.597 1.0813 1.3904 1.226 1.238C1.3708 1.0856 1.5671 1 1.7718 1H12.5781C12.7828 1 12.9791 1.0856 13.1239 1.238C13.2686 1.3904 13.35 1.597 13.35 1.8125V19.6875Z" stroke="#D1D1D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75187 8.28396V8.13396H9.60187H7.88847V6.25596V6.10596H7.73847H7.11887H6.96887V6.25596V8.13396H5.25547H5.10547V8.28396V8.93146V9.08146H5.25547H6.96887V10.9501V11.1001H7.11887H7.73847H7.88847V10.9501V9.08146H9.60187H9.75187V8.93146V8.28396Z" fill="#D1D1D4" stroke="#D1D1D4" stroke-width="0.3"></path></svg>
+        </span>
+        <p>Watchlist</p>
+      </div>
+      }
+      }@else if(showWatchListIcon && sharedData.checkMenuPer(2028, 2250) == 'D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.35 19.6875L7.175 15.625L1 19.6875V1.8125C1 1.597 1.0813 1.3904 1.226 1.238C1.3708 1.0856 1.5671 1 1.7718 1H12.5781C12.7828 1 12.9791 1.0856 13.1239 1.238C13.2686 1.3904 13.35 1.597 13.35 1.8125V19.6875Z" stroke="#D1D1D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75187 8.28396V8.13396H9.60187H7.88847V6.25596V6.10596H7.73847H7.11887H6.96887V6.25596V8.13396H5.25547H5.10547V8.28396V8.93146V9.08146H5.25547H6.96887V10.9501V11.1001H7.11887H7.73847H7.88847V10.9501V9.08146H9.60187H9.75187V8.93146V8.28396Z" fill="#D1D1D4" stroke="#D1D1D4" stroke-width="0.3"></path></svg>
+        </span>
+        <p>Watchlist</p>
+      </div>
+      }
+      <!-- Watchlist -->
+      <!-- Compare -->
+      @if(showTimelineBtn && showCompareBtn){
+      @if(sharedData.checkMenuPer(2028, 2258)=='Y'){
+      <div class="__selectIco select__accounts" (click)="openCompare()">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.8563 2.30713L1 8.89863H6.7126L3.8563 2.30713Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.8563 11.7547C5.3943 11.7547 6.7126 10.4364 6.7126 8.89844H1C1 10.4364 2.2084 11.7547 3.8563 11.7547Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 0.65918L14.1836 7.25068H19.8963L17.0399 0.65918Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 10.1069C18.578 10.1069 19.8963 8.78849 19.8963 7.25049H14.1836C14.1836 8.78849 15.5019 10.1069 17.0399 10.1069Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0424 0.65918L3.85938 2.30708" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4492 1.42822V15.3802" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.85938 15.3804H17.0424" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4476 2.8563C11.2364 2.8563 11.8758 2.2169 11.8758 1.4281C11.8758 0.639401 11.2364 0 10.4476 0C9.65893 0 9.01953 0.639401 9.01953 1.4281C9.01953 2.2169 9.65893 2.8563 10.4476 2.8563Z" fill="white"></path></svg>
+        </span>
+        <p>Compare</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2028, 2258)=='D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.8563 2.30713L1 8.89863H6.7126L3.8563 2.30713Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.8563 11.7547C5.3943 11.7547 6.7126 10.4364 6.7126 8.89844H1C1 10.4364 2.2084 11.7547 3.8563 11.7547Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 0.65918L14.1836 7.25068H19.8963L17.0399 0.65918Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 10.1069C18.578 10.1069 19.8963 8.78849 19.8963 7.25049H14.1836C14.1836 8.78849 15.5019 10.1069 17.0399 10.1069Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0424 0.65918L3.85938 2.30708" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4492 1.42822V15.3802" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.85938 15.3804H17.0424" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4476 2.8563C11.2364 2.8563 11.8758 2.2169 11.8758 1.4281C11.8758 0.639401 11.2364 0 10.4476 0C9.65893 0 9.01953 0.639401 9.01953 1.4281C9.01953 2.2169 9.65893 2.8563 10.4476 2.8563Z" fill="white"></path></svg>
+        </span>
+        <p>Compare</p>
+      </div>
+      }
+      }
+      <!-- Compare -->
+
+    </div>
+    }
+  </div>
+ 
+  <div class="rightSideDefGrid" [class.showRightAnimate]="sharedData._getSelectedRightSide  != 'N'">
+    @if(sharedData.checkMenuPer(2028, 2252) == 'Y'){
+    <div class="icon__details" [style.display]="showDefault_select == 'company'?'block':'none'">
+      <div class="select__steps__details">
+        
+        <div class="d-flex align-items-center comp__head justify-content-between pb1rem pl0_5rem pr0_5rem">
+          @if(rightGridData.length>0){
+          <h4 class="d-flex align-items-center">
+            Components
+            @if(etfService._SRValue > 0 && etfService._SRValue < 100){<span class="count d-flex">{{avDataCount}}</span>}
+            @else{<span class="count d-flex">{{rightGridData.length}}</span> }
+          </h4>
+          }@else{
+          <h4 class="d-flex align-items-center">Components</h4>
+          }
+          <div class="no_line_height d-flex align-items-center">
+            <span class="material-icons mr0rem" (click)="openSearch()">
+              search
+            </span>
+            <div class="dropdown">
+              <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                swap_vert
+              </span>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <!-- <div class="component sortbyComp" style="margin-top: 0; margin-bottom: 0; ">
+        <div class="dropSpace">
+          <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+          <div class="component sortbyComp EQ_sorting">
+            <span class="title">Ascending</span>
+            <div class="mat__toggle">
+              <mat-slide-toggle (change)="onToggleAscending($event)" [checked]="ascending_val" class="example-margin preLabel"></mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div> -->
+                <ul>
+                  <li class="d-flex">
+                    <a class="dropdown-item sort_btn">
+                      Sort by
+                      <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('R','etf')"><span class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem"> refresh</span> Reset</button>
+                    </a>
+
+                  </li>
+                  <li *ngFor="let item of FilterList">
+                    <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                    <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                      @if(ascending_val){
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                      </svg>
+                      }
+                      @else{
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" />
+                      </svg>
+                      }
+                    </span>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+            <span class="material-icons-outlined close__card pin__bar__comp" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components');">
+              push_pin
+            </span>
+
+          </div>
+        </div>
+        <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+          <div class="d-flex align-items-center">
+            <span class="material-icons disable">
+              search
+            </span>
+            <input (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchText" (input)="filterItems()" #searchBox>
+            <span class="material-icons" (click)="searchClose()">
+              close
+            </span>
+          </div>
+        </div>
+
+        <div class="scrollbox outerScroll__Div componentScroll">
+          <div class="construction h-100">
+            @if(rightGridData.length>0){
+            <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+              <ul>
+                <li *cdkVirtualFor="let data of rightGridData;">
+                  <div class="list__sec" [class.active]="data.stockKey == highlightList">
+                    <div (click)="compClick(data)" [style.border-color]="cl(data.colorVal)" class="d__border">
+                      <p class="ind__name">{{data['companyName'] | nullDashPipe:''}}</p>
+                      <div class="d-flex align-items-center">
+                        <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                        <span class="price text-right priceSymbol" style="color: var(--paraFontColorAlt)">{{data['price'] | priceFormat  :',.1f':data['currency'] }}</span>
+                        <span class="price text-right">{{data.Wt | weightFormat:''}}</span>
+                        <span class="price text-right">
+                          <span class="med-e" [style.background-color]="cl(data.colorVal)" [style.color]="(data.colorVal>=0 && data.colorVal<=35) || (data.colorVal>=60)?'#fff':'#000'">{{sharedData.formatGScore(data.score)}}</span>
+                        </span>
+                        <div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+            </cdk-virtual-scroll-viewport>
+            }@else{
+            @if(!sharedData._showCenterLoader && !sharedData._showMatLoader){
+            <div class="no-r-f" style="display:flex">No results found. Revise your search.</div>
+            }@else{
+            <div class="no-r-f" style="display:flex">Loading please wait...</div>
+            }
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    @if(showPerf && sharedData.checkMenuPer(2028, 2253) == 'Y'){
+    <div class="icon__details perform__wrapper" [style.display]="showDefault_select == 'performance'?'flex':'none'">
+      <div class="select__accounts__details    min_height">
+        <span class="material-icons-outlined close__card pin__bar__comp p-abs" style="top:1.5rem" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('performance');">
+          push_pin
+        </span>
+        <!--<div class="Cumulative_return">
+          <ul>
+            <li>
+              <span class="ico">
+                <span class="">
+                  <img src="../../../../assets/images/matico/cumulative_ico.svg">
+                </span>
+              </span>
+              <div>
+                <h4 class="mb1">Excess Cumulative return</h4>
+                <p class="return d-flex align-items-end">
+                  @if(excessCumReturns >= 0){+}{{excessCumReturns | numWithCommaRtnPercent}}
+                  @if(excessCumReturns >= 0){
+                  <span class="material-icons __pos" style="color: var(--successColor); font-size: 2rem;height:1.8rem">
+                    arrow_drop_up
+                  </span>
+                  }@else{
+                  <span class="material-icons __neg" style="color: var(--danger); font-size: 2rem; height: 1.8rem">
+                    arrow_drop_down
+                  </span>
+                  }
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="d-flex align-item-center ico">
+                <span class="">
+                  <img src="../../../../assets/images/matico/annualized_ico.svg">
+                </span>
+              </span>
+              <div>
+                <h4 class="mb1">Excess Annualized return</h4>
+                <p class="return d-flex align-items-end">
+                  @if(excessAnnReturns >= 0){+}{{excessAnnReturns | numWithCommaRtnPercent }}
+                  @if(excessAnnReturns >= 0){
+                  <span class="material-icons __pos" style="color: var(--successColor); font-size: 2rem; height: 1.8rem">
+                    arrow_drop_up
+                  </span>
+                  }@else{
+                  <span class="material-icons __neg" style="color: var(--danger); font-size: 2rem; height: 1.8rem">
+                    arrow_drop_down
+                  </span>
+                  }
+                </p>
+              </div>
+            </li>
+          </ul>
+          @if(returnAsOfDate != ''){
+          <span class="return_cal w66">
+            {{returnAsOfDate}}
+          </span>
+          }
+        </div>-->
+        <div class="perform__details">
+          <div>
+            <h4 class="mb1">
+              Performance Statistics
+            </h4>
+
+          </div>
+          <div class="rightGrid_matTab perf__mat_table scrollbox scrollHeight perf__sec">
+            <mat-tab-group>
+              <mat-tab [label]="'Before & After'">
+                <div class="tab__head d-flex justify-content-between align-items-center no-border-top">
+                  <div class="tab_Cell">h-factor</div>
+                  <div class="tab_Cell">{{selTickName}}</div>
+                  <div class="tab_Cell" style="white-space: normal; line-height: 1;">Your Index</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of h_facData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['H-Factor']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Performance</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of perData1; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['Performance']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Statistics</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of StatData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['Statistics']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                  </div>
+                  }
+                </div>
+              </mat-tab>
+              <mat-tab [label]="'Before & Combined'">
+                <label class="perStatSliderDraggedValue">NAA Combined Performance: {{assgUserDrpVal}}%</label>
+                <div class="perStatSliderNGX d-flex align-items-center justify-content-between cus_range_slider mb1_5rem">
+                  <label class="perStatSliderLable" for="hisperStatSliderInput" style="top: 0.5rem;">0%</label>
+                  <ngx-slider [(value)]="assgUserDrpVal" [options]="options" (userChangeEnd)="hisperStatSliderChange($event)" style="width:70%"></ngx-slider>
+                  <label class="perStatSliderLable" for="hisperStatSliderInput" style="top: 0.45rem;">100%</label>
+                </div>
+                <!--<div class="perStatSlider d-flex align-items-center justify-content-between cus_range_slider" style="margin-bottom:1rem;">
+                <label class="perStatSliderLable" for="hisperStatSliderInput">0%</label>
+                <input type="range" min="0" max="100" [value]="assgUserDrpVal" step="1" class="cus_range" style="width:75%" id="perStatSliderInput" (change)="hisperStatSliderChange($event)">-->
+                <!--<mat-slider min="0" max="100" step="1" class="cus_range_mat">
+                  <input matSliderThumb [value]="assgUserDrpVal" step="1" (change)="hisperStatSliderChange($event)">
+                </mat-slider>-->
+                <!--<label class="perStatSliderLable" for="hisperStatSliderInput">100%</label>
+                </div>-->
+
+                <div class="tab__head d-flex justify-content-between align-items-center no-border-top">
+                  <div class="tab_Cell">h-factor</div>
+                  <div class="tab_Cell">Before</div>
+                  <div class="tab_Cell" matTooltip="Combined" [matTooltipPosition]="'above'">Combined</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of h_facData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['H-Factor']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['Combined']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Performance</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of perData1; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['Performance']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['Combined']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Statistics</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of StatData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['Statistics']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['Combined']}}</div>
+                  </div>
+                  }
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+          </div>
+          <span class="perform__RTN text-right d-block mt1rem w66" style="padding-right: 0.75rem;">{{returnAsOfDate}}</span>
+          @if(sharedData._showMatLoader){
+          <div id="openFactsheet__loader" class="d-flex align-items-center justify-content-center">
+            <div class="common-prog-loader per-loader text-center align-items-center justify-content-center" style="    width: 84%;">
+              <span class="div_n">
+                Loading...
+              </span>
+              <mat-progress-bar mode="determinate" [value]="0"
+                                style="padding-left: 10px; padding-right: 10px;margin-right:10px; width: 100%; transition: all .10s"></mat-progress-bar>
+            </div>
+          </div>
+          }
+        </div>
+
+
+      </div>
+    </div>
+    }
+  </div>
+  
+</div>
+  }

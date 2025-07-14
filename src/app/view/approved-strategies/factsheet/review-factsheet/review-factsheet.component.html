@@ -1,0 +1,532 @@
+<div class="reviewFact__inner p1rem p-rel">
+  <!---- Loader Modal ----->
+  @if(showSpinner_factsheet){
+  <div id="openFactsheet__loader" class="d-flex align-items-center justify-content-center">
+    <div class="common-prog-loader per-loader d-flex align-items-center justify-content-center">
+      <span class="div_n">
+        Loading <span style="font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace">{{direct_progress}}</span>
+      </span>
+      <mat-progress-bar mode="determinate" [value]="0"
+                        style="padding-left: 10px; padding-right: 10px;margin-right:10px; width: 80%; transition: all .10s"></mat-progress-bar>
+      <span class="div_n div_n_load"
+            style="margin-top: 0.5rem; padding: 0; opacity: .5; font-family: var(--ff-italic);">
+        Implementing filtering
+        and selection
+      </span>
+    </div>
+  </div>
+  }
+
+  <!---- Loader Modal ----->
+  <div class="reviewFact__inner__left scrollbox" [style.visibility]="showSpinner_factsheet?'hidden':'visible'">
+    <div class="d-flex justify-content-between">
+      <div class="lh_D mb1rem">
+        <h3 class="m0">Index Factsheet:<span class="ind-name ml0_5rem">{{cusindexName}}</span></h3>
+        <div style="min-height: 2rem;">
+          <div class="d-flex fs_hearder_list">
+            <span class="fs_bar">
+              <span class="d-flex align-items-center">
+                <span class="perfDate" style="padding-bottom: 0rem; padding-top: 0rem;">
+                  Performance as of:
+                  <b>{{asOfDate}}</b>
+                </span>
+                @if(checkShowUpdateBtn()){
+                <span class="d-flex align-items-center update_factsheet_ico pl0_5rem" (click)="dirIndexService.updateFactsheet()">
+                  <span class="material-icons">
+                    update
+                  </span><span>Update</span>
+                </span>
+                }
+              </span>
+            </span>
+            <div class="select_index_id fs_bar" *ngIf="seltabname != ''">
+              <span class="select_index_id_child">
+                Account: <span><b>{{clickedAccountDetails.accountVan}}</b></span>
+              </span>
+            </div>
+            <div class="select_index_id fs_bar" *ngIf="seltabname != ''">
+              <span class="select_index_id_child">
+                Market Value: <span>
+                  <b>
+                    ${{clickedAccountDetails.marketValue| number: '1.2-2'}}
+                  </b>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviewFact__dropdown pr1rem">
+        <div id="account_Exclusions" class="d-flex align-items-center mb1rem enable_trading_check" *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && showTradeBtn">
+          <ng-container *ngIf="alreadyselected_strategy.length<=0">
+            <mat-checkbox class="example-margin" (change)="onToggleVerify($event)" [checked]="checkverify_trade">Enable For Trading</mat-checkbox>
+          </ng-container>
+          <ng-container *ngIf="alreadyselected_strategy.length>0">
+            <mat-checkbox class="success" disabled [checked]="true">Trading Completed</mat-checkbox>
+          </ng-container>
+          <ng-container *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkverify_trade && alreadyselected_strategy.length<=0">
+            <button class="dialog_btn_P D_btn d-flex align-items-center ml1rem justify-content-end" [disabled]="!checkverify_trade" (click)="checkAccInfo('', 'DI')">
+              <span class="material-icons">touch_app</span> Trade Now
+            </button>
+          </ng-container>
+          <!-- <ng-container *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkverify_trade && alreadyselected_strategy.length<=0">
+            <button class="dialog_btn_P D_btn d-flex align-items-center ml1rem justify-content-end" [disabled]="!checkverify_trade" (click)="checkAccInfo('', 'DI')">
+              <span class="material-icons">touch_app</span>Rebalance
+            </button>
+          </ng-container> -->
+          <ng-container *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && !checkverify_trade &&  alreadyselected_strategy.length<=0">
+            <button class="dialog_btn_P D_btn d-flex align-items-center ml1rem justify-content-end" [disabled]="!checkverify_trade">
+              <span class="material-icons">touch_app</span> Trade Now
+            </button>
+          </ng-container>
+        </div>
+        <div class="reviewFact__dropdown_button justify-content-end mb1rem">
+          <span class="selectOptions">
+            <svg _ngcontent-ng-cli-universal-c173="" fill="none" height="13" viewBox="0 0 24 24" width="13"
+                 xmlns="http://www.w3.org/2000/svg" style="position: relative;">
+              <path _ngcontent-ng-cli-universal-c173=""
+                    d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z"
+                    fill="currentColor" opacity="1"></path>
+              <rect _ngcontent-ng-cli-universal-c173="" fill="currentColor" height="2" rx="1"
+                    transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+              <path _ngcontent-ng-cli-universal-c173=""
+                    d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z"
+                    fill="currentColor"></path>
+            </svg>
+            Export
+          </span>
+          <span class="selecticons dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+            <span class="material-icons">
+              expand_more
+            </span>
+          </span>
+          <div class="dropdown-menu" x-placement="bottom-start">
+            <ul>
+              <li class="justify-content-between" (click)="$event.stopPropagation();downloadPDF();">
+                <!--{{showLoad ? 'Downloading...': ' Index Factsheet'}}-->
+                Index Factsheet
+                <span *ngIf="showLoad" class="spinner-border  spinner-border-sm mr-05" role="status" aria-hidden="true"></span>
+
+              </li>
+              <li class="justify-content-between" (click)="$event.stopPropagation();downloadMethodology();">
+                <!--{{showLoad1 ? 'Downloading...': ' Methodology'}}-->
+                Methodology
+                <span *ngIf="showLoad1" class="spinner-border  spinner-border-sm mr-05" role="status" aria-hidden="true"></span>
+              </li>
+
+              @if(sharedData.checkMenuPer(12,2272) == 'Y'){
+              <li class="justify-content-between" id="preventDefault" (click)="openProposalModal()">
+                <!--{{showLoad2 ? 'Downloading...': ' Proposal'}}-->
+                Proposal
+                <span *ngIf="showLoad2" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              </li>
+              }@else if(sharedData.checkMenuPer(12,2272) == 'D'){
+              <li class="disabled">Proposal</li>
+              }
+
+              @if(sharedData.checkMenuPer(12,2270) == 'Y'){
+              <li (click)="downloadHisReturn();isOpen=false;"> Returns History </li>}
+              @else if(sharedData.checkMenuPer(12,2270) == 'D'){
+              <li class="disabled"> Returns History </li>}
+
+              @if(sharedData.checkMenuPer(12,2271) == 'Y'){
+              <li (click)="downloadHoldingsExcel();isOpen=false;"> Holdings History </li>}
+              @else if(sharedData.checkMenuPer(12,2271) == 'D'){
+              <li class="disabled"> Holdings History </li>}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scrollableDiv scrollbox">
+      <div class="reviewFact__inner__table p1rem mb1rem">
+        <!-- Performance Annualized Trailing Returns -->
+        <div>
+          <div class="reviewFact__inner__table_title mb1rem">
+            <span class="title">Performance Annualized Trailing Returns (Gross of fees) </span>
+          </div>
+          <div class="reviewFact__inner__table_data overflow_auto" id="account_Exclusions">
+            <table class="table-grid">
+              <tbody>
+                <tr class="table-grid-row">
+                  <td class="">
+                    Product Name
+                    <ng-container *ngIf="taxOptFlage">
+                      <mat-checkbox (change)="onToggletraded($event)" [checked]="enableTaxPerformance" class="example-margin ml0_5rem">After Tax</mat-checkbox>
+                    </ng-container>
+                  </td>
+                  <td>YTD</td>
+                  <td>1 Year</td>
+                  <td>3 Years</td>
+                  <td>5 Years</td>
+                  <!--<td>7 Years</td>-->
+                  <td>10 Years</td>
+                </tr>
+                <tr class="table-grid-row" *ngIf="factsheetPerfData.length>0" [style.background]="(taxOptFactSheet) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                  <td class="" *ngIf="(taxOptFactSheet)">
+                    <span class="d-flex">
+                      <span class="ellips"> {{cusindexName}} </span>
+                      <span>(Before Tax)</span>
+                    </span>
+                  </td>
+                  <td class="" *ngIf="!(taxOptFactSheet)">
+
+                    <span class="ellips" [class.ellipsWidth]="!(taxOptFactSheet)"> {{cusindexName}} </span>
+
+                  </td>
+                  <td>{{factsheetPerfData[0]['ytdReturn'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['y1Return'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['y3Return'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['y5Return'] | percentFormat}}</td>
+                  <!--<td>{{factsheetPerfData[0]['y7Return'] | percentFormat}}</td>-->
+                  <td>{{factsheetPerfData[0]['y10Return'] | percentFormat}}</td>
+                </tr>
+                <tr class="table-grid-row" *ngIf="factsheetPerfData.length>2 && (taxOptFactSheet)">
+                  <td class="">
+                    <span class="d-flex">
+                      <span class="ellips"> {{cusindexName}} </span>
+                      <span>(After Tax)</span>
+                    </span>
+                  </td>
+                  <td>{{factsheetPerfData[2]['ytdReturn'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[2]['y1Return'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[2]['y3Return'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[2]['y5Return'] | percentFormat}}</td>
+                  <!--<td>{{factsheetPerfData[2]['y7Return'] | percentFormat}}</td>-->
+                  <td>{{factsheetPerfData[2]['y10Return'] | percentFormat}}</td>
+                </tr>
+                <tr class="table-grid-row" *ngIf="factsheetPerfData.length>1">
+                  <td class="">
+                    <span class="d-flex"> <span class="ellips ellipsWidth"> {{cusshortName}} </span> </span>
+                  </td>
+                  <td>{{factsheetPerfData[1]['ytdReturn'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[1]['y1Return'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[1]['y3Return'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[1]['y5Return'] | percentFormat}}</td>
+                  <!--<td>{{factsheetPerfData[1]['y7Return'] | percentFormat}}</td>-->
+                  <td>{{factsheetPerfData[1]['y10Return'] | percentFormat}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Performance Annualized Trailing Returns End -->
+        <!-- Calendar Year Returns -->
+        <div class="mt2rem position-relative">
+          <div class="reviewFact__inner__table_title mb1rem">
+            <span class="title">Calendar Year Returns (Gross of fees) </span>
+            <div id="tableNavBuy" class="text-right tableNav">
+              <a class="nav-prev arrow scrollBtn" id="calArrowleft" (click)="scrollLeft('calendarYearReturnsLeft')">
+                <span class="material-icons">chevron_left</span>
+              </a>
+              <a class="nav-next arrow ml0_5rem" id="calArrowright" (click)="scrollRight('calendarYearReturnsRight')">
+                <span class="material-icons">chevron_right</span>
+              </a>
+            </div>
+          </div>
+          <div class="reviewFact__inner__table_data reviewFact__inner__table_fixed_data calendarYearReturns" #calendarYearReturns (scroll)="onScroll($event,'calendarYearReturns')" id="account_Exclusions">
+            <table class="table-grid" *ngIf="perfData.years.length>0">
+              <tbody>
+                <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                  <td class="">
+                    Product Name
+                    <ng-container *ngIf="taxOptFlage">
+                      <mat-checkbox style="position: absolute;top: 0.1rem;" (change)="onToggletradedCal($event)" [checked]="enableTaxCalendar" class="example-margin ml0_5rem">After Tax</mat-checkbox>
+                    </ng-container>
+                  </td>
+                  <td class="wi_4r" *ngFor="let d of perfData.years">{{d}}</td>
+                </tr>
+                <tr class="table-grid-row" *ngIf="checkEmptyObj(perfData.Uindex)" [style.background]="(taxOptFactSheetCal) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                  <td class="" [style.background]="(taxOptFactSheetCal) ? 'var(--cardsHighlightColorDark)':'transparent'">
+                    <span class="d-flex">
+                      <span class="ellips" [style.width]="(taxOptFactSheetCal) ? '10rem':'14.4rem'"> {{cusindexName}} </span>
+                      <span [style.display]="(taxOptFactSheetCal) ? 'block':'none'">(Before Tax)</span>
+                    </span>
+                  </td>
+                  <td class="wi_4r" *ngFor="let d of perfData.years" [style.background]="(taxOptFactSheetCal) ? 'var(--cardsHighlightColorDark)':'transparent'">{{ perfData.Uindex[d] | weightFormat:'per' }}</td>
+                </tr>
+                <tr class="table-grid-row" *ngIf="checkEmptyObj(perfData.AUindex) && (taxOptFactSheetCal)">
+                  <td class="">
+                    <span class="d-flex">
+                      <span class="ellips"> {{cusindexName}} </span>
+                      <span>(After Tax)</span>
+                    </span>
+                  </td>
+                  <td class="wi_4r" *ngFor="let d of perfData.years">{{ perfData.AUindex[d] | weightFormat:'per' }}</td>
+                </tr>
+                <tr class="table-grid-row" *ngIf="checkEmptyObj(perfData.ETFind)">
+                  <td class="">
+                    <span class="d-flex">
+                      <span class="ellips ellipsWidth"> {{cusshortName}} </span>
+                    </span>
+                  </td>
+                  <td class="wi_4r" *ngFor="let d of perfData.years">{{ perfData.ETFind[d] | weightFormat:'per' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Calendar Year Returns End-->
+      </div>
+      <!-- Tax Gain / Loss -->
+      @if(taxOptFlage && (taxOptFactSheet || taxOptFactSheetCal)){
+      <div class="reviewFact__inner__table p1rem mb1rem" *ngIf="taxGainLossData.length>0">
+        <div class="position-relative">
+          <div class="reviewFact__inner__table_title mb1rem">
+            <span class="title">Tax Gain / Loss </span>
+            <div id="tableNavBuy2" class="text-right tableNav">
+              <a class="nav-prev arrow scrollBtn" id="taxArrowleft" (click)="scrollLeft('taxGainLossLeft')">
+                <span class="material-icons">chevron_left</span>
+              </a>
+              <a class="nav-next arrow ml0_5rem" id="taxArrowright" (click)="scrollRight('taxGainLossRight')">
+                <span class="material-icons">chevron_right</span>
+              </a>
+            </div>
+          </div>
+          <div class="reviewFact__inner__table_data  reviewFact__inner__table_fixed_data_taxGain taxGainLoss" #taxGainLoss (scroll)="onScrolltaxGainLoss($event,'taxGainLoss')">
+            <table class="table-grid">
+              <tbody>
+                <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                  <td class="pr0_5rem">
+                    Strategy Name
+                  </td>
+                  <td class="wi_4r" *ngFor="let d of taxGainLossData">{{d.year}}</td>
+                </tr>
+                <tr class="table-grid-row">
+                  <td class="pr0_5rem">
+                    <span class="d-flex">
+                      <span class="ellips taxgainEllips"> {{cusindexName}} </span>
+                      <span *ngIf="cusshortName!=undefined">({{cusshortName}})</span>
+                    </span>
+                  </td>
+                  <td class="wi_4r" *ngFor="let d of taxGainLossData">{{taxgainlossFormat(d)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <span style="font-size: 0.7rem; color: var(--paraFontColorAlt);font-style: italic;">* Based on market value</span>
+        </div>
+      </div>
+      }
+      <!-- Tax Gain / Loss End -->
+      <!-- Portfolio Characteristics-->
+      <div class="reviewFact__inner__table p1rem mb1rem">
+        <div class="position-relative">
+          <div class="reviewFact__inner__table_title mb1rem">
+            <span class="title">Portfolio Characteristics</span>
+          </div>
+          <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_portfolio overflow_auto">
+            <table class="table-grid">
+              <tbody>
+                <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                  <td class="">
+                    Annualized <br>Alpha
+                  </td>
+                  <td class="">Information <br>Ratio </td>
+                  <td class="">Beta</td>
+                  <td class="">Upside <br>Capture </td>
+                  <td class="">Downside <br>Capture </td>
+                  <td class="">Correlation</td>
+                  <td *ngIf="factsheetPerfData.length>0 && sharedData.checkDivYield(factsheetPerfData[0])">Yield</td>
+                  <td class="">Batting <br>Average </td>
+                  <td class="">Standard <br>Deviation </td>
+                  <td class="">Tracking <br>Error </td>
+                  <td class="">Turnover</td>
+                </tr>
+                <tr class="table-grid-row" *ngIf="factsheetPerfData.length>0">
+                  <td>{{factsheetPerfData[0]['annulaizedAlpha'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['informationRatio'] | numValueFormat}}</td>
+                  <td>{{factsheetPerfData[0]['beta'] | numValueFormat }}</td>
+                  <td>{{factsheetPerfData[0]['upsideCapture'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['downSideCapture'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['correlation'] | numValueFormat}}</td>
+                  <td *ngIf="sharedData.checkDivYield(factsheetPerfData[0])">{{factsheetPerfData[0]['divYield'] | weightFormat:'per'}}</td>
+                  <td>{{factsheetPerfData[0]['battingAverage'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['stdDeviation'] | percentFormat}}</td>
+                  <td>{{factsheetPerfData[0]['trackingError'] | weightFormat:'per'}}</td>
+                  <td>{{factsheetPerfData[0]['turnOver'] | weightFormat:'per'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Portfolio Characteristics End-->
+      <!--line Chart start-->
+      <div class="reviewFact__inner__table p1rem mb1rem">
+        <div class="reviewFact__inner__table_title mb1rem">
+          <span class="title">Chart</span>
+        </div>
+        <div style="width:100%;" id="lineChartBuyModel_dirIndex"></div>
+      </div>
+      <!--line Chart end-->
+      <!-- Top Security Weights-->
+      <div class="reviewFact__inner__table p1rem">
+        <div class="d-flex justify-content-between overflow_auto">
+          <div class="position-relative w-100 pr2rem">
+            <div class="reviewFact__inner__table_title mb1rem">
+              <span class="title">Top Security Weights</span>
+            </div>
+            <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_top_security">
+              <table class="table-grid">
+                <tbody *ngIf="bldMyIndexMntHPortfolioData.length > 0">
+                  <tr class="table-grid-row" style="border-bottom: 2px solid var(--border);">
+                    <td class="">Security</td>
+                    <td class="">Weight</td>
+                  </tr>
+                  <tr class="table-grid-row" *ngFor="let data of bldMyIndexMntHPortfolioData.slice(0, 10)">
+                    <td class="">{{data['compname']}}</td>
+                    <td class="">{{data['weight'] | weightFormat :'per'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="position-relative w-100">
+            @if(sectorWeightLoader){
+            <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--topNavbar); z-index: 99;">
+              <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+            </div>
+            }
+            <div class="reviewFact__inner__table_title mb1rem">
+              <span class="title">Sector Weights</span>
+            </div>
+            <div class="approvedStrategyChart">
+              <div id="barChartBuyModel_popup1" class="factsheetChartresize"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Top Security Weights End-->
+    </div>
+
+  </div>
+  <div class="reviewFact__inner__right pl1rem" [style.visibility]="showSpinner_factsheet?'hidden':'visible'" [class.open]="isOpen">
+    @if(isOpen){
+    <span class="reviewFact__inner__right_components_toggle icon_close" (click)="toggleSidebar()">
+      <i class="fa-solid fa-xmark"></i>
+    </span>
+    }
+    @else{
+    <span class="reviewFact__inner__right_components_toggle icon_comp" (click)="toggleSidebar()">
+      <!-- <i  [ngClass]="iconClass"></i> -->
+      <span class="material-icons-outlined" style="transform: rotate(45deg);font-size: 1rem;"> attach_file </span>
+      <p>Components</p>
+    </span>
+    }
+    <div class="top__section lh_D">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-start">
+          <ng-container *ngIf="top10HoldingCheck()"> <p>Top 10 Components</p></ng-container>
+          <ng-container *ngIf="!top10HoldingCheck()"> <p>Components</p></ng-container>
+          <span *ngIf="!top10HoldingCheck()" class="count">{{bldMyIndexMntHPortfolioData.length}}</span>
+        </div>
+        @if(sharedData.checkMenuPer(12,171) == 'Y' && sharedData.checkShowLeftTab(12) == 'A'){
+        <button class="dialog_btn_P D_btn d-flex align-items-center" (click)="download()">
+          <span class="material-icons">download</span>
+          <span class="downHide">Download</span>
+        </button>
+        }
+        @else if(sharedData.checkMenuPer(12,171) == 'D' && sharedData.checkShowLeftTab(12) == 'A'){
+        <button class="dialog_btn_P D_btn d-flex align-items-center disabled">
+          <span class="material-icons">download</span>
+          <span class="downHide">Download</span>
+        </button>
+        }
+
+      </div>
+      <span class="perfDate">
+        Price as of:
+        <span>{{asOfPrice | date: 'MM/dd/yyyy'}}</span>
+      </span>
+    </div>
+    <div class="bottom__section scrollbox mt0_5rem" *ngIf="bldMyIndexMntHPortfolioData.length>0">
+      @for(data of bldMyIndexMntHPortfolioData;track data.stockKey){
+      <div class="list__view">
+        <p class="ind__name">{{data['compname']}}</p>
+        <div class="d-flex align-items-center">
+          <span class="ticker text-left">{{data['ticker']}}</span>
+          <span class="price text-right" style="color: var(--paraFontColorAlt); ">{{data['price'] | priceFormat  :',.2f':data['currency']}}</span>
+          <span class="price text-right">{{data['weight'] | weightFormat :'per'}}</span>
+          <!--<span class="price text-right"></span>-->
+          <div>
+          </div>
+        </div>
+      </div>
+      }@empty{ }
+    </div>
+    <h4 class="d-flex align-items-center" style="">
+      <span class="d-flex align-items-center justify-content-between" style="width: 73%;">
+        <span class="d-flex align-items-center">Cash Target:</span>
+        <span *ngIf="checkTarget() != '-'" class="d-flex align-items-center" style="padding: 0.35rem;font-size: 0.7rem;">
+          {{checkTarget()}}%
+        </span>
+        <span *ngIf="checkTarget() == '-'" class="d-flex align-items-center" style="padding: 0.35rem;font-size: 0.7rem;">
+          {{checkTarget()}}
+        </span>
+      </span>
+    </h4>
+  </div>
+</div>
+
+
+<div class="modal fade" id="Proposal_Modal" tabindex="-1" role="dialog" aria-labelledby="existModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:33%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-top"><p>Proposal</p></div>
+          <div class="content-btm pad_all_0" style="    padding: 0;">
+            <div class="pad_all_1 w-100" style="padding: 1rem 1rem;">
+              <div class="strategiesform mb0_5rem" style="position: relative;">
+                <label for="exampleFormControlInput1" class="required form-label">Prepared by:</label>
+
+                <input (keypress)="omit_special_char($any($event))" maxlength="100" type="text" [(ngModel)]="Preparedby" class="form-control form-control-solid" autocomplete="disabled" />
+
+              </div>
+              <div class="strategiesform mb0_5rem" style="position: relative;">
+                <label for="exampleFormControlInput1" class="required form-label">Prepared for:</label>
+                <input (keypress)="omit_special_char($any($event))" maxlength="100" type="text" [(ngModel)]="Preparedfor" class="form-control form-control-solid" autocomplete="disabled" />
+                <p class="d-flex align-items-center" style="font-size:0.6rem;margin-top:0.5rem"><span style="font-size: 0.6rem; margin-right: 0.3rem; line-height: 1.5;" class="material-icons">info_outline</span>No special characters or numbers.</p>
+              </div>
+
+            </div>
+            <div class="foot-l" style="margin-top: 0;">
+              <button [disabled]="Preparedby.trim().length==0 || Preparedfor.trim().length==0" type="button" class="mod-foot-btn-activeP mr_p_5" (click)="saveproposal();">Save</button>
+              <button type="button" #closebutton class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade warningautoModel" id="pauseTradeModal_factsheet" tabindex="-1" role="dialog"
+     aria-labelledby="pauseTradeModal_factsheet" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(12,89)}}</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="unPauseAcc()" data-bs-dismiss="modal">
+                Continue
+              </button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

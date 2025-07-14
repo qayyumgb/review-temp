@@ -1,0 +1,97 @@
+@use '../styles/mixins' as *;
+.global_mat_table {
+  background: transparent !important;
+  box-shadow: none;
+
+  .mat-mdc-header-row {
+    height: 2.5rem;
+    min-height: 2.5rem;
+    background: var(--cardsHighlightColorDark);
+
+    .mat-mdc-header-cell {
+      vertical-align: middle;
+      border-bottom: 3px solid var(--border);
+      color: var(--leftSideText-B);
+      font-weight: 500;
+      font-family: var(--ff-regular);
+      font-size: .75rem;
+      line-height: 1.2;
+      padding: .2rem .5rem;
+      border-top: 0;
+      background: var(--topNavbar);
+      position: sticky;
+      z-index: 999;
+    }
+  }
+
+  .mat-mdc-row {
+    height: 2.5rem;
+    min-height: 2.5rem;
+    border-bottom: .2px dashed var(--border);
+
+    .mat-mdc-cell {
+      font-weight: 500;
+      color: var(--leftSideText);
+      font-family: var(--ff-regular);
+      font-size: .7rem;
+      line-height: 1.2;
+      padding: .2rem .5rem;
+      border: none;
+      vertical-align: middle;
+      font-family: var(--ff-medium);
+      transition: all .15s;
+
+      span {
+        @include badge;
+      }
+    }
+  }
+}
+.global_table{
+    thead {
+        position: sticky;
+        top: 0;
+        height: 2.5rem;
+        z-index: 9;
+        tr{
+            th{
+                vertical-align: middle;
+                border-bottom: 3px solid var(--border);
+                color: var(--leftSideText-B);
+                font-weight: 500;
+                font-family: var(--ff-medium);
+                font-size: .75rem;
+                line-height: 1.2;
+                padding: .2rem .5rem;
+                border-top: 0;
+                background: var(--border);
+                position: sticky;
+                z-index: 999;
+                text-align: left;
+            }
+        }
+    }
+}
+.select__alpha__details {
+  .common_mat_table {
+    .mat-mdc-row {
+      .mat-mdc-cell {
+        font-weight: 500;
+        color: var(--leftSideText-B);
+        font-family: var(--ff-regular) !important;
+        font-size: .60rem;
+        line-height: 1;
+
+        &:first-child {
+          min-width: 70%;
+          color: var(--leftSideText);
+          font-size: .65rem;
+        }
+
+        span {
+          @include badge;
+        }
+      }
+    }
+  }
+}

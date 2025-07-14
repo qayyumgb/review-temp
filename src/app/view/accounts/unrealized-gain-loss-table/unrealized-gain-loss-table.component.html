@@ -1,0 +1,186 @@
+<mat-table *ngIf="selectedType != 'P'" matSort [dataSource]="accountDataSourceData" class="common_mat_table accounts_table unrealizedGainLoss_table"
+    matSortDisableClear id="rolemanagement-table" matSortDirection="asc" (matSortChange)="onSortData($event)">
+    <ng-container matColumnDef="Instrument">
+        <mat-header-cell mat-sort-header *matHeaderCellDef style=" justify-content: flex-start;">
+            Instrument </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span
+                style="position: absolute;left: 0;cursor: pointer;line-height: 0;top: 49%;transform: translate(0, -50%);"
+                *ngIf="checkDont_Info(element)" matTooltipClass='nav_tooltip' matTooltipPosition="above"
+                matTooltip="Added this stock in don't sell" [matTooltipShowDelay]="showDelay.value"
+                [matTooltipHideDelay]="hideDelay.value">
+                <svg width="10" height="10" fill="transparent" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                        style="fill: var(--prim-button-color-text); "></path>
+                    <path
+                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                        style="fill: var(--prim-button-color-text);"></path>
+                </svg>
+            </span>
+            <span class="accMenuFirst" mat-menu-item>{{element.contractDesc}}</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Position">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Position </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span style="cursor: pointer; color: var(--prim-button-color-text) !important;"
+                (click)="taxLot_ModalOpen(element)" data-bs-toggle="modal" data-bs-target="#myexistingTaxlotModal"
+                mat-menu-item>{{sharedData.numberWithCommas(element.position)}}</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Last">
+        <mat-header-cell *matHeaderCellDef> Last</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span mat-menu-item>{{sharedData.numFormatWithComma(element.lastPrice)}}</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Market Value ($)">
+        <mat-header-cell *matHeaderCellDef> Market Value ($) </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span mat-menu-item>{{sharedData.numFormatWithComma(element.mktValue)}}</span>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Unrealized P&L ($)">
+        <mat-header-cell *matHeaderCellDef> Unrealized P&L ($) </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span mat-menu-item>{{getmarketdata(element.conid,'unrealizedprofitloss')}}</span>
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="accountDataSourceHeader;sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: accountDataSourceHeader;"></mat-row>
+</mat-table>
+<mat-table *ngIf="selectedType == 'P'" matSort [dataSource]="accountDataSourceData" class="common_mat_table accounts_table  unrealizedGainLoss_table" matSortDisableClear
+id="rolemanagement-table" matSortDirection="asc" (matSortChange)="onSortPData($event)">
+
+<ng-container matColumnDef="Instrument">
+  <mat-header-cell mat-sort-header *matHeaderCellDef style="justify-content: flex-start;">
+    Instrument
+  </mat-header-cell>
+  <mat-cell *matCellDef="let element">
+    <span style="position: absolute;left: 0;cursor: pointer;line-height: 0;top: 49%;transform: translate(0, -50%);"
+      *ngIf="checkDont_Info(element)" matTooltipClass='nav_tooltip' matTooltipPosition="above"
+      matTooltip="Added this stock in don't sell" [matTooltipShowDelay]="showDelay.value"
+      [matTooltipHideDelay]="hideDelay.value">
+      <svg width="10" height="10" fill="transparent" class="bi bi-info-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          style="fill: var(--prim-button-color-text); "></path>
+        <path
+          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+          style="fill: var(--prim-button-color-text);"></path>
+      </svg>
+    </span>
+
+    <span mat-menu-item *ngIf="element.Instrument != null" class="accMenuFirst" style="position: absolute; "
+      matTooltipClass='nav_tooltip' matTooltipPosition="above" [matTooltip]="element.securityDescription"
+      [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value">
+      {{element.Instrument}}
+    </span>
+    <span mat-menu-item *ngIf="element.Instrument == null" class="accMenuFirst" style="position: absolute; "
+      matTooltipClass='nav_tooltip' matTooltipPosition="above" [matTooltip]="element.securityDescription"
+      [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value">
+      {{element.exchangeCode}}
+    </span>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Position">
+  <mat-header-cell mat-sort-header *matHeaderCellDef> Position </mat-header-cell>
+  <mat-cell *matCellDef="let element">
+    <span style="cursor: pointer; color: var(--prim-button-color-text) !important;"
+      (click)="taxLot_ModalOpen(element)" data-bs-toggle="modal" data-bs-target="#myexistingTaxlotModal"
+      mat-menu-item>{{sharedData.numberWithCommas(element.Position)}}</span>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Last">
+  <mat-header-cell  *matHeaderCellDef> Last</mat-header-cell>
+  <mat-cell *matCellDef="let element">
+    <span mat-menu-item>{{element.last | number: '1.2-2'}}</span>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Market Value ($)">
+  <mat-header-cell  *matHeaderCellDef> Market Value ($) </mat-header-cell>
+  <mat-cell *matCellDef="let element">
+    <span mat-menu-item>{{element.Market_Value | number: '1.2-2' }}</span>
+  </mat-cell>
+</ng-container>
+
+
+<ng-container matColumnDef="Unrealized P&L ($)">
+  <mat-header-cell  *matHeaderCellDef> Unrealized P&L ($) </mat-header-cell>
+  <mat-cell *matCellDef="let element" style="position: relative;">
+
+    <span style="color: #50cd89;"
+      *ngIf="isPershingLossorGain(element.Unrealized_PL) && element.Unrealized_PL != null">
+      {{ sharedData.numFormatWithComma(element.Unrealized_PL) }}
+    </span>
+    <span style="color: #f1416c;"
+      *ngIf="!isPershingLossorGain(element.Unrealized_PL) && element.Unrealized_PL != null">
+      {{ sharedData.numFormatWithComma(element.Unrealized_PL) }}
+    </span>
+    <span *ngIf="element.Unrealized_PL == null">
+      -
+    </span>
+
+
+
+  </mat-cell>
+</ng-container>
+<mat-header-row *matHeaderRowDef="accountDataSourceHeader;sticky: true"></mat-header-row>
+
+<mat-row *matRowDef="let row; columns: accountDataSourceHeader;"></mat-row>
+
+</mat-table>
+<div class="modal fade warningautoModel" id="myexistingTaxlotModal" tabindex="-1" role="dialog" aria-labelledby="myexistingTaxlotModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:50%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="close-l" data-bs-dismiss="modal" aria-label="Close" style="z-index:9999;"><span class="material-icons">close</span></div>
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <h3 style="border-bottom: 1px dotted var(--border); padding-bottom: 1.2rem;">Taxlot Information <span *ngIf="taxlotModalDataTicker.length > 0">({{taxlotModalDataTicker}})</span></h3>
+            <div class="taxlotInfoOuter pt-0">
+             
+              <div *ngIf="taxLotModalLastPrice.length > 0" class="taxlotInfoText mb0_5rem">
+                <span  style="   color: var(--leftSideText-B);">Last Price ($):  </span>
+                <span style="    color: var(--leftSideText);">{{taxLotModalLastPrice}}</span>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="text-align:left">Entry Date (MM/DD/YYYY)</th>
+                    <th style="text-align: left; width: 12rem">Taxlot Id</th>
+                    <!-- <th style="text-align:left">Ticker</th> -->
+                    <!--<th style="text-align:left">Company</th>-->
+                    <th style="text-align:right">Quantity </th>
+                    <th style="text-align:right">Unit Cost ($)</th>
+                    <!-- <th style="text-align:right">Last Price ($)</th> -->
+                    <th style="text-align:right">Unrealized <span class="nw">P&L ($)</span></th>
+                  
+                  </tr>
+                </thead>
+                <tbody *ngIf="taxlotModalData.length>0">
+                  <tr *ngFor="let data of taxlotModalData">
+                    <td style="text-align:left">{{sharedData.dateFormatMMDDYYYY(data.entryDate)}}</td>
+                    <td style="text-align: left; width: 12rem">{{data.taxLotIdentifier}}</td>
+                    <!-- <td style="text-align:left">{{data.ticker}}</td> -->
+                    <!--<td style="text-align:left">{{data.companyName}}</td>-->
+                  <td style="text-align:right">{{sharedData.numberWithCommas(data.noofShares)}}</td>
+                  <td style="text-align:right">{{sharedData.numFormatWithComma(data.unitCost)}}</td>
+                  <!-- <td style="text-align:right">{{sharedData.numFormatWithComma(data.price)}}</td> -->
+                  <td style="text-align:right" [style.color]="isPershingLossorGain(data.unrealizedGainLoss) ? '#50cd89': '#f1416c'">
+                    {{sharedData.numFormatWithComma(data.unrealizedGainLoss)}}</td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="taxlotModalData.length ==0">
+                  <tr style="display: inline;"><td colspan="6" style="text-align: center;height: 6rem;">No records Found</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

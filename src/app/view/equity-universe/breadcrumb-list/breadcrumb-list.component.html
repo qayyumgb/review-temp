@@ -1,0 +1,58 @@
+<div class="bcum-list-l-n d-flex align-items-center w-100" [class.hideLeftAnimate] ="sharedData._getSelectedLeftSide != 'Y'">
+  <!--<div class="pinnedSec" *ngIf="!sharedData._openPinnedLeftSide" (click)="sharedData.openLeftSideGrid()"> 
+    <div class="icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.125 4.875L4.125 19.125C4.125 19.5392 4.46079 19.875 4.875 19.875L19.125 19.875C19.5392 19.875 19.875 19.5392 19.875 19.125L19.875 4.875C19.875 4.46079 19.5392 4.125 19.125 4.125L4.875 4.125C4.46079 4.125 4.125 4.46079 4.125 4.875Z" stroke="#B5B5E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 19.875L12 4.125" stroke="#B5B5E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 16.5L19.875 16.5" stroke="#B5B5E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 13.5L19.875 13.5" stroke="#B5B5E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 10.5L19.875 10.5" stroke="#B5B5E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 7.5L19.875 7.5" stroke="#B5B5E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    View List
+  </div>-->
+  <div class="b-outer d-flex align-items-center">
+    <div class="d-flex align-items-center">
+      @if(showBackBtn){
+      <div class="b-drop-n1 d-flex" (click)="onPreviousGrp()">
+        <div class="go-back-ico" ><span class="material-icons">arrow_back_ios</span></div>
+      </div>
+      <div class="clkdTxtView d-flex">
+        <span class="b-text-n-d" *ngIf="selectedPath.length<2">
+          {{selectedPath[selectedPath.length-1].name}}
+        </span>
+        <span class="b-text-n-d" *ngIf="selectedPath.length>= 2" [style.fontSize]="checkFontLength()">
+          {{selectedPath[selectedPath.length-1].name}}
+          <!--<span class="bcumToolTip">{{selectedPath[selectedPath.length-1].name}}</span>-->
+        </span>
+        <span class="d-flex align-items-center">
+          <span class="d-flex align-items-center">
+          <span class="material-icons go-home-ico" (click)="gotoHome()">home</span>
+          <span class="b-text-n-ico" (click)="gotoHome()" style="color: var(--linkColor); padding-left: 0.1rem;">Equity</span>
+          </span>
+          <span class="b-text-n-ico">
+            @for (bcrumb of selectedPath |firstAndLast; track bcrumb;let index = $index) {
+            <span class="d-flex align-items-center hideB">
+              <span class="material-icons __horiz" *ngIf="selectedPath.length>0">navigate_next</span>
+              <span class="b__list">{{bcrumb.name}}</span>
+              <!--@if(bcrumb.indexName != null && bcrumb.indexName != undefined){
+              <span class="b__list" style="padding-left:0.25rem">({{bcrumb.indexName}})</span>
+              }-->
+              <!--<span class="material-icons __horiz" *ngIf="selectedPath.length>0">navigate_next</span>-->
+              <!--<span class="material-icons __horiz" *ngIf="selectedPath.length>0">more_horiz</span>
+  <span class="material-icons">navigate_next</span>-->
+            </span>
+            }
+          </span>
+        </span>
+      </div>
+      }
+      @else{
+      <div class="clkdTxtView d-flex pl2rem">
+        <span class="b-text-n nw">Equity</span>
+      </div>
+      }
+    </div>
+  </div>
+</div>

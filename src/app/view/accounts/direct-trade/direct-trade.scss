@@ -1,0 +1,115 @@
+.title_head {
+  text-align: left !important;
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 0.5rem;
+  padding-left: 0;
+  white-space: nowrap;
+  font-size: 1.6rem !important;
+  color: var(--leftSideText-B) !important;
+  font-family: var(--ff-semibold) !important;
+  border-bottom: 1px dashed var(--border);
+}
+
+.upload_sec {
+  p {
+    color: var(--leftSideText);
+    padding: 0 0rem;
+    font-size: 1.0rem;
+    margin: 0 !important;
+
+    b {
+      color: var(--leftSideText-B);
+    }
+  }
+
+  button.dialog_btn_S {
+    color: var(--linkColor);
+    background: transparent;
+    border: 1px solid var(--prim-button-color);
+
+    span.material-icons {
+      font-size: 1rem;
+      height: auto;
+      color: var(--linkColor);
+      width: auto;
+      margin-right: 0.2rem;
+    }
+  }
+}
+
+.upload_sec_first {
+  .section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px dashed var(--border);
+    padding: 3rem;
+    border-radius: 0.2rem;
+    background: var(--primary-color-Alt);
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+    min-width: 35%;
+  }
+
+  p {
+    color: var(--leftSideText);
+    padding: 0 0rem;
+    font-size: 1.0rem;
+    margin: 0.5rem !important;
+
+    b {
+      color: var(--leftSideText-B);
+    }
+  }
+
+  button.dialog_btn_S {
+    color: var(--linkColor);
+    background: transparent;
+    border: 1px solid var(--prim-button-color);
+    margin-top: 2rem;
+
+    span.material-icons {
+      font-size: 1rem;
+      height: auto;
+      color: var(--linkColor);
+      width: auto;
+      margin-right: 0.2rem;
+    }
+  }
+}
+
+.example-container {
+  height: calc(100vh - 12.5rem);
+  overflow: auto;
+  padding-right: 0.2rem;
+  background: var(--primary-color);
+
+  .mat-mdc-header-row {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
+
+.common_mat_table .mat-mdc-row {
+  background: var(--primary-color-Alt);
+}
+
+.delete_ico {
+  font-size: 1.2rem;
+  color: var(--danger);
+  margin-left: 0.5rem;
+}
+
+.content-btm {
+  padding: 1.5rem;
+  max-width: 1600px;
+  margin: auto;
+}

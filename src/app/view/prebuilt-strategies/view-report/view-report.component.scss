@@ -1,0 +1,69 @@
+.ind_loader {
+  transform: scale(1.5);
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+.report_table .scrollbox {
+  height: calc(100vh - 10rem);
+}
+.report_dropdown {
+  position: relative;
+
+  .view_perf_btn {
+    background-color: var(--defButtonBgColor);
+    position: absolute;
+    right: 0;
+    top: 0.5rem;
+    padding: 0.2rem 0.7rem;
+    z-index: 9;
+    border: none;
+    color: var(--leftSideText-B);
+    font-size: 0.75rem;
+    border-radius: 0.2rem;
+    font-family: var(--ff-regular);
+    display: flex;
+    align-items: center;
+
+    .material-icons {
+      font-size: 0.8rem;
+      margin-right: 0.25rem;
+    }
+  }
+
+
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+margin: 0;
+
+    li {
+      color: var(--leftSideText-B);
+      font-size: 0.75rem;
+      padding: 0.3rem 1rem;
+      cursor: pointer;
+      &:hover{
+        background: var(--dropdownBgHover);
+      }
+    }
+  }
+}
+.ticker_VR {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+
+  span {
+    background: var(--border);
+    padding: 0.2rem 0.7rem;
+    margin-top: 0.2rem;
+    display: inline-block;
+    border-radius: 0.2rem;
+    color: var(--leftSideText-B);
+    min-width:5rem;
+  }
+}

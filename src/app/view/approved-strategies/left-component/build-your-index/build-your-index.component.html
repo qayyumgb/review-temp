@@ -1,0 +1,674 @@
+<div class="buildYourIndex__sec">
+  <div class="icon__select">
+    <!--Index steps Menu Permission-->
+    @if(sharedData.checkMenuPer(12, 170) == 'Y'){
+    <div class="__selectIco select__steps" [class.active]="showDefault_select == 'Steps'" (click)="showDefault_select = 'Steps';closeFactsheet();dirIndexService.eventTrack('left tab click',{name:'Index Steps'})">
+      <span class="material-icons-outlined">
+        dns
+      </span>
+      <p>Index Steps</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(12, 170) == 'D'){
+    <div class="__selectIco select__steps disableMenu">
+      <span class="material-icons-outlined">
+        dns
+      </span>
+      <p>Index Steps</p>
+    </div>
+    }
+    <!--Index steps Menu Permission-->
+    <!--Accounts Menu Permission-->
+    @if(sharedData.checkShowLeftTab(5) == 'A'){
+    <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'Accounts'" (click)="showDefault_select = 'Accounts';closeFactsheet();dirIndexService.eventTrack('left tab click',{name:'Select Accounts'})">
+      <span class="material-icons-outlined">
+        manage_accounts
+      </span>
+      <p>Select Accounts</p>
+    </div>
+    }
+    <!--Accounts Menu Permission-->
+    <!--Factsheet Menu Permission-->
+    @if(sharedData.checkMenuPer(12, 171) == 'Y'){
+    <div class="__selectIco select__factsheet" [class.active]="showDefault_select == 'Factsheet'" (click)="showDefault_select = 'Factsheet';closeFactsheet();dirIndexService.eventTrack('left tab click',{name:'Factsheet'});openFactsheet(0)">
+      <span class="material-icons-outlined">
+        newspaper
+      </span>
+      <p>Factsheet</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(12, 171) == 'D'){
+    <div class="__selectIco select__factsheet disableMenu">
+      <span class="material-icons-outlined">
+        newspaper
+      </span>
+      <p>Factsheet</p>
+    </div>
+    }
+    <!--Factsheet Menu Permission-->
+  </div>
+  <div class="left_icon__details">
+    <div class="select__steps__details top_bg" style="padding: 1rem;" [style.display]="showDefault_select == 'Steps'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <h4>Index Steps</h4>
+      <div class="scrollbox outerScroll__Div ">
+        <div class="construction h__line">
+          <span class="d-flex justify-content-between align-items-center">
+            <span class="sub__head">Index Construction</span>
+            <span class="sub__ico" (click)="openIndexConstruction();dirIndexService.eventTrack('Index Construction popup click',{name:'Index Construction'})">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="transparent" xmlns="http://www.w3.org/2000/svg"><path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="currentColor"></path><path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="currentColor"></path></svg>
+            </span>
+          </span>
+        </div>
+        <div class="SW__section">
+          <h5>Selection & Weighting</h5>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Selected By</span>
+            <span class="sub__text">{{selectedDirectIndex.selectedByName}}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Number of Components</span>
+            <span class="sub__text">{{selectedDirectIndex.noofComp}}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Cash Target</span>
+            <span class="sub__text">{{selectedDirectIndex.cashTarget != null ? selectedDirectIndex.cashTarget+'%' : '-'}}</span>
+            <!--<span class="sub__text">{{selectedDirectIndex.cashTarget}}%</span>-->
+
+
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Weighted By</span>
+            <span class="sub__text">{{selectedDirectIndex.weightedByName}}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="sub__head">Tax Optimization</span>
+            <span class="sub__text">
+              @if(selectedDirectIndex.taxEffAwareness =='Y'){Yes}@else{No}
+            </span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="sub__head">Rebalance</span>
+            <span class="sub__text">{{selectedDirectIndex.rebalanceByName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    @if(sharedData.checkShowLeftTab(3) == 'A' && showCutomTool){
+    <div class="select__steps__details top_bg tool_cust mt1rem" style="padding: 1rem 0.5rem 1rem 1rem;" [style.display]="showDefault_select == 'Steps'?'block':'none'" (click)="openToolCustom()">
+      <div class="d-flex align-items-center">
+        <span class="icon_bg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="196" height="50" viewBox="0 0 196 197" fill="none">
+            <path d="M95.5329 8.34609C119.397 7.69171 142.544 16.5441 159.881 32.9558C177.218 49.3675 187.325 71.9941 187.98 95.8581" stroke="url(#paint0_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+            <path d="M182.556 129.191C176.452 145.914 165.525 160.452 151.158 170.966C136.792 181.479 119.63 187.497 101.843 188.257C84.0562 189.017 66.4436 184.485 51.2322 175.235C36.0209 165.986 23.8941 152.433 16.3852 136.291" stroke="url(#paint1_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+            <path d="M7.98706 98.3255C7.98706 80.6917 13.1665 63.4463 22.8823 48.7305C32.5981 34.0147 46.4223 22.4767 62.6383 15.5492" stroke="url(#paint2_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+            <path d="M63.4756 98.3235H78.8198V132.848H63.4756V98.3235ZM117.18 82.9793H132.525V132.848H117.18V82.9793ZM90.328 59.9629H105.672V132.848H90.328V59.9629Z" fill="#5A5A89"></path>
+            <defs>
+              <linearGradient id="paint0_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#E323FF"></stop>
+                <stop offset="1" stop-color="#7517F8"></stop>
+              </linearGradient>
+              <linearGradient id="paint1_linear_699_114074" x1="98.0003" y1="196.054" x2="98.0003" y2="0.59728" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8AFF6C"></stop>
+                <stop offset="1" stop-color="#02C751"></stop>
+              </linearGradient>
+              <linearGradient id="paint2_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFD422"></stop>
+                <stop offset="1" stop-color="#FF7D05"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <div>
+          <p>Customization</p>
+          <h5>Tool</h5>
+        </div>
+      </div>
+    </div>
+    }@else if(sharedData.checkShowLeftTab(3) == 'D' && showCutomTool){
+    <div class="select__steps__details top_bg tool_cust mt1rem disabled" style="padding: 1rem 0.5rem 1rem 1rem;" [style.display]="showDefault_select == 'Steps'?'block':'none'">
+      <div class="d-flex align-items-center">
+        <span class="icon_bg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="196" height="50" viewBox="0 0 196 197" fill="none">
+            <path d="M95.5329 8.34609C119.397 7.69171 142.544 16.5441 159.881 32.9558C177.218 49.3675 187.325 71.9941 187.98 95.8581" stroke="url(#paint0_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+            <path d="M182.556 129.191C176.452 145.914 165.525 160.452 151.158 170.966C136.792 181.479 119.63 187.497 101.843 188.257C84.0562 189.017 66.4436 184.485 51.2322 175.235C36.0209 165.986 23.8941 152.433 16.3852 136.291" stroke="url(#paint1_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+            <path d="M7.98706 98.3255C7.98706 80.6917 13.1665 63.4463 22.8823 48.7305C32.5981 34.0147 46.4223 22.4767 62.6383 15.5492" stroke="url(#paint2_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+            <path d="M63.4756 98.3235H78.8198V132.848H63.4756V98.3235ZM117.18 82.9793H132.525V132.848H117.18V82.9793ZM90.328 59.9629H105.672V132.848H90.328V59.9629Z" fill="#5A5A89"></path>
+            <defs>
+              <linearGradient id="paint0_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#E323FF"></stop>
+                <stop offset="1" stop-color="#7517F8"></stop>
+              </linearGradient>
+              <linearGradient id="paint1_linear_699_114074" x1="98.0003" y1="196.054" x2="98.0003" y2="0.59728" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8AFF6C"></stop>
+                <stop offset="1" stop-color="#02C751"></stop>
+              </linearGradient>
+              <linearGradient id="paint2_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFD422"></stop>
+                <stop offset="1" stop-color="#FF7D05"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <div>
+          <p>Customization</p>
+          <h5>Tool</h5>
+        </div>
+      </div>
+    </div>
+    }
+
+    <div class="select__accounts__details top_bg p-rel h-auto" style="padding: 1rem 0.5rem 1rem 1rem;display:none" [class.hidden__sec]="checkDefaultAccountPopup != ''" [style.display]="showDefault_select == 'Accounts'?'block':'none'">
+      <div class="checkQueue-sec" *ngIf="!checkEnableFactSheet()" (click)="openQueueModal()" style="position: absolute; width: 100%; height: 100%; background: transparent; z-index: 9; cursor: pointer;left:0;top:0;"></div>
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <div class="d-flex align-items-center acc-head">
+        <h4>Accounts</h4>
+        <span class="material-icons mr0_5rem" (click)="openSearch()">
+          search
+        </span>
+      </div>
+      <div class="search-block-account mat-elevation-z4" [class.active]="toggleSearch">
+        <div class="d-flex align-items-center">
+          <span class="material-icons disable"> search </span>
+          <input appalphanumCharacters  minlength="1" maxlength="10" class="search-control" [(ngModel)]="accSearchText" type="text" placeholder="Filter account" #searchBox #filterInput>
+          <span class="material-icons" (click)="accSearchText='';searchClose()"> close </span>
+        </div>
+      </div>
+      <div id="account_Exclusions" class="p-rel accountSelectBg h-auto">
+        <div class="build-my-sec-l">
+          <div *ngIf="myAcclistList.length <= 0" class="noAcc d-flex align-items-center justify-content-center" style="min-height: 10rem;">
+            <span style="font-size: 0.7rem;color: var(--leftSideText);">No accounts assigned!</span>
+          </div>
+          @if(showSpinnerAcc_settings){
+          <div class="mat-spinner-loader">
+            <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+          </div>
+          }
+          <div class="scrollbox build-my-sec-l p-rel" *ngIf="myAcclistList.length>0">
+
+            <form [formGroup]="accountForm" novalidate name="accountForm">
+              <div formArrayName="accountItem" class="outerScroll__Div__18 clientaccountHeight" style="padding-left: 0.2rem; height: calc(100vh - 25rem);">
+                @if((getFormAccount.controls | accountFilter:filterInput.value).length == 0 ){
+                <div class="no-records-abs">
+                  <span>No record found</span>
+                </div>
+                }
+                <cdk-virtual-scroll-viewport itemSize="20" minBufferPx="700" maxBufferPx="700" class="account-viewport w-100 h-100 scrollbox acc-selc-h " id="accSelect">
+                  <div *cdkVirtualFor="let item of getFormAccount.controls | accountFilter:filterInput.value; let i = index;" [formGroup]="item" class="example-item accountSelect">
+                    <ng-container>
+                      <div class="cashFlowAccount p-rel" [matTooltip]="accountTooltip(item)" [matTooltipPosition]="'above'">
+                        <ng-container>
+                          <mat-checkbox formControlName="account" class="example-margin" (change)="acccountChange($event,item)">{{checkAccName(item)}}</mat-checkbox>
+                        </ng-container>
+                        <span class="material-icons dollar_ico ng-star-inserted" style="margin: 0;position: absolute;right: 2rem;line-height:0.5" *ngIf="checkAcctradedDisable(item)">
+                          <svg width="16" height="16" viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z" stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg>
+                        </span>
+                        <span class="fill-remaining-space" style=" position: absolute; right: 0;">
+                          <button [disabled]="!checkAccActive(item)" mat-icon-button (click)="accountInit(item);accountmore(item)">
+                            <mat-icon>more_horiz</mat-icon>
+                          </button>
+                        </span>
+                      </div>
+                    </ng-container>
+                  </div>
+                </cdk-virtual-scroll-viewport>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="account__details__popup approveStrategies" [style.display]="checkDefaultAccountPopup=='details_popup'?'block':'none'">
+        <span class="material-icons-outlined close__card" (click)="checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account: <span style="color: var(--prim-button-color); text-transform: capitalize; letter-spacing: normal; ">{{checkAccName(accModalGroup)}}</span></h4>
+        <form [formGroup]="accModalGroup">
+          <div class="accEditValues">
+            <div class="panel-collapse cashFlowWrapper">
+              <div class="cashFlowValue">
+                <ul style="margin:0;padding:0">
+                  <li class="cashFlow hrLine" style="height: 1.8rem;">
+                    <p>Market Value</p>
+                    <p class="text_right" style="width: 25%;">{{defaultMarketCurrency}}{{checkMV(accModalGroup)}}</p>
+                    <a (click)="accountInit(accModalGroup)" class="cp lh_D">
+                      <span class="material-icons market-info">refresh</span>
+                    </a>
+                  </li>
+                  <li [style.display]="(cusIndexService.checkAccTrans(checkMyaccID()))?'block':'none'" class="cashFlow w-100">
+                    <div class="w-100 d-flex align-items-center">
+                      <p>Transition By Date<br> <span class="high_text">(Max.no of Rebalance: {{rebalanceCount}})</span> </p>
+                      <mat-form-field FloatLabelType="never" [class.errorBorder]="checkFormInvalid('transitionDate')">
+                        <input class="date_inp" readonly matInput [matDatepicker]="dp1" (dateChange)="transitionDateCange($event)"
+                               formControlName="transitionDate" [min]="minDate" [max]="maxDate" placeholder="Select">
+                        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                        <mat-datepicker #dp1></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </li>
+                  <li [style.display]="(cusIndexService.checkAccTrans(checkMyaccID()))?'block':'none'" class="w-100 hrLine">
+                    <div class="w-100 d-flex align-items-center">
+                      <p>Transition Gain Target</p>
+                      <input formControlName="transitionGainTgt" type="number" class="form-control" required>
+                    </div>
+                  </li>
+                  <li class="ct_nobg hrLine">
+                    <div class="w-100">
+                      <div class="p-rel w-100 d-flex align-items-center">
+                        <div class="cashT_invest text_left" style="width:75%">
+                          <p>Cash Target</p>
+                          <div class="d-flex align-items-center" style="flex-wrap:wrap;margin-top:0.2rem">
+                            <span class="high_text" *ngIf="!checkFormInvalid('cashTarget')">Investing <span class="bold">{{defaultMarketCurrency}}{{checkRemainingCashTarget('cashTarget', 'updatedCash')}}</span> leaving a balance of <span class="bold">{{defaultMarketCurrency}}{{checkRemainingCashTarget('cashTarget', 'remainingCash')}}</span></span>
+                          </div>
+                        </div>
+                        <div class="p-rel" style="width:25%">
+                          <input id="cashTargetIn" [class.errorBorder]="checkFormInvalid('cashTarget') || InsufficientCashTarget" onkeydown="if($event.key==='.'){$event.preventDefault();}" step="1" formControlName="cashTarget" type="number" class="form-control" required style="width:100%;padding-right: 1.7rem;box-shadow: none;">
+                          <span class="per_sym">%</span>
+                        </div>
+                      </div>
+                      <div class="w-100 text_right" *ngIf="checkFormInvalid('cashTarget')">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;">Value should range from 2% to 99%</span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li *ngIf="isAccountAccor" class="cashFlow" style="flex-direction: column;">
+                    <div class="w-100">
+                      <div class="w-100 d-flex">
+                        <p class="cashFlowTax d-flex align-items-center">
+                          <span>Tax</span>
+                          <span class=" cashFlowMat defaulttheme_Mat">
+                            <mat-form-field FloatLabelType="never" appearance="outline" style="width: 5rem;margin: 0 0.3rem;">
+                              <mat-select (selectionChange)="taxChange($event.value)" panelClass="selectList gainMat" formControlName="cashTargetType">
+                                <ng-container>
+                                  <mat-option *ngFor="let ga of gainList" [value]="ga.value">
+                                    <span>{{ga.name}}</span>
+                                  </mat-option>
+                                </ng-container>
+                              </mat-select>
+                            </mat-form-field>
+                          </span>
+                          <span class="d-flex align-items-center cursor-pointer">
+                            Target.
+                            <span *ngIf="checkFormValue('cashTargetType') =='L'" class="d-flex buiToolTip">
+                              <mat-icon class="market-info" matTooltip='Must not surpass 20% market value' [matTooltipPosition]="'above'" #tooltip="matTooltip">info_outline</mat-icon>
+                              <!--<span class="ACCtooltiptext">Must not surpass 20% market value</span>-->
+                            </span>
+                          </span>
+                        </p>
+                        <input type="number" class="form-control" formControlName="taxTarget" required>
+                      </div>
+                      <div class="w-100 text_right">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;" *ngIf="(checkFormValue('cashTargetType') =='L' && checkFormInvalid('taxTarget'))">Exceeds 20% of Market Value</span>
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;" *ngIf="(checkFormValue('cashTargetType') =='G' && checkFormInvalid('taxTarget'))">Exceeds Market Value</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li *ngIf="isAccountAccor" class="cashFlow hrLine" style="flex-direction: column;">
+                    <div class="bt_nobg w-100 d-flex align-items-center">
+                      <p>Buffer {{checkTax(checkFormValue('cashTargetType'))}} Target</p>
+                      <mat-form-field FloatLabelType="never" appearance="outline" style="width: 25%;">
+                        <mat-select formControlName="bufferTarget" panelClass="selectList CTOption bufferTgt">
+                          <ng-container>
+                            <mat-option *ngFor="let ct of bufferTargetData" [value]="ct"><p>{{ct}}%</p></mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </li>
+                  <li *ngIf="selectedDirectIndex.taxEffAwareness == 'Y'" class="cashFlow" style="white-space: nowrap;flex-direction:column;">
+                    <div class="w-100">
+                      <div class="p-rel w-100 d-flex align-items-center">
+                        <p>Long term tax rate</p>
+                        <input style="padding-right: 1.7rem;" type="number" [class.errorBorder]="checkFormInvalid('longTermtaxRate')" class="form-control" step="0.01" formControlName="longTermtaxRate" required>
+                        <span class="per_sym">%</span>
+                      </div>
+                      <div class="w-100 text_right" *ngIf="checkFormInvalid('longTermtaxRate')">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;">Value should range from 0.00% to 100.00%</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li *ngIf="selectedDirectIndex.taxEffAwareness == 'Y'" class="cashFlow" style="white-space: nowrap;flex-direction:column;">
+                    <div class="w-100">
+                      <div class="p-rel w-100 d-flex align-items-center">
+                        <p>Short term tax rate</p>
+                        <input style="padding-right: 1.7rem;" type="number" [class.errorBorder]="checkFormInvalid('shortTermtaxRate')" class="form-control" step="0.01" formControlName="shortTermtaxRate" required>
+                        <span class="per_sym">%</span>
+                      </div>
+                      <div class="w-100 text_right" *ngIf="checkFormInvalid('shortTermtaxRate')">
+                        <span style="color: var(--danger) !important;font-size: 0.65rem;">Value should range from 0.00% to 100.00%</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="foot_btn d-flex align-items-center justify-content-end">
+            @if(!updateBtn){
+            <button *ngIf="!updateBtn" class="save mr0_5rem" (click)="updateAccModal()">Update</button>
+            <button class="close" (click)="checkDefaultAccountPopup = ''">Cancel</button>
+            }@else{
+            <button class="close" (click)="checkDefaultAccountPopup = ''">Cancel</button>
+            }
+
+          </div>
+        </form>
+      </div>
+      @switch (checkDefaultAccountPopup) {
+      @case ("traded_popup") {
+      <div class="traded__sec__popup top_bg">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY TRADED</h4>
+        <div class="accEditValues">
+          <p class="para_txt">This account {{accountAlertInfo.account}} is currently being used for trading by another user.</p>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{accountAlertInfo.username}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{accountAlertInfo.stgyname}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Traded date:</b></p>
+            <p class="text-right">{{accountAlertInfo.tradedate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          <p class="para_txt">Do you wish to proceed with reallocating this account?</p>
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="accountInit(changeFormValue);eventTrace(changeFormValue,'Account ALREADY TRADED Reallocate')">Reallocate</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      @case ("saved_popup") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY SAVED</h4>
+        <div class="accEditValues" *ngIf="strat_savedAccount.length>0">
+          <p class="para_txt">This account <b>{{checkAccName(changeFormValue)}}</b> has been saved by the below user in their strategy.</p>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{strat_savedAccount[0].username}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{strat_savedAccount[0].name}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Traded date:</b></p>
+            <p class="text-right">{{strat_savedAccount[0].updatedDatetime+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          <p class="para_txt">Saving this account in your strategy will lead to its removal from the previously saved strategies. Do you want to continue?</p>
+        </div>
+
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="PostRemoveAccLinks();eventTrace(changeFormValue,'Account ALREADY SAVED Proceed')">Proceed</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      @case ("locked_popup_single") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY LOCKED</h4>
+        <div class="accEditValues" *ngIf="strat_savedAccount.length>0">
+          <p class="para_txt">{{sharedData.checkMyAppMessage(6,100)}}</p>
+
+          @for (data of lockedDataInfo; track data.id) {
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{checkAccValName(data.id)}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{data.lockedUserName}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Locked date:</b></p>
+            <p class="text-right">{{data.lockedDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          }
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save" (click)="removeAccount(); checkDefaultAccountPopup = ''">OK</button>
+        </div>
+      </div>
+      }
+      @case ("paused_popup_single") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY PAUSED</h4>
+        <div class="accEditValues">
+          <p class="para_txt">{{sharedData.checkMyAppMessage(3,61)}}</p>
+
+          @for (data of pausedDataInfo; track data.id) {
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{checkAccValName(data.id)}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{data.pauseUserName}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Locked date:</b></p>
+            <p class="text-right">{{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          }
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="unPauseAcc();checkPostInit(changeFormValue);eventTrace(changeFormValue,'Account ALREADY PAUSED Proceed')">Proceed</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      } @case ("paused_popup") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Account ALREADY PAUSED</h4>
+        <div class="accEditValues">
+          <p class="para_txt">{{sharedData.checkMyAppMessage(3,61)}}</p>
+
+          @for (data of pausedDataInfo; track data.id) {
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="field_txt text-left m0"><b>User name:</b></p>
+            <p class="text-right">{{checkAccValName(data.id)}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Strategy:</b></p>
+            <p class="text-right">{{data.pauseUserName}}</p>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bb__dashed mb0_5rem">
+            <p class="text-left"><b>Locked date:</b></p>
+            <p class="text-right">{{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+          </div>
+          }
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem" (click)="unPauseAcc();checkPostInit(changeFormValue);eventTrace(changeFormValue,'Account ALREADY PAUSED Proceed')">Proceed</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      @case ("lockAccounts_popup") {
+      <div class="traded__sec__popup">
+        <span class="material-icons-outlined close__card" (click)="removeAccount();checkDefaultAccountPopup = ''">
+          close
+        </span>
+        <h4>Paused/Locked Accounts</h4>
+        <div class="accEditValues">
+          <p class="para_txt" *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length>0">{{sharedData.checkMyAppMessage(12,87)}}</p>
+          <p class="para_txt" *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length<=0">{{sharedData.checkMyAppMessage(12,88)}}</p>
+          <p class="para_txt" *ngIf="pausedDataInfo.length>0 && lockedDataInfo.length<=0">{{sharedData.checkMyAppMessage(12,89)}}</p>
+          <div class="mb1rem" *ngIf="lockedDataInfo.length>0">
+            <div class="w-100">
+              <span class="acc d-flex" style=" font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--leftSideText-B);">Locked Accounts:</span>
+              <!--begin::Text-->
+              @for (data of lockedDataInfo; track data.accid) {
+              <div class="fw-mormal timeline-content" style=" font-size: 0.72rem; color: var(--leftSideText);">
+                <span class="acc" style=" color: var(--linkColor);">{{checkAccValName(data.accid)}} </span>
+                <span><span style="color: var(--leftSideText-B)"> by&nbsp;</span> {{data.lockedUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.lockedDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="mb1rem" *ngIf="pausedDataInfo.length>0">
+            <div class="w-100">
+              <span class="acc" style=" font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--leftSideText-B);">Paused Accounts:</span>
+              <!--begin::Text-->
+              @for (data of pausedDataInfo; track data.accid) {
+              <div class="fw-mormal timeline-content" style=" font-size: 0.72rem; color: var(--leftSideText);">
+                <span class="acc" style=" color: var(--linkColor);">{{checkAccValName(data.accid)}} </span>
+                <span><span style="color: var(--leftSideText-B)"> by&nbsp;</span>{{data.pauseUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+              </div>
+              }
+            </div>
+          </div>
+
+        </div>
+        <div class="foot_btn d-flex align-items-center justify-content-end">
+          <button class="save mr0_5rem"  (click)="unPauseAcc();builIndexCalculate();eventTrace(changeFormValue,'Paused Locked Accounts');checkDefaultAccountPopup = ''">Continue</button>
+          <button class="close" (click)="removeAccount(); checkDefaultAccountPopup = ''">Cancel</button>
+        </div>
+      </div>
+      }
+      }
+    </div>
+    <div class="select__steps__details top_bg tool_cust tool_calcu mt1rem" style="padding: 1rem" [style.display]="showDefault_select == 'Accounts'?'block':'none'">
+      <p class="semi_text">Clicking "Calculate" engages selected accounts and their custom settings, initiating the calculation.</p>
+      <div class="calBtn__abs mt0_5rem">
+        @if(checkDefaultAccountPopup != '' || myAcclistList.length==0){
+        <button class="dialog_btn_P w-100" style="opacity:.5 !important">
+          <span class="svg-icon svg-icon-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3"
+                    d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                    fill="currentColor"></path>
+              <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          Calculate
+        </button>
+        }@else{
+        @if(checkEnableFactSheet()){
+        <button class="dialog_btn_P w-100" (click)="checkLockedAcc()">
+          <span class="svg-icon svg-icon-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3"
+                    d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                    fill="currentColor"></path>
+              <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          Calculate
+        </button>
+        }
+        @else if(!checkEnableFactSheet()){
+        <button class="dialog_btn_P w-100" (click)="openQueueModal()" style="opacity:.5 !important">
+          <span class="svg-icon svg-icon-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.3"
+                    d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                    fill="currentColor"></path>
+              <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          Calculate
+        </button>
+        }
+        }
+      </div>
+    </div>
+    <div class="select__factsheet__details top_bg" style="padding: 1rem 0.5rem 1rem 1rem; display: none" [style.display]="showDefault_select == 'Factsheet'?'block':'none'">
+      <span class="material-icons-outlined close__card" (click)="showDefault_select = ''">
+        close
+      </span>
+      <h4>Index Factsheet</h4>
+      <div class="scrollbox outerScroll__Div ">
+        <div class="fact__list" (click)="openFactsheet(0)">
+          <span class="d-flex align-items-center mb-2" [class.active]="reviewIndextab == 0">
+            <span class="material-icons-outlined ico">
+              fiber_manual_record
+            </span>
+            <span class="sub__head">View Factsheet</span>
+          </span>
+        </div>
+        <div class="fact__list" *ngIf="diStrFactsheetAccData.length>0">
+          @for(accDt of diStrFactsheetAccData;track accDt.accountId){
+          @if(checkfactDisable(accDt.accountId)){
+          <span class="d-flex align-items-center mb-2 disabled" [class.active]="reviewIndextab == accDt.accountId">
+            <span class="material-icons-outlined ico">
+              fiber_manual_record
+            </span>
+            <span class="sub__head">{{accDt['accountNo'] | nullDashPipe}}</span>
+          </span>
+          }@else{
+          <span (click)="openFactsheet(accDt.accountId)" class="d-flex align-items-center mb-2" [class.disabled]="checkfactDisable(accDt.accountId)" [class.active]="reviewIndextab == accDt.accountId">
+            <span class="material-icons-outlined ico">
+              fiber_manual_record
+            </span>
+            <span class="sub__head">{{accDt['accountNo'] | nullDashPipe}}</span>
+          </span>
+          }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel w_Table" id="accCashTargetModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; padding: 0 1rem 1rem;">{{sharedData.checkMyAppMessage(12, 93)}}</p>
+            <div class="w-100" *ngIf="accMtData.length>0">
+              <table class="table" style=" padding: 0 5rem;width: 80%; margin: auto; margin-bottom: 1rem;">
+                <tbody>
+                  <tr>
+                    <td style="text-align: left;">Account</td>
+                    <td style="text-align: right;">Market value</td>
+                    <td style="text-align: right;">Cash Target</td>
+                  </tr>
+                  <ng-container *ngFor="let data of accMtData">
+                    <tr>
+                      <td style="text-align: left;">{{data.account}}</td>
+                      <td style="text-align: right;">{{sharedData.numberWithCommas(data.marketValue.toFixed(2))  }}</td>
+                      <td style="text-align: right;">{{data.cashTarget}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

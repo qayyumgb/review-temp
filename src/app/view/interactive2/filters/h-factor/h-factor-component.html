@@ -1,0 +1,61 @@
+<svg style="display:contents" id="hFactor">
+  <g class="innerC__section">
+    <circle cx="160" cy="160" r="235" fill="var(--primary-color)" style="transform: translate(-160px, 10px)" />
+    <text class="innerC__head" x="55" y="0">{{filterTitle}}</text>
+    <text class="innerC__para innerC__hgt" x="-193" y="130">By</text>
+    <g style="transform: translate(85px, 0);" (click)="selectOption('count')" class="radio-rect" [ngClass]="{'selected': selectedOption === 'count'}">
+      <rect   x="60" y="20" width="20" height="20" rx="50" fill="#13368d" style="transform: translate(-297px, 94px);"></rect>
+      <rect class="innerC__rect"  x="64" y="24" width="12" height="12" rx="50" fill="#13368d" style="transform: translate(-297px, 94px);"></rect>
+      <text class="innerC__para innerC__hgt" x="-210" y="130">Count</text>
+    </g>
+    <g style="transform: translate(198px, 0);" class="radio-rect" (click)="selectOption('percentage')" [ngClass]="{'selected': selectedOption === 'percentage'}">
+      <rect   x="0" y="20" width="20" height="20" rx="50" fill="#13368d" style="transform: translate(-238px, 94px);"></rect>
+      <rect  class="innerC__rect" x="4" y="24" width="12" height="12" rx="50" fill="#13368d" style="transform: translate(-238px, 94px);"></rect>
+      <text class="innerC__para innerC__hgt" x="-210" y="130">Percentage</text>
+    </g>
+    <g style="transform: translate(360px, 0);" class="radio-rect" (click)="selectOption('value')" [ngClass]="{'selected': selectedOption === 'value'}">
+      <rect   x="0" y="20" width="20" height="20" rx="50" fill="#13368d" style="transform: translate(-237px, 94px);"></rect>
+      <rect class="innerC__rect"  x="4" y="24" width="12" height="12" rx="50" fill="#13368d" style="transform: translate(-237px, 94px);"></rect>
+      <text class="innerC__para innerC__hgt" x="-210" y="130">Value</text>
+    </g>
+    <g  class="range_components">
+      <text class="header innerC__para" y="215" x="" style="text-anchor: middle;font-size:15px;">
+       
+      </text>
+    </g>
+    <!-- @if (selectedOption === 'percentage') {
+      <g style="transform: translate(155px, 50px);" class="range_components">
+        <text class="header" y="165" x="-210" style="text-anchor: middle;font-size:11.5px;"></text>
+        <text x="-210" y="165" class="innerC__para">From</text>
+        <text x="-163" y="165" class="innerC__para value_range">{{rangeTo}}
+          <tspan x="-151">%</tspan>
+        </text>
+        <text x="-136" y="165" class="innerC__para">to</text>
+        <text x="-115" y="165" class="innerC__para value_range">{{rangeFrom}}
+          <tspan x="-87">%</tspan>
+        </text>
+      </g>
+    }
+    @else {
+      
+      <g style="transform: translate(155px, 50px);" class="range_components">
+        <text class="header" y="165" x="-210" style="text-anchor: middle;font-size:11.5px;"></text>
+        <text x="-210" y="165" class="innerC__para">From</text>
+        <text x="-163" y="165" class="innerC__para value_range">{{rangeTo}}
+         
+        </text>
+        <text x="-141" y="165" class="innerC__para">to</text>
+        <text x="-115" y="165" class="innerC__para value_range">{{rangeFrom}}
+         
+        </text>
+      </g>
+    } -->
+   
+    <g transform="translate(-30, 360)" style="cursor:pointer !important" (click)="close()">
+      <g transform="" class="innerC__apply_btn">
+        <rect width="30" height="30" stroke="var(--border)" fill="var(--prim-button-color)" rx="5" ry="5"></rect>
+        <text y="10" x="35" >APPLY</text>
+      </g>
+    </g>
+  </g>
+</svg>

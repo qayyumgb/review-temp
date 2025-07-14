@@ -1,0 +1,367 @@
+<div class="trade_Page restrictedList_page h-100" style="overflow: hidden;">
+  <div class="dialog-content h-100">
+    <div class="split-mod-l h-100">
+      <div class="split-mod-right h-100">
+        <div class="close-l" (click)="confirmationDialog()"><span class="material-icons">close</span></div>
+        <div class="content-top" style="background: var(--topNavbar);">
+          <p>
+            Restricted List
+          </p>
+        </div>
+        <div
+          style=" height: 100%; position: absolute; width: 100%; background: var(--topNavbar); z-index: 99999;left:0;top:0;"
+          *ngIf="matloader_RS">
+          <mat-spinner class="reviewloader-spinner"></mat-spinner>
+        </div>
+        <div style="background: var(--primary-color)" class="p1rem h-100">
+          <div class="d-flex justify-content-between" *ngIf="sharedData._selResData.length>0">
+            <div class="default-search-item default-search-itemRestricted"
+              style="display: flex; width: 60%; align-items: flex-end; position: relative">
+              <div class="default-search-item" style="width:40%">
+                <span class="formLabel">
+                  Search & add Stock
+                </span>
+                <div class="default-search-item w-100">
+                  <form>
+                    <mat-form-field class="SearchFormField">
+                      <input appRemoveSpecialCharacters minlength="1" maxlength="50" type="text" matInput placeholder="Search" [formControl]="searchFormCtrl"
+                        [matAutocomplete]="auto" [(ngModel)]="inputValue">
+                      <mat-icon id="eScBtn" *ngIf="!inputValue" matPrefix>search</mat-icon>
+                      <mat-icon id="close_btn" matPrefix *ngIf="inputValue" (click)="clearInput()">close</mat-icon>
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                        (optionSelected)="onCompanyClick($event.option.value)" class="DrilldownSearchBar">
+                        <mat-option [value]="item" *ngFor="let item of filteredCompanies | async" [value]="item">
+                          <span class="d-flex justify-content-between align-items-center">
+                            <span class="indName">{{item.companyName}} ({{item.ticker}})</span>
+                            <span class="pbName">{{checkGroup(item)}}</span>
+                          </span>
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                </div>
+              </div>
+              <div class="ml0_5rem">
+                <div class="d-flex">
+                  <div style="text-align: center;">
+                    <input style="display: none;" type="file" id="importFile" (change)="importData($event)"
+                      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,.csv, text/csv,.txt"
+                      #importFiles>
+                    <div class="d-flex align-items-center">
+                      <button class="dialog_btn_S mr0_5rem d-flex align-items-center" style=" color: var(--linkColor); background: transparent; border: 1px solid var(--prim-button-color);" (click)="importFiles.click()">
+                        <mat-icon style="font-size: 1rem; height: auto; color: var(--linkColor); width: auto; margin-right: 0.2rem;">upload</mat-icon>
+                        Direct Upload
+                      </button>
+                      <button (click)="saveList()" class="dialog_btn_P">Save</button>
+                    </div>
+                  </div>
+               
+                </div>
+              </div>
+            </div>
+            <div class="res_btm">
+              <div class="d-flex">
+                <div style="text-align: center;">
+                  <div class="d-flex" style="align-items:center;">
+                    <div class="totalRows">
+                      <span *ngIf="uploadDataCount > 0"
+                        style="font-size: 0.8rem; margin-right: 1rem; color: var(--leftSideText)">
+                        Count: <span style="color: var(--leftSideText-B)">{{uploadDataCount}}</span>
+                      </span>
+                      <ng-container *ngIf="!uploadDataCount">
+                        <span *ngIf="checkDownloadBtnshow()"
+                        style="font-size: 0.8rem; margin-right: 1rem; color: var(--leftSideText)">
+                        Saved Record(s): <span style="color: var(--leftSideText-B)">{{savedRecords}}</span>
+                      </span>
+                      </ng-container>
+                    </div>
+                    <ng-container *ngIf="uploadDataCount > 0">
+                      <button class="dialog_btn_P d-flex align-items-center" (click)="downloadFile()">
+                        <mat-icon style="font-size: 1rem;
+                        height: auto;width: auto;margin-right: 0.2rem;">download</mat-icon>
+                        Download
+                      </button>
+                    </ng-container>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content naa-ind-hgt scrollbox" style="margin: 0" id="rsTable">
+            <ng-container *ngIf="checkShowTab()">
+              <div class="scrollbox">
+                <mat-table matSort matSortActive="created" matSortDisableClear matSortDirection="asc"
+                  [dataSource]="tableDataSource"
+                  class="table rList table-responsive scrolls common_mat_table common_mat_table1 scrollbox scrolltoMiddle"
+                  id="rolemanagement-table" (matSortChange)="onSortData($event)">
+                  <ng-container matColumnDef="checkBox">
+                    <mat-header-cell class="fontstyle" *matHeaderCellDef
+                      style="flex: none; width: 10%; text-align: center;">
+                      <span id="account_Exclusions">
+                        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          class="example-margin ml0_5rem"></mat-checkbox>
+                      </span>
+                      <mat-icon (click)="conforClearAll()" matTooltip="Delete"
+                        style="cursor: pointer; font-size: 1rem; height: auto; width: auto; margin-right: 0.2rem; margin-left: 1.2rem; color: var(--errorColor); margin-top: 0.1rem;">delete</mat-icon>
+                    </mat-header-cell>
+                    <mat-cell class="fontstyle nopad" *matCellDef="let row"
+                      style="flex: none; width: 10%; text-align: center;">
+                   
+                      <span id="account_Exclusions">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                          class="example-margin ml0_5rem"></mat-checkbox>
+                      </span>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Company">
+                    <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="flex: none;width: 45%;">
+                      <p class="fontstyle">Company </p>
+                    </mat-header-cell>
+                    <mat-cell class="fontstyle nopad" *matCellDef="let row" style="flex: none;width: 45%;">
+                      <ng-container style="width:100%" *ngIf="checkBr(row)" class="default-search-item default-search-itemRestricted">
+                        <div class="default-search-item ">
+                          <form  style="padding-right:1rem">
+                            <mat-form-field class="SearchFormField">
+                              <input  matInput type="text" appRemoveSpecialCharacters minlength="1" maxlength="50"
+                                [formControl]="tabFormCtrl" [matAutocomplete]="autoTab" [(ngModel)]="inputValue2" placeholder="Search">
+                                <mat-icon id="eScBtn" *ngIf="!inputValue2" matPrefix>search</mat-icon>
+                      <mat-icon id="close_btn" matPrefix *ngIf="inputValue2" (click)="clearInput2()">close</mat-icon>
+                              <mat-autocomplete #autoTab="matAutocomplete"
+                                (optionSelected)="onTabCompanyClick($event,row)" class="DrilldownSearchBar">
+                                <mat-option *ngFor="let item of tabFilteredCompanies | async" [value]="item">
+                                  <div style="margin-bottom:5px">
+                                    <p
+                                      style="margin-bottom: 0px !important; color: var(--leftSideText); font-family: poppins-regular; text-transform: capitalize; cursor: pointer; font-size: 11px; line-height: 1.4; justify-content: space-between; display: flex; ">
+                                      <span style="font-size: 9px;cursor: pointer;">{{item.companyName}}
+                                        ({{item.ticker}})</span><span
+                                        style="font-size: 9px; color: var(--btn-border); font-family: var(--ff-medium); text-anchor: end; cursor: pointer; ">{{checkGroup(item)}}</span>
+                                    </p>
+                                  </div>
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </form>
+                        </div>
+                      
+                      </ng-container>
+                      <p class="fontnormal emailName">{{row.companyName}}</p>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Ticker">
+                    <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="width: 15%;">
+                      <p class="fontstyle">Ticker </p>
+                    </mat-header-cell>
+                    <mat-cell class="fontstyle nopad" *matCellDef="let row" style="width: 15%;">
+                      <p class="fontnormal emailName">
+                        <span class="tickerbadge">{{row.ticker }}</span>
+                      </p>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Country">
+                    <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="width: 10%;">
+                      <p class="fontstyle">Country </p>
+                    </mat-header-cell>
+                    <mat-cell class="fontstyle nopad" *matCellDef="let row" style="width: 10%;">
+                      <p class="fontnormal emailName"> {{row.country }}</p>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Action">
+                    <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="width: 10%;">
+                      <p class="fontstyle">Action </p>
+                    </mat-header-cell>
+                    <mat-cell class="fontstyle nopad" *matCellDef="let row" style="width: 10%;">
+                      <mat-icon data-bs-target="#resStockdeleteModal" data-bs-toggle="modal"
+                        style="color: var(--delete-action); cursor: pointer; font-size: 1rem; height: 1.2rem; width: 1.2rem;"
+                        (click)="deleteRow = row" fontIcon="delete_forever"></mat-icon>
+                    </mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedColumn; sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumn;" [class.nobor]="checkBr(row)"></mat-row>
+                </mat-table>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!checkShowTab()">
+              <mat-table matSort matSortActive="created" matSortDisableClear matSortDirection="asc"
+                [dataSource]="tableDataSource"
+                class="table rList table-responsive scrolls common_mat_table common_mat_table1 scrollbox"
+                id="rolemanagement-table" (matSortChange)="onSortData($event)"
+                style="height: calc(100vh - 15rem);overflow: auto;margin:0;background: transparent;">
+                <ng-container matColumnDef="checkBox">
+                  <mat-header-cell class="fontstyle" *matHeaderCellDef style="flex: none;width: 10%;">
+                  </mat-header-cell>
+                </ng-container>
+                <ng-container matColumnDef="Company">
+                  <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="flex: none;width: 45%;">
+                    <p class="fontstyle">Company </p>
+                  </mat-header-cell>
+                </ng-container>
+                <ng-container matColumnDef="Ticker">
+                  <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="width: 15%;">
+                    <p class="fontstyle">Ticker </p>
+                  </mat-header-cell>
+                </ng-container>
+                <ng-container matColumnDef="Country">
+                  <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="width: 10%;">
+                    <p class="fontstyle">Country </p>
+                  </mat-header-cell>
+                </ng-container>
+                <!--<ng-container matColumnDef="Action">
+             <mat-header-cell class="fontstyle" *matHeaderCellDef mat-sort-header style="width: 10%;">
+               <p class="fontstyle">Action </p>
+             </mat-header-cell>
+           </ng-container>-->
+                <mat-header-row *matHeaderRowDef="displayedColumn; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumn;" [class.nobor]="checkBr(row)"></mat-row>
+                <!--<mat-row>test</mat-row>-->
+              </mat-table>
+              <p class="resTableNoData">{{sharedData.checkMyAppMessage(5,20)}}</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="resStockCheckModal" tabindex="-1" role="dialog"
+  aria-labelledby="resStockCheckModal" aria-hidden="true" data-backdrop="static" data-keyboard="false"
+  style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--warningColor);opacity: .75;">
+                check_circle
+              </span>
+            </p>
+            <h3>Save confirmation</h3>
+            <p style="font-size: 0.9rem;">[{{invalidCount}}] invalid company names detected in your input. Kindly proceed with their removal to ensure data accuracy and compliance before saving.</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal"
+                (click)="saveCheck()">Save</button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="resStocksaveCheckModal" tabindex="-1" role="dialog"
+  aria-labelledby="resStocksaveCheckModal" aria-hidden="true" data-backdrop="static" data-keyboard="false"
+  style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--warningColor);opacity: .75;">
+                check_circle
+              </span>
+            </p>
+            <h3>Save confirmation</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(5,22)}}</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal"
+                (click)="saveCheck()">Save</button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Confirmation popup -->
+<div class="modal fade warningautoModel" id="resStockConfirmPopup" tabindex="-1" role="dialog"
+  aria-labelledby="resStocksaveCheckModal" aria-hidden="true" data-backdrop="static" data-keyboard="false"
+  style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--warningColor);opacity: .75;">
+                error
+              </span>
+            </p>
+            <h3>Unsaved changes</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(5,109)}}</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal"
+                (click)="closeModal()">Yes</button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Confiramation popup -->
+<div class="modal fade warningautoModel" id="resStockdeleteallModal" tabindex="-1" role="dialog"
+  aria-labelledby="existModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"
+  style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z"
+                    fill="var(--errorColor)" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Stock</h3>
+            <p style="font-size: 0.9rem;">{{deleteConfTxt}}</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal"
+                (click)="remSelAll()">Confirm</button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="clearAllModal" tabindex="-1" role="dialog"
+  aria-labelledby="existModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"
+  style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .85;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z"
+                    fill="var(--errorColor)" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Stock</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(5,24)}}</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal"
+                (click)="clearAll()">Confirm</button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

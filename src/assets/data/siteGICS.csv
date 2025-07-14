@@ -1,0 +1,279 @@
+code,name,type
+10,Energy,Sector
+15,Materials,Sector
+20,Industrials,Sector
+25,Consumer Discretionary,Sector
+30,Consumer Staples,Sector
+35,Health Care,Sector
+40,Financials,Sector
+45,Information Technology,Sector
+50,Communication Services,Sector
+55,Utilities,Sector
+60,Real Estate,Sector
+1010,Energy,Industrygroup
+1510,Materials,Industrygroup
+2010,Capital Goods,Industrygroup
+2020,Commercial  & Professional Services,Industrygroup
+2030,Transportation,Industrygroup
+2510,Automobiles & Components,Industrygroup
+2520,Consumer Durables & Apparel,Industrygroup
+2530,Consumer Services,Industrygroup
+2550,Retailing,Industrygroup
+3010,Food & Staples Retailing,Industrygroup
+3020,"Food, Beverage & Tobacco",Industrygroup
+3030,Household & Personal Products,Industrygroup
+3510,Health Care Equipment & Services,Industrygroup
+3520,"Pharmaceuticals, Biotechnology & Life Sciences",Industrygroup
+4010,Banks,Industrygroup
+4020,Diversified Financials,Industrygroup
+4030,Insurance,Industrygroup
+4510,Software & Services,Industrygroup
+4520,Technology Hardware & Equipment,Industrygroup
+4530,Semiconductors & Semiconductor Equipment,Industrygroup
+5010,Telecommunication Services,Industrygroup
+5020,Media & Entertainment,Industrygroup
+5510,Utilities,Industrygroup
+6010,Real Estate,Industrygroup
+101010,Energy Equipment & Services,Industry
+101020,"Oil, Gas & Consumable Fuels",Industry
+151010,Chemicals,Industry
+151020,Construction Materials,Industry
+151030,Containers & Packaging,Industry
+151040,Metals & Mining,Industry
+151050,Paper & Forest Products,Industry
+201010,Aerospace & Defense,Industry
+201020,Building Products,Industry
+201030,Construction & Engineering,Industry
+201040,Electrical Equipment,Industry
+201050,Industrial Conglomerates,Industry
+201060,Machinery,Industry
+201070,Trading Companies & Distributors,Industry
+202010,Commercial Services & Supplies,Industry
+202020,Professional Services,Industry
+203010,Air Freight & Logistics,Industry
+203020,Airlines,Industry
+203030,Marine,Industry
+203040,Road & Rail,Industry
+203050,Transportation Infrastructure,Industry
+251010,Auto Components,Industry
+251020,Automobiles,Industry
+252010,Household Durables,Industry
+252020,Leisure Products,Industry
+252030,"Textiles, Apparel & Luxury Goods",Industry
+253010,"Hotels, Restaurants & Leisure",Industry
+253020,Diversified Consumer Services,Industry
+255010,Distributors,Industry
+255020,Internet & Direct Marketing Retail,Industry
+255030,Multiline Retail,Industry
+255040,Specialty Retail,Industry
+301010,Food & Staples Retailing,Industry
+302010,Beverages,Industry
+302020,Food Products,Industry
+302030,Tobacco,Industry
+303010,Household Products,Industry
+303020,Personal Products,Industry
+351010,Health Care Equipment & Supplies,Industry
+351020,Health Care Providers & Services,Industry
+351030,Health Care Technology,Industry
+352010,Biotechnology,Industry
+352020,Pharmaceuticals,Industry
+352030,Life Sciences Tools & Services,Industry
+401010,Banks,Industry
+401020,Thrifts & Mortgage Finance,Industry
+402010,Diversified Financial Services,Industry
+402020,Consumer Finance,Industry
+402030,Capital Markets,Industry
+402040,Mortgage Real Estate Investment  Trusts (REITs),Industry
+403010,Insurance,Industry
+451020,IT Services,Industry
+451030,Software,Industry
+452010,Communications Equipment,Industry
+452020,"Technology Hardware, Storage & Peripherals",Industry
+452030,"Electronic Equipment, Instruments & Components",Industry
+453010,Semiconductors & Semiconductor Equipment,Industry
+501010,Diversified Telecommunication Services,Industry
+501020,Wireless Telecommunication Services,Industry
+502010,Media,Industry
+502020,Entertainment,Industry
+502030,Interactive Media & Services,Industry
+551010,Electric Utilities,Industry
+551020,Gas Utilities,Industry
+551030,Multi-Utilities,Industry
+551040,Water Utilities,Industry
+551050,Independent Power and Renewable Electricity Producers,Industry
+601010,Equity Real Estate Investment Trusts (REITs),Industry
+601020,Real Estate Management & Development,Industry
+10101010,Oil & Gas Drilling,Sub Industry
+10101020,Oil & Gas Equipment & Services,Sub Industry
+10102010,Integrated Oil & Gas,Sub Industry
+10102020,Oil & Gas Exploration & Production,Sub Industry
+10102030,Oil & Gas Refining & Marketing,Sub Industry
+10102040,Oil & Gas Storage & Transportation,Sub Industry
+10102050,Coal & Consumable Fuels,Sub Industry
+15101010,Commodity Chemicals,Sub Industry
+15101020,Diversified Chemicals,Sub Industry
+15101030,Fertilizers & Agricultural Chemicals,Sub Industry
+15101040,Industrial Gases,Sub Industry
+15101050,Specialty Chemicals,Sub Industry
+15102010,Construction Materials,Sub Industry
+15103010,Metal & Glass Containers,Sub Industry
+15103020,Paper Packaging,Sub Industry
+15104010,Aluminum,Sub Industry
+15104020,Diversified Metals & Mining,Sub Industry
+15104025,Copper,Sub Industry
+15104030,Gold,Sub Industry
+15104040,Precious Metals & Minerals,Sub Industry
+15104045,Silver,Sub Industry
+15104050,Steel,Sub Industry
+15105010,Forest Products,Sub Industry
+15105020,Paper Products,Sub Industry
+20101010,Aerospace & Defense,Sub Industry
+20102010,Building Products,Sub Industry
+20103010,Construction & Engineering,Sub Industry
+20104010,Electrical Components & Equipment,Sub Industry
+20104020,Heavy Electrical Equipment,Sub Industry
+20105010,Industrial Conglomerates,Sub Industry
+20106010,Construction Machinery & Heavy Trucks,Sub Industry
+20106015,Agricultural & Farm Machinery,Sub Industry
+20106020,Industrial Machinery,Sub Industry
+20107010,Trading Companies & Distributors,Sub Industry
+20201010,Commercial Printing,Sub Industry
+20201050,Environmental & Facilities Services,Sub Industry
+20201060,Office Services & Supplies,Sub Industry
+20201070,Diversified Support Services,Sub Industry
+20201080,Security & Alarm Services,Sub Industry
+20202010,Human Resource & Employment Services,Sub Industry
+20202020,Research & Consulting Services,Sub Industry
+20301010,Air Freight & Logistics,Sub Industry
+20302010,Airlines,Sub Industry
+20303010,Marine,Sub Industry
+20304010,Railroads,Sub Industry
+20304020,Trucking,Sub Industry
+20305010,Airport Services,Sub Industry
+20305020,Highways & Railtracks,Sub Industry
+20305030,Marine Ports & Services,Sub Industry
+25101010,Auto Parts & Equipment,Sub Industry
+25101020,Tires & Rubber,Sub Industry
+25102010,Automobile Manufacturers,Sub Industry
+25102020,Motorcycle Manufacturers,Sub Industry
+25201010,Consumer Electronics,Sub Industry
+25201020,Home Furnishings,Sub Industry
+25201030,Homebuilding,Sub Industry
+25201040,Household Appliances,Sub Industry
+25201050,Housewares & Specialties,Sub Industry
+25202010,Leisure Products,Sub Industry
+25203010,"Apparel, Accessories & Luxury Goods",Sub Industry
+25203020,Footwear,Sub Industry
+25203030,Textiles,Sub Industry
+25301010,Casinos & Gaming,Sub Industry
+25301020,"Hotels, Resorts & Cruise Lines",Sub Industry
+25301030,Leisure Facilities,Sub Industry
+25301040,Restaurants,Sub Industry
+25302010,Education Services,Sub Industry
+25302020,Specialized Consumer Services,Sub Industry
+25501010,Distributors,Sub Industry
+25502020,Internet & Direct Marketing Retail,Sub Industry
+25503010,Department Stores,Sub Industry
+25503020,General Merchandise Stores,Sub Industry
+25504010,Apparel Retail,Sub Industry
+25504020,Computer & Electronics Retail,Sub Industry
+25504030,Home Improvement Retail,Sub Industry
+25504040,Specialty Stores,Sub Industry
+25504050,Automotive Retail,Sub Industry
+25504060,Homefurnishing Retail,Sub Industry
+30101010,Drug Retail,Sub Industry
+30101020,Food Distributors,Sub Industry
+30101030,Food Retail,Sub Industry
+30101040,Hypermarkets & Super Centers,Sub Industry
+30201010,Brewers,Sub Industry
+30201020,Distillers & Vintners,Sub Industry
+30201030,Soft Drinks,Sub Industry
+30202010,Agricultural Products,Sub Industry
+30202030,Packaged Foods & Meats,Sub Industry
+30203010,Tobacco,Sub Industry
+30301010,Household Products,Sub Industry
+30302010,Personal Products,Sub Industry
+35101010,Health Care Equipment,Sub Industry
+35101020,Health Care Supplies,Sub Industry
+35102010,Health Care Distributors,Sub Industry
+35102015,Health Care  Services,Sub Industry
+35102020,Health Care Facilities,Sub Industry
+35102030,Managed Health Care,Sub Industry
+35103010,Health Care Technology,Sub Industry
+35201010,Biotechnology,Sub Industry
+35202010,Pharmaceuticals,Sub Industry
+35203010,Life Sciences Tools & Services,Sub Industry
+40101010,Diversified Banks,Sub Industry
+40101015,Regional Banks,Sub Industry
+40102010,Thrifts & Mortgage Finance,Sub Industry
+40201020,Other Diversified Financial Services,Sub Industry
+40201030,Multi-Sector Holdings,Sub Industry
+40201040,Specialized Finance,Sub Industry
+40202010,Consumer Finance,Sub Industry
+40203010,Asset Management & Custody Banks,Sub Industry
+40203020,Investment Banking & Brokerage,Sub Industry
+40203030,Diversified Capital Markets,Sub Industry
+40203040,Financial Exchanges & Data,Sub Industry
+40204010,Mortgage REITs,Sub Industry
+40301010,Insurance Brokers,Sub Industry
+40301020,Life & Health Insurance,Sub Industry
+40301030,Multi-line Insurance,Sub Industry
+40301040,Property & Casualty Insurance,Sub Industry
+40301050,Reinsurance,Sub Industry
+45102010,IT Consulting & Other Services,Sub Industry
+45102020,Data Processing & Outsourced Services,Sub Industry
+45102030,Internet Services & Infrastructure,Sub Industry
+45103010,Application Software,Sub Industry
+45103020,Systems Software,Sub Industry
+45201020,Communications Equipment,Sub Industry
+45202030,"Technology Hardware, Storage & Peripherals",Sub Industry
+45203010,Electronic Equipment & Instruments ,Sub Industry
+45203015,Electronic Components,Sub Industry
+45203020,Electronic Manufacturing Services,Sub Industry
+45203030,Technology Distributors,Sub Industry
+45301010,Semiconductor Equipment ,Sub Industry
+45301020,Semiconductors,Sub Industry
+50101010,Alternative Carriers,Sub Industry
+50101020,Integrated Telecommunication Services,Sub Industry
+50102010,Wireless Telecommunication Services,Sub Industry
+50201010,Advertising,Sub Industry
+50201020,Broadcasting,Sub Industry
+50201030,Cable & Satellite,Sub Industry
+50201040,Publishing,Sub Industry
+50202010,Movies & Entertainment,Sub Industry
+50202020,Interactive Home Entertainment,Sub Industry
+50203010,Interactive Media & Services,Sub Industry
+55101010,Electric Utilities,Sub Industry
+55102010,Gas Utilities,Sub Industry
+55103010,Multi-Utilities,Sub Industry
+55104010,Water Utilities,Sub Industry
+55105010,Independent Power Producers & Energy Traders,Sub Industry
+55105020,Renewable Electricity ,Sub Industry
+60101010,Diversified REITs,Sub Industry
+60101020,Industrial REITs,Sub Industry
+60101030,Hotel & Resort REITs ,Sub Industry
+60101040,Office REITs ,Sub Industry
+60101050,Health Care REITs ,Sub Industry
+60101060,Residential REITs,Sub Industry
+60101070,Retail REITs,Sub Industry
+60101080,Specialized REITs ,Sub Industry
+60102010,Diversified Real Estate Activities ,Sub Industry
+60102020,Real Estate Operating Companies,Sub Industry
+60102030,Real Estate Development ,Sub Industry
+60102040,Real Estate Services ,Sub Industry
+40401010,Real Estate Investment Trusts,Sub Industry
+25401025,Cable & Satellite,Sub Industry
+40402060,Retail REITs,Sub Industry
+25401010,Advertising,Sub Industry
+45101010,Internet Software & Services,Sub Industry
+40402010,Diversified REITs,Sub Industry
+25502010,Catalog Retail,Sub Industry
+40403030,Real Estate Development,Sub Industry
+20201030,Diversified Commercial & Professional Services,Sub Industry
+40403020,Real Estate Operating Companies,Sub Industry
+40402050,Residential REITs,Sub Industry
+25401040,Publishing,Sub Industry
+45103030,Home Entertainment Software,Sub Industry
+25401030,Movies & Entertainment,Sub Industry
+40402020,Industrial REITs,Sub Industry
+40403010,Real Estate Management & Development,Sub Industry

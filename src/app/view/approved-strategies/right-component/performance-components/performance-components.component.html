@@ -1,0 +1,229 @@
+<div class="buildYourIndex__sec__rightG approved__Comp__rightG">
+  <div class="icon__select">
+    @if(sharedData.checkMenuPer(12, 172) == 'Y'){
+    <div class="__selectIco select__steps" [class.active]="showDefault_select == 'company'" (mouseenter)="showDefault_select_hover('company');sharedData.openRightSideGrid();componentClick();" (click)="toggleIconSelect('company');componentClick()">
+      <span class="material-icons-outlined">
+        attach_file
+      </span>
+      <p>Components</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(12, 172) == 'D'){
+    <div class="__selectIco select__steps disableMenu">
+      <span class="material-icons-outlined">
+        attach_file
+      </span>
+      <p>Components</p>
+    </div>
+    }
+
+    @if(sharedData.checkMenuPer(12, 173) == 'Y'){
+    <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'performance'" (mouseenter)="showDefault_select_hover('performance');sharedData.openRightSideGrid();" (click)="toggleIconSelect('performance');">
+      <span class="material-icons-outlined">
+        query_stats
+      </span>
+      <p>Performance</p>
+    </div>
+    }@else if(sharedData.checkMenuPer(12, 173) == 'D'){
+    <div class="__selectIco select__accounts disableMenu">
+      <span class="material-icons-outlined">
+        query_stats
+      </span>
+      <p>Performance</p>
+    </div>
+    }
+
+
+
+  </div>
+  <div class="rightSideDefGrid" [class.showRightAnimate]="sharedData._getSelectedRightSide  != 'N'">
+    @if(showDefault_select != ''){
+    <div class="icon__details">
+      @if(sharedData.checkMenuPer(12, 172) == 'Y'){
+      <div class="select__steps__details" [style.display]="showDefault_select == 'company'?'block':'none'">
+       
+        <div class="d-flex align-items-center comp__head justify-content-between pb1rem pl0_5rem pr0_5rem">
+          @if(sortedDirectIndexGridData.length>0){
+          <h4 class="d-flex align-items-center">
+            Components
+            <span class="count d-flex">{{sortedDirectIndexGridData.length}}</span>
+          </h4>
+          }@else{
+          <h4 class="d-flex align-items-center">Components</h4>
+          }
+          <div class="d-flex align-items-center">
+            <span class="material-icons " (click)="openSearch()">
+              search
+            </span>
+            <div class="dropdown">
+              <span class="material-icons d-flex" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                swap_vert
+              </span>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <!-- <div class="component sortbyComp" style="margin-top: 0.5rem; margin-bottom: 0; ">
+        <div class="dropSpace">
+          <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+          <div class="component sortbyComp">
+            <span class="title">Ascending</span>
+            <div class="mat__toggle">
+              <mat-slide-toggle (change)="onToggleAscending($event)" [checked]="ascending_val" class="example-margin preLabel"></mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div> -->
+                <ul>
+                  <li class="d-flex">
+                    <a class="dropdown-item sort_btn">
+                      Sort by
+                      <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('R','di')"><span class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem"> refresh</span> Reset</button>
+                    </a>
+
+                  </li>
+                  <li *ngFor="let item of FilterList">
+                    <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                    <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                      @if(ascending_val){
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                      </svg>
+                      }
+                      @else{
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" />
+                      </svg>
+                      }
+                    </span>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+            <span class="material-icons-outlined close__card pin pin__bar__comp" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components');">
+              push_pin
+            </span>
+          </div>
+
+
+        </div>
+        <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+          <div class="d-flex align-items-center">
+            <span class="material-icons disable">
+              search
+            </span>
+            <input appRemoveSpecialCharacters (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchText" (input)="filterItems()" #searchBox>
+            <span class="material-icons" (click)="searchClose()">
+              close
+            </span>
+          </div>
+        </div>
+
+        <div class="scrollbox outerScroll__Div componentScroll">
+          <div class="construction h-100">
+            @if(sortedDirectIndexGridData.length>0){
+            <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+              <ul>
+                <li *cdkVirtualFor="let data of sortedDirectIndexGridData;">
+                  <div class="list__sec Border_before" (click)="clickComp(data)" [class.active]="data.stockKey == highlightList">
+                    <div [attr.data-index]="data.stockKey">
+                      <p class="ind__name">{{data['compname'] | nullDashPipe:''}}</p>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                        <span class="price text-right" style="color: var(--paraFontColorAlt)">{{data['price'] | priceFormat  :',.2f':data['currency'] }}</span>
+                        <span class="price text-right">
+                          {{data['marketcap'] | markerCapFormat }}
+                        </span>
+                        <div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+            </cdk-virtual-scroll-viewport>
+            }
+            @else{
+            @if(!sharedData._showCenterLoader){
+            <div class="no-r-f " style="display:flex">No results found. Revise your search.</div>
+            }@else{
+            <div class="no-r-f " style="display:flex">Loading please wait...</div>
+            }
+            }
+            <!--<div class="no-r-f" [style.display]="(directIndexGridData.length <= 0) ?'flex':'none'">No Result Found.</div>-->
+            <!--@for (data of sortedDirectIndexGridData; track data.isin) {
+          <div class="list__sec" (click)="clickComp(data)" [class.active]="data.stockKey == highlightList">
+            <p class="ind__name">{{data['compname'] | nullDashPipe:''}}</p>
+            <div class="d-flex align-items-center">
+              <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+              <span class="price text-right">$ {{data['price'] | nullDashPipe :'' | number : '1.2-2' }}</span>
+              <span class="price text-right">
+                {{data['weight']*100 | number : '1.2-2' }}%
+              </span>
+              <div>
+              </div>
+            </div>
+          </div>
+          }-->
+          </div>
+          <!--<div class="SW__section">
+
+        </div>-->
+        </div>
+      </div>
+      
+      }
+      @if(sharedData.checkMenuPer(12, 173) == 'Y'){
+      <div class="select__accounts__details prebuil_perf__sec pl0_5rem pr0_5rem pb1rem" [style.display]="showDefault_select == 'performance'?'block':'none'">
+        <span class="material-icons-outlined close__card pin pin__bar__comp p-abs" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('performance');">
+          push_pin
+        </span>
+        <div>
+          <h4 class="mb1">Performance Statistics</h4>
+          <p class="perform__RTN d-block">Returns as of {{asOfDate}}</p>
+        </div>
+        <div class="tab__head d-flex justify-content-between align-items-center">
+          <div class="tab_Cell">Performance</div>
+          <div class="tab_Cell" *ngIf="indexName.length <= 7">{{indexName}}</div>
+          <div class="tab_Cell" *ngIf="indexName.length > 7" [matTooltip]="indexName" [matTooltipPosition]="'above'">{{indexName}}</div>
+          <div class="tab_Cell" *ngIf="DIname.length <= 7">{{DIname}}</div>
+          <div class="tab_Cell" *ngIf="DIname.length > 7" [matTooltip]="DIname" [matTooltipPosition]="'above'">{{DIname}}</div>
+        </div>
+        <div class="tab__body border_btm">
+          @for (data of perData; track data.Performance) {
+          <div class="b__sec d-flex justify-content-between align-items-center">
+            <div class="tab_Cell">{{data['Performance']}}</div>
+            <div class="tab_Cell high__color">{{data['ETFticker']}}</div>
+            <div class="tab_Cell">{{data['yourIndex']}}</div>
+          </div>
+          }
+        </div>
+        <div class="mt1rem tab__head d-flex justify-content-between align-items-center">
+          <div class="tab_Cell">Statistics</div>
+          <div class="tab_Cell" *ngIf="indexName.length <= 7">{{indexName}}</div>
+          <div class="tab_Cell" *ngIf="indexName.length > 7" [matTooltip]="indexName" [matTooltipPosition]="'above'">{{indexName}}</div>
+          <div class="tab_Cell" *ngIf="DIname.length <= 7">{{DIname}}</div>
+          <div class="tab_Cell" *ngIf="DIname.length > 7" [matTooltip]="DIname" [matTooltipPosition]="'above'">{{DIname}}</div>
+        </div>
+        <div class="tab__body border_btm">
+          @for (data of StatData; track data.Statistics) {
+          <div class="b__sec d-flex justify-content-between align-items-center">
+            <div class="tab_Cell">{{data['Statistics']}}</div>
+            <div class="tab_Cell high__color">{{data['ETFticker']}}</div>
+            <div class="tab_Cell">{{data['yourIndex']}}</div>
+          </div>
+          }
+        </div>
+        <div style="padding-top:1rem">
+          <p class="perform__RTN d-block w66">{{sinceDate}}</p>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+  </div>

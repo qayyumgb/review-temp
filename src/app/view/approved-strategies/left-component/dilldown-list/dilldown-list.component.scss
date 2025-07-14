@@ -1,0 +1,67 @@
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.drilldown__cards__list {
+  max-height: 80vh;
+  background: var(--topNavbar);
+  border-radius: 0.3rem;
+  height: auto;
+  overflow: hidden;
+  overflow-y: auto;
+  min-height: 10rem;
+  padding: 0.6rem;
+
+  .no-r-f {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--iconColor);
+    font-family: var(--ff-regular);
+  }
+
+  .search_sec {
+    padding: 0px;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  ul {
+    @include reset-list;
+
+    li {
+      @include reset-list;
+      @include flex-align-center;
+      font-size: 0.70rem;
+      color: var(--leftSideText);
+      cursor: pointer;
+      transition: all .2s;
+      padding-bottom: 0.5rem;
+
+      span.material-icons {
+        font-size: 1.0rem;
+        color: var(--leftSideText-B);
+      }
+
+      &:hover {
+        color: var(--leftSideText-B);
+      }
+
+      .elip_text {
+        width: 100%;
+        overflow: hidden;
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

@@ -1,0 +1,714 @@
+<div class="close-l-popup" (click)="close()"><span class="material-icons">close</span></div>
+@if(showSpinnerAcc_loaded){
+<div class="mat-spinner-loader-popup">
+  <mat-spinner class="reviewloader-spinner" style=""></mat-spinner>
+</div>
+}
+ @if(openLineChart){
+<div class="avoid_losers_chart w-100" style="overflow: hidden;">
+  <span class="title cp" (click)="openLineChart=false;"><span class="material-icons" style="padding-right:0.25rem" >keyboard_backspace</span> Back to timeline</span>
+  <h4 class="pt1rem" style=" text-align: center; color: var(--leftSideText-B)">Avoid the Losers</h4>
+  <div class="d-flex justify-content-center" style="padding:0 2rem">
+    <p class="" *ngIf="selectedSectorName != undefined">
+      {{selectedSectorName['name']}}
+      <span *ngIf="selectedSectorName.indexName != undefined" style="color: var(--paraFontColorAlt); font-size: 0.7rem;">({{selectedSectorName['indexName']}})</span>
+      @if(selectedSectorName.group == 'ETFIndex'){ <span style="color: var(--paraFontColorAlt); font-size: 0.7rem;">({{selectedSectorName.ticker}})</span> }
+    </p>
+    <p>
+      @if(hisChartTitle != ''){
+      <span class="date_m"><span style="color: #0de8f7; padding-right: 0.25rem">{{hisChartTitleDate}}</span>{{hisChartTitle}}</span>
+      }
+    </p>
+  </div>
+  <div id="lineChartModal" class="p2rem" style="height:78vh; width:100%"></div>
+</div>
+}
+<div class="equity_index_comp pt1rem" id="hisTimeline__Comp" [style.display]="!openLineChart?'block':'none'">
+  <div class="basedOn__sec__popup" style="z-index:999">
+    <span class="indName">
+      {{selectedSectorName.name}}
+      @if(selectedSectorName.group == 'ETFIndex'){ ({{selectedSectorName.ticker}}) }
+    </span>
+    <span class="divided ml0rem mr0_5rem" style="padding-left: 0.25rem;">({{selectedSectorName.group}})</span>
+    <span class="basedOn">
+      {{selHistroyTimeDate}}
+    </span>
+    @if(SRValue != 0 && SRValue != 100 && !showErrorMsg){
+    @if((sharedData.checkMenuPer(2027, 2238) == 'Y' && from == 'equityUniverse') || (from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2254) == 'Y')){
+    <!-- <img class="cp" (click)="openLineChart=true;openHistoryChart()" matTooltip="Avoid Losers" matTooltipPosition="below" src="../../../../assets/images/footer_ico/avoid_losers_ico.svg" alt="new age alpha avoid losers" /> -->
+    <span (click)="openLineChart=true;openHistoryChart()" class="avoidLoserClick" matTooltip="Avoid Losers" matTooltipPosition="below"><svg  width="15" height="15" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path  d="M16 0.769043L9.07694 7.69211L6.19233 4.8075L1 9.99979" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path  d="M15.9982 5.38442V0.769043H11.3828" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+    } @else if((sharedData.checkMenuPer(2027, 2238) == 'D' && from == 'equityUniverse') || (from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2254) == 'D')){
+    <!-- <img class="cp disabled" matTooltip="Avoid Losers" matTooltipPosition="below" src="../../../../assets/images/footer_ico/avoid_losers_ico.svg" alt="new age alpha avoid losers" /> -->
+    <span class="avoidLoserClick disabled" matTooltip="Avoid Losers" matTooltipPosition="below"><svg  width="17" height="17" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path  d="M16 0.769043L9.07694 7.69211L6.19233 4.8075L1 9.99979" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path  d="M15.9982 5.38442V0.769043H11.3828" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+    }
+    }
+  </div>
+  <div class="left-l">
+    <h4 class="subHead mb2rem">History Timeline</h4>
+    <div class="verticalAroww" *ngIf="showArrows">
+      <button (click)="scrollUp()" [disabled]="isAtTop"><span class="material-icons">keyboard_arrow_up</span></button>
+    </div>
+    <div class="year-list-l w-100" #scrollContainer (scroll)="onScroll()" [class.bordor]="!showArrows">
+      <!-- <ng-scrollbar class="scroll-event scrollbox1" thumbClass="white-scrollbars"> -->
+        <!--<ul>
+        <li *ngFor="let yr of yrListTab; let i = index" style="cursor:pointer">
+        <span class="d-flex align-items-start w-100">
+        <span class="topHead">{{yr['year']}}:</span>
+        <span class="topHeadBtm">
+                @for (data of yr['qtrList']; track data.date) {
+        <span [class]="selHistroyTimeDate == data.date ? 'active' : ''"
+                      (click)="leftHisTimeMenuClick(data)">{{ data.date | date: 'MMM, d'}}</span>
+                }
+        </span>
+        </span>
+        </li>
+        </ul>-->
+      
+        <ul class="timelineDiv">
+        <li *ngFor="let yr of yrListTab; let i = index" style="cursor:pointer" [class]="selHistroyactiveDate == yr['year'] ? 'active' : ''">
+         <span class="d-flex align-items-start justify-content-center w-100">
+        <span class="topHead">{{yr['year']}}</span>
+     
+        </span>
+        <span class="topHeadBtm">
+          <!--<span class="topRightActive"></span>-->
+                        @for (data of yr['qtrList']; track data.date) {
+          <span [class]="selHistroyTimeDate == data.date ? 'active' : ''"
+                              (click)="leftHisTimeMenuClick(data)">{{ data.date | date: 'MMM, d'}}</span>
+                        }
+          </span>
+        </li>
+        </ul>
+      
+        <!-- </ng-scrollbar> -->
+    </div>
+    <div class="verticalAroww verticaldown" *ngIf="showArrows">
+      <button (click)="scrollDown()" [disabled]="isAtBottom"><span class="material-icons">keyboard_arrow_down</span></button>
+    </div>
+  </div>
+  <div class="center-l">
+    @if(showErrorMsg && !showCenterLoader_popup ){
+    <span class="no-r-f" style="position: fixed; z-index: 0; top: 50%; left: 50%; color: var(--leftSideText); font-size: 0.85rem;transform: translate(-50%, -50%);">No records available for the chosen quarter.</span>
+    }
+    <svg id="hisTimelineCircle" [style.display]="showErrorMsg || showCenterLoader_popup?'none':'block'" class="commonSVGCircle" viewBox="180 45 1220 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <!--<circle class="start-ring1" fill="var(--primary-color)" id="his_maincircle1" r="395" transform="translate(810, 405)"></circle>-->
+      <g class="inner_center_circle" transform="translate(740, 320)">
+        <defs><clipPath id="defalutmyMask12"><circle cx="130" cy="145" r="120" fill="white" /></clipPath></defs>
+        <g clip-path="url(#defalutmyMask12)" style=" transform: translate(-60px, -80px)">
+          <g id="slidingSVG" transform="translate(0, 0)">
+            <g style=" transform: translate(30px, 80px);">
+              <g transform="translate(0, 0)" id="companyMedian" class="Sel_midComp" style="display:none">
+                <g transform="translate(0, 0)" class="SN_CS">
+                  <text x="100" y="30" class="SelCompName text-G-Def" style=""> </text>
+                </g>
+                <g transform="translate(0, 0)" class="HF_Val">
+                  <!--<text x="100" y="45" class="name-txt h-fact text-G-Def" style="">ERF</text>-->
+                  <text x="100" y="80" class="SelCompScore" style=""></text>
+                </g>
+              </g>
+              <g class="STw_middle" id="yearMedian" transform="translate(0, 0)">
+                <g class="Sel_midComp translength" id="s1_MM">
+                  <text class="name-txt h-fact" x="100" y="45" id="medianERF">Median h-factor</text>
+                  <text class="SelCompScore" x="100" y="80"></text>
+                </g>
+              </g>
+              <g>
+                <g id="s1_MM" class="Sel_midComp translength">
+                  <text x="100" y="140" class="SelCompScore" style="fill: var(--paraFontColorAlt);font-size: 16px;font-family: var(--ff-semibold) !important;">
+                    {{selHistroyTimeDate}}
+                  </text>
+                </g>
+              </g>
+
+              @if(rankComp != ''){
+              <g transform="translate(145, 160)" class="total_components">
+                <text id="sinceRCIncep" class="SelCompName header" y="10" x="-42" style="text-anchor: middle;"></text>
+                <!-- <text class="SelCompName compRank" y="10" x="0">{{rankComp}}</text> -->
+              </g>
+
+
+
+              }
+            </g>
+            <!--- Slider 4 --->
+            <g class="sliderCumAnn" transform="translate(320, 0)">
+              <rect width="330" height="330" fill="transparent" />
+              <g transform="translate(0, 10)" style="transform:scale(0.92) translate(25px, 15px) ">
+                <g class="SMi_top_table" transform="translate(75, 100)">
+                  <g>
+                    <text class="text-G-Def bold" x="60">Excess Cumulative return</text>
+                    <text class="text-G-Def" x="75" y='30'>
+                      @if(hiscumReturn >= 0){+}{{hiscumReturn | numWithCommaRtnPercent}}
+                      @if(hiscumReturn >= 0){
+                      <tspan class="material-icons __pos" dy="15" dx="-5" style="fill: var(--successColor); font-size: 40px">
+                        arrow_drop_up
+                      </tspan>
+                      }@else{
+                      <tspan class="material-icons __neg" dy="15" dx="-5" style="fill: var(--danger); font-size: 40px">
+                        arrow_drop_down
+                      </tspan>
+                      }
+                    </text>
+                    <g style="transform: translate(-58px, -8px);">
+                      <rect width="40" height="40" fill="transparent" style="stroke: var(--border);" rx="5" ry="5"></rect>
+                      <image href="../../../../assets/images/matico/cumulative_ico.svg" width="30" height="30" style="transform: translate(6px, 5px);"></image>
+                    </g>
+                  </g>
+                  <g transform="translate(0, 65)">
+                    <text class="text-G-Def bold" x="60">Excess Annualized return</text>
+                    <text class="text-G-Def" x="75" y='30'>
+                      @if(hisannReturn >= 0){+}{{hisannReturn | numWithCommaRtnPercent}}
+                      @if(hisannReturn >= 0){
+                      <tspan class="material-icons __pos" dy="15" dx="-5" style="fill: var(--successColor); font-size: 40px">
+                        arrow_drop_up
+                      </tspan>
+                      }@else{
+                      <tspan class="material-icons __neg" dy="15" dx="-5" style="fill: var(--danger); font-size: 40px">
+                        arrow_drop_down
+                      </tspan>
+                      }
+                    </text>
+                    <g style="transform: translate(-58px, -8px)">
+                      <rect width="40" height="40" fill="transparent" style="stroke: var(--border);" rx="5" ry="5"></rect>
+                      <image href="../../../../assets/images/matico/annualized_ico.svg" width="30" height="30" style="transform: translate(6px, 5px);"></image>
+                    </g>
+                  </g>
+                </g>
+              </g>
+             
+              <g transform="translate(130, 215)">
+                <text *ngIf="returnAsOfDate != ''" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 10px; fill: var(--leftSideText); text-transform: unset; cursor:auto;" x="0" y="18">Returns calculated from </text>
+                <text id="sinceRCIncep" y="33" x="0" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 10px; fill: var(--leftSideText); text-transform: lowercase; cursor: auto; ">{{returnAsOfDate}}</text>
+              </g>
+              
+            </g>
+            <!--- Slider 4 --->
+          </g>
+
+        </g>
+        @if(SRValue != 0 && SRValue != 100){
+        <g class="controls" style="display: block; transform: translate(-67px, -70px) scale(0.85) ">
+          <g id="left" transform="translate(47, 164)" class="disable">
+            <g (click)="exclControlLeft()" style="cursor:pointer" transform="translate(-39, -54)">
+              <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(0px, 31px);"></rect>
+              <path class="st1" d="M13.8,47l4.9-4.9 c0.4-0.4,0.4-0.9,0-1.3s-0.9-0.4-1.3,0l-5.5,5.5c-0.3,0.3-0.4,0.9,0,1.3l5.5,5.5c0.4,0.4,0.9,0.4,1.3,0c0.4-0.4,0.4-0.9,0-1.3l0,0 L13.8,47z" style="fill: var(--iconColor);" />
+            </g>
+            <circle class="disableLeftCircle" cx="-35" cy="0" r="60" fill="var(--primary-color)" stroke="transparent" style="opacity:0" />
+          </g>
+          <g id="right" transform="translate(255, 164)" class="disable">
+            <g (click)="exclControlRight()" style="cursor: pointer; transform: translate(19px, -54px);">
+              <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(8px, 31px);"></rect>
+              <path id="Icon_ionic-ios-arrow-back-2" class="st1" d="M25,47l-4.9-4.9c-0.4-0.4-0.4-0.9,0-1.3c0.4-0.4,0.9-0.4,1.3,0l5.5,5.5 c0.3,0.3,0.4,0.9,0,1.3l-5.5,5.5c-0.4,0.4-0.9,0.4-1.3,0c-0.4-0.4-0.4-0.9,0-1.3L25,47z" style=" fill: var(--iconColor)" />
+            </g>
+            <circle class="disableRightCircle" cx="53" cy="0" r="60" fill="var(--primary-color)" stroke="transparent" style="opacity:0;" />
+          </g>
+        </g>
+        }
+        <!-- <g class="RCsince-info" transform="translate(105, 165)">
+    <g style="transform: translate(-14px, -4px);cursor: pointer;">
+      <rect width="20" height="20" x="2" style="fill:transparent"></rect>
+      <svg width="20" height="20" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
+        <path d="M32 59C39.4261 59 46.548 56.05 51.799 50.799C57.05 45.548 60 38.4261 60 31C60 23.5739 57.05 16.452 51.799 11.201C46.548 5.94999 39.4261 3 32 3C24.5739 3 17.452 5.94999 12.201 11.201C6.94999 16.452 4 23.5739 4 31C4 38.4261 6.94999 45.548 12.201 50.799C17.452 56.05 24.5739 59 32 59V59ZM35.255 26.058L31.755 42.5255C31.51 43.7155 31.8565 44.391 32.819 44.391C33.498 44.391 34.5235 44.146 35.22 43.53L34.912 44.986C33.9075 46.197 31.692 47.079 29.7845 47.079C27.324 47.079 26.2775 45.602 26.9565 42.4625L29.5395 30.3245C29.7635 29.299 29.5605 28.928 28.535 28.6795L26.9565 28.396L27.2435 27.0625L35.2585 26.058H35.255ZM32 22.25C31.0717 22.25 30.1815 21.8813 29.5251 21.2249C28.8687 20.5685 28.5 19.6783 28.5 18.75C28.5 17.8217 28.8687 16.9315 29.5251 16.2751C30.1815 15.6187 31.0717 15.25 32 15.25C32.9283 15.25 33.8185 15.6187 34.4749 16.2751C35.1313 16.9315 35.5 17.8217 35.5 18.75C35.5 19.6783 35.1313 20.5685 34.4749 21.2249C33.8185 21.8813 32.9283 22.25 32 22.25V22.25Z" fill="white" style=" fill: var(--prim-button-color)"></path>
+      </svg>
+    </g>
+    <g class="RCsince" transform="translate(-4, -48)" style="display:none">
+      <g style="transform: translate(8px, 42px);">
+        <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+      </g>
+      <rect width="153" height="40" fill="transparent" style="stroke: #444455; fill: var(--topNavbar) !important;" rx="5" ry="5" x="-80" y="-5.5"></rect>
+      <text style="font-family: var(--ff-medium); text-anchor: start; font-style: italic; font-size: 11px; fill: var(--leftSideText);" x="-68" y="18">Scores as of: </text>
+      <text id="sinceRCIncep" y="18" x="2" style="font-family: var(--ff-medium); text-anchor: start; font-style: italic; font-size: 11px; fill: var(--leftSideText);">{{asOfDate}}</text>
+    </g>
+  </g> -->
+        
+
+        g>
+
+
+      </g>
+
+
+
+        
+
+        <g id="gHisTimeChart" transform="translate(810 ,385)">
+          <g id="gHisTimeCompetitive"></g>
+          <g id="gcrlChart_his"></g>
+          <g id="gHisTimeCompetitiveRect"></g>
+        </g>
+</svg>
+    @if(showCenterLoader_popup){
+    <svg id="defCenCircle_loader_popup" [style.display]="(showCenterLoader_popup) ? 'block':'none'" viewBox="180 45 1220 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <g class="mainLoaderShow_load" id="mainToolLoader_load">
+        <defs>
+          <linearGradient id="gradient1" y1="0" y2="1">
+            <stop stop-color="#1f1f32" offset="0" />
+            <stop stop-color="#aeb6c5" offset="1" />
+          </linearGradient>
+        </defs>
+        <g class="mainLoader_load_popup" style="transform: translate(642px, 232px) scale(8.4)">
+          <svg class="spinner_load">
+            <circle cx="20" cy="20" r="18" stroke="url(#gradient1)"></circle>
+          </svg>
+        </g>
+        <g style="transform: translate(738px, 380px)">
+          <rect width="150" height="25" fill="var(--topNavbar)" rx="5" ry="5"></rect>
+          <text x="15" y="16" fill="var(--leftSideText)" style="font-family: var(--ff-medium); font-size: 9pt;">Loading...</text>
+          <text x="80" y="16" fill="var(--leftSideText)" style="font-family: var(--ff-regular); font-size: 7pt;">Please Wait</text>
+        </g>
+        <rect height="700" width="1220" transform="translate(200,0)" style="stroke: transparent;
+        stroke-width: 2px;fill: transparent;" x="0" y="70" rx="15" ry="15"></rect>
+      </g>
+    </svg>
+    }
+  </div>
+  <div class="right-l" [style.display]="showErrorMsg?'none':'block'"  (mouseenter)="onSidebarRightEnter()" (mouseleave)="onSidebarRightLeave()">
+    <div class="buildYourIndex__sec__rightG">
+      @if(((sharedData.checkMenuPer(2027, 2236) == 'Y' || sharedData.checkMenuPer(2027, 2236) == 'D') && from == 'equityUniverse') ||
+      ((sharedData.checkMenuPer(2027, 2237) == 'Y' || sharedData.checkMenuPer(2027, 2237) == 'D') && from == 'equityUniverse') ||
+      ( from == 'etfUniverse' && (sharedData.checkMenuPer(2028, 2252) == 'Y' || sharedData.checkMenuPer(2028, 2252) == 'D')) ||
+      ( from == 'etfUniverse' && (sharedData.checkMenuPer(2028, 2253) == 'Y' || sharedData.checkMenuPer(2028, 2253) == 'D'))){
+      <div class="icon__select">
+        @if((sharedData.checkMenuPer(2027, 2236) == 'Y' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2252) == 'Y')){
+        <div class="__selectIco select__steps" [class.active]="showDefault_select == 'company'" (mouseenter)="showDefault_select_hover('company');openRightSideGrid();vir_ScrollGrids('', sortedhisRightGridData, highlightList)"  (click)="toggleIconSelect('company');vir_ScrollGrids('', sortedhisRightGridData, highlightList)">
+          <span class="material-icons-outlined">
+            attach_file
+          </span>
+          <p>Components</p>
+        </div>
+        }@else if((sharedData.checkMenuPer(2027, 2236) == 'D' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2252) == 'D')){
+        <div class="__selectIco select__steps disabled">
+          <span class="material-icons-outlined">attach_file</span>
+          <p>Components</p>
+        </div>
+        }
+        @if((sharedData.checkMenuPer(2027, 2237) == 'Y' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2253) == 'Y')){
+        <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'performance'" (mouseenter)="showDefault_select_hover('performance');openRightSideGrid();"  (click)="toggleIconSelect('performance');">
+          <span class="material-icons-outlined">
+            query_stats
+          </span>
+          <p>Performance</p>
+        </div>
+        } @else if((sharedData.checkMenuPer(2027, 2237) == 'D' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2253) == 'D')){
+        <div class="__selectIco select__accounts disabled">
+          <span class="material-icons-outlined">
+            query_stats
+          </span>
+          <p>Performance</p>
+        </div>
+        }
+      </div>
+      }
+      <div class="rightSideDefGrid" [class.showRightAnimate]="getSelectedRightSide  != 'N'">
+        @if((sharedData.checkMenuPer(2027, 2236) == 'Y' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2252) == 'Y')){
+        <div class="icon__details p-0" [style.display]="showDefault_select == 'company'?'block':'none'">
+
+          <div class="ind_sec select__steps__details">
+           
+            <div class="d-flex align-items-center comp__head pb1rem pl0_5rem justify-content-between">
+              @if(hisaddGridData.length>0){
+              <h4 class="d-flex align-items-center">
+                Components
+                <span class="count d-flex">{{hisaddGridData.length}}</span>
+              </h4>
+              }@else{
+              <h4 class="d-flex align-items-center">Components</h4>
+              }
+              <span class="no_line_height d-flex align-items-center">
+                <span class="material-icons " (click)="openSearch()">
+                  search
+                </span>
+                <div class="dropdown">
+                  <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    swap_vert
+                  </span>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <!-- <div class="component sortbyComp" style="margin-top: 0; margin-bottom: 0; ">
+        <div class="dropSpace">
+          <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+          <div class="component sortbyComp EQ_sorting">
+            <span class="title">Ascending</span>
+            <div class="mat__toggle">
+              <mat-slide-toggle [checked]="ascending_val" (change)="onToggleAscending($event)" class="example-margin preLabel"></mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div> -->
+                    <ul>
+                      <li class="d-flex">
+                        <a class="dropdown-item sort_btn">
+                          Sort by
+                          <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('R','hisTimeline')"><span class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem"> refresh</span> Reset</button>
+                        </a>
+
+                      </li>
+                      <li *ngFor="let item of FilterList">
+                        <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                        <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                          @if(ascending_val){
+                          <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                  fill="#fff" />
+                            <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                  fill="#fff" style="opacity: 0.2;" />
+                          </svg>
+                          }
+                          @else{
+                          <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                  fill="#fff" style="opacity: 0.2;" />
+                            <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                  fill="#fff" />
+                          </svg>
+                          }
+                        </span>
+                      </li>
+                    </ul>
+
+                  </div>
+                </div>
+                <span class="material-icons-outlined close__card pin__bar__comp mr0_5rem" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components');">
+                  push_pin
+                </span>
+              </span>
+            </div>
+            <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+              <div class="d-flex align-items-center">
+                <span class="material-icons disable">
+                  search
+                </span>
+                <input appRemoveSpecialCharacters (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchText" (input)="filterItems()" #searchBox>
+                <span class="material-icons" (click)="searchClose()">
+                  close
+                </span>
+              </div>
+            </div>
+
+            <div class="scrollbox outerScroll__Div">
+              <div class="construction h-100">
+                @if(sortedhisRightGridData.length>0){
+                <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+                  <ul>
+                    <li *cdkVirtualFor="let data of sortedhisRightGridData;let i=index;">
+                      <div class="list__sec" [class.active]="data.isin == highlightList">
+                        <div class="d__border" [style.border-color]="cl(data.colorVal)" (click)="hisCompClick(data);scrollToIndexClick(i)">
+                          <p class="ind__name">{{data['companyName'] | nullDashPipe:''}}</p>
+                          <div class="d-flex align-items-center justify-content-between">
+                            <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                            <span class="price text-right" style="color: var(--paraFontColorAlt)">{{data['price'] | priceFormat :',.1f' :data['currency'] }}</span>
+                            <span class="price text-right">{{data.Wt | weightFormatPerWithDigit:',.1f'}}</span>
+                            <span class="price text-right ">
+                              <span class="med-e" [style.background-color]="cl(data.colorVal)" [style.color]="(data.score>=0 && data.score<=35) || (data.score>=60)?'#fff':'#000'">{{sharedData.formatGScore(data.score)}}</span>
+                            </span>
+                            <div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                </cdk-virtual-scroll-viewport>
+                }@else{
+                <div class="no-r-f text-center pt0rem h-100 d-flex align-items-center justify-content-center">No results found. Revise your search.</div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+        @if((sharedData.checkMenuPer(2027, 2237) == 'Y' && from == 'equityUniverse') ||( from == 'etfUniverse' && sharedData.checkMenuPer(2028, 2253) == 'Y')){
+
+
+        <div class="icon__details HisComponent" [style.display]="showDefault_select == 'performance'?'block':'none'">
+          <!--@if(SRValue != 0 && SRValue != 100){
+      <div class="Cumulative_return" [style.display]="showErrorMsg || openLineChart?'none':'block'">
+        <ul>
+          <li>
+            <span class="ico">
+              <span class="">
+                <img src="../../../../assets/images/matico/cumulative_ico.svg">
+              </span>
+            </span>
+            <div>
+              <h4 class="mb1">Excess Cumulative return</h4>
+              <p class="return d-flex align-items-end">
+                @if(hiscumReturn >= 0){+}{{hiscumReturn | numWithCommaRtnPercent}}
+                @if(hiscumReturn >= 0){
+                <span class="material-icons __pos" style="color: var(--successColor); font-size: 2rem;height:1.8rem">
+                  arrow_drop_up
+                </span>
+                }@else{
+                <span class="material-icons __neg" style="color: var(--danger); font-size: 2rem; height: 1.8rem">
+                  arrow_drop_down
+                </span>
+                }
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="d-flex align-item-center ico">
+              <span class="">
+                <img src="../../../../assets/images/matico/annualized_ico.svg">
+              </span>
+            </span>
+            <div>
+              <h4 class="mb1">Excess Annualized return</h4>
+              <p class="return d-flex align-items-end">
+                @if(hisannReturn >= 0){+}{{hisannReturn | numWithCommaRtnPercent }}
+                @if(hisannReturn >= 0){
+                <span class="material-icons __pos" style="color: var(--successColor); font-size: 2rem; height: 1.8rem">
+                  arrow_drop_up
+                </span>
+                }@else{
+                <span class="material-icons __neg" style="color: var(--danger); font-size: 2rem; height: 1.8rem">
+                  arrow_drop_down
+                </span>
+                }
+              </p>
+            </div>
+          </li>
+        </ul>
+        @if(returnDate != ''){
+        <span class="return_cal returnW">
+          {{returnDate}}
+        </span>
+        }
+      </div>
+      }-->
+          <div class="Hisperform__details">
+          
+            <div class="ind_sec select__accounts__details perf__sec pl0_5rem pb1rem p-rel h-auto" [class.heightMinCu]="SRValue != 0 && SRValue != 100">
+              <span class="material-icons-outlined close__card pin__bar__comp p-abs" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('performance');">
+                push_pin
+              </span>
+              <div>
+                <h4 class="mb1">Performance Statistics</h4>
+                <!--<p>Returns as of {{asOfDate}}</p>-->
+              </div>
+              <div class="rightGrid_matTab fif__table1">
+                <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+                  <mat-tab [label]="'Before & After'">
+                    <div class="scrollbox scroll_div_perf" [class.def_height]="SRValue == 0 || SRValue == 100">
+                      <div class="tab__head d-flex justify-content-between align-items-center">
+                        <div class="tab_Cell">h-factor</div>
+                        <div class="tab_Cell" *ngIf="selectedSectorName.group != 'ETFIndex'">Before</div>
+                        <div class="tab_Cell" *ngIf="selectedSectorName.group == 'ETFIndex'">
+                          @if(selectedSectorName.group == 'ETFIndex'){ {{selectedSectorName.ticker}} }
+                          @else{{{selectedSectorName.group}}}
+
+                        </div>
+                        <div class="tab_Cell" *ngIf="selectedSectorName.group != 'ETFIndex'">After</div>
+                        <div class="tab_Cell" *ngIf="selectedSectorName.group == 'ETFIndex'" style=" white-space: normal; line-height: 1;">Your Index</div>
+                      </div>
+                      <div class="tab__body">
+                        @for (data of h_facData; track data) {
+                        <div class="b__sec d-flex justify-content-between align-items-center">
+                          <div class="tab_Cell">{{data['H-Factor']}}</div>
+                          <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                          <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                        </div>
+                        }
+                      </div>
+
+                      <div class="tab__head d-flex justify-content-between align-items-center">
+                        <div class="tab_Cell">Performance</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                      </div>
+                      <div class="tab__body">
+                        @for (data of perData1; track data) {
+                        <div class="b__sec d-flex justify-content-between align-items-center">
+                          <div class="tab_Cell">{{data['Performance']}}</div>
+                          <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                          <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                        </div>
+                        }
+                      </div>
+
+                      <div class="tab__head d-flex justify-content-between align-items-center">
+                        <div class="tab_Cell">Statistics</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                      </div>
+                      <div class="tab__body">
+                        @for (data of StatData; track data) {
+                        <div class="b__sec d-flex justify-content-between align-items-center">
+                          <div class="tab_Cell">{{data['Statistics']}}</div>
+
+                          <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                          <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                        </div>
+                        }
+                      </div>
+                    </div>
+                  </mat-tab>
+                  <mat-tab [label]="'Before & Combined'">
+                    <div class="scrollbox scroll_div_perf" [class.def_height]="SRValue == 0 || SRValue == 100">
+                      <label class="perStatSliderDraggedValue">NAA Combined Performance: {{assgUserDrpVal}}%</label>
+                      <div class="perStatSliderNGX d-flex align-items-center justify-content-between cus_range_slider mb1_5rem">
+                        <label class="perStatSliderLable" for="hisperStatSliderInput" style="top: 0.5rem;">0%</label>
+                        <ngx-slider [(value)]="assgUserDrpVal" [options]="options" (userChangeEnd)="hisperStatSliderChange($event)" style="width:70%"></ngx-slider>
+                        <!--<input type="range" min="0" max="100" [value]="assgUserDrpVal" step="1" class="cus_range" style="width:75%" id="perStatSliderInput" (change)="hisperStatSliderChange($event)">-->
+                        <!--<mat-slider min="0" max="100" step="1" class="cus_range_mat">
+                      <input matSliderThumb [value]="assgUserDrpVal" (change)="hisperStatSliderChange($event)">
+                    </mat-slider>-->
+                        <label class="perStatSliderLable" for="hisperStatSliderInput" style="top: 0.45rem;">100%</label>
+                      </div>
+
+                      <div class="tab__head d-flex justify-content-between align-items-center">
+                        <div class="tab_Cell">h-factor</div>
+                        <div class="tab_Cell">Before</div>
+                        <div class="tab_Cell" matTooltip="Combined" [matTooltipPosition]="'above'">Combined</div>
+                      </div>
+                      <div class="tab__body">
+                        @for (data of h_facData; track data) {
+                        <div class="b__sec d-flex justify-content-between align-items-center">
+                          <div class="tab_Cell">{{data['H-Factor']}}</div>
+                          <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                          <div class="tab_Cell">{{data['Combined']}}</div>
+                        </div>
+                        }
+                      </div>
+
+                      <div class="tab__head d-flex justify-content-between align-items-center">
+                        <div class="tab_Cell">Performance</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                      </div>
+                      <div class="tab__body">
+                        @for (data of perData1; track data) {
+                        <div class="b__sec d-flex justify-content-between align-items-center">
+                          <div class="tab_Cell">{{data['Performance']}}</div>
+                          <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                          <div class="tab_Cell">{{data['Combined']}}</div>
+                        </div>
+                        }
+                      </div>
+
+                      <div class="tab__head d-flex justify-content-between align-items-center">
+                        <div class="tab_Cell">Statistics</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                        <div class="tab_Cell">&nbsp;</div>
+                      </div>
+                      <div class="tab__body">
+                        @for (data of StatData; track data) {
+                        <div class="b__sec d-flex justify-content-between align-items-center">
+                          <div class="tab_Cell">{{data['Statistics']}}</div>
+                          <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                          <div class="tab_Cell">{{data['Combined']}}</div>
+                        </div>
+                        }
+                      </div>
+                    </div>
+                  </mat-tab>
+                </mat-tab-group>
+                <span class="perform__RTN text-left d-block pt0_5rem w66" style="padding-right: 0.75rem;">{{returnDate}}</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        }
+      </div>
+    </div>
+    </div>
+</div>
+<div class="modal fade warningautoModel" id="errorModalHisTimeline" tabindex="-1" role="dialog" aria-labelledby="openCompletedQueueModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:32%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <!--<h3>Error</h3>-->
+            <p style="font-size: 0.8rem; padding: 0 0.5rem;">No records available for the chosen quarter. Please select a different one or try again later.</p>
+            <div class="foot-l">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="errorMainModalHT" tabindex="-1" role="dialog" aria-labelledby="openCompletedQueueModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:32%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3>{{noDataEr.title}}</h3>
+            <p style="font-size: 0.8rem; padding: 0 0.5rem;">{{noDataEr.msg}}</p>
+            <div class="foot-l">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="close()">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@if(SRValue != 0 && SRValue != 100){
+<!--<div class="common__perf__cumulative" [style.display]="showErrorMsg || openLineChart?'none':'block'">
+  <div class="cum__return" style="bottom:7%" [matTooltip]="returnDate" matTooltipClass="custom-tooltip">-->
+    <!--<div class="ico cursor-pointer" (click)="openLineChart()">
+      <span class="material-icons" style="color: var(--prim-button-color) ">
+        show_chart
+      </span>
+    </div>-->
+    <!--<div class="ico">
+      <span class="material-icons-outlined">
+        ssid_chart
+      </span>
+    </div>
+    <div class="details">
+      <p>Excess <span>Cumulative return</span></p>
+      <p class="return d-flex align-items-end">
+        @if(hiscumReturn >= 0){+}{{hiscumReturn | numWithCommaRtnPercent}}
+        @if(hiscumReturn >= 0){
+        <span class="material-icons __pos" style="color: var(--successColor); font-size: 1.4rem;height:1.4rem">
+          arrow_drop_up
+        </span>
+        }@else{
+        <span class="material-icons __neg" style="color: var(--danger); font-size: 1.4rem; height: 1.4rem">
+          arrow_drop_down
+        </span>
+        }
+      </p>
+    </div>
+  </div>
+  <div class="cum__return ann_return" style="bottom:7%" [matTooltip]="returnDate" matTooltipClass="custom-tooltip">
+    <div class="ico">
+      <span class="material-icons-outlined">
+        bar_chart
+      </span>
+    </div>
+    <div class="details">
+      <p>Excess <span>Annualized return</span></p>
+      <p class="return d-flex align-items-end">
+        @if(hisannReturn >= 0){+}{{hisannReturn | numWithCommaRtnPercent }}
+        @if(hisannReturn >= 0){
+        <span class="material-icons __pos" style="color: var(--successColor); font-size: 1.4rem; height: 1.4rem">
+          arrow_drop_up
+        </span>
+        }@else{
+        <span class="material-icons __neg" style="color: var(--danger); font-size: 1.4rem; height: 1.4rem">
+          arrow_drop_down
+        </span>
+        }
+      </p>
+    </div>
+  </div>
+</div>-->
+}

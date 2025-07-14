@@ -1,0 +1,96 @@
+$base-border-radius:0.265rem;
+$borderradius:0 0.265rem 0.265rem 0;
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @mixin badge{
+    background-color: var(--border) !important;
+    font-size: .7rem;
+    font-weight: 500;
+    color: var(--leftSideText);
+  }
+@mixin reset-button {
+  line-height: 1;
+  border: 0;
+  min-width: auto;
+  border-radius: 0.265rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  font-family: var(--ff-medium) !important;
+}
+  @mixin button-hover-opacity {
+    opacity: 0.75 !important;
+  }
+  @mixin flex-align-center {
+    display: flex;
+    align-items: center;
+  }
+  @mixin flex-middle-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @mixin button-hover-opacity {
+    opacity: 0.75 !important;
+  }
+  @mixin button-diable-opacity{
+    opacity: .5 !important;
+  }
+@mixin button($bg-color,$text-color,$basefont) {
+  padding: .25rem 1rem;
+  background-color: $bg-color;
+  color: $text-color;
+  border: 1px solid $bg-color;
+  border-radius: $base-border-radius;
+  font-size: $basefont;
+  font-family: var(--ff-medium);
+
+  &:hover:not(.disabled) {
+    @include button-hover-opacity;
+  }
+}
+@mixin button_active($bg-color,$text-color,$basefont) {
+  padding: .25rem 1rem;
+  background-color: $bg-color;
+  color: $text-color;
+  border: 1px solid $bg-color;
+  border-radius: $base-border-radius;
+  font-size: $basefont;
+  font-family: var(--ff-medium);
+
+  &:hover:not(.disabled) {
+    @include button-hover-opacity;
+  }
+}
+
+@mixin button_outline($bg-color,$text-color,$basefont) {
+  padding: .25rem 1rem;
+  color: $text-color;
+  border: 1px solid $bg-color;
+  border-radius: $base-border-radius;
+  font-size: $basefont;
+  font-family: var(--ff-medium);
+
+  &:hover:not(.disabled) {
+    @include button-hover-opacity;
+  }
+}
+@mixin button__theme($bg-color,$text-color,$basefont, $padding) {
+  padding: $padding;
+  background-color: $bg-color;
+  color: $text-color;
+  border: 1px solid $bg-color;
+  border-radius: $base-border-radius;
+  font-size: $basefont;
+  font-family: var(--ff-medium);
+
+  &:hover:not(.disabled) {
+    @include button-hover-opacity;
+  }
+}
+@mixin buttonDisabled($bg-color,$text-color){
+  pointer-events: none;
+  @include button-diable-opacity()
+}

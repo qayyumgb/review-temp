@@ -1,0 +1,4 @@
+{
+    "Server": "$(Agent.Name)",
+    "BuildNumber" : "$(Build.BuildNumber)"
+}

@@ -1,0 +1,96 @@
+<!--<div class="default_mat_tabs">
+  <mat-tab-group>
+    <mat-tab label="Trades History">
+      <mat-table matSort [dataSource]="accountDataSourceData" class="common_mat_table accounts_table history_table"
+                 id="rolemanagement-table" matSortDisableClear matSortDirection="asc" (matSortChange)="onSortHistory($event)">
+
+        <ng-container matColumnDef="Date of trade">
+          <mat-header-cell mat-sort-header *matHeaderCellDef style=" justify-content: flex-start;">
+            Date of trade
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" style=" justify-content: flex-start;">
+            <span mat-menu-item>{{element.dateofTrade}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Ticker">
+          <mat-header-cell mat-sort-header *matHeaderCellDef style=" justify-content: flex-start;">
+            Ticker
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" style=" justify-content: flex-start;">
+            <span mat-menu-item>{{element.ticker}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Price ($)">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Price ($) </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span mat-menu-item>{{element.price}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Quantity">
+          <mat-header-cell mat-sort-header *matHeaderCellDef> Quantity</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span mat-menu-item>{{numberWithCommas(element.noofShares)}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Value">
+          <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span mat-menu-item>{{checkValPrice(element.noofShares * element.price)}}</span>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="accountDataSourceHeader;sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: accountDataSourceHeader;"></mat-row>
+
+      </mat-table>
+    </mat-tab>
+    <mat-tab label="Trades Allocation History">-->
+<mat-table matSort [dataSource]="accountAllocationDataSourceData" class="common_mat_table accounts_table history_table_his layout__1"
+           id="rolemanagement-table" matSortDisableClear matSortDirection="asc" (matSortChange)="onSortHistoryAll($event)">
+
+  <ng-container matColumnDef="Ticker">
+    <mat-header-cell mat-sort-header *matHeaderCellDef style=" justify-content: flex-start;">
+      Ticker
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element" style=" justify-content: flex-start;">
+      <span mat-menu-item>{{element.ticker | nullDashPipe :''}}</span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Price ($)">
+    <mat-header-cell mat-sort-header *matHeaderCellDef> Price ($) </mat-header-cell>
+    <mat-cell *matCellDef="let element" style="padding-right:2rem">
+      <span mat-menu-item>{{element.price | priceFormat:',.2f'}}</span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="buyOrSell">
+    <mat-header-cell mat-sort-header *matHeaderCellDef style=" justify-content: flex-start;"> Action </mat-header-cell>
+    <mat-cell *matCellDef="let element" style=" justify-content: flex-start;">
+      <span mat-menu-item>{{element.buyOrSell | nullDashPipe :''}}</span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Quantity">
+    <mat-header-cell mat-sort-header *matHeaderCellDef style="padding-right:2rem"> Quantity</mat-header-cell>
+    <mat-cell *matCellDef="let element" style="padding-right:2rem">
+      <span mat-menu-item>{{numberWithCommas(element.noofShares) | nullDashPipe :''}}</span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="tradedStatus">
+    <mat-header-cell *matHeaderCellDef style=" justify-content: flex-start;min-width:20rem"> Traded Status </mat-header-cell>
+    <mat-cell *matCellDef="let element" style="justify-content: flex-start; min-width: 20rem ">
+      <span mat-menu-item>{{element.tradedStatus | nullDashPipe :''}}</span>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="accountAllocHeader;sticky: true"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: accountAllocHeader;"></mat-row>
+
+</mat-table>
+    <!--</mat-tab>
+  </mat-tab-group>
+</div>-->

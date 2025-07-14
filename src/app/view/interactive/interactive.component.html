@@ -1,0 +1,305 @@
+
+<div class="canvas">
+  <div class="default_mat_dropdown" style="margin-top: 3.5rem;">
+    <ul>
+      <!-- <li>
+        <span class="w-100">
+          <mat-form-field FloatLabelType="never" appearance="outline" class="w-100">
+        
+            <mat-label style="padding-right: 0.5rem">--Selected option--</mat-label> 
+            <mat-select panelClass="selectList" placeholder="--Selected option--">
+              <mat-option value="universe" (click)="selectedByChange('universe')">Add Universe</mat-option>
+              <mat-option value="component" (click)="selectedByChange('component')">Add Component</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </span>
+      </li> -->
+      <!-- <li>
+        <button class="addbtn mod-foot-btn-activeP ml_p_5 mr_p_5" (click)="addDraggable()">Add Draggable</button>
+      </li> -->
+      <!-- <li>
+        <app-globalbutton (childButtonClicked)="parentMethod($event)" [buttonName]="'Add Connector'" [buttonType]="'add'" [isDisabled]="istrigger">
+        
+        </app-globalbutton>
+      </li>
+      <li>
+        <app-globalbutton (childButtonClicked)="parentMethod($event)" [buttonName]="'Remove Connector'" [buttonType]="'remove'" [isDisabled]="false">
+        
+        </app-globalbutton>
+      </li> -->
+      <li>
+        <button class="mod-foot-btn-activeS" (click)="connectSelectedCards()" [disabled]="selectedCards.size < 2">
+          Add Connecter
+        </button>
+      </li>
+      <li>
+        <button class="mod-foot-btn-activeError" (click)="removeSelectedCards()" disabled>
+          Remove Connecter
+        </button>
+      </li>
+    </ul>
+  
+  </div>
+
+  <!--<button class="mod-foot-btn-activeS mr_p_5" (click)="deleteSelected()">
+    Delete Selected
+  </button>-->
+
+  <div id="canvas">
+    <div class="d_grid">
+      <div class="grid-item position-relative">
+        <h5>Add Component</h5>
+        <ng-container *ngIf="!isUniverse">
+          <div class="grid-item-wrap" *ngFor="let filter of filterData">
+            <span class="sub_title" *ngIf="filter.value === 'universe'">Universe</span>
+            <span class="sub_title" *ngIf="filter.value === 'liquidity'">Filters</span>
+            @if (filter.value == "universe") {
+              <div class="grid-item-content" (click)="showUniverse(filter.value)">
+                @if (filter.value == "universe") {
+                  <span class="icons">
+                    <svg width="24" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg>
+                  </span>
+                }
+                @else {
+                  <span class="icons warning">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C14.8058 4.19021 15.1133 4.7437 14.9615 5.27473L10.9615 19.2747C10.8098 19.8058 10.2563 20.1133 9.72529 19.9615C9.19426 19.8098 8.88677 19.2563 9.03849 18.7253L13.0385 4.72529C13.1902 4.19426 13.7437 3.88677 14.2747 4.03849Z" fill="var(--warningColor)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7071 4.29289C15.0977 4.68342 15.0977 5.31658 14.7071 5.70711L9.41424 11H17C17.4045 11 17.7691 11.2436 17.9239 11.6173C18.0787 11.991 17.9931 12.4211 17.7071 12.7071L10.7071 19.7071C10.3166 20.0976 9.68345 20.0976 9.29292 19.7071C8.9024 19.3166 8.9024 18.6834 9.29292 18.2929L14.5858 13H7.00003C6.59557 13 6.23093 12.7564 6.07615 12.3827C5.92137 12.009 6.00692 11.5789 6.29292 11.2929L13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289Z" fill="var(--warningColor)"></path></svg>
+                  </span>
+                }
+                <p> {{filter.label}}</p>
+              </div>
+            }
+            @else {
+              <div class="grid-item-content" (click)="addDraggable(filter.value)" [ngClass]="{'selected': filter.value === 'group' && isGroupSelected}">
+                @if (filter.value == "universe") {
+                  <span class="icons" >
+                    <svg width="24" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg>
+                  </span>
+                }
+                @else {
+                  <span class="icons warning" [ngClass]="getIconClass(filter.value)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C14.8058 4.19021 15.1133 4.7437 14.9615 5.27473L10.9615 19.2747C10.8098 19.8058 10.2563 20.1133 9.72529 19.9615C9.19426 19.8098 8.88677 19.2563 9.03849 18.7253L13.0385 4.72529C13.1902 4.19426 13.7437 3.88677 14.2747 4.03849Z" fill="var(--primary-logo)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7071 4.29289C15.0977 4.68342 15.0977 5.31658 14.7071 5.70711L9.41424 11H17C17.4045 11 17.7691 11.2436 17.9239 11.6173C18.0787 11.991 17.9931 12.4211 17.7071 12.7071L10.7071 19.7071C10.3166 20.0976 9.68345 20.0976 9.29292 19.7071C8.9024 19.3166 8.9024 18.6834 9.29292 18.2929L14.5858 13H7.00003C6.59557 13 6.23093 12.7564 6.07615 12.3827C5.92137 12.009 6.00692 11.5789 6.29292 11.2929L13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289Z" fill="var(--primary-logo)"></path></svg>
+                  </span>
+                }
+                <p> {{filter.label}}</p>
+              </div>
+            }
+          
+           
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isUniverse">
+          <div class="d-flex align-items-center mb-2">
+            <div  class="go-back-ico d-flex align-items-center cursor-pointer" (click)="backToUniverse()">
+              <span  class="material-icons icons">arrow_back_ios</span>
+              <span>Universe</span>
+            </div>
+          
+          </div>
+          <div id="account_Exclusions">
+            <ul class="universe-list">
+              <!-- <li *ngFor="let item of universeList">
+                <ng-container >
+                  <mat-checkbox  class="example-margin w-100" (change)="acccountChange(item)">{{item.name}}</mat-checkbox>
+                </ng-container>
+              </li> -->
+              <li class="default-search-item-dropdownList" *ngFor="let item of universeList">
+                <mat-radio-group aria-label="Select" [(ngModel)]="selectedItem" (change)="onOptionChange($event, item)">
+                  <mat-radio-button [value]="item.name" style="min-width:100%;margin-bottom:0.5rem;">{{item.name}}</mat-radio-button>
+                 
+                </mat-radio-group>
+              </li>
+            </ul>
+            <button class="mod-foot-btn-activeP" style="    position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;" (click)="addUniverse()">
+              Add Universe
+            </button>
+          </div>
+        </ng-container>
+     
+      </div>
+      <div id="canvas-wrapper" (mousedown)="startPan($event)" (mousemove)="pan($event)" (mouseup)="endPan()">
+        <div class="plumb-select-mode">
+          <button (click)="zoomIn()" matTooltip="Zoom In" matTooltipPosition="below">
+            <i class="fa fa-plus"></i> 
+          </button>
+          <button (click)="zoomOut()" matTooltip="Zoom Out" matTooltipPosition="below">
+            <i class="fa fa-minus"></i> 
+          </button>
+          <button (click)="resetZoom()" matTooltip="Reset Zoom" matTooltipPosition="below">
+            <i class="fa fa-refresh"></i> 
+          </button>
+        </div>
+        <div class="position-relative zoomable-canvas" id="zoomPanel">
+          @for(card of cards;track card){
+          @if(card.type == 'group'){
+            <!-- [style.width.px]="(card?.group.length>0)?((card?.group.length*150)+20) :180" -->
+          <div class="cardGrp" [id]="card.id" [style.top.px]="card.top" [class.flow-conn-error]="checkError(card)"
+               [style.left.px]="card.left" >
+            @if(card?.data?.name != null || card?.data?.name != undefined){
+            {{  card?.data?.name }}
+            }@else{
+            <span *ngIf="card?.group.length == 0"> {{  card.label }}</span>
+            }
+            @if(card?.group.length >0){
+            @for(grp of card?.group;track grp){
+            <!--@if(grp?.type == 'subGrp' && grp?.subGrp.length>0){
+            <div class="subGrpChild">
+              <span class="icons"><svg width="15" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg></span>
+              @for(sugrp of grp?.subGrp;track sugrp){
+              <div class="card groupchild" >
+                @if(sugrp?.data?.name != null || sugrp?.data?.name != undefined){
+                {{  sugrp?.data?.name }}
+                }@else{
+                {{  sugrp.label }}
+                }
+                <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardChildClick(card.id,grp.id)">delete</span>
+              </div>
+              }
+            </div>
+            }@else{-->
+          <div class="card groupchild" [id]="grp.id" (click)="groupChildClick(card,$event)" data-bs-toggle="modal" data-bs-target="#filtermodal">
+            @if(grp?.data?.name != null || grp?.data?.name != undefined){
+            {{  grp?.data?.name }}
+            }@else{
+            {{  grp.label }}
+            }
+            @if(grp?.type == 'subGrp' && grp?.subGrp.length>0){
+            <span class="icons d-flex" style="position:absolute;top:0;right:0;"><svg width="15" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg></span>
+            }
+            <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardChildClick(card.id,grp.id)">delete</span>
+          </div>
+            <!--}-->
+            }
+            }
+            <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardClick(card.id)">delete</span>
+          </div>
+          }@else{
+          <div class="card" [id]="card.id" [style.top.px]="card.top" [class.flow-conn-error]="checkError(card)"
+               [style.left.px]="card.left" [ngClass]="getIconClass(card.label)">
+            @if(card?.data?.name != null || card?.data?.name != undefined){
+            {{  card?.data?.name }}
+            }@else{
+            {{  card.label }}
+            }
+            <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardClick(card.id)">delete</span>
+          </div>
+          }
+          }
+        </div>
+      </div>
+    
+    </div>
+ 
+    
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="cardDelModal" aria-modal="true" tabindex="-1" role="dialog" aria-labelledby="cardDelModal"
+      data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3>Are you sure?</h3>
+            <p style="font-size: 0.9rem;">Do you really want to delete this card.</p>
+            <div class="foot-l" style="margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="deleteSelected(cardDel)">Delete</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="filtermodal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:45%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; padding: 0;">
+            <div class="w-head">
+              <p>h-factor</p>
+              <div class="close-l" data-bs-dismiss="modal" aria-label="Close"><span class="material-icons">close</span></div>
+            </div>
+            <div class="accEditValues">
+              
+              <div id="canvas">
+              
+                  <!-- <div class="popupcardGrp">
+                    @for(card of groups;track card){
+                    <div class="card groupchild" [id]="card.id" [style.top.px]="card.top"
+                    [style.left.px]="card.left">
+                      {{  card.label }}
+                    </div>
+                  }
+                  </div> -->
+                  <div cdkDropList class="popupcardGrp sub-branches" (cdkDropListDropped)="drop($event)" [cdkDropListData]="groups">
+                    <div *ngFor="let card of groups;trackBy: trackByCardId" cdkDrag cdkDragLockAxis="y" class=" withSubchild">
+                    @if(card.type == 'subGrp'){
+                      <div class="position-relative">
+                        <div class=" groupchild card">
+                          {{ card.label }}
+                        </div>
+                        <div class="lineBox"></div>
+                        <div class="sub-branches mt3_5rem">
+                          @for(grp of card?.subGrp;track grp){
+                         
+                            @if(grp?.type == 'subGrp' && grp?.subGrp.length>0){
+                            <div class="subChild">
+                              <div class=" card">
+                                {{ grp.label }}
+                              </div>
+                            </div>
+    
+                            }
+                            @else{
+                            <div class="subChild">
+                              <div class=" card">
+                                {{ grp.label }}
+                              </div>
+                            </div>
+                            }
+                            }
+                        </div>
+                     
+                      </div>
+                   
+                    
+                        
+                   
+                    }
+                    @else {
+                      <div class="groupchild card">
+                        {{ card.label }}
+                      </div>
+                   
+                    }
+                     
+                    
+                    </div>
+                  </div>
+            
+              </div>
+            </div>
+            <div class="foot-l accUpdate">
+            
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal">
+                update
+              </button>
+              <button type="button" class="dialog_btn_S cp" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

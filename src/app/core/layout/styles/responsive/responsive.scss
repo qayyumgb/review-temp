@@ -1,0 +1,676 @@
+@media(max-width: 991px) {
+  .SSlider {
+    display: none;
+  }
+}
+
+@media(max-width: 1350px) {
+  .downHide {
+    display: none;
+  }
+  .reviewFact__inner .D_btn span {
+    margin-right: 0rem !important;
+  }
+}
+@media(max-width: 1200px) {
+  .custom-modalbox.mat-mdc-dialog-panel {
+    width: 44% !important;
+  }
+  
+  .minOverflowAuto {
+    overflow: auto;
+  }
+    .forgotPage .logIn-container,
+    .resetPass .logIn-container {
+        width: 100%;
+        padding: 1rem !important;
+
+        a.userLogIn {
+            padding-top: 1rem;
+        }
+    }
+
+    .resetPass .logIn-container {
+        width: 100%;
+        padding: 2rem !important;
+
+        a.userLogIn {
+            padding-top: 1rem;
+        }
+    }
+
+    .changePwd .logIn-container {
+        width: 60% !important;
+
+        .errorInfo {
+            display: none;
+        }
+    }
+
+    #myErrorModal .delete-stat-modal {
+        max-width: 80%;
+        margin: auto;
+    }
+    .funded_sec {
+        .nav-tabs {
+            padding: 0 !important;
+        }
+    }
+}
+@media(max-width:1128px) {
+  .right-l .outerScroll__Div {
+    // height: calc(100vh - 15rem) !important;
+    height: calc(65vh) !important;
+  }
+}
+@media(max-width: 1024px){
+    #my-strategies {
+        .container-fill {
+            max-width: 950px;
+            padding: 0 0.8rem;
+        }
+    }
+    #myexistingModalNew{
+        .existing_popup_height{
+            max-height: calc(100vh - 30rem);
+            height: auto !important;
+        }
+    }
+}
+@media(max-width: 768px) {
+    .changePwd .logIn-container {
+        width: 100% !important;
+
+        .errorInfo {
+            display: none;
+        }
+    }
+
+    #myErrorModal .delete-stat-modal {
+        max-width: 80%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 1260px) and (min-height:750px) {
+
+    /*my-strategies*/
+    #my-strategies {
+        .container-fill {
+            max-width: 950px;
+        }
+    }
+
+    .mystrategies_accordion {
+        .mystrategies_accordion_child {
+            mat-table {
+                .accordion-extend {
+                    span {
+                        font-size: 0.7rem !important;
+                        height: 1rem !important;
+                        width: 1rem !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .expandAll .mdc-switch {
+        transform: scale(0.6) !important;
+    }
+
+    .mystrategies_accordion {
+        .mystrategies_accordion_child {
+            .customIndex-header {
+                .mat-mdc-paginator {
+                    .mat-mdc-text-field-wrapper {
+                        height: auto;
+
+                    }
+                }
+            }
+        }
+    }
+
+    #my-strategies .customIndex-container {
+        height: calc(100vh - 14rem) !important;
+    }
+
+    /*my-strategies*/
+    /*Accounts*/
+    .funded_sec {
+        .nav-tabs {
+            padding: 0 !important;
+        }
+    }
+
+    .Acc-main-outer {
+        .example-viewport-r {
+            overflow-x: hidden;
+        }
+    }
+
+    /*Accounts*/
+    .restrictedList_page {
+        overflow: hidden;
+    }
+
+    .rList {
+        height: calc(100vh - 20rem);
+    }
+
+    .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+        width: auto;
+        max-width: 9rem;
+    }
+
+    .dontSell_page {
+        overflow: hidden;
+        // height: 100vh !important; 
+    }
+
+    .accountEFTCheck {
+        width: 10rem;
+    }
+
+    /*Accounts*/
+    /*Accounts Review factsheet*/
+    .trade_Page {
+        .reviewFact__inner {
+            .reviewFact__inner__left {
+                .scrollableDiv {
+                    height: calc(100vh - 19rem) !important;
+                }
+
+                .pb_md_3 {
+                    // padding-bottom: 3rem !important;
+                }
+            }
+
+        }
+
+    }
+
+    /*Accounts Review factsheet*/
+    /*Trade popup*/
+    .tradeBtnGrp {
+        z-index: 999;
+    }
+
+    .trade_Page .refresh_loader {
+        height: calc(100vh - 19rem) !important;
+    }
+
+    .trade_Page {
+        .TRContainer {
+            .TL_rightSec {
+                #pills-tabContent {
+                    .tblHeightTR {
+                        height: calc(100vh - 23rem);
+                    }
+                }
+            }
+        }
+    }
+
+    .tradeChart {
+        height: auto !important;
+    }
+
+    /*Trade popup*/
+
+}
+
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+
+    /*my-strategies*/
+    #my-strategies {
+        .container-fill {
+            max-width: 727px;
+        }
+    }
+  .SSlider{
+      display: none;
+  }
+  .mystrategies_accordion {
+    .mystrategies_accordion_child {
+      mat-table {
+        .accordion-extend {
+          span {
+            font-size: 0.7rem !important;
+            height: 1rem !important;
+            width: 1rem !important;
+          }
+        }
+      }
+    }
+  }
+
+    .expandAll .mdc-switch {
+        transform: scale(0.6) !important;
+    }
+
+    .mystrategies_accordion {
+        .mystrategies_accordion_child {
+            .customIndex-header {
+                .mat-mdc-paginator {
+                    .mat-mdc-text-field-wrapper {
+                        height: auto;
+
+                    }
+                }
+            }
+        }
+    }
+
+    #my-strategies .customIndex-container {
+        height: calc(100vh - 14rem) !important;
+    }
+
+    /*my-strategies*/
+    /*Accounts*/
+    .funded_sec {
+        .nav-tabs {
+            padding: 0 !important;
+
+            .nav-link {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    .Acc-main-outer {
+        .example-viewport-r {
+            overflow-x: hidden;
+        }
+    }
+
+    .FundedTab {
+        .profile_details {
+            .acc-list {
+                width: 70%;
+            }
+
+            .port_list {
+                width: 30%;
+            }
+        }
+    }
+
+    #vsSrcCls {
+        top: 0;
+        transform: scale(0.8);
+        left: -0.2rem;
+    }
+
+    /*Accounts*/
+    .restrictedList_page {
+        overflow: hidden;
+    }
+
+    .rList {
+        height: calc(100vh - 20rem);
+    }
+
+    .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+        width: auto;
+        max-width: 7rem;
+    }
+
+    .dontSell_page {
+        overflow: hidden;
+        // height: 100vh !important; 
+    }
+
+    /*Accounts*/
+    /*Accounts index steps*/
+    .trade_Page {
+        .p-rel {
+            height: auto;
+        }
+
+        #indexRulesModalInner_T {
+            .build-my-sec-l {
+                height: auto;
+            }
+        }
+    }
+
+    /*Accounts index steps*/
+    /*Accounts Review factsheet*/
+    .trade_Page {
+        .reviewFact__inner {
+            .reviewFact__inner__left {
+                .scrollableheight {
+                    height: calc(100vh - 22rem);
+                }
+
+                .pb_md_3 {
+                    // padding-bottom: 3rem !important;
+                }
+
+                .reviewFact__inner__table {
+                    .chartHeight {
+
+                        height: auto;
+                    }
+                }
+            }
+
+        }
+
+        &.accountIndexFactsheetModal {
+            .reviewFact__inner__right {
+                .bottom__section {
+                    max-height: calc(100vh - 25rem);
+                }
+            }
+        }
+    }
+
+    /*Accounts Review factsheet*/
+    /*Trade popup*/
+    .tradeBtnGrp {
+        z-index: 999;
+    }
+
+    .trade_Page .refresh_loader {
+        height: calc(100vh - 19rem) !important;
+    }
+
+    .trade_Page {
+        .TRContainer {
+            .TL_rightSec {
+                #pills-tabContent {
+                    .tblHeightTR {
+                        height: calc(100vh - 23rem);
+                    }
+                }
+            }
+        }
+    }
+
+    .tradeChart {
+        height: auto !important;
+    }
+
+    /*Trade popup*/
+    /*Dont sell popup*/
+    #rsTable .scrollbox {
+        max-height: calc(100vh - 19.5rem);
+        overflow: auto;
+        height: auto;
+    }
+
+    /*Dont sell popup*/
+
+}
+
+@media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait) {
+
+    /*my-strategies*/
+    #my-strategies {
+        .container-fill {
+            max-width: 950px;
+        }
+    }
+
+    .mystrategies_accordion {
+        .mystrategies_accordion_child {
+            mat-table {
+                .accordion-extend {
+                    span {
+                        font-size: 0.7rem !important;
+                        height: 1rem !important;
+                        width: 1rem !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .expandAll .mdc-switch {
+        transform: scale(0.6) !important;
+    }
+
+    .mystrategies_accordion {
+        .mystrategies_accordion_child {
+            .customIndex-header {
+                .mat-mdc-paginator {
+                    .mat-mdc-text-field-wrapper {
+                        height: auto;
+
+                    }
+                }
+            }
+        }
+    }
+
+    #my-strategies .customIndex-container {
+        height: calc(100vh - 14rem) !important;
+    }
+
+    /*my-strategies*/
+    /*Accounts*/
+    .funded_sec {
+        .nav-tabs {
+            padding: 0 !important;
+
+            .nav-link {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    .Acc-main-outer {
+        .example-viewport-r {
+            overflow-x: hidden;
+        }
+    }
+
+    /*Accounts*/
+    .restrictedList_page {
+        overflow: hidden;
+    }
+
+    .rList {
+        height: calc(100vh - 20rem);
+    }
+
+    .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+        width: auto;
+        max-width: 9rem;
+    }
+
+    .dontSell_page {
+        overflow: hidden;
+        // height: 100vh !important; 
+    }
+
+    /*Accounts*/
+    /*Accounts Review factsheet*/
+    .trade_Page {
+        .reviewFact__inner {
+            .reviewFact__inner__left {
+                .scrollableheight {
+                    height: calc(100vh - 22rem);
+                }
+
+                .pb_md_3 {
+                    // padding-bottom: 3rem;
+                }
+
+                .reviewFact__inner__table {
+                    height: auto;
+                }
+            }
+
+        }
+
+        &.accountIndexFactsheetModal {
+            .reviewFact__inner__right {
+                .bottom__section {
+                    max-height: calc(100vh - 25rem);
+                }
+            }
+        }
+    }
+
+    /*Accounts Review factsheet*/
+    /*Trade popup*/
+    .tradeBtnGrp {
+        z-index: 999;
+    }
+
+    .trade_Page .refresh_loader {
+        height: calc(100vh - 19rem) !important;
+    }
+
+    .trade_Page {
+        .TRContainer {
+            .TL_rightSec {
+                #pills-tabContent {
+                    .tblHeightTR {
+                        height: calc(100vh - 23rem);
+                    }
+                }
+            }
+        }
+    }
+
+    .tradeChart {
+        height: auto !important;
+    }
+
+    /*Trade popup*/
+    /*Dont sell popup*/
+    #rsTable .scrollbox {
+        max-height: calc(100vh - 40.5rem);
+        overflow: auto;
+        height: auto;
+    }
+
+    .dontsellpopup {
+        height: auto !important;
+    }
+
+    /*Dont sell popup*/
+}
+
+/*Landscape*/
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+    .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+        width: auto;
+        max-width: 12rem;
+    }
+
+    .dontsellpopup {
+        height: auto !important;
+    }
+}
+
+@media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: portrait) {
+    .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+        width: auto;
+        max-width: 12rem;
+    }
+
+    .dontsellpopup {
+        height: auto !important;
+    }
+}
+
+@media (min-device-width: 834px) and (max-device-width: 1194px) and (orientation: landscape) {
+    .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+        width: auto;
+        max-width: 12rem;
+    }
+
+    .dontsellpopup {
+        height: auto !important;
+    }
+
+    .trade_Page .reviewFact__inner .reviewFact__inner__left .reviewFact__inner__table .chartHeight {
+        height: auto;
+        width: 100%;
+    }
+
+    .trade_Page .reviewFact__inner .reviewFact__inner__left .scrollableheight {
+        height: calc(100vh - 17rem);
+    }
+
+    /*Dont sell popup*/
+    #rsTable .scrollbox {
+        max-height: calc(100vh - 19.5rem);
+        overflow: auto;
+        height: auto;
+    }
+
+    /*Dont sell popup*/
+}
+
+@media (min-device-width: 834px) and (max-device-width: 1112px) and (orientation: landscape) {
+    .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+        width: auto;
+        max-width: 12rem;
+    }
+
+    .trade_Page .reviewFact__inner .reviewFact__inner__left .reviewFact__inner__table .chartHeight {
+        height: auto;
+        width: 100%;
+    }
+
+    .trade_Page .reviewFact__inner .reviewFact__inner__left .scrollableheight {
+        height: calc(100vh - 17rem);
+    }
+
+    /*Dont sell popup*/
+    #rsTable .scrollbox {
+        max-height: calc(100vh - 19.5rem);
+        overflow: auto;
+        height: auto;
+    }
+
+    .dontsellpopup {
+        height: auto !important;
+    }
+
+    /*Dont sell popup*/
+}
+
+@media (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: landscape) {
+    // .acc-tabs-content ul:not(#accNavTab1) li .acctlist span.subTitle {
+    //     width: auto;
+    //     max-width: 12rem;
+    // }
+
+    // .trade_Page .reviewFact__inner .reviewFact__inner__left .reviewFact__inner__table .chartHeight {
+    //     height: auto;
+    //     width: 100%;
+    // }
+
+    // .trade_Page .reviewFact__inner .reviewFact__inner__left .scrollableheight {
+    //     height: calc(100vh - 17rem);
+    // }
+
+    // .trade_Page {
+    //     &.accountIndexFactsheetModal {
+    //         .reviewFact__inner__right {
+    //             .bottom__section {
+    //                 max-height: calc(100vh - 20rem);
+    //             }
+    //         }
+    //     }
+    // }
+
+    /*Dont sell popup*/
+    // #rsTable .scrollbox{
+    //     max-height: calc(100vh - 19.5rem);
+    //     overflow: auto;
+    //     height: auto;
+    // }
+    // .dontsellpopup{
+    //     height: auto !important;
+    // }
+    /*Dont sell popup*/
+}

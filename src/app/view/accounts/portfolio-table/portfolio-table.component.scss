@@ -1,0 +1,63 @@
+.accounts_table {
+
+    .mat-mdc-header-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  
+    }
+  
+    .mat-mdc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  
+  
+    }
+   
+  }
+  #PortmyexistingModal, .w_Table {
+    .table thead th {
+      vertical-align: middle;
+      border-bottom: 3px solid var(--border);
+      color: var(--leftSideText-B);
+      font-weight: 500;
+      font-family: 'poppins-medium';
+      font-size: 0.75rem;
+      line-height: 1.2;
+      padding: 0.4rem 0.5rem;
+      border-top: 0;
+      background: var(--btn-bg-alt);
+      position: sticky;
+      /*top: 0;*/
+      z-index: 999;
+    }
+  
+    .table tbody tr {
+      border-bottom: 0px dashed var(--border);
+    }
+  
+    .table tbody td {
+      border-bottom: 0px solid #dee2e6;
+      color: var(--leftSideText);
+      font-weight: 500;
+      font-family: var(--ff-regular);
+      font-size: 0.75rem;
+      line-height: 1.2;
+      padding: 0.2rem 0.5rem;
+      border: none;
+      vertical-align: middle;
+      height: 2.2rem;
+      text-align: left;
+      border: 0px solid var(--clkdIndex);
+      width: 10rem;
+  
+      &:first-child {
+        color: var(--leftSideText-B);
+        text-align: right;
+        // width: 44%;
+      }
+    }
+  
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: var(--primary-color) !important;
+    }
+  }

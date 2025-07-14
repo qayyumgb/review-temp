@@ -1,0 +1,633 @@
+<svg id="defCenCircle" class="commonSVGCircle noselect_mousepointer" viewBox="180 45 1220 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <g class="Homecenter" style="" transform="translate(810,285)">
+    <!--<g wlcmHome transform="translate(-377,-25)" [style.display]="showWlcmHome == true ? 'block':'none'"></g>-->
+    <g id="gCircleSlider" class="Circle_Slider" transform="scale(0.84)translate(0,26)">
+      <g viewBox="0 0 120 120">
+        <defs><clipPath id="defalutmyMask"><circle cx="160" cy="160" r="160" fill="white" /></clipPath></defs>
+        <g clip-path="url(#defalutmyMask)" id="ToolSvgSlider" transform="translate(-160, -40)">
+          <rect width="330" height="330" fill="var(--primary-color)" />
+          <g id="slidingSVG" transform="translate(0, 0)" [style.display]="isShowLosers? 'none' : 'block'" [style.visibility]="isShowLosers? 'hidden' : 'visible'">
+            <!--- Slider 1 --->
+            <g class="slider1">
+              <rect width="330" height="330" fill="transparent" />
+              <g transform="translate(40, 25)">
+                <!-- Default Median -->
+                <g class="STw_middle Sel_defComp" transform="translate(40, 0)" style="display:block" [style.display]="!selectedClickedSelcomp?'block':'none'">
+                  <g class="mainsectorTxt">
+                    <text class="med__title" x="80" y="140"></text>
+                  </g>
+                  <g class="translength" id="s1_MM">
+                    <text class="med__title" x="78" y="205" style="fill: var(--paraFontColorAlt) ">Median h-factor&nbsp; <tspan class="med__value"></tspan></text>
+                    <!--<text class="med__value" x="80" y="180" style="font-size:20px"></text>-->
+                  </g>
+                </g>
+                <!-- Default Median -->
+                <!-- Selected Comp -->
+
+                <g class="Sel_midComp" style="display:none" transform="translate(40, 85)" [style.display]="selectedClickedSelcomp?'block':'none'">
+                  <g class="SN_CS" transform="translate(0, -20)">
+                    <text class="SelCompName text-G-Def" x="80" y="0">{{selectedCompName}}</text>
+                  </g>
+
+                  @if(sharedData.checkMenuPer(2027, 2239) =='Y'){
+                  <g id="STW_Price" transform="translate(30, 15)">
+                    <text class="STW_PriceHead" x="-60" y="16">Stock Price</text>
+                    <g transform="translate(65, -5)">
+                      <foreignObject height="38" style="overflow:hidden" width="70" y="0" x="32" rx="9">
+                        <xhtml:input id="STW_PriceTxt" type="number" step="0.01" (keyup.enter)="onKeyEnterPrice($event)" onKeyPress="if(this.value.length==6) return false;" (focusout)="onFocusOutEvent($event,STW_Price)" [(ngModel)]="STW_Price"> </xhtml:input>
+                      </foreignObject>
+                      <g *ngIf="STW_PriceRefre" id="STW_PriceRefresh" class="c-pointer" style="transform: translate(13px, 6px);" (click)="STW_PriceRef($event)">
+                        <path transform="scale(0.025)" fill="var(--prim-button-color)" d="M500.33 0h-47.41a12 12 0 0 0-12 12.57l4 82.76A247.42 247.42 0 0 0 256 8C119.34 8 7.9 119.53 8 256.19 8.1 393.07 119.1 504 256 504a247.1 247.1 0 0 0 166.18-63.91 12 12 0 0 0 .48-17.43l-34-34a12 12 0 0 0-16.38-.55A176 176 0 1 1 402.1 157.8l-101.53-4.87a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12h200.33a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12z"></path>
+                        <rect width="15" height="15" fill="transparent"></rect>
+                      </g>
+                    </g>
+                  </g>
+                  }@else if(sharedData.checkMenuPer(2027, 2239) =='D'){
+                  <g id="STW_Price disabled" transform="translate(30, 15)">
+                    <text class="STW_PriceHead" x="-60" y="16">Stock Price</text>
+                    <text class="clicked__comp__value impRevValue" x="155" y="16">{{STW_Pricecurrency}}</text>
+                    <!--<g transform="translate(65, -5)"><foreignObject height="38" style="overflow:hidden" width="70" y="0" x="32" rx="9"><xhtml:input id="STW_PriceTxt" style="border: none !important" type="text" step="0.01" [(ngModel)]="STW_Pricecurrency" readonly> </xhtml:input></foreignObject></g>-->
+                  </g>
+                  }
+
+                  @if(sharedData.checkMenuPer(2027, 2241) =='Y'){
+                  <g class="impRev" transform="translate(30, 40)">
+                    <g>
+                      <text class="clicked__comp__text" x="-60" y="17">Indicated Growth Rate</text>
+                    </g>
+                    <text class="clicked__comp__value impRevValue" x="155" y="18">{{impRevValue>0?'+':''}}{{impRevValue}}%</text>
+                  </g>
+                  <g class="HF_Val" transform="translate(30, 65)">
+                    <g>
+                      <g (click)="openImpliedRevenue()">
+                        <text class="clicked__comp__text click__highlight" x="-60" y="17">Probability of Failure (h-factor)</text>
+                      </g>
+                      <text class="clicked__comp__value probabilityScore" x="155" y="18">{{selectedProbability}}</text>
+                    </g>
+                  </g>
+                  }@else if(sharedData.checkMenuPer(2027, 2241) =='D'){
+                  <g class="impRev disabled" transform="translate(30, 40)">
+                    <g>
+                      <text class="clicked__comp__text" x="-55" y="17">Indicated Growth Rate</text>
+                    </g>
+                    <text class="clicked__comp__value impRevValue" x="155" y="18">{{impRevValue>0?'+':''}}{{impRevValue}}%</text>
+                  </g>
+                  <g class="HF_Val disabled" transform="translate(30, 65)">
+                    <g>
+                      <g>
+                        <text class="clicked__comp__text" x="-45" y="17">Probability of Failure (h-factor)</text>
+                      </g>
+                      <text class="clicked__comp__value probabilityScore" x="145" y="18">{{selectedProbability}}</text>
+                    </g>
+                  </g>
+                  }
+                  <g class="rank" transform="translate(40, 145)">
+                    <text y="0" x="40" class="header" style="text-anchor: middle; fill: var(--leftSideText-B) !important;">
+                      <tspan style="fill: var(--paraFontColorAlt)">Rank: </tspan> {{selectedRank}}
+                    </text>
+                  </g>
+                </g>
+
+                <!-- Selected Comp -->
+              </g>
+              <!--<g transform="translate(59,140)" [attr.transform]="selectedClickedSelcomp?'translate(59,105)':'translate(59,140)'">
+        <foreignObject x="0" y="0" width="200" height="30">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="default-search-item  alt_bg_color circle-sm">
+            <form>
+              <mat-form-field style=" ">
+                <input type="text" #glbSearchBox matInput placeholder="" [formControl]="glbSearch" [matAutocomplete]="auto" (focus)="inputFocused()">
+                <mat-icon id="eScBtn" matPrefix>search</mat-icon>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class="DrilldownSearchBar" (optionSelected)="circleSrcEnter($event)">
+                  @for (d of filteredOptions | async; track d) {
+                  <mat-option [value]="d">
+                    <span class="">
+                      <span class="w-100 d-flex justify-content-start align-items-center">
+                        <span class="indName">{{d.companyName}}</span>
+                        <span class="pbName_ticker">({{d.ticker}})</span>
+                      </span>
+                      <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                        <span class="pbName">{{d.country}}</span>
+                      </span>
+                    </span>
+                  </mat-option>
+                  }
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </div>
+        </foreignObject>
+      </g>-->
+            </g>
+
+            <!--- Slider 1 --->
+            <!--- Slider 2 --->
+            <g class="SMi_top_table range__check__Table" transform="translate(430, 100)">
+              <g>
+                <text class="head" x="14">h-factor</text>
+                <text class="head" x="90">Companies</text>
+              </g>
+              <g transform="translate(0, 25)">
+                <g style="cursor:pointer;" transform="translate(-15, -10)">
+                  <g transform="scale(0.8)" (click)="circleHFclick('range0_25')">
+                    <path d="M13.5,0.2h-11c-1.3,0-2.3,1-2.3,2.3v11c0,1.3,1,2.3,2.3,2.3h11c1.3,0,2.3-1,2.3-2.3v-11 C15.8,1.2,14.8,0.2,13.5,0.2z" fill="var(--iconColor)" stroke="#9f9f9f"></path>
+                    <path d="M13.1,5.5L6.7,12c-0.1,0.1-0.3,0.1-0.5,0c0,0,0,0,0,0L2.9,8.6c-0.1-0.1-0.1-0.3,0-0.5c0,0,0,0,0,0l1-1 C4,7,4.2,7,4.3,7.1c0,0,0,0,0,0l2.1,2.1L11.7,4c0.1-0.1,0.3-0.1,0.5,0c0,0,0,0,0,0l1,1C13.3,5.2,13.3,5.4,13.1,5.5 C13.1,5.5,13.1,5.5,13.1,5.5z" fill="var(--primary-color)"
+                          [style.display]="checkBoxFill('range0_25')?'block':'none'"></path>
+                  </g>
+                </g>
+                <text class="cont text-G-Def" x="5">0-25%</text>
+                <text id="decile1" class="cont text-G-Def" x="115" style="text-anchor:end">0</text>
+              </g>
+              <g transform="translate(0, 50)">
+                <g style="cursor:pointer;" transform="translate(-15, -10)">
+                  <g transform="scale(0.8)" (click)="circleHFclick('range25_50')">
+                    <path d="M13.5,0.2h-11c-1.3,0-2.3,1-2.3,2.3v11c0,1.3,1,2.3,2.3,2.3h11c1.3,0,2.3-1,2.3-2.3v-11 C15.8,1.2,14.8,0.2,13.5,0.2z" fill="var(--iconColor)" stroke="#9f9f9f"></path>
+                    <path d="M13.1,5.5L6.7,12c-0.1,0.1-0.3,0.1-0.5,0c0,0,0,0,0,0L2.9,8.6c-0.1-0.1-0.1-0.3,0-0.5c0,0,0,0,0,0l1-1 C4,7,4.2,7,4.3,7.1c0,0,0,0,0,0l2.1,2.1L11.7,4c0.1-0.1,0.3-0.1,0.5,0c0,0,0,0,0,0l1,1C13.3,5.2,13.3,5.4,13.1,5.5 C13.1,5.5,13.1,5.5,13.1,5.5z" fill="var(--primary-color)"
+                          [style.display]="checkBoxFill('range25_50')?'block':'none'"></path>
+                  </g>
+                </g>
+                <text class="cont text-G-Def" x="5">25-50%</text>
+                <text id="decile2" class="cont text-G-Def" x="115" style="text-anchor:end">0</text>
+              </g>
+              <g transform="translate(0, 75)">
+                <g style="cursor:pointer;" transform="translate(-15, -10)">
+                  <g transform="scale(0.8)" (click)="circleHFclick('range50_75')">
+                    <path d="M13.5,0.2h-11c-1.3,0-2.3,1-2.3,2.3v11c0,1.3,1,2.3,2.3,2.3h11c1.3,0,2.3-1,2.3-2.3v-11 C15.8,1.2,14.8,0.2,13.5,0.2z" fill="var(--iconColor)" stroke="#9f9f9f"></path>
+                    <path d="M13.1,5.5L6.7,12c-0.1,0.1-0.3,0.1-0.5,0c0,0,0,0,0,0L2.9,8.6c-0.1-0.1-0.1-0.3,0-0.5c0,0,0,0,0,0l1-1 C4,7,4.2,7,4.3,7.1c0,0,0,0,0,0l2.1,2.1L11.7,4c0.1-0.1,0.3-0.1,0.5,0c0,0,0,0,0,0l1,1C13.3,5.2,13.3,5.4,13.1,5.5 C13.1,5.5,13.1,5.5,13.1,5.5z" fill="var(--primary-color)"
+                          [style.display]="checkBoxFill('range50_75')?'block':'none'"></path>
+                  </g>
+                </g>
+                <text class="cont text-G-Def" x="5">50-75%</text>
+                <text id="decile3" class="cont text-G-Def" x="115" style="text-anchor:end">0</text>
+              </g>
+              <g transform="translate(0, 100)">
+                <g style="cursor:pointer;" transform="translate(-15, -10)">
+                  <g transform="scale(0.8)" (click)="circleHFclick('range75_100')">
+                    <path d="M13.5,0.2h-11c-1.3,0-2.3,1-2.3,2.3v11c0,1.3,1,2.3,2.3,2.3h11c1.3,0,2.3-1,2.3-2.3v-11 C15.8,1.2,14.8,0.2,13.5,0.2z" fill="var(--iconColor)" stroke="#9f9f9f"></path>
+                    <path d="M13.1,5.5L6.7,12c-0.1,0.1-0.3,0.1-0.5,0c0,0,0,0,0,0L2.9,8.6c-0.1-0.1-0.1-0.3,0-0.5c0,0,0,0,0,0l1-1 C4,7,4.2,7,4.3,7.1c0,0,0,0,0,0l2.1,2.1L11.7,4c0.1-0.1,0.3-0.1,0.5,0c0,0,0,0,0,0l1,1C13.3,5.2,13.3,5.4,13.1,5.5 C13.1,5.5,13.1,5.5,13.1,5.5z" fill="var(--primary-color)"
+                          [style.display]="checkBoxFill('range75_100')?'block':'none'"></path>
+                  </g>
+                </g>
+                <text class="cont text-G-Def" x="5">75-100%</text>
+                <text id="decile4" class="cont text-G-Def" x="115" style="text-anchor:end">0</text>
+              </g>
+              <g (click)="circleHFclick('selectedPin')" transform='translate(199, 75)rotate(90)' [attr.transform]="(checkBoxFill('selectedPin')==true?'translate(120, -30)rotate(30)':'translate(120, -30)rotate(90)')" style="cursor:pointer;">
+                <path xmlns="http://www.w3.org/2000/svg" [style.fill]="(checkBoxFill('selectedPin')==true?'var(--prim-button-color)':'var(--iconColor)')" d="M298.028 214.267L285.793 96H328c13.255 0 24-10.745 24-24V24c0-13.255-10.745-24-24-24H56C42.745 0 32 10.745 32 24v48c0 13.255 10.745 24 24 24h42.207L85.972 214.267C37.465 236.82 0 277.261 0 328c0 13.255 10.745 24 24 24h136v104.007c0 1.242.289 2.467.845 3.578l24 48c2.941 5.882 11.364 5.893 14.311 0l24-48a8.008 8.008 0 0 0 .845-3.578V352h136c13.255 0 24-10.745 24-24-.001-51.183-37.983-91.42-85.973-113.733z" transform='scale(0.03)'></path>
+              </g>
+            </g>
+
+            <!--- Slider 2 --->
+            <!--- Slider 3 --->
+            <g class="sliderOverpriced" transform="translate(640, 0)">
+              <rect width="330" height="330" fill="transparent" />
+              <!--<rect width="330" height="330" fill="transparent" style="transform: translate(0px, 235px);fill: var(--topnavbarBgColor) !important;"></rect>-->
+
+              <g transform="translate(45, 10)">
+                <g class="SMi_top_table" transform="translate(75, 100)">
+                  <g>
+                    <text class="text-G-Def bold" x="40">Underpriced Stocks</text>
+                    <text class="text-G-Def" x="40" y='18'>Less than 50%</text>
+                  </g>
+                  <g transform="translate(0, 35)">
+                    <text id="decile1" class="cont text-G-Def" x="35">
+                      <tspan class="text-G-Def bold" id="tdecileCount1"></tspan>
+                      <tspan class="text-G-Def"> Companies</tspan>
+                    </text>
+                  </g>
+                  <g transform="translate(0, 65)">
+                    <text class="text-G-Def bold" x="40">Overpriced Stocks</text>
+                    <text class="text-G-Def" x="40" y='18'>Greater than 50%</text>
+                  </g>
+                  <g transform="translate(0, 100)">
+                    <text id="decile4" class="cont text-G-Def" x="40">
+                      <tspan class="text-G-Def bold" id="tdecileCount2"></tspan>
+                      <tspan class="text-G-Def"> Companies</tspan>
+                    </text>
+                  </g>
+                </g>
+                <g (click)="circleHFclick('UOpricestockPin')" transform='translate(185, 75)rotate(90)' [attr.transform]="(checkBoxFill('UOpricestockPin')==true?'translate(180, 75)rotate(30)':'translate(185, 75)rotate(90)')" style="cursor:pointer">
+                  <path xmlns="http://www.w3.org/2000/svg" [style.fill]="(checkBoxFill('UOpricestockPin')==true?'var(--prim-button-color)':'var(--iconColor)')" d="M298.028 214.267L285.793 96H328c13.255 0 24-10.745 24-24V24c0-13.255-10.745-24-24-24H56C42.745 0 32 10.745 32 24v48c0 13.255 10.745 24 24 24h42.207L85.972 214.267C37.465 236.82 0 277.261 0 328c0 13.255 10.745 24 24 24h136v104.007c0 1.242.289 2.467.845 3.578l24 48c2.941 5.882 11.364 5.893 14.311 0l24-48a8.008 8.008 0 0 0 .845-3.578V352h136c13.255 0 24-10.745 24-24-.001-51.183-37.983-91.42-85.973-113.733z" transform='scale(0.03)'></path>
+                </g>
+              </g>
+            </g>
+            <!--- Slider 3 --->
+            <!--- Slider 4 --->
+            <g class="sliderCumAnn" transform="translate(955, 0)">
+              <rect width="330" height="330" fill="transparent" />
+              <g transform="translate(30, 10)">
+                <g class="SMi_top_table" transform="translate(85, 100)">
+                  <g>
+                    <text class="text-G-Def bold" x="60">Excess Cumulative return</text>
+                    <text class="text-G-Def" x="75" y='30'>
+                      @if(excessCumReturns >= 0){+}{{excessCumReturns | numWithCommaRtnPercent}}
+                      @if(excessCumReturns >= 0){
+                      <tspan class="material-icons __pos" dy="15" dx="-5" style="fill: var(--successColor); font-size: 40px">
+                        arrow_drop_up
+                      </tspan>
+                      }@else{
+                      <tspan class="material-icons __neg" dy="15" dx="-5" style="fill: var(--danger); font-size: 40px">
+                        arrow_drop_down
+                      </tspan>
+                      }
+                    </text>
+                    <g style="transform: translate(-58px, -8px);">
+                      <rect width="40" height="40" fill="transparent" style="stroke: var(--border);" rx="5" ry="5"></rect>
+                      <image href="../../../../assets/images/matico/cumulative_ico.svg" width="30" height="30" style="transform: translate(6px, 5px);"></image>
+                    </g>
+                  </g>
+                  <g transform="translate(0, 65)">
+                    <text class="text-G-Def bold" x="60">Excess Annualized return</text>
+                    <text class="text-G-Def" x="75" y='30'>
+                      @if(excessAnnReturns >= 0){+}{{excessAnnReturns | numWithCommaRtnPercent}}
+                      @if(excessAnnReturns >= 0){
+                      <tspan class="material-icons __pos" dy="15" dx="-5" style="fill: var(--successColor); font-size: 40px">
+                        arrow_drop_up
+                      </tspan>
+                      }@else{
+                      <tspan class="material-icons __neg" dy="15" dx="-5" style="fill: var(--danger); font-size: 40px">
+                        arrow_drop_down
+                      </tspan>
+                      }
+                    </text>
+                    <g style="transform: translate(-58px, -8px)">
+                      <rect width="40" height="40" fill="transparent" style="stroke: var(--border);" rx="5" ry="5"></rect>
+                      <image href="../../../../assets/images/matico/annualized_ico.svg" width="30" height="30" style="transform: translate(6px, 5px);"></image>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <!--- Slider 4 --->
+          </g>
+          <!-- Total components & scores as of -->
+          <!-- Total components & scores as of -->
+          <g class="STw_top_ico" transform="translate(90, 5)" id="pullRemove" style="display:none">
+            <svg height="18px">
+              <path d="M 10,100 L 70,10 L 130,100 z" fill="var(--prim-button-color)" />
+            </svg>
+
+            <g style="transform: translate(0px, -2.5px );">
+              <rect fill="red" height="32" width="100" style="fill: var(--prim-button-color);" rx="5" ry="5" x="20" y="20"></rect>
+              <text class="ptext" style="font-size: 11px;fill: #fff;" x="70" y="34">Drag to Avoid</text>
+              <text class="ptext" style="font-size: 11px;fill: #fff;" x="70" y="46">the Losers</text>
+            </g>
+          </g>
+          <!------------ reset -------------->
+          <g class="STw_top_ico" transform="translate(90, 0)" (click)="resetSlider()" id="resetAL" style="display:none;cursor:pointer;">
+            <svg height="18px">
+              <path d="M 10,100 L 70,10 L 130,100 z" fill="var(--prim-button-color)" />
+            </svg>
+            <text class="ptext" style="" y="27" x="70">Reset</text>
+          </g>
+
+          @if(equityService._SRValue > 0 && equityService._SRValue < 100 && isShowLosers){
+          <g class="draggedText" style="transform: translate(78px, 30px); font-size: 15px; font-family: 'poppins-light'; fill: #fff;display:block">
+            <text class="name" style="text-anchor: middle" x="80" y="40">
+              If you had avoided
+              <tspan style="font-family: 'poppins-semiBold'" id="avoidedPer">{{equityService._SRValue}}%</tspan>
+            </text>
+            <text class="name" style="text-anchor: middle" x="80" y="62">of the losers in S&amp;P 500.</text>
+            <text class="name" style="text-anchor: middle" x="80" y="97">Your $1,000 investment would </text>
+            <text class="name" style="text-anchor: middle" x="80" y="119">
+              have been worth
+              <tspan id="worthReturn">${{worthReturnSP | numWithComma:',.2f'}}</tspan>.
+            </text>
+            <text class="name" style="text-anchor: middle; fill: #4ab85a;font-family: 'poppins-semiBold';" x="80" y="154">An additional return of&nbsp;</text>
+            <text class="name" style="text-anchor: middle; font-family: poppins-bold, 'poppins-semiBold', sans-serif; fill: #4ab85a" x="80" y="176" id="addReturn">{{addReturnSP}}%</text>
+            <text class="name" style="text-anchor: middle;text-anchor: middle;fill: #9e9eb8; font-size: 9px;font-family: 'poppins-italic';" x="80" y="205"> Calculated from </text>
+            <text class="name" style="text-anchor: middle;text-anchor: middle;fill: #9e9eb8;font-size: 9px;font-family: 'poppins-italic';" x="80" y="220">
+              <tspan id="HoldingDate">{{returnAsOfDate}}</tspan>
+            </text>
+          </g>
+          @if(sharedData._showSpinner){
+          <g class="loading-analysis ng-star-inserted" style="transform: translate(56px, -77px);display: block;">
+            <rect height="265" rx="50" ry="50" stroke="224d9d" width="265" x="-30" y="110" class="mainrect" style="fill: var(--primary-color);stroke: none;"></rect>
+            <text x="108" y="230" class="txt" style="text-anchor: middle; font-size: 12px; font-family: 'Poppins-Light'; fill: #fff;">Loading...</text>
+          </g>
+          }
+          }@else{
+          @if(isShowLosers){
+          <g class="welcomeText" style="transform: translate(78px, 70px) scale(1); font-size: 14px; font-family: poppins-light; fill: var(--leftSideText);">
+            <text class="name" style="text-anchor: middle; font-size: 20px" x="80" y="40">Drag to see the extra</text>
+            <text class="name" style="text-anchor: middle; font-size: 20px" x="80" y="68">return you might </text>
+            <text class="name" style="text-anchor: middle; font-size: 20px" x="80" y="97">have made by avoiding </text>
+            <text class="name" style="text-anchor: middle; font-size: 20px" x="80" y="126">the losers in the</text>
+            <text class="name" style="text-anchor: middle; font-size: 20px;font-family: poppins-bold;display:none;" x="80" y="150"></text>
+            <text class="name" style="text-anchor: middle; font-size: 20px; font-family: 'poppins-semiBold'; fill: var(--leftSideText-B);" x="80" y="155">S&amp;P 500.</text>
+          </g>
+          }
+          }
+          <!------------ Bottom Icons -------------->
+          @if(equityService._SRValue > 0 && equityService._SRValue < 100 && Slide_count == 3 && !isShowLosers){
+          <g transform="translate(160, 228)">
+            <text *ngIf="returnAsOfDate != ''" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 10px; fill: var(--leftSideText); text-transform: unset;" x="0" y="18">Returns calculated from </text>
+            <text id="sinceRCIncep" y="33" x="0" style="font-family: var(--ff-medium); text-anchor: middle; font-style: italic !important; font-size: 10px; fill: var(--leftSideText);">{{returnAsOfDate}}</text>
+          </g>
+          <g class="moveSP500" [style.transform]="showSP500Icon ? 'translate(12px, 0px)' : 'translate(0px, 0px)' ">
+            @if(showSP500Icon){
+            <g transform="translate(136, 269)">
+              <g _ngcontent-ng-c2442107763="" class="material-icons-outlined viewSideGrids" (click)="openAvoidingLosers()">
+                <rect _ngcontent-ng-c2442107763="" width="18" height="18" x="2" rx="10" ry="10" y="2" style="stroke: #595f73;" [attr.fill]="isShowLosers?'var(--linkColor)':'var(--primary-color)'"></rect>
+
+                <svg x="3.2" y="3" width="15" height="15" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.5 18.3665C14.6421 18.3665 18 15.0086 18 10.8665C18 6.72432 14.6421 3.36646 10.5 3.36646C6.35786 3.36646 3 6.72432 3 10.8665C3 15.0086 6.35786 18.3665 10.5 18.3665Z" [attr.stroke]="!isShowLosers?'var(--linkColor)':'var(--primary-color)'" stroke="var(--linkColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M10.5 15.8665C13.2614 15.8665 15.5 13.6279 15.5 10.8665C15.5 8.10503 13.2614 5.86646 10.5 5.86646C7.73858 5.86646 5.5 8.10503 5.5 10.8665C5.5 13.6279 7.73858 15.8665 10.5 15.8665Z" [attr.stroke]="!isShowLosers?'var(--linkColor)':'var(--primary-color)'" stroke="var(--linkColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+
+                <g transform="translate(46, -42)" class="RCsince" style="display: none;">
+                  <g style="transform: translate(-30px, 39px);">
+                    <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+                  </g>
+                  <rect width="130" height="30" fill="transparent" rx="5" ry="5" x="-100" y="0" style="stroke: #444455; fill: var(--topNavbar) !important;"></rect>
+                  <text x="-35" y="18" style="font-family: var(--ff-regular); text-anchor: middle; font-size: 11px; fill: var(--leftSideText-B); text-transform: unset; font-weight: 500;">Avoiding the losers</text>
+                </g>
+              </g>
+            </g>
+            }
+            <!--@if(sharedData.checksideGridsVisible()){
+            <g transform="translate(150, 269)" class="viewSideGrids cp" (click)="sharedData.showCompSideGrids()">
+              <rect width="20" height="20" x="0" stroke="var(--borderAlt)" style="fill: var(--primary-color) " rx="20" ry="20"></rect>
+              <g style="transform: translate(1px, 1px);">
+                @if(sharedData._showDefaultSideGrids){
+                <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+                  <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+                  <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+                  <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+                  <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+                </svg>
+                }@else{
+                <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+                  <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+                  <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+                  <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+                  <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+                  <rect width="4" height="26" fill="var(--prim-button-color)" style="transform: translate(20px, 2px) rotate(45deg);fill: #454555; stroke: var(--primary-color);"></rect>
+                </svg>
+                }
+              </g>
+              <g transform="translate(46, -42)" class="RCsince" style="display: none;">
+                <g style="transform: translate(-30px, 39px);">
+                  <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+                </g>
+                <rect width="84" height="30" fill="transparent" rx="5" ry="5" x="-80" y="0" style="stroke: #444455; fill: var(--topNavbar) !important;"></rect>
+                <text x="-68" y="18" style="font-family: var(--ff-regular);text-anchor: start;font-size: 11px;fill: var(--leftSideText-B);text-transform: unset;font-weight: 500;">{{sharedData._showDefaultSideGrids ? 'Hide Grids':'Show Grids'}}</text>
+              </g>
+            </g>
+            }-->
+          </g>
+            }@else{
+            <g class="moveSP500" [style.transform]="showSP500Icon ? 'translate(12px, 0px)' : 'translate(0px, 0px)' ">
+              <g>
+                @if(!isShowLosers){
+                <g transform="translate(145, 245)" class="total_components" [style.display]="!selectedClickedSelcomp?'block': Slide_count == 0 ? 'none': 'block'">
+                  <text class="header" y="10" x="0" [attr.x]="!showSP500Icon ? 12 : 0" style="text-anchor: middle;font-size:11.5px;">
+                    Components: <tspan style="fill:#fff">{{circleCount + " / " + componentsCount}}</tspan>
+                  </text>
+                </g>
+                }
+                <g class="RCsince-info" transform="translate(150, 270)" [attr.transform]="sharedData.checksideGridsVisible()?'translate(150, 270)':'translate(162, 270)'">
+                  <g style="transform: translate(-14px, -4px); cursor: default;">
+                    <rect width="18" height="18" x="2" style="fill: var(--linkColor);" rx="10" ry="10" y="2"></rect>
+                    <svg width="22" height="22" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M32 59C39.4261 59 46.548 56.05 51.799 50.799C57.05 45.548 60 38.4261 60 31C60 23.5739 57.05 16.452 51.799 11.201C46.548 5.94999 39.4261 3 32 3C24.5739 3 17.452 5.94999 12.201 11.201C6.94999 16.452 4 23.5739 4 31C4 38.4261 6.94999 45.548 12.201 50.799C17.452 56.05 24.5739 59 32 59V59ZM35.255 26.058L31.755 42.5255C31.51 43.7155 31.8565 44.391 32.819 44.391C33.498 44.391 34.5235 44.146 35.22 43.53L34.912 44.986C33.9075 46.197 31.692 47.079 29.7845 47.079C27.324 47.079 26.2775 45.602 26.9565 42.4625L29.5395 30.3245C29.7635 29.299 29.5605 28.928 28.535 28.6795L26.9565 28.396L27.2435 27.0625L35.2585 26.058H35.255ZM32 22.25C31.0717 22.25 30.1815 21.8813 29.5251 21.2249C28.8687 20.5685 28.5 19.6783 28.5 18.75C28.5 17.8217 28.8687 16.9315 29.5251 16.2751C30.1815 15.6187 31.0717 15.25 32 15.25C32.9283 15.25 33.8185 15.6187 34.4749 16.2751C35.1313 16.9315 35.5 17.8217 35.5 18.75C35.5 19.6783 35.1313 20.5685 34.4749 21.2249C33.8185 21.8813 32.9283 22.25 32 22.25V22.25Z" fill="white" style="fill: var(--primary-color);stroke: var(--leftSideText);"></path>
+                    </svg>
+                  </g>
+
+                  <g class="RCsince" transform="translate(-4, -48)" style="display:none">
+                    <g style="transform: translate(8px, 42px);">
+                      <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+                    </g>
+                    <rect width="160" height="40" fill="transparent" style="stroke: #444455; fill: var(--topNavbar) !important;" rx="5" ry="5" x="-80" y="-5.5"></rect>
+                    <text style="font-family: var(--ff-medium); text-anchor: start; font-style: italic !important; font-size: 11px; fill: var(--leftSideText-B); text-transform: unset;" x="-68" y="18">Scores as of: </text>
+                    <text id="sinceRCIncep" y="18" x="5" style="font-family: var(--ff-medium); text-anchor: start; font-style: italic !important; font-size: 11px; fill: var(--leftSideText-B);">{{asOfDate}}</text>
+                  </g>
+                </g>
+
+                <!--@if(sharedData.checksideGridsVisible()){
+  <g transform="translate(162, 267)" class="viewSideGrids cp" (click)="sharedData.showCompSideGrids()">
+    <rect width="20" height="20" x="0" stroke="var(--borderAlt)" style="fill: var(--primary-color) " rx="20" ry="20"></rect>
+    <g style="transform: translate(1px, 1px);">
+      @if(sharedData._showDefaultSideGrids){
+      <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+        <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+        <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+        <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+        <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+      </svg>
+      }@else{
+      <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5" viewBox="0 0 24 24" fill="none" class="ng-star-inserted">
+        <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 4)"></rect>
+        <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 10)"></rect>
+        <rect width="4" height="4" fill="var(--prim-button-color)" transform="translate(3 16)"></rect>
+        <circle cx="15" cy="12" r="7" fill="var(--prim-button-color)" style="fill: var(--prim-button-color);"></circle>
+        <rect width="4" height="26" fill="var(--prim-button-color)" style="transform: translate(20px, 2px) rotate(45deg);fill: #454555; stroke: var(--primary-color);"></rect>
+      </svg>
+      }
+    </g>
+    <g transform="translate(46, -42)" class="RCsince" style="display: none;">
+      <g style="transform: translate(-30px, 39px);">
+        <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+      </g>
+      <rect width="84" height="30" fill="transparent" rx="5" ry="5" x="-80" y="0" style="stroke: #444455; fill: var(--topNavbar) !important;"></rect>
+      <text x="-68" y="18" style="font-family: var(--ff-regular);text-anchor: start;font-size: 11px;fill: var(--leftSideText-B);text-transform: unset;font-weight: 500;">{{sharedData._showDefaultSideGrids ? 'Hide Grids':'Show Grids'}}</text>
+    </g>
+  </g>
+  }-->
+              </g>
+              @if(showSP500Icon){
+              <g transform="translate(122, 266)">
+                <g _ngcontent-ng-c2442107763="" class="material-icons-outlined viewSideGrids" (click)="openAvoidingLosers()">
+                  <rect _ngcontent-ng-c2442107763="" width="18" height="18" x="2" rx="10" ry="10" y="2" style="stroke: #595f73;" [attr.fill]="isShowLosers?'var(--linkColor)':'var(--primary-color)'"></rect>
+
+                  <svg x="3.2" y="3" width="15" height="15" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 18.3665C14.6421 18.3665 18 15.0086 18 10.8665C18 6.72432 14.6421 3.36646 10.5 3.36646C6.35786 3.36646 3 6.72432 3 10.8665C3 15.0086 6.35786 18.3665 10.5 18.3665Z" [attr.stroke]="!isShowLosers?'var(--linkColor)':'var(--primary-color)'" stroke="var(--linkColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M10.5 15.8665C13.2614 15.8665 15.5 13.6279 15.5 10.8665C15.5 8.10503 13.2614 5.86646 10.5 5.86646C7.73858 5.86646 5.5 8.10503 5.5 10.8665C5.5 13.6279 7.73858 15.8665 10.5 15.8665Z" [attr.stroke]="!isShowLosers?'var(--linkColor)':'var(--primary-color)'" stroke="var(--linkColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+
+                  <g transform="translate(46, -42)" class="RCsince" style="display: none;">
+                    <g style="transform: translate(-30px, 39px);">
+                      <path d="M 10,100 L 70,10 L 130,100 z" fill="#444455" style="transform: rotate(-180deg) scale(0.1);"></path>
+                    </g>
+                    <rect width="130" height="30" fill="transparent" rx="5" ry="5" x="-100" y="0" style="stroke: #444455; fill: var(--topNavbar) !important;"></rect>
+                    <text x="-35" y="18" style="font-family: var(--ff-regular); text-anchor: middle; font-size: 11px; fill: var(--leftSideText-B); text-transform: unset; font-weight: 500;">Avoiding the losers</text>
+                  </g>
+                </g>
+              </g>
+              }
+            </g>
+            }
+            <!------------ Bottom Icons -------------->
+            <!------------ Left & Right controls -------------->
+            <g class="controls" [style.display]="isShowLosers? 'none' : 'block'">
+              <g id="left" transform="translate(50, 164)" class="disable">
+                <g (click)="controlLeft()" style="cursor:pointer" transform="translate(-39, -54)">
+                  <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(0px, 31px);"></rect>
+                  <path class="st1" d="M13.8,47l4.9-4.9 c0.4-0.4,0.4-0.9,0-1.3s-0.9-0.4-1.3,0l-5.5,5.5c-0.3,0.3-0.4,0.9,0,1.3l5.5,5.5c0.4,0.4,0.9,0.4,1.3,0c0.4-0.4,0.4-0.9,0-1.3l0,0 L13.8,47z" style="fill: var(--theme-def-bg);" />
+                </g>
+                <circle class="disableLeftCircle" cx="-35" cy="0" r="60" fill="#fff" stroke="#e5e5e5" style="opacity:0" />
+              </g>
+              <g id="right" transform="translate(252, 164)" class="">
+                <g (click)="controlRight()" style="cursor: pointer; transform: translate(19px, -54px);">
+                  <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(8px, 31px);"></rect>
+                  <path id="Icon_ionic-ios-arrow-back-2" class="st1" d="M25,47l-4.9-4.9c-0.4-0.4-0.4-0.9,0-1.3c0.4-0.4,0.9-0.4,1.3,0l5.5,5.5 c0.3,0.3,0.4,0.9,0,1.3l-5.5,5.5c-0.4,0.4-0.9,0.4-1.3,0c-0.4-0.4-0.4-0.9,0-1.3L25,47z" style=" fill: var(--theme-def-bg);" />
+                </g>
+                <circle class="disableRightCircle" cx="53" cy="0" r="60" fill="#fff" stroke="#e5e5e5" style="opacity:0;display:none;" />
+              </g>
+            </g>
+            <!------------ Left & Right controls -------------->
+            <!-- skelton -->
+            <!-- End skelton -->
+          </g>
+        </g>
+    </g>
+    <g id="Circle_SliderDots" [style.display]="isShowLosers? 'none' : 'block'"></g>
+  </g>
+  
+  <g id="gchart" transform="translate(810 ,405)">
+    <g id="crlChart"></g>
+    <g class="text-drag" style="display:none">
+
+
+
+      <svg class="trag-arw2" y="-6" x="-2" width="20" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path style="transform: rotate(-5deg);" fill-rule="evenodd" clip-rule="evenodd" d="M13.1364 3.11361C13.4879 3.46508 13.4879 4.03493 13.1364 4.3864L7.5228 10L13.1364 15.6136C13.4879 15.9651 13.4879 16.5349 13.1364 16.8864C12.7849 17.2379 12.2151 17.2379 11.8636 16.8864L5.61361 10.6364C5.26214 10.2849 5.26214 9.71508 5.61361 9.36361L11.8636 3.11361C12.2151 2.76214 12.7849 2.76214 13.1364 3.11361Z" fill="white" fill-opacity="0.95" />
+      </svg>
+      <svg class="trag-arw1" y="-5" x="-10" width="20" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path style="transform: rotate(-5deg);" fill-rule="evenodd" clip-rule="evenodd" d="M13.1364 3.11361C13.4879 3.46508 13.4879 4.03493 13.1364 4.3864L7.5228 10L13.1364 15.6136C13.4879 15.9651 13.4879 16.5349 13.1364 16.8864C12.7849 17.2379 12.2151 17.2379 11.8636 16.8864L5.61361 10.6364C5.26214 10.2849 5.26214 9.71508 5.61361 9.36361L11.8636 3.11361C12.2151 2.76214 12.7849 2.76214 13.1364 3.11361Z" fill="white" fill-opacity="0.95" />
+      </svg>
+
+      <!-- <text class="trag-arw1" y="5" x="-2" style="transform: rotate(-10deg);">&lt;</text>
+      <text class="trag-arw2" y="5" x="5" style="transform: rotate(-8deg);">&lt;</text> -->
+    </g>
+  </g>
+  
+  <!--<g class="mainLoaderShow def_load_center" id="mainToolLoader" style="display:none">
+    <defs>
+      <linearGradient id="gradient1" y1="0" y2="1">
+        <stop stop-color="#81868e" offset="0" />
+        <stop stop-color="#e5eeff" offset="1" />
+      </linearGradient>
+    </defs>
+    <g class="mainLoaader" style="transform: translate(643px, 236px) scale(8.4)">
+      <svg class="spinner1">
+        <circle cx="20" cy="20" r="18" stroke="url(#gradient1)"></circle>
+      </svg>
+    </g>
+    <g style="transform: translate(740px, 705px)">
+      <rect width="150" height="25" fill="#151521" rx="5" ry="5"></rect>
+      <text x="15" y="16" fill="var(--leftSideText)" style="font-family: 'poppins-medium';font-size: 9pt;">Loading...</text>
+      <text x="80" y="16" fill="var(--leftSideText)" style="font-family: 'poppins-Light';font-size: 7pt;">Please Wait</text>
+    </g>
+    <rect height="700" width="1220" transform="translate(200,0)" style="    stroke: transparent;
+          stroke-width: 2px;fill: transparent;" x="0" y="70" rx="15" ry="15"></rect>
+  </g>-->
+</svg>
+<!--@if(equityService.checkFillCompCreation() && (equityService._SRValue > 0 && equityService._SRValue < 100)){-->
+<!--<div style="z-index:9999;display:flex;position:absolute">
+  <a class="btn btn-primary" (click)="openLineChart()"> linchart</a>
+</div>-->
+<!--}-->
+<!--@if(showSlider2){
+@if(sharedData._showSpinner){
+<div class="common__perf__cumulative">
+  <div class="cum__return align-items-end">
+    <div class="gravatar">
+      <ngx-skeleton-loader appearance="circle" [theme]="{ width: '3rem', height: '3rem', 'border-radius': '10px' }">
+      </ngx-skeleton-loader>
+    </div>
+    <div class="gravatar-title">
+      <div>
+        <ngx-skeleton-loader [theme]="{
+            width: '7rem',
+            'border-radius': '0',
+            height: '10px',
+            'margin-bottom': '5px',
+                           'background-color': 'var(--border)'
+          }"></ngx-skeleton-loader>
+      </div>
+      <div>
+        <ngx-skeleton-loader [theme]="{
+            width: '4rem',
+            'border-radius': '0',
+            height: '20px'
+          }"></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+  <div class="cum__return ann_return align-items-end">
+    <div class="gravatar">
+      <ngx-skeleton-loader appearance="circle" [theme]="{ width: '3rem', height: '3rem', 'border-radius': '10px' }">
+      </ngx-skeleton-loader>
+    </div>
+    <div class="gravatar-title">
+      <div>
+        <ngx-skeleton-loader [theme]="{
+            width: '7rem',
+            'border-radius': '0',
+            height: '10px',
+            'margin-bottom': '5px'
+          }"></ngx-skeleton-loader>
+      </div>
+      <div>
+        <ngx-skeleton-loader [theme]="{
+            width: '4rem',
+            'border-radius': '0',
+            height: '20px'
+          }"></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+</div>
+}@else if(equityService._SRValue > 0 && equityService._SRValue < 100){
+<div class="common__perf__cumulative">
+  <div class="cum__return" [matTooltip]="checkMyToolTip()" matTooltipClass="custom-tooltip">
+    <div class="ico cursor-pointer" (click)="openLineChart()">
+      <span class="material-icons" style="color: var(--prim-button-color) ">
+        show_chart
+      </span>
+    </div>
+    <div class="ico">
+      <span class="material-icons-outlined">
+        ssid_chart
+      </span>
+    </div>
+    <div class="details">
+      <p>Excess <span>Cumulative return</span></p>
+      <p class="return d-flex align-items-end">
+        @if(excessCumReturns >= 0){+}{{excessCumReturns | numWithCommaRtnPercent}}
+        @if(excessCumReturns >= 0){
+        <span class="material-icons __pos" style="color: var(--successColor); font-size: 1.4rem;height:1.4rem">
+          arrow_drop_up
+        </span>
+        }@else{
+        <span class="material-icons __neg" style="color: var(--danger); font-size: 1.4rem; height: 1.4rem">
+          arrow_drop_down
+        </span>
+        }
+      </p>
+    </div>
+  </div>
+  <div class="cum__return ann_return" [matTooltip]="checkMyToolTip()" matTooltipClass="custom-tooltip">
+    <div class="ico">
+      <span class="material-icons-outlined">
+        bar_chart
+      </span>
+    </div>
+    <div class="details">
+      <p>Excess <span>Annualized return</span></p>
+      <p class="return d-flex align-items-end">
+        @if(excessAnnReturns >= 0){+}{{excessAnnReturns | numWithCommaRtnPercent }}
+        @if(excessAnnReturns >= 0){
+        <span class="material-icons __pos" style="color: var(--successColor); font-size: 1.4rem; height: 1.4rem">
+          arrow_drop_up
+        </span>
+        }@else{
+        <span class="material-icons __neg" style="color: var(--danger); font-size: 1.4rem; height: 1.4rem">
+          arrow_drop_down
+        </span>
+        }
+      </p>
+    </div>
+  </div>
+</div>
+  }
+}-->

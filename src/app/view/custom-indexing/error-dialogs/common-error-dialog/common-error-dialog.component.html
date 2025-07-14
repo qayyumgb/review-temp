@@ -1,0 +1,102 @@
+@if(dialogTitle == 'notifyQueue'){
+<div class="dialog-content errormodal">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <div class="content-btm text-center">
+        <p style="text-align: center;">
+          <span class="material-icons " style="font-size: 3rem; color: var(--warningColor); opacity: .75; ">
+            error_outline
+          </span>
+        </p>
+        <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(12,96)}}</p>
+      </div>
+      <div class="content-footer d-flex justify-content-center align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="forceClosereviewind()">View Queue</button>
+        <!--<button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="closeModal()">Cancel</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+}
+@else if(dialogTitle == 'goToHome'){
+<div class="dialog-content errormodal">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <!--<div class="content-top">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>-->
+      <div class="content-btm text-center">
+        <p style="text-align: center;">
+          <span class="material-icons " style="font-size: 3rem; color: var(--warningColor); opacity: .75; ">
+            error_outline
+          </span>
+        </p>
+        <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(3,77)}}</p>
+        <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+
+      </div>
+      <div class="content-footer d-flex justify-content-center align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="forceClosereviewind()">Go back Home</button>
+      </div>
+    </div>
+  </div>
+</div>
+}@else if(dialogTitle == 'ConfirmationDialog'){
+<div class="dialog-content errormodal">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <!--<div class="content-top" style="border-bottom: 1px dashed var(--border);">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>-->
+      <div class="content-btm text-center">
+        <p style="text-align: center;">
+          <span class="material-icons " style="font-size: 3rem; color: var(--warningColor); opacity: .75; ">
+            error_outline
+          </span>
+        </p>
+        <p style="font-size: 0.9rem; text-align: center;">{{dialogOptions.error}}</p>
+      </div>
+      <div class="content-footer d-flex justify-content-center align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="forceClosereviewind()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+@else{
+<div class="dialog-content errormodal">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <!--<div class="content-top">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>-->
+      <div class="content-btm text-center">
+        <p style="text-align: center;">
+          <span class="material-icons " style="font-size: 3rem; color: var(--warningColor); opacity: .75; ">
+            error_outline
+          </span>
+        </p>
+        <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(12,94)}}</p>
+        <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+
+      </div>
+      <div class="content-footer d-flex justify-content-center align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="forceClosereviewind()">Ok</button>
+        <!--<button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="closeModal()">Cancel</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+

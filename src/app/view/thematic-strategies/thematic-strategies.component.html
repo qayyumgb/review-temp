@@ -1,0 +1,74 @@
+<div class="thematic_index_comp" id="thematic__Comp" style="padding-top:3rem" >
+  <div class="left-l" [style.display]="sharedData._showDefaultSideGrids?'block':'none'" (mouseenter)="sharedData.onSidebarEnter()" (mouseleave)="sharedData.onSidebarLeave()">
+    <the-breadcrumb-list></the-breadcrumb-list>
+    @if(!showStartIndex){ <the-dilldown-list (hoverEmitter)="receiveHoverData($event)"></the-dilldown-list> }
+    @else{ <the-build-your-index></the-build-your-index> }
+  </div>
+  <div class="center-l">
+    <app-circle-loader-svg></app-circle-loader-svg>
+    @if(showStartIndex){<the-exclusion-circle></the-exclusion-circle> }
+    @else{ <the-default-circle></the-default-circle> }
+
+  </div>
+  @if(showStartIndex){
+  <div class="right-l" [style.visibility]="sharedData._showDefaultSideGrids?'visible':'hidden'" (mouseenter)="sharedData.onSidebarRightEnter()" (mouseleave)="sharedData.onSidebarRightLeave()" [style.opacity]="sharedData._showDefaultSideGrids?1:0">
+    <thematic-performance-components></thematic-performance-components>
+  </div>
+  }
+  <!--@if(showStartIndex){
+  <div class="right-l" [style.display]="showReviewIndexLoaded?'none':'block'">
+    <pre-performance-components></pre-performance-components>
+  </div>
+  }-->
+  <!--@if(showReviewIndexLoaded){
+  <div class="reviewFactsheet_Direct">
+    <pre-review-factsheet></pre-review-factsheet>
+  </div>
+  }
+  <!--@if(showStartIndex && preBuiltService._selNaaIndex!=undefined){
+  <div class="basedOn__sec">
+    <span class="indName">{{preBuiltService._selNaaIndex.indexname}}</span>
+    <span class="divided ml0_5rem mr0_5rem">|</span>
+    <span class="basedOn">{{preBuiltService._selNaaIndex.CommonTicker}}</span>
+  </div>
+  }-->
+  @if(hoverData__Right != undefined && !showStartIndex){
+  <div class="right__sec__hover">
+    <p>{{hoverData__Right.indexname}}</p>
+    <div class="box">
+      <span class="sub__head">Components</span>
+      <h4>{{hoverData__Right['holdingsCount']}}</h4>
+    </div>
+    <div class="box">
+      <span class="sub__head">YTD</span>
+      <h4>
+        {{hoverTData.ytd | percentFormat}}
+        @if(hoverTData.ytd >= 0){
+        <span class="material-icons __pos">
+          arrow_drop_up
+        </span>
+        }@else{
+        <span class="material-icons __neg">
+          arrow_drop_down
+        </span>
+        }
+      </h4>
+    </div>
+    <div class="box">
+      <span class="sub__head">Year {{hoverTData.year}}</span>
+      <h4>
+        {{hoverTData.yearReturns | percentFormat}}
+        @if(hoverTData.yearReturns >= 0){
+        <span class="material-icons __pos">
+          arrow_drop_up
+        </span>
+        }@else{
+        <span class="material-icons __neg">
+          arrow_drop_down
+        </span>
+        }
+      </h4>
+    </div>
+  </div>
+  }
+</div>

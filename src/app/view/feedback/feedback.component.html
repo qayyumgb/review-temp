@@ -1,0 +1,73 @@
+
+<div class="position-relative">
+  <mat-progress-bar *ngIf="showLoad" id="showMatLoaderAccountsF" mode="indeterminate" style="position: absolute;top: 0px;left: 0px;display: block;height: 2px;margin: 0 0.5rem;width: 99%;"></mat-progress-bar>
+  <div class="modal-header">
+    <h3 class="modal-title">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.5833 2.75C17.6084 2.75 19.25 4.49332 19.25 6.64381V13.458C19.25 15.6085 17.6084 17.3518 15.5833 17.3518H15.4444L13.11 19.2111C13.0448 19.263 12.9552 19.263 12.89 19.2111L10.5556 17.3518H6.41667C4.39162 17.3518 2.75 15.6085 2.75 13.458V6.64381C2.75 4.49332 4.39162 2.75 6.41667 2.75H15.5833Z" stroke="var(--leftSideText)" stroke-width="1.5" stroke-linecap="round" />
+        <path d="M14.4935 8.91922C14.9997 8.91922 15.4101 9.32963 15.4101 9.83589C15.4101 10.3422 14.9997 10.7526 14.4935 10.7526L8.07682 10.7526C7.57056 10.7526 7.16016 10.3422 7.16016 9.83589C7.16016 9.32963 7.57056 8.91922 8.07682 8.91922L14.4935 8.91922Z" fill="var(--leftSideText)" />
+        <path d="M13.5768 6.81325C13.5768 6.30699 13.1664 5.89658 12.6601 5.89658L8.07682 5.89658C7.57055 5.89658 7.16015 6.30699 7.16015 6.81325C7.16015 7.31951 7.57055 7.72991 8.07682 7.72991L12.6601 7.72991C13.1664 7.72991 13.5768 7.31951 13.5768 6.81325Z" fill="var(--leftSideText)" />
+        <path d="M14.4935 11.8922C14.9998 11.8922 15.4102 12.3026 15.4102 12.8089C15.4102 13.3151 14.9998 13.7255 14.4935 13.7255L8.07682 13.7255C7.57056 13.7255 7.16016 13.3151 7.16016 12.8089C7.16016 12.3026 7.57056 11.8922 8.07682 11.8922L14.4935 11.8922Z" fill="var(--leftSideText)" />
+      </svg>
+      Feedback
+    </h3>
+    <span class="IndexRun-close" (click)="closeModal()">
+      <!--<img height="25" src="../../../../assets/images/cross-remove-sign.svg" width="25">-->
+      <span class="material-icons">
+        close
+      </span>
+    </span>
+  </div>
+  <form [formGroup]="feedbackForm" (keydown.enter)="disableEnterKey($event)">
+    <!--(keydown.enter)="$event.preventDefault()"-->
+    <div class="content-btm" style="border-radius: 0 0 0.5rem 0.5rem !important; border: none; text-align: center;background: var(--btn-bg-graph);">
+      <div style="position: relative;">
+        <textarea (keydown)="pressed($event)" formControlName="feedbacktext" [maxlength]="maxChars" name="" class="form-control" id="" cols="30" rows="10" #myInput maxlength="1000" placeholder="Type your Feedback" [ngClass]="{ 'is-invalid': submitted  }"></textarea>
+        <div *ngIf="myInput.value.length<=0" class="invalid-feedback text-left" style="position: absolute;
+        margin: 0;">
+          <p>Feedback is required</p>
+        </div>
+        <span style="color: #dc3545;font-size: .875em;position: absolute;left: 0;" *ngIf="hasError3('feedbacktext', 'pattern')">Special characters are not allowed except , ? . ! &</span>
+      </div>
+
+      <p style="font-style: italic;font-size: .7rem;color: var(--leftSideText);font-family: poppins-light;margin-bottom: 0 !important;text-align: right;margin-top: 0.2rem;">(Maximum  Characters {{myInput.value.length}} / {{maxChars}})</p>
+
+      <!--<div class="upload-btn-wrapper">
+        <div class="position-relative">
+          <button class="btn">
+            <span class="material-icons">
+              attach_file
+            </span> Attachments
+          </button>
+          <input type="file" formControlName="myfile" #inputFile name="myfile" id="file" (change)="onFileSelected($event)">
+          <div class="filenamepos">
+            <p id="fname"></p>
+            <span id="crossIcon" (click)="clear()" style="position: absolute;top: 0.2rem;right: -30px;color: #dc3545;cursor: pointer;"></span>
+            <span id="successIcon" style="position: absolute;top: 0.2rem;left: -28px;color: #38a913;"></span>
+          </div>
+        </div>
+        <p style="font-style: italic;margin-top: 0.5rem;">(Maximum File Size Limit is 1MB)</p>
+        <p id="size"></p>
+      </div>-->
+      <div class="foot-l text-right" style="text-align: right !important;margin-top:1rem;">
+        @if(!submitted || myInput.value.length <= 0 || hasError3('feedbacktext', 'pattern')){
+        <button id="btnsubmit" class="mod-foot-btn-activeP mr_p_5 disabled">
+          Submit
+        </button>
+        }@else{
+        <button id="btnsubmit" class="mod-foot-btn-activeP d-flex align-items-center mr_p_5" (click)="onSubmit()">
+          <span *ngIf="showLoad" class="spinner-border  spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;{{showLoad ? 'Submitting...': 'Submit'}}
+        </button>
+        }
+        <button type="button" (click)="closeModal()" class="mod-foot-btn-activeS">Cancel</button>
+      </div>
+    </div>
+  </form>
+  <!---- Loader Modal ----->
+  <!--<div id="SpinLoader-modal" [style.display]="showModalLoader?'flex':'none'">
+    <div class="loader">
+      <img class="" src="../../../assets/images/NAA.gif" alt="loading NewAgeAlpha" style="width:32px" />
+    </div>
+  </div>-->
+</div>
+

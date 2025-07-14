@@ -1,0 +1,621 @@
+<div class="trade_Page">
+  <div class="dialog-content h-100">
+    <div class="split-mod-l h-100">
+      <div class="split-mod-right h-100">
+        <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+        <div class="content-top"> <p>Direct Trade </p> </div>
+        <div class="trade_subTop">
+          <ul>
+            <!--<li><p class="mb0"></p></li>-->
+            <li *ngIf="sharedData.tradeTiming['showTradeTime'] && showTradeBtn">
+              <p class="mb0">Trade times: <span class="TRtimes">{{sharedData.tradeTiming['tradeTimes']}}</span></p>
+            </li>
+            <li *ngIf="(sharedData.tradeTiming['showCount'] && sharedData.tradeTiming['tradeEnd'])">
+              <p class="mb0">Trade ends in: <span class="TRtimes">{{sharedData.tradeTiming['tradeCount']}}</span></p>
+            </li>
+            <li *ngIf="(sharedData.tradeTiming['showCount'] && sharedData.tradeTiming['tradeStart'])">
+              <p class="mb0">Trade start in: <span class="TRtimes">{{sharedData.tradeTiming['tradeCount']}}</span></p>
+            </li>
+            <li *ngIf="!showTradeBtn">
+              <p class="mb0 d-flex align-items-center"><span style="font-size: 1rem; margin-right: 0.25rem;" class="material-symbols-outlined material-icons TRtimes market-info">info</span> <span>{{showTradetxt}}</span></p>
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="TRContainer pl1rem pr1rem d-flex">
+          <div class="TL_leftSec">
+            <p class="mb1rem">Account</p>
+            <div class="box">
+              <ul *ngIf="currentAccList.length>0">
+                <ng-container *ngFor="let it of currentAccList">
+                  <li class="active">
+                    <span class="material-icons">radio_button_unchecked</span> {{it['accountVan']}}
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+
+          <div class="TL_rightSec">
+            <div>
+              <!---- Based On Account Click---->
+              <ul class="nav nav-pills parentTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-bs-toggle="pill" href="#tradeList"
+                     (click)="selTab = 'trade';tradeTrack('Trade List')">Trade List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="pill" href="#holding"
+                     (click)="selTab = 'moveHoldings';prevarrowTax();tradeTrack('Holdings')">Holdings</a>
+                </li>
+
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div id="tradeList" class="container tab-pane active">
+                  <div class="sH100 p-rel tradeLoadHeight" style="min-height: calc(100vh - 17rem);">
+                    @if(currentAccList.length==1){
+                    <div class="acc_loader justify-content-center align-items-center" [style.display]="(timeOutCount==0 && reloadBtnSH) ?'flex':'none'">
+                      <span class="d-flex align-items-center">
+                        <span class="ref_text">Refreshing trade list</span>
+                        <span class="pulse-loader-dots" [style.width]="'1.5rem'" [style.height]="'0.5rem'"
+                              [style.color]="'var(--prim-button-color)'">
+                          <span></span><span></span><span></span>
+                        </span>
+                      </span>
+                    </div>
+                    }
+                    <div class="d-flex justify-content-between align-items-center" style="margin: 0.5rem 0;">
+                      <div></div>
+                      <div class="d-flex align-items-center dwnld-section"
+                           style="color: var(--leftSideText-B);font-size: 0.8rem;">
+                        <a *ngIf="checkShowMatTableTradeList(tradeCompanydataSource)"
+                           class="dialog_btn_P mr1rem D_btn c-pointer" style="margin:0rem 1rem" (click)="tradeDownloadList()">
+                          <span class="material-icons"
+                                style="font-size: 1rem; padding-right: 0.25rem;">file_download</span>
+                          Download
+                        </a>
+                        <span>
+                          Count: <b>
+                            {{tradeCompanydataSource.data.length| numWithComma:',.2f' }}
+                          </b>
+                        </span>
+                        <span class="ml0_5rem">
+                          Net value:
+                          <b>{{netValue(tradeCompanydataSource.data,'value')}}</b>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="tab-content" [style.opacity]="(timeOutCount==0 && reloadBtnSH) ?'0':'1'">
+                      <div id="Current-trade" class="tab-pane active">
+                        <div class="split-mod-right">
+                          <div class="content-btm p0" style="position:relative">
+                            <div class="w-100">
+                              <div class="scrollbox">
+                                <table class="table global_table"
+                                       *ngIf="!checkShowMatTableTradeList(tradeCompanydataSource)">
+                                  <thead>
+                                    <tr>
+                                      <th>Company Name</th>
+                                      <th style="text-align: left">Ticker</th>
+                                      <th style="text-align:right">Action</th>
+                                      <th style="text-align:right">Order Type</th>
+                                      <th style="text-align:right">Price ($)</th>
+                                      <th style="text-align:right">Quantity</th>
+                                      <th style="text-align:right">Value</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr style=" height: 12rem;border:none">
+                                      <td style=" color: var(--leftSideText); text-align: center; font-size: 0.8rem;vertical-align: middle;border: 0;"
+                                          colspan="7">
+                                        Contemporary trade list are being updated. Please check again
+                                        shortly.
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <ng-container *ngIf="checkShowMatTableTradeList(tradeCompanydataSource)">
+                                  <ng-scrollbar #scrollable class="scroll-event scrollbox1 tablescrollbox1"
+                                                thumbClass="white-scrollbars">
+                                    <ng-container>
+                                      <mat-table matSort matSortActive="Ticker" matSortDisableClear="true"
+                                                 matSortDirection="asc" (matSortChange)="tradeListsortChange($event)"
+                                                 [dataSource]="tradeCompanydataSource" [trackBy]="TradeListTrackBy"
+                                                 class="global_mat_table" style="background: transparent;height: calc(100vh - 18rem); overflow: auto;">
+                                        <ng-container matColumnDef="Company Name">
+                                          <mat-header-cell mat-sort-header style="min-width: 40%; align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Company Name
+                                          </mat-header-cell>
+                                          <mat-cell style="min-width: 40%;"
+                                                    *matCellDef="let element">
+                                            {{element.companyName | nullDashPipe:'' }}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Ticker">
+                                          <mat-header-cell mat-sort-header style="text-align: left;align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Ticker
+                                          </mat-header-cell>
+                                          <mat-cell style="text-align: left" *matCellDef="let element">
+                                            <span class="badge badge-light-primary tickerbadge">{{element.ticker}}</span>
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Action">
+                                          <mat-header-cell mat-sort-header style="text-align:right;align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Action
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element;let i = index"
+                                                    [style.color]="element.buyOrSell == 'Buy'?'var(--successColor)':'var(--errorColor)'">
+                                            {{element.buyOrSell}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Order Type">
+                                          <mat-header-cell style="align-items: center;" *matHeaderCellDef>
+                                            Order Type
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element">{{'Market'}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Price ($)">
+                                          <mat-header-cell mat-sort-header class="row_reverse" style="align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Price ($)
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element;let i = index" class="row_reverse">{{element.price | priceFormat:'$,.2f'}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Quantity">
+                                          <mat-header-cell mat-sort-header class="row_reverse" style="align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Quantity
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element;let i = index" class="row_reverse">
+                                            {{element.noofShares| numWithComma:','}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Value">
+                                          <mat-header-cell style="align-items: center; padding-right: 1rem;"
+                                                           *matHeaderCellDef>
+                                            Value
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element;let i = index"
+                                                    style="padding-right: 1rem; white-space: nowrap"
+                                                    [style.color]="checkTL_ValueColor(element)?'var(--successColor)':'var(--errorColor)'">
+                                            {{checkTL_ValueColor(element) ? checkValPrice(element.value):'- '+checkValPrice(element.value) }}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedTradeColumns;sticky:true"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedTradeColumns"></mat-row>
+                                      </mat-table>
+                                    </ng-container>
+                                  </ng-scrollbar>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="holding" class="container tab-pane fade">
+                  <div class="sH100 p-rel" style="min-height: calc(100vh - 14rem);">
+                    <div class="d-flex justify-content-between align-items-center mt0_5rem mb0_5rem">
+                      <ul class="nav nav-pills childTab" role="tablist">
+                        <li class="nav-item active">
+                          <a (click)="(folioSelTab='current')" class="nav-link active" data-bs-toggle="pill"
+                             href="#Current" style=" margin-left: 0;">Current portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                          <a (click)="(folioSelTab='previous')" class="nav-link "
+                             data-bs-toggle="pill" href="#old">Previous portfolio</a>
+                        </li>
+                      </ul>
+                      <div class="d-flex align-items-center dwnld-section">
+                        <a *ngIf="(checkShowMatTable(prevCompanydataSource) || checkShowMatTable(companydataSource))"
+                           (click)="downloadView()" class="dialog_btn_P mr1rem D_btn c-pointer">
+                          <span class="material-icons">file_download</span>Download
+                        </a>
+                        <span>
+                          Count: <b>
+                            {{checkCount() | numWithCommaRtnNullDash:',.2f' }}
+                          </b>
+                        </span>
+                        <span class="ml0_5rem">
+                          Value: <b>
+                            ${{checkMarketVal() | numWithCommaRtnNullDash:',.2f' }}
+                          </b>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="tab-content">
+                      <div id="Current" class="tab-pane active">
+                        <div class="split-mod-right">
+                          <div class="content-btm p0" style="position:relative">
+                            <div class="w-100">
+                              <div class="scrollbox">
+                                <table class="table global_table" *ngIf="!checkShowMatTable(companydataSource)">
+                                  <thead>
+                                    <tr>
+                                      <th>Company Name</th>
+                                      <th style="text-align: left">Ticker</th>
+                                      <th style="text-align:right">Weight</th>
+                                      <th style="text-align:right">Price</th>
+                                      <th style="text-align:right">Quantity</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr style=" height: 12rem;border:none">
+                                      <td style=" color: var(--leftSideText); text-align: center; font-size: 0.8rem;border: 0;vertical-align: middle;"
+                                          colspan="5">
+                                        Contemporary portfolio holdings are being updated. Please check
+                                        again shortly.
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <!-- mat table -->
+                                <ng-container *ngIf="checkShowMatTable(companydataSource)">
+                                  <ng-scrollbar #scrollable class="scroll-event scrollbox1 tablescrollbox1"
+                                                thumbClass="white-scrollbars">
+                                    <ng-container>
+                                      <mat-table matSort matSortDisableClear="true" matSortActive="Ticker"
+                                                 matSortDirection="asc" [dataSource]="companydataSource"
+                                                 class="global_mat_table tblHeightCR" style="background: transparent;"
+                                                 (matSortChange)="companysortChange($event)">
+                                        <ng-container matColumnDef="CompanyName">
+                                          <mat-header-cell style="min-width: 45%; align-items: center;"
+                                                           *matHeaderCellDef mat-sort-header>
+                                            Company Name
+                                          </mat-header-cell>
+                                          <mat-cell style="min-width: 45%;"
+                                                    *matCellDef="let element">
+                                            {{element.companyName|nullDashPipe:''}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Ticker">
+                                          <mat-header-cell style="text-align: left;align-items: center;"
+                                                           *matHeaderCellDef mat-sort-header>
+                                            Ticker
+                                          </mat-header-cell>
+                                          <mat-cell style="text-align: left" *matCellDef="let element">
+                                            <span class="badge badge-light-primary tickerbadge">
+                                              {{element.ticker}}
+                                            </span>
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Weight">
+                                          <mat-header-cell style="text-align:right;align-items: center;"
+                                                           class="row_reverse" *matHeaderCellDef mat-sort-header>
+                                            Weight
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" *matCellDef="let element">
+                                            <!--<div [matTooltip]='element.weight' [matTooltipPosition]="'above'"
+                                            matTooltipClass="frequentlyOpenToolTip" #tooltip="matTooltip"
+                                            class="dashboardTooltipText"></div>-->
+                                            {{element.weight | weightFormat :'per'}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Price">
+                                          <mat-header-cell style="align-items: center;" class="row_reverse" *matHeaderCellDef
+                                                           mat-sort-header>
+                                            Price
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element" class="row_reverse">{{element.price | priceFormat:'$,.2f'}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Quantity">
+                                          <mat-header-cell style="text-align: right; align-items: center; padding-right: 1rem" class="row_reverse"
+                                                           *matHeaderCellDef mat-sort-header>
+                                            Quantity
+                                          </mat-header-cell>
+                                          <mat-cell style="text-align: right; padding-right: 1rem"
+                                                    *matCellDef="let element" class="row_reverse">
+                                            {{element.noofShares | numWithComma:',' }}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                                      </mat-table>
+                                    </ng-container>
+                                  </ng-scrollbar>
+                                </ng-container>
+                                <!-- mat table -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="old" class="tab-pane">
+                        <div class="split-mod-right">
+                          <div class="content-btm p0" style="position:relative">
+                            <div class="w-100">
+                              <div class="scrollbox">
+                                <table class="table global_table" style="margin-top:0rem;"
+                                       *ngIf="!checkShowMatTable(prevCompanydataSource)">
+                                  <thead>
+                                    <tr>
+                                      <th>Company Name</th>
+                                      <th style="text-align: left">Ticker</th>
+                                      <th style="text-align:right">Weight</th>
+                                      <th style="text-align:right">Price</th>
+                                      <th style="text-align:right">Quantity</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr style=" height: 12rem; border-bottom: 0px dashed var(--border) !important;">
+                                      <td style=" color: var(--leftSideText); text-align: center; font-size: 0.8rem;border: 0;vertical-align: middle;"
+                                          colspan="5">
+                                        Your previous portfolio holdings are being revised. Please expet the
+                                        updated details to be available shortly.
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <!-- mat table -->
+                                <ng-container *ngIf="checkShowMatTable(prevCompanydataSource)">
+                                  <ng-scrollbar #scrollable class="scroll-event scrollbox1 tablescrollbox1"
+                                                thumbClass="white-scrollbars">
+                                    <mat-table matSort matSortDisableClear="true" matSortActive="Ticker"
+                                               matSortDirection="asc" [dataSource]="prevCompanydataSource"
+                                               class="global_mat_table " style="background: transparent; height: calc(100vh - 18rem); overflow: auto;"
+                                               (matSortChange)="prevCompanysortChange($event)">
+                                      <ng-container matColumnDef="CompanyName">
+                                        <mat-header-cell style="min-width: 45%; align-items: center;" *matHeaderCellDef
+                                                         mat-sort-header>
+                                          Company Name
+                                        </mat-header-cell>
+                                        <mat-cell style="min-width: 45%;"
+                                                  *matCellDef="let element">{{element.companyName| nullDashPipe:''}}</mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Ticker">
+                                        <mat-header-cell style="text-align: left;align-items: center;" *matHeaderCellDef
+                                                         mat-sort-header>
+                                          Ticker
+                                        </mat-header-cell>
+                                        <mat-cell style="text-align: left" *matCellDef="let element">
+                                          <span class="badge badge-light-primary tickerbadge"> {{element.ticker}}</span>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Weight">
+                                        <mat-header-cell style="text-align:right;align-items: center;"
+                                                         class="row_reverse" *matHeaderCellDef mat-sort-header>
+                                          Weight
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" class="row_reverse">
+                                          {{element.weight | weightFormat :'per'}}
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Price">
+                                        <mat-header-cell style="align-items: center;" class="row_reverse" *matHeaderCellDef mat-sort-header>
+                                          Price
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" class="row_reverse">{{element.price| priceFormat:'$,.2f'}}</mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Quantity">
+                                        <mat-header-cell style="text-align: right; align-items: center; padding-right: 1rem" class="row_reverse"
+                                                         *matHeaderCellDef mat-sort-header>
+                                          Quantity
+                                        </mat-header-cell>
+                                        <mat-cell style="text-align: right; padding-right: 1rem"
+                                                  *matCellDef="let element" class="row_reverse">
+                                          {{element.noofShares | numWithComma:',' }}
+                                        </mat-cell>
+                                      </ng-container>
+                                      <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+                                      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                                    </mat-table>
+                                  </ng-scrollbar>
+                                </ng-container>
+                                <!-- mat table -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="acc_loader" id="view_load_spinner" style="display:none"
+                         [style.display]="(showSpinner_account?'flex':'none')">
+                      <mat-spinner class="reviewloader-spinner"></mat-spinner>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--- Single Account--->
+            </div>
+          </div>
+        </div>
+
+
+        <!--- Single Account--->
+        <div class=" tradeBtnGrp">
+          <p>{{sharedData.checkMyAppMessage(6,105)}}</p>
+          <div class="d-flex">
+            <div class="btmBtn d-flex">
+              <a class="d-flex fetchList">
+                <ng-container *ngIf="(timeOutCount==0 && reloadBtnSH)">
+                  <span class="d-flex align-items-center">
+                    <span style="margin: 0rem 0.3rem;">Fetching trade list </span>
+                    <span class="pulse-loader-dots" [style.width]="'1.5rem'" [style.height]="'0.5rem'"
+                          [style.color]="'var(--leftSideText)'">
+                      <span></span><span></span><span></span>
+                    </span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="timeOutCount>0 && showTradeBtn">Time out in: {{timeOutCount}}s</ng-container>
+              </a>
+              <a *ngIf="showTradeBtn &&(checkShowMatTable(tradeCompanydataSource)) && !tradeBuyClicked && timeOutCount>0 && selTab == 'trade'"
+                 data-bs-toggle="modal" data-bs-target="#tradeCompAlert" class="dialog_btn_P cp d-flex align-items-center">Confirm</a>
+              <a *ngIf="!showTradeBtn &&(checkShowMatTable(tradeCompanydataSource)) && !tradeBuyClicked && timeOutCount>0 && selTab == 'trade'"
+                 class="dialog_btn_P disabled d-flex align-items-center">Confirm</a>
+              <a *ngIf="(!checkShowMatTable(tradeCompanydataSource) || tradeBuyClicked) "
+                 class="dialog_btn_P disabled d-flex align-items-center">Confirm</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="showMatLoaderTrades"
+       style=" height: 95vh; display: none; top: 0px; position: absolute; background: transparent; width: 100%; left: 0px; overflow: hidden; border-radius: 0.465rem; z-index: 999;">
+    <mat-progress-bar mode="indeterminate"
+                      style="position: absolute;top: 0px;left: 0px;display: block;height: 2px;width: 100%;overflow: hidden;"></mat-progress-bar>
+  </div>
+
+  <div class="mat-spinner-loader-popup" [style.display]="showCloader?'flex':'none'">
+    <mat-spinner class="reviewloader-spinner"></mat-spinner>
+  </div>
+
+</div>
+
+<div class="modal fade" id="myTradeErrorModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true" data-backdrop="static" style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:25%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="color: var(--btn-border);opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 576 575" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M287.625 574.933C445.918 574.933 575.092 445.761 575.092 287.467C575.092 129.173 445.914 0 287.625 0C129.336 0 0.158203 129.177 0.158203 287.467C0.158203 445.756 129.336 574.933 287.625 574.933ZM287.625 37.3333C425.758 37.3333 537.758 149.333 537.758 287.467C537.758 425.6 425.758 537.6 287.625 537.6C149.492 537.6 37.4915 425.6 37.4915 287.467C37.4915 149.333 149.492 37.3333 287.625 37.3333Z"
+                        fill="#E32755" />
+                  <path d="M184.585 390.507C188.32 394.241 192.799 395.736 198.023 395.736C203.252 395.736 207.731 394.241 211.46 390.507L287.627 313.6L364.533 390.507C368.268 394.241 372.747 395.736 377.971 395.736C383.2 395.736 387.679 394.241 391.408 390.507C398.877 383.038 398.877 371.095 391.408 364.371L313.763 287.464L390.669 210.557C398.138 203.089 398.138 191.145 390.669 184.421C383.201 176.953 371.257 176.953 364.533 184.421L287.627 261.328L210.72 184.421C203.251 176.953 191.308 176.953 184.584 184.421C177.115 191.89 177.115 203.833 184.584 210.557L261.491 287.464L184.584 364.371C177.12 371.09 177.12 383.037 184.584 390.507H184.585Z"
+                        fill="#E32755" />
+                </svg>
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(13,114)}}</p>
+            <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+            <div class="foot-l" style="text-align: center;">
+              <button type="button" class="btn btn-theme-alt" data-bs-dismiss="modal" style="margin: 0;margin-left: 0.5rem;border-radius: 0.2rem;">
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="myTradeListErrorModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel" aria-hidden="true" data-backdrop="static" style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:25%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="color: var(--btn-border);opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 576 575" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M287.625 574.933C445.918 574.933 575.092 445.761 575.092 287.467C575.092 129.173 445.914 0 287.625 0C129.336 0 0.158203 129.177 0.158203 287.467C0.158203 445.756 129.336 574.933 287.625 574.933ZM287.625 37.3333C425.758 37.3333 537.758 149.333 537.758 287.467C537.758 425.6 425.758 537.6 287.625 537.6C149.492 537.6 37.4915 425.6 37.4915 287.467C37.4915 149.333 149.492 37.3333 287.625 37.3333Z"
+                        fill="#E32755" />
+                  <path d="M184.585 390.507C188.32 394.241 192.799 395.736 198.023 395.736C203.252 395.736 207.731 394.241 211.46 390.507L287.627 313.6L364.533 390.507C368.268 394.241 372.747 395.736 377.971 395.736C383.2 395.736 387.679 394.241 391.408 390.507C398.877 383.038 398.877 371.095 391.408 364.371L313.763 287.464L390.669 210.557C398.138 203.089 398.138 191.145 390.669 184.421C383.201 176.953 371.257 176.953 364.533 184.421L287.627 261.328L210.72 184.421C203.251 176.953 191.308 176.953 184.584 184.421C177.115 191.89 177.115 203.833 184.584 210.557L261.491 287.464L184.584 364.371C177.12 371.09 177.12 383.037 184.584 390.507H184.585Z"
+                        fill="#E32755" />
+                </svg>
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">Trade list preview could not be loaded.</p>
+            <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+            <div class="foot-l" style="text-align: center;">
+              <button type="button" class="btn btn-theme-alt" data-bs-dismiss="modal" style="margin: 0;margin-left: 0.5rem;border-radius: 0.2rem;">
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="myCustomIndErrorModal_review" tabindex="-1" role="dialog"
+     aria-labelledby="myCustomIndErrorModal_review" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false"
+     style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:35%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(5,34)}}</p>
+            <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+            <div class="foot-l" style="text-align: center;">
+              <button type="button" class="mod-foot-btn-activeP" data-bs-dismiss="modal"
+                      (click)="closeModal()">
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="tradeCompAlert" tabindex="-1" role="dialog"
+     aria-labelledby="tradeCompAlert" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false"
+     style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="close-l" data-bs-dismiss="modal" aria-label="Close" style="z-index:9;"
+               (click)="tradeBuyClicked = false"><span class="material-icons">close</span></div>
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3>Trade confirmation</h3>
+            <p>{{sharedData.checkMyAppMessage(13,117)}}</p>
+            <p style="border-top: 1px dashed var(--border);padding-top: 1rem;margin-top: 0.5rem;">
+              {{sharedData.checkMyAppMessage(6,105)}}
+            </p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="tradeBuy()" data-bs-dismiss="modal"
+                      *ngIf="!tradeBuyClicked">
+                Execute
+              </button>
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" disabled style="opacity:0.5"
+                      *ngIf="tradeBuyClicked">
+                Execute
+              </button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal"
+                      (click)="tradeBuyClicked = false">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="warningautoModel modal fade" id="API_lockmodal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false"
+     style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:35%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(13,118)}}</p>
+            <div class="foot-l" style="text-align: center;margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeP" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

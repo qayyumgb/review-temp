@@ -1,0 +1,31 @@
+<!--<svg style="display:contents">
+  <g class="innerC__section">
+    <circle cx="160" cy="160" r="235" fill="var(--primary-color)" style="transform: translate(-160px, 10px)" />
+    <text class="innerC__head" x="55" y="0">Universe</text>
+    <g style="transform: translate(-96px, 52px);">
+      <foreignObject height="350" style="overflow:hidden" width="200" y="0" x="0" rx="5" ry="5">
+        <xhtml:ul class="p-0"> 
+          <li *ngFor="let item of universeList">
+            <xhtml:a >{{item.name}}</xhtml:a>
+          </li>
+        </xhtml:ul>
+      </foreignObject>
+    </g>
+    <g transform="translate(-30, 360)" style="cursor:pointer !important" (click)="close()">
+      <g transform="" class="innerC__apply_btn">
+        <rect width="30" height="30" stroke="var(--border)" fill="var(--prim-button-color)" rx="5" ry="5"></rect>
+        <text y="10" x="35" >APPLY</text>
+      </g>
+    </g>
+  </g>
+</svg>-->
+
+<svg style="display:contents">
+  <g class="innerC__section">
+    <circle cx="160" cy="160" r="235" fill="var(--primary-color)" style="transform: translate(-160px, 10px)" />
+    <text class="innerC__head" x="55" y="-35">Universe</text>
+  </g>
+  <g id="chart" class="chart" style="transform: translate(-200px, -20px) "></g>
+  <g id="tooltip" style="visibility:hidden">
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<div class="dialog-content" style="overflow: hidden;">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <div class="content-top" style="background: var(--topNavbar);">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>
+      <div class="content-btm" style="background: var(--cardsHighlightColorDark);">
+        <span style="font-size: 0.65rem;
+        margin-right: 1.5rem;
+        display: block;
+        color: var(--leftSideText);
+        text-align: right;
+        width: 100%;" id="indexStacompDate"></span>
+        <div id="cumulativeLineChart_Default"></div>
+      </div>
+      <!--<div class="content-footer d-flex justify-content-end align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="savePreference()">Save</button>
+        <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="closeModal()">Cancel</button>
+      </div>-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,414 @@
+<div class="trade_Page">
+    <div class="dialog-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+          <div class="content-top" style="background: var(--topNavbar);">
+            <p>
+              Index Construction
+            </p>
+          </div>
+          <div class="d-flex p-rel p1rem">
+            <div style=" height: 100%; position: absolute; width: 100%; background: var(--modalcontentHeader); z-index: 99999;" *ngIf="indexRulesData.length <= 0">
+              <mat-spinner class="reviewloader-spinner"></mat-spinner>
+            </div>
+            <div id="indexRulesModalInner_T" class="" data-bs-parent="#accordion_cus" style="">
+              <div>
+                <div class="scrollbox build-my-sec-l">
+                  <div class="indexTimeline-content" style="padding-right: 1rem;" *ngIf="indexRulesData.length > 0">
+                    <div class="mb-1 indexTimelinetext">
+                      <h4>Filters</h4>
+                      @if(sharedData.checkShowLeftTab(3) == 'A'){
+                      <a class="cloneStrategyText" (click)="cloneStrategy()" *ngIf="!cloneStrategyDataText">
+                        <span class="material-icons" style="font-size: 0.65rem;margin-right: 0.25rem;">content_copy</span>
+                        Clone Strategy
+                      </a>
+                      <a class="cloneStrategyText d-flex align-items-center" *ngIf="cloneStrategyDataText">
+                        <span class="spinner-border  spinner-border-sm" role="status" aria-hidden="true" style=" margin-right: 0.2rem;"></span>
+                        Cloning Strategy...
+                      </a>
+                      }
+                    </div>
+                    <div *ngIf="factorsGrp.length > 0">
+                      <!--<div class="pe-3 mb-1 indexTimelinetext" *ngIf="indexRulesData[0].range != '100'"><h4>Expectation Risk Factor <span style="font-size: 0.6rem;color: var(--leftSideText);font-family: 'poppins-medium';opacity: .6;float: right;">(Excluded)</span></h4></div>-->
+                      <ng-container *ngFor="let f_data of factorsGrp">
+                        <ng-container *ngIf="f_data.factorid == 18">
+                          <div class="overflow-auto">
+                            <div class="filtersList avoidFilter">
+                              <span class="timelinetitle">
+                                {{checkfactorName(f_data.factorid)}}
+                              </span>
+                              <!---- percentage -->
+                              <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 0">
+                                <div class="popuprangeSliderT erfBar">
+                                  <div class="progress-container">
+                                    <div class="progress" [ngStyle]="{'width.%':(f_data.startval)}"></div>
+                                    <div class="range-flex" [ngStyle]="{'left.%':(f_data.startval)-3}">
+                                      <div class="percentage" style="background: #343553">{{f_data.startval}}%</div>
+                                      <span class="range-round"></span>
+                                    </div>
+                                  </div>
+                                  <div class="rangeFlex">
+                                    <span>0%</span>
+                                    <span>100%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <!---- percentage -->
+                              <!---- value -->
+                              <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 1">
+                                <div class="popuprangeSliderT">
+                                  <div class="progress-container">
+                                    <div class="progress" [ngStyle]="{'width.%':(100-f_data.eRange)}"></div>
+                                    <div class="range-flex" [ngStyle]="{'left.%':(100-f_data.eRange)-3}">
+                                      <div class="percentage">{{convert2digits(f_data.endval*100, f_data.factorid)}}%</div>
+                                      <span class="range-round"></span>
+                                    </div>
+                                  </div>
+                                  <div class="rangeFlex">
+                                    <span>{{convert2digits(f_data.dmax*100, f_data.factorid)}}%</span>
+                                    <span>{{convert2digits(f_data.dmin*100, f_data.factorid)}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <!---- value -->
+                            </div>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                    <div class="">
+                      <div class="overflow-auto" *ngIf="indexrulesCmpy.length > 0">
+                        <div class="filtersList">
+                          @if(indexrulesCmpy.length>1){
+                          <span class="timelinetitle">
+                            {{indexrulesCmpy.length}} Companies <span style="font-size: 0.6rem;color: var(--leftSideText);font-family: var(--ff-medium);opacity: .6;float: right;">(Excluded)</span>
+                          </span>
+                          }@else{
+                          <span class="timelinetitle">
+                            {{indexrulesCmpy.length}} Company <span style="font-size: 0.6rem;color: var(--leftSideText);font-family: var(--ff-medium);opacity: .6;float: right;">(Excluded)</span>
+                          </span>
+                          }
+
+
+                          <div class="indexTimeline-ticker scrollbox">
+                            <div *ngFor="let item of indexrulesCmpy" class="example-item" style="padding-right: 0.2rem; margin: 0; margin-top: 0.2rem;">
+                              <div class="mat-CusVirTable gridlist-e"
+                                   style="background-color: var(--indexrules_bg) !important">
+                                <div class="d-flex">
+                                  <div class="details-e" [style.border-color]="checkshowBorderColor(item)"
+                                       [class.border-d]="(!showCircleScores)">
+                                    <div class="top-e">{{item.name}}</div>
+                                    <div class="bottm-e">
+                                      <span class="tick-l-e">{{item.ticker}}</span>
+                                      <!--<span class="tick-m-e">{{item.currency }}&nbsp;{{decimalFormat_2D(item.price )}}</span>
+              <span class="tick-r-e">{{decimalFormat_2D(item.Wt )}}%</span>-->
+                                    </div>
+                                  </div>
+
+                                  <!--<div class="med-e" [style.background-color]="cl(item.score | number:'1.1-2')" *ngIf="indexRulesData[0].weightBy[0].Name == 'ERF' || indexRulesData[0].selectBy[0].Name == 'ERF' || indexRulesData[0].weightBy.length == 0 || indexRulesData[0].selectBy.length == 0 ">{{sharedData.formatGScore(item.score)}}</div>-->
+                                  <!--<div class="med-e" [style.background-color]="cl(item.score | number:'1.1-2')" *ngIf="(indexRulesData[0].weightBy.length > 0 && indexRulesData[0].weightBy[0].Name == 'ERF') || (indexRulesData[0].selectBy.length > 0 && indexRulesData[0].selectBy[0].Name == 'ERF')  ">{{sharedData.formatGScore(item.score)}}</div>-->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="overflow-auto" style="" *ngIf="indexrulesGICS.length > 0">
+
+                        <div class="filtersList">
+                          <span class="timelinetitle">
+                            Sector(s) (GICS) <span style="font-size: 0.6rem; color: var(--leftSideText); font-family: var(--ff-medium); opacity: .6; float: right;">(Excluded)</span>
+                          </span>
+                          <div class="indexTimeline-ticker scrollbox">
+                            <div class="grid-list-T w-100 excGicsList" style="padding-top: 0rem ">
+                              <ul style=" margin: 0; margin-top: 0.2rem;">
+                                <li *ngFor="let data of indexrulesGICS" style="cursor:default !important;">
+                                  <span class="D_list"
+                                        style="cursor:default !important;background-color: var(--indexrules_bg) !important">
+                                    <span class="d-flex w-100 align-items-center justify-content-between">
+                                      <span style="cursor:default !important;">{{data.name}}</span>
+                                      <!--<span class="med-l" [style.background]="cl(data.med)" style="width: auto !important; color: #fff !important;" *ngIf="index_const_weight == 'ERF' || index_const_select == 'ERF'">{{data.med  }}</span>-->
+                                    </span>
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="factorsGrp.length > 0">
+                      <!--<div class="pe-3 mb-1 indexTimelinetext" *ngIf="indexRulesData[0].range != '100'"><h4>Expectation Risk Factor <span style="font-size: 0.6rem;color: var(--leftSideText);font-family: 'poppins-medium';opacity: .6;float: right;">(Excluded)</span></h4></div>-->
+                      <ng-container *ngFor="let f_data of factorsGrp">
+                        <ng-container *ngIf="f_data.factorid != 18">
+                          <div class="overflow-auto">
+                            <div class="filtersList avoidFilter">
+                              <span class="timelinetitle">{{checkfactorName(f_data.factorid)}}</span>
+                              <!---- percentage -->
+                              <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 0">
+                                <div class="popuprangeSliderT">
+                                  <div class="progress-container factors" [style.width]="functionPercentage(f_data.endval-2) ? '99%':'90%'">
+                                    <div class="progress" [ngStyle]="{'width.%':((f_data.endval) - f_data.startval),'left.%':(f_data.startval+3)}"></div>
+                                    <div class="range-flex" [ngStyle]="{'left.%':f_data.startval}">
+                                      <div class="percentage">{{f_data.startval}}%</div>
+                                      <span class="range-round"></span>
+                                    </div>
+                                    <div class="range-flex" [ngStyle]="{'left.%':(f_data.endval-2)}">
+                                      <div class="percentage">{{f_data.endval}}%</div>
+                                      <span class="range-round"></span>
+                                    </div>
+                                  </div>
+                                  <div class="rangeFlex">
+                                    <span>0%</span>
+                                    <span>100%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <!---- percentage -->
+                              <!---- value -->
+                              <div class="indexTimeline-ticker Losers" style="display: flex;" *ngIf="f_data.perorval == 1">
+                                <div class="popuprangeSliderT">
+                                  <div class="progress-container factors" [style.width]="function(f_data.eRange-2) ? '99%':'90%'">
+                                    <div class="progress" [ngStyle]="{'width.%':convert2width(f_data.eRange, f_data.sRange),'left.%':(f_data.sRange+3)}"></div>
+                                    <div class="range-flex" [ngStyle]="{'left.%':f_data.sRange}">
+                                      <div class="percentage">
+                                        {{convert2digits(f_data.startval, f_data.factorid)}}
+                                      </div>
+                                      <span class="range-round"></span>
+                                    </div>
+                                    <div class="range-flex" [ngStyle]="{'left.%':(f_data.eRange-2)}">
+                                      <div class="percentage">{{convert2digits(f_data.endval, f_data.factorid)}}</div>
+                                      <span class="range-round"></span>
+                                    </div>
+                                  </div>
+                                  <div class="rangeFlex">
+                                    <span>{{convert2digits(f_data.dmin, f_data.factorid)}}</span>
+                                    <span>{{convert2digits(f_data.dmax, f_data.factorid)}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <!---- value -->
+                            </div>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                    <div class="overflow-auto ng-star-inserted" *ngIf="!checkconst_filters()">
+                      <div class="filtersList"><span class="timelinetitle text-center">No filters selected</span></div>
+                    </div>
+
+                    <div class="indexTimeline-content" *ngIf="indexRulesData.length > 0">
+                      <div class="pe-3 mb-1 indexTimelinetext"
+                           *ngIf="indexRulesData[0].selectBy.length > 0 || indexRulesData[0].noofComp != null || indexRulesData[0].weightBy.length > 0 || indexRulesData[0].taxEffAwareness != null">
+                        <h4>Selection & Weighting</h4>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].selectBy.length > 0">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Selected by</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{indexRulesData[0].selectBy[0].Name}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].noofComp != null">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Number of components</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{indexRulesData[0].noofComp}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].weightBy.length > 0">
+                        <div class="filtersList" style="flex-direction:row;justify-content:space-between;align-items:center">
+                          <span class="timelinetitle full">Weighted by</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{indexRulesData[0].weightBy[0].Name}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0]['strData'].weightlimitflag == 'Y' && indexRulesData[0]['strData'].weightlimit != null">
+                        <div class="filtersList" style="flex-direction:row;justify-content:space-between;align-items:center">
+                          <span class="timelinetitle full">Maximum security weight</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{indexRulesData[0]['strData'].weightlimit}}%</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].taxEffAwareness != null">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Tax Optimization</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge" *ngIf="indexRulesData[0].taxEffAwareness == 'Y'">Yes</span>
+                            <span class="badge" *ngIf="indexRulesData[0].taxEffAwareness == 'N'">No</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].strData != null">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Rebalance</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{sharedData.checkRebalanceType(indexRulesData[0]['strData'])}}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="indexTimeline-content" *ngIf="indexRulesData.length > 0">
+                      <div class="pe-3 mb-1 indexTimelinetext">
+                        <h4>Account Settings</h4>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].selectBy.length > 0">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Market Value</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{defaultMarketCurrency}} {{checkMarketValueNull(savedStrategySettingsData.marketvalue) | number: '1.2-2'}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].noofComp != null">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Transition Duration</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{sharedData.checkDate(savedStrategySettingsData)}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].weightBy.length > 0">
+                        <div class="filtersList" style="flex-direction:row;justify-content:space-between;align-items:center">
+                          <span class="timelinetitle full">Cash Target</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{savedStrategySettingsData.cashTarget}}%</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].taxEffAwareness != null && indexRulesData[0].taxEffAwareness == 'Y'">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Tax {{savedStrategySettingsData.taxType=='G'?'Gain':'Loss'}} Target</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{savedStrategySettingsData.taxTarget | number:'1.0-0'}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto" *ngIf="indexRulesData[0].taxEffAwareness != null && indexRulesData[0].taxEffAwareness == 'Y'">
+                        <div class="filtersList"
+                             style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Buffer {{savedStrategySettingsData.taxType=='G'?'Gain':'Loss'}} Target</span>
+                          <div class="indexTimeline-ticker full">
+                            <span class="badge">{{savedStrategySettingsData.taxBufferGainTarget}}%</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto">
+                        <div class="filtersList" style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Restricted List</span>
+                          <div class="indexTimeline-ticker full" *ngIf="AT_strategyListDetails != undefined">
+                            <span class="badge">{{AT_strategyListDetails.restrictedlistcount}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="overflow-auto">
+                        <div class="filtersList" style="flex-direction: row; justify-content: space-between; align-items: center">
+                          <span class="timelinetitle full">Don't Sell</span>
+                          <div class="indexTimeline-ticker full" *ngIf="AT_strategyListDetails != undefined">
+                            <span class="badge">{{AT_strategyListDetails.donotsellcount}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-centers" id="indexRulesModalT" style="width:75%;padding-top:1.5rem">
+              <div class="w-100">
+                <div class="w-100 h-100">
+                  <div class="split-mod-l">
+                    <div class="split-mod-right">
+                      <div class="content-btm  scrollbox d-flex justify-content-center align-items-center" style="background: transparent; border: none;">
+                        <div class="tab-content" style="padding: 0; width: 90%;">
+                          <div id="Construction" class="">
+                            <div class="d-flex justify-content-between construction-rules" *ngIf="indexRulesData.length > 0">
+                              <div class="univ-chart">
+                                <div class="box-c"></div>
+                                <div class="box-d">
+                                  <span class="text-c" style="">
+                                    Universe
+                                  </span>
+                                </div>
+                                <div class="text-b">
+                                  <p><span>{{cuselindName}} </span> {{cuselindTicker}}</p>
+                                </div>
+                              </div>
+                              <div class="calc-chart">
+                                <div class="box-c"></div>
+                                <div class="box-d">
+                                  <span class="text-c" style="">
+                                    Calculation
+                                  </span>
+                                </div>
+                                <div class="text-b">
+                                  <p *ngIf="index_const_calcu > 0" class="d-flex" style="flex-wrap:wrap;">
+                                    Removed <b>&nbsp;{{index_const_calcu}}&nbsp;</b>stocks <span *ngIf="checkconst_filters()">
+                                      using
+                                      <span *ngIf="(accord_losers_length > 0 )" style="margin-right: 0.2rem;">Avoid the Losers (h-factor)</span>
+                                      <span *ngIf="(indexRulesData[0].strStockkey.length>0)" style="margin-right: 0.4rem;">Company</span><span *ngIf="(indexRulesData[0].strSector.length>0)" style="margin-right: 0.4rem;">Sectors (GICS)</span>
+                                      <span *ngIf="(indexRulesData[0].category.length>0)" style="margin-right: 0.4rem;">ESG Category </span>
+                                      <span *ngIf="(sharedData.getRatingSSRval(indexRulesData[0].rating)>0)" style="margin-right: 0.4rem;">ESG Range</span>
+                                      <ng-container *ngFor="let f_data of factorsGrp">
+                                        <span style="margin-right: 0.2rem;">{{checkfactorName(f_data.factorid)}}</span>
+                                      </ng-container>
+                                      filters.
+                                    </span>
+                                  </p>
+                                  <p *ngIf="index_const_calcu <= 0">Removed 0 stocks</p>
+                                </div>
+                              </div>
+                              <div class="weight-chart">
+                                <div class="box-c"></div>
+                                <div class="box-d">
+                                  <span class="text-c" style="">
+                                    Weighting
+                                  </span>
+                                </div>
+                                <div class="text-b" *ngIf="indexRulesData.length > 0">
+                                  <p>
+                                    Selected by <b>{{index_const_select}}</b> Scores.
+                                  </p>
+                                  <hr />
+                                  <p>
+                                    Weighted by <b>{{index_const_weight}}</b> Scores.
+                                  </p>
+                                  <hr />
+                                  <p>
+                                    No of components <b>{{indexRulesData[0].noofComp}}</b>.
+                                  </p>
+                                  <hr *ngIf="index_const_tax == 'Yes'">
+                                  <p *ngIf="index_const_tax == 'Yes'">
+                                    <b>Yes</b> Tax Optimization.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,216 @@
+<svg id="excluTempCircleS" class="noselect_mousepointer commonSVGCircle sp_500Circle" viewBox="180 45 1220 700" width="100%" height="100%"
+     xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <circle class="start-ring1" fill="var(--primary-color)" style="fill:var(--primary-color)" id="maincircle1" r="395" transform="translate(810, 405)">
+  </circle>
+  <g class="Homecenter" style="" transform="translate(810,285)">
+    <circle id="maincircle" class="start-ring" fill="var(--primary-color)" r="154" style="stroke-width: 0px;"
+            transform="translate(0, 120)"></circle>
+    <!--<g style="transform: translate(-100px, 138px);" *ngIf="noDataFound">
+    <rect x="0" y="0" width="200" height="35" rx="5" ry="5" style="
+  fill: var(--topNavbar);
+  stroke: var(--border);"></rect>
+    <text style="
+  text-anchor: start;
+  fill: var(--leftSideText);
+  font-size: 0.75rem;
+  font-family: var(--ff-regular);" y="20" x="10">No data found.</text>
+  </g>-->
+    @if(showSpinBtn){
+    <g class="cp ng-star-inserted" style="transform: translate(-100px, 0px);" (click)="ruletReset()">
+      <text y="20" x="100" class="cp" style="text-anchor: middle;fill: var(--linkColor);font-size: 0.65rem;font-family: var(--ff-medium)">Reset Wheel</text>
+    </g>
+    <g class="cp" (click)="spinAgain()" style="transform: translate(-100px, 195px);">
+      <rect width="60" height="25" style="fill: #071631;transform: translate(69px, 3px);" rx="5" ry="5"></rect>
+      <text class="cp" style=" text-anchor: middle; fill: var(--linkColor); font-size: 0.75rem; font-family: var(--ff-medium);" y="20" x="100">SPIN</text>
+    </g>
+    }
+    <g id="fil_STW_Price" class="fil_STW_Price_path" transform="translate(-33, 85) scale(.9)" style="opacity:0">
+      <g>
+        <rect width="210" height="28" rx="0" ry="1" x="-68" y="-1" style="fill: transparent !important;"></rect>
+        <text class="STW_PriceHead" x="-79" y="17"
+              style="font-family: var(--ff-medium);text-anchor: start;font-size: 11.5px;fill: var(--leftSideText) !important;cursor: inherit !important;">Stock Price</text>
+        <text x="150" y="17" style="fill: var(--leftSideText-B); font-size: 12px; font-family: var(--ff-semibold); text-anchor: end;">{{STW_Pricecurrency}}</text>
+      </g>
+      <g class="impRev" transform="translate(0, 28)">
+        <rect width="210" height="28" rx="0" ry="1" x="-68" y="-1" style="fill: transparent !important;"></rect>
+        <text class="name-txt h-fact" x="-79" y="17" style="font-size: 11.5px;
+    fill: var(--leftSideText);
+    font-family: var(--ff-medium);
+    text-anchor: start;">Indicated Growth Rate </text>
+        <text class="impRevValue" x="150" y="17" style="fill: var(--leftSideText-B); font-size: 12px; font-family: var(--ff-semibold); text-anchor: end;">{{impRevValue>0?'+':''}}{{impRevValue}}%</text>
+      </g>
+      
+      <g transform="translate(0, 56)" class="cp" (click)="openImpliedRevenue()">
+        <text class="name-txt h-fact" x="-80" y="18" style=" text-anchor: start; fill: var(--linkColor) !important; font-size: 11px; font-family: var(--ff-medium);">Probability of Failure (h-factor)</text>
+        <text class="SelCompScore" x="150" y="18" style="font-size: 12px; font-family: var(--ff-semibold); fill: var(--leftSideText-B); text-anchor: end; ">{{HFscore}}</text>
+      </g>
+    </g>
+    <g id="circleSelectedName" style="transform: translate(-10px, 40px);opacity:0">
+      <text class="CText" style="text-anchor: middle; fill: var(--leftSideText-B); font-size: 0.8rem; font-family: var(--ff-medium); " y="20" x="10"></text>
+      <!--<text class="MText" style=" text-anchor: middle; fill: var(--iconColor); font-size: 0.75rem; font-family: var(--ff-semibold);" y="42" x="10">50.2%</text>-->
+    </g>
+    <g id="circleLogo" style="display: block; transform: scale(0.12) translate(-570px, 640px);">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_ww" viewBox="0 0 129 28">
+        <defs>
+          <style>
+            #Layer_ww .cls-1 {
+              fill: url(#linear-gradient-2_ww) !important;
+            }
+
+            #Layer_ww .cls-2 {
+              clip-path: url(#clippath_ww) !important;
+            }
+
+            #Layer_ww .cls-3 {
+              fill: none;
+            }
+
+            #Layer_ww .cls-4 {
+              fill: url(#linear-gradient_ww) !important;
+            }
+
+            #Layer_ww path {
+              fill: #fff;
+            }
+          </style>
+          <clipPath id="clippath_ww"><path d="M90.85,16.91c-.67,3.09-3.43,5.41-6.72,5.41-3.79,0-6.88-3.09-6.88-6.88s3.09-6.88,6.88-6.88c2.84,0,5.29,1.73,6.33,4.2h4.73c-1.21-4.99-5.71-8.7-11.06-8.7-6.28,0-11.38,5.1-11.38,11.38s5.1,11.38,11.38,11.38c5.78,0,10.57-4.33,11.28-9.91h-4.57Z" class="cls-3"></path></clipPath>
+          <linearGradient id="linear-gradient_ww" x1="-519.02" y1="314.89" x2="-519.02" y2="314.8" gradientTransform="translate(73918.67 89598.18) scale(142.27 -284.53)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ef4b26"></stop><stop offset=".2" stop-color="#f05b2e"></stop><stop offset=".4" stop-color="#f26b35"></stop><stop offset=".56" stop-color="#ed8422"></stop><stop offset=".58" stop-color="#ed921f"></stop><stop offset=".63" stop-color="#eeb11a"></stop><stop offset=".68" stop-color="#efc916"></stop><stop offset=".73" stop-color="#efda13"></stop><stop offset=".79" stop-color="#efe411"></stop><stop offset=".86" stop-color="#f0e811"></stop></linearGradient>
+          <linearGradient id="linear-gradient-2_ww" x1="-519.91" y1="314.8" x2="-519.91" y2="314.89" gradientTransform="translate(73485.99 89598.18) scale(141.17 -284.53)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f0e811"></stop><stop offset=".4" stop-color="#bfd633"></stop><stop offset=".6" stop-color="#71bf5b"></stop><stop offset=".8" stop-color="#59b852"></stop><stop offset="1" stop-color="#42b35b"></stop></linearGradient>
+        </defs>
+        <g><path d="M128.01,7.17s-.01,.05-.06,.05c-.15,0-.3,0-.45,0-.04,0-.06,0-.06-.05,0-.75,0-1.5,0-2.25,0-.01,0-.03,0-.04,0,0,0,0-.01,0-.03,.12-.06,.23-.09,.35-.1,.4-.2,.8-.3,1.2-.06,.25-.13,.5-.19,.76,0,.03-.02,.04-.05,.04-.17,0-.34,0-.51,0-.03,0-.04-.01-.05-.04-.19-.75-.38-1.5-.56-2.24,0-.02-.01-.04-.02-.07-.02,.02-.01,.04-.01,.05,0,.75,0,1.49,0,2.24,0,.05-.01,.07-.06,.07-.15,0-.31,0-.46,0-.03,0-.05,0-.05-.04,0-.98,0-1.96,0-2.94,0-.03,0-.04,.04-.04,.28,0,.56,0,.83,0,.03,0,.04,0,.05,.04,.17,.65,.35,1.31,.52,1.96,0,.02,0,.03,.02,.06,.03-.02,.02-.04,.03-.06,.17-.65,.34-1.29,.51-1.94,.01-.04,.03-.06,.07-.06,.27,0,.54,0,.81,0,.04,0,.05,0,.05,.05,0,.98,0,1.95,0,2.93Z"></path><path d="M124.7,4.66s-.01,.04-.05,.04c-.27,0-.53,0-.8,0-.04,0-.05,.01-.05,.05v2.39q0,.08-.08,.08c-.16,0-.32,0-.47,0-.04,0-.05,0-.05-.05,0-.4,0-.81,0-1.21s0-.8,0-1.2c0-.05-.01-.06-.06-.06-.26,0-.53,0-.79,0-.04,0-.05,0-.05-.05,0-.14,0-.28,0-.42,0-.04,.01-.05,.05-.05,.77,0,1.55,0,2.32,0,.03,0,.05,0,.05,.04,0,.14,0,.28,0,.42Z"></path></g>
+        <path d="M.99,26.83v-4.53H13.82c.62,0,1.16-.22,1.6-.66s.66-.98,.66-1.6-.22-1.16-.66-1.6-.98-.66-1.6-.66H7.78c-1.87,0-3.47-.66-4.8-1.99-1.33-1.33-1.99-2.93-1.99-4.8s.66-3.47,1.99-4.8c1.33-1.33,2.93-1.99,4.8-1.99h12.83l-1.51,4.53H7.78c-.62,0-1.16,.22-1.6,.66-.44,.44-.66,.98-.66,1.6s.22,1.16,.66,1.6c.44,.44,.98,.66,1.6,.66h6.04c1.87,0,3.47,.66,4.8,1.99,1.33,1.33,1.99,2.93,1.99,4.8s-.66,3.47-1.99,4.8c-1.33,1.33-2.93,1.99-4.8,1.99H.99Z"></path>
+        <path d="M26.82,8.72l-1.51-4.53h12.83c1.87,0,3.47,.66,4.8,1.99,1.33,1.33,1.99,2.93,1.99,4.8s-.66,3.47-1.99,4.8-2.93,1.99-4.8,1.99h-8.3v9.05h-4.53V13.25h12.83c.62,0,1.16-.22,1.6-.66s.66-.98,.66-1.6-.22-1.16-.66-1.6c-.44-.44-.98-.66-1.6-.66h-11.32Z"></path>
+        <path d="M56.77,26.83l-1.51-4.53h7.06l-4.04-9.52-5.96,14.05h-4.93L58.28,1.17l10.9,25.65h-12.4Z"></path>
+        <path d="M118.23,8.72h-18.11V4.19h19.62l-1.51,4.53Zm-13.58,13.58h15.09v4.53h-19.62V13.25h19.62v4.53h-15.09v4.53Z"></path>
+        <g class="cls-2"><g id="d"><rect id="f" x="72.59" y="3.82" width="11.59" height="23.17" class="cls-4"></rect><rect id="h" x="84.17" y="3.82" width="11.5" height="23.17" class="cls-1"></rect></g></g>
+      </svg>
+    </g>
+
+
+    <!--<g transform="translate(-110,100)">
+  <foreignObject x="0" y="0" width="220" height="35">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="default-search-item alt_bg_color">
+      <form>
+        <mat-form-field>
+          <input type="text" #glbSearchBox matInput placeholder="Search" [formControl]="glbSearch" [(ngModel)]="inputValue" (keyup.enter)="filtering($event)"
+                 [matAutocomplete]="auto" (focus)="inputFocused($event,'in')" (ngModelChange)="onInputChange($event)">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class="DrilldownSearchBar" (optionSelected)="gloSrcEnter($event)">-->
+    <!--<mat-option *ngIf="noDataFound" class="autocompletedNoData">No data found</mat-option>-->
+    <!--@for (data of filteredOptions; track data) {
+              @if(data['type']== "Equity Universe"){
+              <mat-optgroup label="Equity">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  @if(d['category']== "Index"){
+                  <span class="d-flex justify-content-between align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                    <span class="pbName">{{d.country}}</span>
+                  </span>
+                  }@else{
+                  <span class="">
+                    <span class="w-100 d-flex justify-content-start align-items-center">
+                      <span class="indName">{{d.company}}</span>
+                      <span class="pbName_ticker">({{d.ticker}})</span>
+                    </span>
+                    <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                      <span class="indName_sub">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                      <span class="pbName">{{d.country}}</span>
+                    </span>
+                  </span>
+                  }
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "ETF"){
+              <mat-optgroup label="ETF">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="d-flex justify-content-between align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                    <span class="pbName">{{d.ticker}}</span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "PreBuilt"){
+              <mat-optgroup label="PreBuilt">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="">
+                    <span class="w-100 d-flex justify-content-start align-items-center">
+                      <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+
+                    </span>
+                    <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                      <span class="indName_sub">
+                        @if(d.ticker != null && d.ticker != undefined && d.ticker != ""){
+                        ({{d.ticker}})
+                        }
+                      </span>
+                      <span class="indName_sub">&nbsp;</span>
+                      <span class="pbName">{{d.country}}</span>
+                    </span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "Thematic"){
+              <mat-optgroup label="Thematic">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="d-flex justify-content-between align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "DirectIndexing"){
+              <mat-optgroup [label]="(sharedData.checkMyUserType()?'Approved':'Direct')">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="w-100 d-flex justify-content-start align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                  </span>
+                  <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                    <span class="indName_sub">{{d.company}}</span>
+                    <span class="pbName">{{d.country}}</span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </div>
+    </foreignObject>
+    <g transform="translate(195,10)">
+      <g transform="translate(-10,-10)" *ngIf="showSearchLoader">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35px" height="35px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+        <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50" style="fill: var(--iconColor);">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform>
+          </path>
+        </svg>
+      </g>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" *ngIf="!inputValue && !showSearchLoader">
+        <path fill="none" d="M0 0h24v24H0z" />
+        <path fill="var(--iconColor)"
+              d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.98-5-5.78-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.31 5.34 5.78a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+      </svg>
+      <g class="cursor-pointer" (click)="clearInput()" *ngIf="!showSearchLoader">
+        <svg *ngIf="inputValue" xmlns="http://www.w3.org/2000/svg"
+             width="16" height="16" viewBox="0 -960 960 960" fill="#6c6c9f">
+          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
+        <rect width="15" height="15" style="transform: translate(0px, 0px);fill: transparent;"></rect>
+      </g>
+    </g>
+    <g transform="translate(175,10)" style="cursor: pointer;" (click)="speackClick()">
+      <g xmlns="http://www.w3.org/2000/svg" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="scale(0.17)">
+        <path d="M 45 70.968 c -16.013 0 -29.042 -13.028 -29.042 -29.042 c 0 -1.712 1.388 -3.099 3.099 -3.099 c 1.712 0 3.099 1.388 3.099 3.099 C 22.157 54.522 32.404 64.77 45 64.77 c 12.595 0 22.843 -10.248 22.843 -22.843 c 0 -1.712 1.387 -3.099 3.099 -3.099 s 3.099 1.388 3.099 3.099 C 74.042 57.94 61.013 70.968 45 70.968 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--leftSideText); fill-rule: nonzero; opacity: 1; " transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+        <path d="M 45 60.738 L 45 60.738 c -10.285 0 -18.7 -8.415 -18.7 -18.7 V 18.7 C 26.3 8.415 34.715 0 45 0 h 0 c 10.285 0 18.7 8.415 18.7 18.7 v 23.337 C 63.7 52.322 55.285 60.738 45 60.738 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--prim-button-color-text); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+        <path d="M 45 89.213 c -1.712 0 -3.099 -1.387 -3.099 -3.099 V 68.655 c 0 -1.712 1.388 -3.099 3.099 -3.099 c 1.712 0 3.099 1.387 3.099 3.099 v 17.459 C 48.099 87.826 46.712 89.213 45 89.213 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--leftSideText); fill-rule: nonzero; opacity: 1; " transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+        <path d="M 55.451 90 H 34.549 c -1.712 0 -3.099 -1.387 -3.099 -3.099 s 1.388 -3.099 3.099 -3.099 h 20.901 c 1.712 0 3.099 1.387 3.099 3.099 S 57.163 90 55.451 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--leftSideText); fill-rule: nonzero; opacity: 1; " transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+      </g>
+    </g>
+  </g>-->
+  </g>
+  <g id="exclusionTempchartS" transform="translate(810 ,405)">
+    <g id="TempcrlChartS"></g>
+  </g>
+</svg>

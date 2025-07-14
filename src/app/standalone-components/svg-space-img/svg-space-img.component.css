@@ -1,0 +1,19 @@
+#Layer_ww .cls-1 {
+  fill: url(#linear-gradient-2_ww) !important;
+}
+
+#Layer_ww .cls-2 {
+  clip-path: url(#clippath_ww) !important;
+}
+
+#Layer_ww .cls-3 {
+  fill: none;
+}
+
+#Layer_ww .cls-4 {
+  fill: url(#linear-gradient_ww) !important;
+}
+
+#Layer_ww path {
+  fill: #fff;
+}

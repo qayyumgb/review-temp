@@ -1,0 +1,582 @@
+ @if(sharedData.checkMenuPer(2027, 2236) == 'Y' || sharedData.checkMenuPer(2027, 2236) == 'D' ||
+ sharedData.checkMenuPer(2027, 2237) == 'Y' || sharedData.checkMenuPer(2027, 2237) == 'D'){
+<div class="buildYourIndex__sec__rightG equity__Comp__rightG">
+  <div>
+    <div class="icon__select">
+      @if(sharedData.checkMenuPer(2027, 2236) == 'Y'){
+      <div class="__selectIco select__steps" [class.active]="showDefault_select == 'company'" (mouseenter)="showDefault_select_hover('company');sharedData.openRightSideGrid();trigger();" (click)="toggleIconSelect('company');eventTrack('company');trigger();">
+        <span class="material-icons-outlined">
+          attach_file
+        </span>
+        <p>Components</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2027, 2236) == 'D'){
+      <div class="__selectIco select__steps disableMenu">
+        <span class="material-icons-outlined">
+          attach_file
+        </span>
+        <p>Components</p>
+      </div>
+      }
+      @if(showPerf && sharedData.checkMenuPer(2027, 2237) == 'Y'){
+      <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'performance'" (mouseenter)="showDefault_select_hover('performance');sharedData.openRightSideGrid();" (click)="toggleIconSelect('performance');eventTrack('performance')">
+        <span class="material-icons-outlined">
+          query_stats
+        </span>
+        <p>Performance</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2027, 2237) != 'N' ){
+      <div class="__selectIco select__accounts disableMenu">
+        <span class="material-icons-outlined">
+          query_stats
+        </span>
+        <p>Performance</p>
+      </div>
+      }
+    </div>
+    <div class="icon__select__top" [class.activeBdr]="checkIconsVisible()">
+
+      @if(showTimelineBtn && equityService.checkFillCompCreation()){
+      @if(sharedData.checkMenuPer(2027, 2242) =='Y'){
+      <div class="__selectIco select__accounts" (click)="openTimeline()">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.61536 18.9998C12.8213 18.9998 16.2307 15.5902 16.2307 11.3844C16.2307 7.17846 12.8213 3.76904 8.61536 3.76904C4.40952 3.76904 1 7.17846 1 11.3844C1 15.5902 4.40952 18.9998 8.61536 18.9998Z" stroke="#f2f2f2" stroke-width="1.50571" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.61719 11.3849L12.0441 7.95801" stroke="#f2f2f2" stroke-width="1.50571" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.53516 1H10.689" stroke="#f2f2f2" stroke-width="1.50571" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>Timeline</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2027, 2242)=='D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.61536 18.9998C12.8213 18.9998 16.2307 15.5902 16.2307 11.3844C16.2307 7.17846 12.8213 3.76904 8.61536 3.76904C4.40952 3.76904 1 7.17846 1 11.3844C1 15.5902 4.40952 18.9998 8.61536 18.9998Z" stroke="#f2f2f2" stroke-width="1.50571" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.61719 11.3849L12.0441 7.95801" stroke="#f2f2f2" stroke-width="1.50571" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.53516 1H10.689" stroke="#f2f2f2" stroke-width="1.50571" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>Timeline</p>
+      </div>
+      }
+      }@else if((!equityService.checkFillCompCreation() && equityService._SRValue >0 && equityService._SRValue < 100)  || equityService.checkFillCompCreation()) {
+      @if(sharedData.checkMenuPer(2027, 2243) =='Y'){
+      <div class="__selectIco select__accounts" (click)="openHisTimeline()">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.9946 12.375L10.7695 9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5.0625 7.06348H1V3.00098" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.7695 5.0625V9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.4532 16.2547C5.7028 17.5054 7.2953 18.3573 9.0292 18.7027C10.7631 19.0482 12.5605 18.8716 14.1941 18.1954C15.8276 17.5191 17.2239 16.3736 18.2063 14.9037C19.1886 13.4338 19.713 11.7055 19.713 9.9375C19.713 8.1695 19.1886 6.4413 18.2063 4.9713C17.2239 3.5014 15.8276 2.3559 14.1941 1.6796C12.5605 1.0034 10.7631 0.8268 9.0292 1.1723C7.2953 1.5177 5.7028 2.3697 4.4532 3.6203L1 7.0633" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>History Timeline</p>
+      </div>
+      } @else if(sharedData.checkMenuPer(2027, 2243)=='D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.9946 12.375L10.7695 9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5.0625 7.06348H1V3.00098" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.7695 5.0625V9.9375" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.4532 16.2547C5.7028 17.5054 7.2953 18.3573 9.0292 18.7027C10.7631 19.0482 12.5605 18.8716 14.1941 18.1954C15.8276 17.5191 17.2239 16.3736 18.2063 14.9037C19.1886 13.4338 19.713 11.7055 19.713 9.9375C19.713 8.1695 19.1886 6.4413 18.2063 4.9713C17.2239 3.5014 15.8276 2.3559 14.1941 1.6796C12.5605 1.0034 10.7631 0.8268 9.0292 1.1723C7.2953 1.5177 5.7028 2.3697 4.4532 3.6203L1 7.0633" stroke="#f2f2f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>History Timeline</p>
+      </div>
+      }
+      }
+      @if(equityService._SRValue > 0 && equityService._SRValue < 100 ){
+      @if(sharedData.checkMenuPer(2027, 2238)=='Y'){
+      <div class="__selectIco select__accounts" (click)="openAvoidLosers()">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 0.769043L9.07694 7.69211L6.19233 4.8075L1 9.99979" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.9982 5.38442V0.769043H11.3828" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>Avoid Losers</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2027, 2238)=='D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 0.769043L9.07694 7.69211L6.19233 4.8075L1 9.99979" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.9982 5.38442V0.769043H11.3828" stroke="#E6E6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <p>Avoid Losers</p>
+      </div>
+      }
+      }
+      <!-- Watchlist -->
+      @if(showWatchListIcon && sharedData.checkMenuPer(2027, 2234) == 'Y'){
+      @if(watchListIconClicked){
+      <div class="__selectIco select__accounts" (click)="addWatchList()">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.35 19.6875L7.175 15.625L1 19.6875V1.8125C1 1.59701 1.0813 1.39035 1.2261 1.23798C1.3708 1.0856 1.5672 1 1.7719 1H12.5781C12.7828 1 12.9792 1.0856 13.1239 1.23798C13.2687 1.39035 13.35 1.59701 13.35 1.8125V19.6875Z" fill="#D1D1D4" stroke="#D1D1D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75567 8.28379V8.13379H9.60567H7.74228H7.12267H5.25937H5.10938V8.28379V8.93129V9.08129H5.25937H7.12267H7.74228H9.60567H9.75567V8.93129V8.28379Z" fill="#191930" stroke="#191930" stroke-width="0.3"></path></svg>
+        </span>
+        <p>Watchlist</p>
+      </div>
+      }@else{
+      <div class="__selectIco select__accounts" (click)="addWatchList()">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.35 19.6875L7.175 15.625L1 19.6875V1.8125C1 1.597 1.0813 1.3904 1.226 1.238C1.3708 1.0856 1.5671 1 1.7718 1H12.5781C12.7828 1 12.9791 1.0856 13.1239 1.238C13.2686 1.3904 13.35 1.597 13.35 1.8125V19.6875Z" stroke="#D1D1D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75187 8.28396V8.13396H9.60187H7.88847V6.25596V6.10596H7.73847H7.11887H6.96887V6.25596V8.13396H5.25547H5.10547V8.28396V8.93146V9.08146H5.25547H6.96887V10.9501V11.1001H7.11887H7.73847H7.88847V10.9501V9.08146H9.60187H9.75187V8.93146V8.28396Z" fill="#D1D1D4" stroke="#D1D1D4" stroke-width="0.3"></path></svg>
+        </span>
+        <p>Watchlist</p>
+      </div>
+      }
+      }@else if(showWatchListIcon && sharedData.checkMenuPer(2027, 2234) == 'D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span>
+          <svg width="15" height="17" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.35 19.6875L7.175 15.625L1 19.6875V1.8125C1 1.597 1.0813 1.3904 1.226 1.238C1.3708 1.0856 1.5671 1 1.7718 1H12.5781C12.7828 1 12.9791 1.0856 13.1239 1.238C13.2686 1.3904 13.35 1.597 13.35 1.8125V19.6875Z" stroke="#D1D1D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75187 8.28396V8.13396H9.60187H7.88847V6.25596V6.10596H7.73847H7.11887H6.96887V6.25596V8.13396H5.25547H5.10547V8.28396V8.93146V9.08146H5.25547H6.96887V10.9501V11.1001H7.11887H7.73847H7.88847V10.9501V9.08146H9.60187H9.75187V8.93146V8.28396Z" fill="#D1D1D4" stroke="#D1D1D4" stroke-width="0.3"></path></svg>
+        </span>
+        <p>Watchlist</p>
+      </div>
+      }
+      <!-- Watchlist -->
+      <!-- Compare -->
+      @if(showTimelineBtn && showCompareBtn){
+      @if(sharedData.checkMenuPer(2027, 2244)=='Y'){
+      <div class="__selectIco select__accounts" (click)="openCompare()">
+        <!-- <img class="material-icons-outlined cp" src="../../../../assets/images/footer_ico/compare_ico.svg" alt="new age alpha compare" /> -->
+        <span>
+          <svg width="15" height="17" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.8563 2.30713L1 8.89863H6.7126L3.8563 2.30713Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.8563 11.7547C5.3943 11.7547 6.7126 10.4364 6.7126 8.89844H1C1 10.4364 2.2084 11.7547 3.8563 11.7547Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 0.65918L14.1836 7.25068H19.8963L17.0399 0.65918Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 10.1069C18.578 10.1069 19.8963 8.78849 19.8963 7.25049H14.1836C14.1836 8.78849 15.5019 10.1069 17.0399 10.1069Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0424 0.65918L3.85938 2.30708" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4492 1.42822V15.3802" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.85938 15.3804H17.0424" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4476 2.8563C11.2364 2.8563 11.8758 2.2169 11.8758 1.4281C11.8758 0.639401 11.2364 0 10.4476 0C9.65893 0 9.01953 0.639401 9.01953 1.4281C9.01953 2.2169 9.65893 2.8563 10.4476 2.8563Z" fill="white"></path></svg>
+        </span>
+
+        <p>Compare</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(2027, 2244)=='D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <!-- <img class="material-icons-outlined" src="../../../../assets/images/footer_ico/compare_ico.svg" alt="new age alpha compare" /> -->
+        <span>
+          <svg width="15" height="17" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.8563 2.30713L1 8.89863H6.7126L3.8563 2.30713Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.8563 11.7547C5.3943 11.7547 6.7126 10.4364 6.7126 8.89844H1C1 10.4364 2.2084 11.7547 3.8563 11.7547Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 0.65918L14.1836 7.25068H19.8963L17.0399 0.65918Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0399 10.1069C18.578 10.1069 19.8963 8.78849 19.8963 7.25049H14.1836C14.1836 8.78849 15.5019 10.1069 17.0399 10.1069Z" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.0424 0.65918L3.85938 2.30708" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4492 1.42822V15.3802" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.85938 15.3804H17.0424" stroke="white" stroke-width="1.1368" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4476 2.8563C11.2364 2.8563 11.8758 2.2169 11.8758 1.4281C11.8758 0.639401 11.2364 0 10.4476 0C9.65893 0 9.01953 0.639401 9.01953 1.4281C9.01953 2.2169 9.65893 2.8563 10.4476 2.8563Z" fill="white"></path></svg>
+        </span>
+        <p>Compare</p>
+      </div>
+      }
+      }
+      <!-- Compare -->
+      <!-- Case study -->
+      @if(CaseStudy != undefined && CaseStudy != null && CaseStudy.length>0 && sharedData.checkMenuPer(2027, 2246) == 'Y'){
+      <div class="__selectIco select__accounts" (click)="openCaseStudyPdf(CaseStudy[0]['pdfUrl'])">
+        <!-- <img class="material-icons-outlined cp" src="../../../../assets/images/footer_ico/casestudy_ico.svg" alt="new age alpha casestudy" /> -->
+        <span>
+          <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.2826 0C5.2354 0.00019 5.1888 0.00969029 5.1453 0.0279503C5.1018 0.0462103 5.0623 0.0728695 5.0292 0.1064L0.1028 5.0348C0.0707004 5.0679 0.0452999 5.1069 0.0279999 5.1496L0.0265999 5.1532C0.00979988 5.195 0.000999997 5.2396 0.000699997 5.2848L0 5.289V18.8927C0 19.9364 0.8506 20.7868 1.8941 20.7868H15.1031C16.1466 20.7868 17 19.9367 17 18.8927V12.964V1.8948C17 0.85087 16.1466 0.000720024 15.1031 0.000720024H5.2896C5.2873 0.000460024 5.2849 0.00021 5.2826 0ZM5.6431 0.71746H15.1031C15.762 0.71746 16.2832 1.2358 16.2832 1.8948V12.964V18.8927C16.2832 19.5517 15.762 20.07 15.1031 20.07H1.8941C1.2351 20.07 0.7167 19.552 0.7167 18.8927V5.6466H3.749C4.7925 5.6466 5.6431 4.7955 5.6431 3.7518V0.71746ZM4.9256 1.2235V3.7518C4.9256 4.4111 4.4079 4.9291 3.749 4.9291H1.2242L4.9256 1.2235ZM3.9603 7.4238C3.913 7.4236 3.8662 7.4328 3.8224 7.4508C3.7787 7.4688 3.739 7.4953 3.7055 7.5288C3.6721 7.5622 3.6456 7.602 3.6276 7.6457C3.6096 7.6894 3.6004 7.7363 3.6006 7.7836C3.6007 7.8307 3.61 7.8774 3.6282 7.9208C3.6463 7.9643 3.6729 8.0038 3.7063 8.037C3.7397 8.0703 3.7793 8.0966 3.8229 8.1145C3.8665 8.1323 3.9132 8.1415 3.9603 8.1413H13.0396C13.1342 8.1409 13.2249 8.1031 13.2918 8.0361C13.3587 7.969 13.3964 7.8783 13.3965 7.7836C13.3967 7.7365 13.3876 7.6899 13.3698 7.6463C13.352 7.6028 13.3257 7.5632 13.2926 7.5298C13.2594 7.4964 13.22 7.4698 13.1766 7.4516C13.1332 7.4334 13.0866 7.424 13.0396 7.4238H3.9603ZM3.9603 10.9159C3.9132 10.9157 3.8665 10.9248 3.8229 10.9427C3.7793 10.9606 3.7397 10.9869 3.7063 11.0201C3.6729 11.0534 3.6463 11.0929 3.6282 11.1363C3.61 11.1798 3.6007 11.2265 3.6006 11.2736C3.6004 11.3209 3.6096 11.3678 3.6276 11.4115C3.6456 11.4552 3.6721 11.495 3.7055 11.5284C3.739 11.5619 3.7787 11.5884 3.8224 11.6064C3.8662 11.6244 3.913 11.6336 3.9603 11.6334H13.0396C13.0866 11.6332 13.1332 11.6237 13.1766 11.6056C13.22 11.5874 13.2594 11.5608 13.2926 11.5274C13.3257 11.494 13.352 11.4544 13.3698 11.4109C13.3876 11.3673 13.3967 11.3207 13.3965 11.2736C13.3964 11.1789 13.3587 11.0882 13.2918 11.0211C13.2249 10.9541 13.1342 10.9163 13.0396 10.9159H3.9603ZM11.7299 12.7232C11.1068 12.7232 10.4841 12.9609 10.0108 13.4344C9.0642 14.3813 9.0642 15.9271 10.0108 16.874C10.8712 17.7347 12.2269 17.8132 13.1775 17.1092L14.5928 18.5224C14.6261 18.5558 14.6656 18.5823 14.7092 18.6003C14.7527 18.6184 14.7994 18.6277 14.8465 18.6277C14.8937 18.6277 14.9403 18.6184 14.9839 18.6003C15.0274 18.5823 15.067 18.5558 15.1003 18.5224C15.167 18.4553 15.2045 18.3644 15.2045 18.2697C15.2045 18.175 15.167 18.0842 15.1003 18.017L13.6849 16.601C14.3886 15.6503 14.3101 14.2951 13.4497 13.4344C12.9764 12.9609 12.353 12.7232 11.7299 12.7232ZM11.7299 13.4344C12.168 13.4344 12.6052 13.6033 12.9416 13.9398C13.6143 14.6127 13.6143 15.6928 12.9416 16.3658C12.2688 17.0388 11.191 17.0388 10.5183 16.3658C9.8456 15.6929 9.8456 14.6128 10.5183 13.9398C10.8547 13.6033 11.2918 13.4344 11.7299 13.4344ZM3.9603 14.6068C3.913 14.6066 3.8662 14.6158 3.8224 14.6338C3.7787 14.6518 3.739 14.6783 3.7055 14.7118C3.6721 14.7452 3.6456 14.785 3.6276 14.8287C3.6096 14.8724 3.6004 14.9193 3.6006 14.9666C3.6007 15.0137 3.6102 15.0602 3.6284 15.1036C3.6466 15.1471 3.6731 15.1865 3.7065 15.2196C3.7399 15.2528 3.7795 15.279 3.8231 15.2968C3.8666 15.3147 3.9133 15.3238 3.9603 15.3236H7.976C8.0231 15.3238 8.0697 15.3147 8.1133 15.2968C8.1568 15.279 8.1964 15.2528 8.2299 15.2196C8.2633 15.1865 8.2898 15.1471 8.308 15.1036C8.3262 15.0602 8.3356 15.0137 8.3358 14.9666C8.336 14.9193 8.3268 14.8724 8.3088 14.8287C8.2908 14.785 8.2643 14.7452 8.2308 14.7118C8.1974 14.6783 8.1577 14.6518 8.1139 14.6338C8.0702 14.6158 8.0233 14.6066 7.976 14.6068H3.9603Z" fill="#D1D1D4" />
+          </svg>
+        </span>
+
+
+        <p>Case Study</p>
+      </div>
+      <!--<a id="caseStudyImage" target="_blank" [href]="CaseStudy[0]['pdfUrl']">
+    <img class="cp" matTooltip="Case Study" matTooltipPosition="below" src="../../../../assets/images/footer_ico/casestudy_ico.svg" alt="new age alpha casestudy_ico" />
+  </a>-->
+      }@else if(CaseStudy != undefined && CaseStudy != null && CaseStudy.length>0 && sharedData.checkMenuPer(2027, 2246) == 'D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span>
+          <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.2826 0C5.2354 0.00019 5.1888 0.00969029 5.1453 0.0279503C5.1018 0.0462103 5.0623 0.0728695 5.0292 0.1064L0.1028 5.0348C0.0707004 5.0679 0.0452999 5.1069 0.0279999 5.1496L0.0265999 5.1532C0.00979988 5.195 0.000999997 5.2396 0.000699997 5.2848L0 5.289V18.8927C0 19.9364 0.8506 20.7868 1.8941 20.7868H15.1031C16.1466 20.7868 17 19.9367 17 18.8927V12.964V1.8948C17 0.85087 16.1466 0.000720024 15.1031 0.000720024H5.2896C5.2873 0.000460024 5.2849 0.00021 5.2826 0ZM5.6431 0.71746H15.1031C15.762 0.71746 16.2832 1.2358 16.2832 1.8948V12.964V18.8927C16.2832 19.5517 15.762 20.07 15.1031 20.07H1.8941C1.2351 20.07 0.7167 19.552 0.7167 18.8927V5.6466H3.749C4.7925 5.6466 5.6431 4.7955 5.6431 3.7518V0.71746ZM4.9256 1.2235V3.7518C4.9256 4.4111 4.4079 4.9291 3.749 4.9291H1.2242L4.9256 1.2235ZM3.9603 7.4238C3.913 7.4236 3.8662 7.4328 3.8224 7.4508C3.7787 7.4688 3.739 7.4953 3.7055 7.5288C3.6721 7.5622 3.6456 7.602 3.6276 7.6457C3.6096 7.6894 3.6004 7.7363 3.6006 7.7836C3.6007 7.8307 3.61 7.8774 3.6282 7.9208C3.6463 7.9643 3.6729 8.0038 3.7063 8.037C3.7397 8.0703 3.7793 8.0966 3.8229 8.1145C3.8665 8.1323 3.9132 8.1415 3.9603 8.1413H13.0396C13.1342 8.1409 13.2249 8.1031 13.2918 8.0361C13.3587 7.969 13.3964 7.8783 13.3965 7.7836C13.3967 7.7365 13.3876 7.6899 13.3698 7.6463C13.352 7.6028 13.3257 7.5632 13.2926 7.5298C13.2594 7.4964 13.22 7.4698 13.1766 7.4516C13.1332 7.4334 13.0866 7.424 13.0396 7.4238H3.9603ZM3.9603 10.9159C3.9132 10.9157 3.8665 10.9248 3.8229 10.9427C3.7793 10.9606 3.7397 10.9869 3.7063 11.0201C3.6729 11.0534 3.6463 11.0929 3.6282 11.1363C3.61 11.1798 3.6007 11.2265 3.6006 11.2736C3.6004 11.3209 3.6096 11.3678 3.6276 11.4115C3.6456 11.4552 3.6721 11.495 3.7055 11.5284C3.739 11.5619 3.7787 11.5884 3.8224 11.6064C3.8662 11.6244 3.913 11.6336 3.9603 11.6334H13.0396C13.0866 11.6332 13.1332 11.6237 13.1766 11.6056C13.22 11.5874 13.2594 11.5608 13.2926 11.5274C13.3257 11.494 13.352 11.4544 13.3698 11.4109C13.3876 11.3673 13.3967 11.3207 13.3965 11.2736C13.3964 11.1789 13.3587 11.0882 13.2918 11.0211C13.2249 10.9541 13.1342 10.9163 13.0396 10.9159H3.9603ZM11.7299 12.7232C11.1068 12.7232 10.4841 12.9609 10.0108 13.4344C9.0642 14.3813 9.0642 15.9271 10.0108 16.874C10.8712 17.7347 12.2269 17.8132 13.1775 17.1092L14.5928 18.5224C14.6261 18.5558 14.6656 18.5823 14.7092 18.6003C14.7527 18.6184 14.7994 18.6277 14.8465 18.6277C14.8937 18.6277 14.9403 18.6184 14.9839 18.6003C15.0274 18.5823 15.067 18.5558 15.1003 18.5224C15.167 18.4553 15.2045 18.3644 15.2045 18.2697C15.2045 18.175 15.167 18.0842 15.1003 18.017L13.6849 16.601C14.3886 15.6503 14.3101 14.2951 13.4497 13.4344C12.9764 12.9609 12.353 12.7232 11.7299 12.7232ZM11.7299 13.4344C12.168 13.4344 12.6052 13.6033 12.9416 13.9398C13.6143 14.6127 13.6143 15.6928 12.9416 16.3658C12.2688 17.0388 11.191 17.0388 10.5183 16.3658C9.8456 15.6929 9.8456 14.6128 10.5183 13.9398C10.8547 13.6033 11.2918 13.4344 11.7299 13.4344ZM3.9603 14.6068C3.913 14.6066 3.8662 14.6158 3.8224 14.6338C3.7787 14.6518 3.739 14.6783 3.7055 14.7118C3.6721 14.7452 3.6456 14.785 3.6276 14.8287C3.6096 14.8724 3.6004 14.9193 3.6006 14.9666C3.6007 15.0137 3.6102 15.0602 3.6284 15.1036C3.6466 15.1471 3.6731 15.1865 3.7065 15.2196C3.7399 15.2528 3.7795 15.279 3.8231 15.2968C3.8666 15.3147 3.9133 15.3238 3.9603 15.3236H7.976C8.0231 15.3238 8.0697 15.3147 8.1133 15.2968C8.1568 15.279 8.1964 15.2528 8.2299 15.2196C8.2633 15.1865 8.2898 15.1471 8.308 15.1036C8.3262 15.0602 8.3356 15.0137 8.3358 14.9666C8.336 14.9193 8.3268 14.8724 8.3088 14.8287C8.2908 14.785 8.2643 14.7452 8.2308 14.7118C8.1974 14.6783 8.1577 14.6518 8.1139 14.6338C8.0702 14.6158 8.0233 14.6066 7.976 14.6068H3.9603Z" fill="#D1D1D4" />
+          </svg>
+        </span>
+
+
+        <p>Case Study</p>
+      </div>
+      }
+      <!-- Case study -->
+    </div>
+
+  </div>
+  <div class="rightSideDefGrid" [class.showRightAnimate]="sharedData._getSelectedRightSide  != 'N'">
+  
+    @if(sharedData.checkMenuPer(2027, 2236) == 'Y'){
+    <div class="icon__details" [style.display]="showDefault_select == 'company'?'block':'none'">
+      <div class="select__steps__details">
+       
+        <div class="d-flex align-items-center comp__head justify-content-between pb1rem pl0_5rem pr0_5rem">
+          @if(rightGridData.length>0){
+          <h4 class="d-flex align-items-center">
+            Components
+            @if(equityService._SRValue > 0 && equityService._SRValue < 100){<span class="count d-flex">{{avDataCount}}</span>}
+            @else{<span class="count d-flex">{{rightGridData.length}}</span> }
+          </h4>
+          }@else{
+          <h4 class="d-flex align-items-center">Components</h4>
+          }
+          <div class="no_line_height d-flex align-items-center">
+            <span class="material-icons mr0rem" (click)="openSearch()">
+              search
+            </span>
+            <div class="dropdown">
+              <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                swap_vert
+              </span>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="sortingDrop">
+                <ul>
+                  <li class="d-flex">
+                    <a class="dropdown-item sort_btn">
+                      Sort by
+                      <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('R','equity')"><span class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem"> refresh</span> Reset</button>
+                    </a>
+
+                  </li>
+                  <li *ngFor="let item of FilterList">
+                    <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                    <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                      @if(ascending_val){
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                      </svg>
+                      }
+                      @else{
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" />
+                      </svg>
+                      }
+                    </span>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+            <span class="material-icons-outlined close__card pin__bar__comp" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components');">
+              push_pin
+            </span>
+          </div>
+
+        </div>
+        <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+          <div class="d-flex align-items-center">
+            <span class="material-icons disable">
+              search
+            </span>
+            <input (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchText" appRemoveSpecialCharacters (input)="filterItems()" #searchBox>
+            <span class="material-icons" (click)="searchClose()">
+              close
+            </span>
+          </div>
+        </div>
+
+        <div class="scrollbox outerScroll__Div componentScroll">
+          <div class="construction h-100">
+            @if(rightGridData.length>0){
+            <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 scrollbox h-100" style="padding-top:0.8rem">
+              <ul>
+                <li *cdkVirtualFor="let data of rightGridData;let i=index;">
+                  <div class="list__sec" [class.active]="data.stockKey == highlightList">
+                    <div class="d__border" [style.border-color]="cl(data.colorVal)" (click)="compClick(data)">
+                      <p class="ind__name">{{data['companyName'] | nullDashPipe:''}}</p>
+                      <div class="d-flex align-items-center">
+                        <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                        <span class="price text-right priceSymbol" style="color: var(--paraFontColorAlt)">{{data['price'] | priceFormat  :',.1f':data['currency'] }}</span>
+                        <span class="price text-right">{{data.Wt | weightFormatPerWithDigit:',.1f'}}</span>
+                        <span class="price text-right ">
+                          <span class="med-e" [style.background-color]="cl(data.colorVal)" [style.color]="(data.colorVal>=0 && data.colorVal<=35) || (data.colorVal>=60)?'#fff':'#000'">{{sharedData.formatGScore(data.score)}}</span>
+                        </span>
+                        <div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </cdk-virtual-scroll-viewport>
+            }@else{
+            @if(!sharedData._showCenterLoader && !sharedData._showMatLoader){
+            <div class="no-r-f" style="display:flex">No results found. Revise your search.</div>
+            }@else{
+            <div class="no-r-f" style="display:flex">Loading please wait...</div>
+            }
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    @if(showPerf && sharedData.checkMenuPer(2027, 2237) == 'Y'){
+    <div class="icon__details perform__wrapper" [style.display]="showDefault_select == 'performance'?'flex':'none'">
+      <!--<div class="Cumulative_return">
+        <ul>
+          <li>
+            <span class="ico">
+              <span class="">
+                <img src="../../../../assets/images/matico/cumulative_ico.svg">
+              </span>
+            </span>
+            <div>
+              <h4 class="mb1">Excess Cumulative return</h4>
+              <p class="return d-flex align-items-end">
+                @if(excessCumReturns >= 0){+}{{excessCumReturns | numWithCommaRtnPercent}}
+                @if(excessCumReturns >= 0){
+                <span class="material-icons __pos" style="color: var(--successColor); font-size: 2rem;height:1.8rem">
+                  arrow_drop_up
+                </span>
+                }@else{
+                <span class="material-icons __neg" style="color: var(--danger); font-size: 2rem; height: 1.8rem">
+                  arrow_drop_down
+                </span>
+                }
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="d-flex align-item-center ico">
+              <span class="">
+                <img src="../../../../assets/images/matico/annualized_ico.svg">
+              </span>
+            </span>
+            <div>
+              <h4 class="mb1">Excess Annualized return</h4>
+              <p class="return d-flex align-items-end">
+                @if(excessAnnReturns >= 0){+}{{excessAnnReturns | numWithCommaRtnPercent }}
+                @if(excessAnnReturns >= 0){
+                <span class="material-icons __pos" style="color: var(--successColor); font-size: 2rem; height: 1.8rem">
+                  arrow_drop_up
+                </span>
+                }@else{
+                <span class="material-icons __neg" style="color: var(--danger); font-size: 2rem; height: 1.8rem">
+                  arrow_drop_down
+                </span>
+                }
+              </p>
+            </div>
+          </li>
+        </ul>
+        @if(returnAsOfDate != ''){
+        <span class="return_cal returnWidth">
+          {{returnAsOfDate}}
+        </span>
+
+        }
+      </div>-->
+      <div class="perform__details">
+        <div class="select__accounts__details perf__sec  min_height">
+          <span class="material-icons-outlined close__card pin__bar__comp p-abs" style="top:1.5rem" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('performance');">
+            push_pin
+          </span>
+          <div>
+            <h4 class="mb1">Performance Statistics</h4>
+          </div>
+          @if(showIndexPerf){
+          <div class="rightGrid_matTab fif__table perf__table perf__mattable">
+            <mat-tab-group>
+              <mat-tab [label]="'Index Statistics'">
+                <div class="scrollbox scrollHeight">
+                  <div class="tab__head d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">h-factor</div>
+                    <div class="tab_Cell" *ngIf="selIndex.length <= 11">{{selIndex}}</div>
+                    <div class="tab_Cell" *ngIf="selIndex.length > 11" [matTooltip]="selIndex" [matTooltipPosition]="'above'">{{selIndex}}</div>
+                  </div>
+                  <div class="tab__body">
+                    @for (data of h_facData; track data) {
+                    <div class="b__sec d-flex justify-content-between align-items-center">
+                      <div class="tab_Cell">{{data['H-Factor']}}</div>
+                      <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    </div>
+                    }
+                  </div>
+
+                  <div class="tab__head d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">Performance</div>
+                    <div class="tab_Cell">&nbsp;</div>
+                  </div>
+                  <div class="tab__body">
+                    @for (data of perData1; track data) {
+                    <div class="b__sec d-flex justify-content-between align-items-center">
+                      <div class="tab_Cell">{{data['Performance']}}</div>
+                      <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    </div>
+                    }
+                  </div>
+
+                  <div class="tab__head d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">Statistics</div>
+                    <div class="tab_Cell">&nbsp;</div>
+                  </div>
+                  <div class="tab__body">
+                    @for (data of StatData; track data) {
+                    <div class="b__sec d-flex justify-content-between align-items-center">
+                      <div class="tab_Cell">{{data['Statistics']}}</div>
+                      <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    </div>
+                    }
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab [label]="'Before & After'" class="scrollbox">
+                <div class="scrollbox scrollHeight">
+                  <div class="tab__head d-flex justify-content-between align-items-center no-margin-top">
+                    <div class="tab_Cell">h-factor</div>
+                    <div class="tab_Cell">Before</div>
+                    <div class="tab_Cell">After</div>
+                  </div>
+                  <div class="tab__body">
+                    @for (data of h_facData; track data) {
+                    <div class="b__sec d-flex justify-content-between align-items-center">
+                      <div class="tab_Cell" *ngIf="data['H-Factor'].length <= 11">{{data['H-Factor']}}</div>
+                      <div class="tab_Cell" *ngIf="data['H-Factor'].length > 11" [matTooltip]="data['H-Factor']" [matTooltipPosition]="'above'">{{data['H-Factor']}}</div>
+                      <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                      <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                    </div>
+                    }
+                  </div>
+
+                  <div class="tab__head d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">Performance</div>
+                    <div class="tab_Cell">&nbsp;</div>
+                    <div class="tab_Cell">&nbsp;</div>
+                  </div>
+                  <div class="tab__body">
+                    @for (data of perData1; track data) {
+                    <div class="b__sec d-flex justify-content-between align-items-center">
+                      <div class="tab_Cell" *ngIf="data['Performance'].length <= 11">{{data['Performance']}}</div>
+                      <div class="tab_Cell" *ngIf="data['Performance'].length > 11" [matTooltip]="data['Performance']" [matTooltipPosition]="'above'">{{data['Performance']}}</div>
+                      <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                      <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                    </div>
+                    }
+                  </div>
+
+                  <div class="tab__head d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">Statistics</div>
+                    <div class="tab_Cell">&nbsp;</div>
+                    <div class="tab_Cell">&nbsp;</div>
+                  </div>
+                  <div class="tab__body">
+                    @for (data of StatData; track data) {
+                    <div class="b__sec d-flex justify-content-between align-items-center">
+                      <div class="tab_Cell e" *ngIf="data['Statistics'].length <= 11">{{data['Statistics']}}</div>
+                      <div class="tab_Cell e" *ngIf="data['Statistics'].length > 11" [matTooltip]="data['Statistics']" [matTooltipPosition]="'above'">{{data['Statistics']}}</div>
+
+                      <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                      <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                    </div>
+                    }
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+            <span class="perform__RTN text-right d-block pt0_5rem w66" style="padding-right: 0.75rem;">{{returnAsOfDate}}</span>
+          </div>
+          }@else{
+          <div class="rightGrid_matTab perf__table perf__mat_table scrollbox scrollHeight">
+            <mat-tab-group>
+              <mat-tab [label]="'Before & After'">
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">h-factor</div>
+                  <div class="tab_Cell">Before</div>
+                  <div class="tab_Cell">After</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of h_facData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['H-Factor']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Performance</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of perData1; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['Performance']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Statistics</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of StatData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell d">{{data['Statistics']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['NAAPortfolio']}}</div>
+                  </div>
+                  }
+                </div>
+              </mat-tab>
+              <mat-tab [label]="'Before & Combined'" class="scrollbox scrollHeight">
+                <label class="perStatSliderDraggedValue">NAA Combined Performance: {{assgUserDrpVal}}%</label>
+                <div class="perStatSliderNGX d-flex align-items-center justify-content-between cus_range_slider mb1_5rem">
+                  <label class="perStatSliderLable" for="hisperStatSliderInput" style="top: 0.5rem;">0%</label>
+                  <ngx-slider [(value)]="assgUserDrpVal" [options]="options" (userChangeEnd)="hisperStatSliderChange($event)" style="width:70%"></ngx-slider>
+                  <label class="perStatSliderLable" for="hisperStatSliderInput" style="top: 0.45rem;">100%</label>
+                </div>
+                <!--<div class="perStatSlider d-flex align-items-center justify-content-between cus_range_slider" style="margin-bottom:1rem;">
+                <label class="perStatSliderLable" for="hisperStatSliderInput">0%</label>
+                <input type="range" min="0" max="100" [value]="assgUserDrpVal" step="1" class="cus_range" style="width:75%" id="perStatSliderInput" (change)="hisperStatSliderChange($event)">
+                <mat-slider min="0" max="100" step="1" class="cus_range_mat">
+                  <input matSliderThumb [value]="assgUserDrpVal" step="1" (change)="hisperStatSliderChange($event)">
+                </mat-slider>
+                <label class="perStatSliderLable" for="hisperStatSliderInput">100%</label>
+                </div>-->
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">h-factor</div>
+                  <div class="tab_Cell">Before</div>
+                  <div class="tab_Cell" matTooltip="Combined" [matTooltipPosition]="'above'">Combined</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of h_facData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['H-Factor']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['Combined']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Performance</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of perData1; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell">{{data['Performance']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['Combined']}}</div>
+                  </div>
+                  }
+                </div>
+
+                <div class="tab__head d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">Statistics</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                  <div class="tab_Cell">&nbsp;</div>
+                </div>
+                <div class="tab__body">
+                  @for (data of StatData; track data) {
+                  <div class="b__sec d-flex justify-content-between align-items-center">
+                    <div class="tab_Cell d">{{data['Statistics']}}</div>
+                    <div class="tab_Cell high__color">{{data['UserPortfolio']}}</div>
+                    <div class="tab_Cell">{{data['Combined']}}</div>
+                  </div>
+                  }
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+          </div>
+          <span class="perform__RTN text-right d-block mt1rem w66" style="padding-right: 0.75rem;">{{returnAsOfDate}}</span>
+
+
+          }
+          @if(sharedData._showSpinner){
+          <div id="openFactsheet__loader" class="d-flex align-items-center justify-content-center">
+            <div class="common-prog-loader per-loader text-center align-items-center justify-content-center" style="width: 84%;">
+              <span class="div_n">
+                Loading...
+              </span>
+              <mat-progress-bar mode="determinate" [value]="0" style="padding-left: 10px; padding-right: 10px;margin-right:10px; width: 100%; transition: all .10s"></mat-progress-bar>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+
+    </div>
+    }
+    
+  </div>
+
+</div>
+  }

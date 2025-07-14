@@ -1,0 +1,236 @@
+<mat-table *ngIf="selectedType != 'P'" matSort [dataSource]="accountDataSourceData" class="common_mat_table accounts_table"
+ matSortDisableClear id="rolemanagement-table"
+matSortDirection="asc" (matSortChange)="onSortData($event)">
+<ng-container matColumnDef="Instrument">
+  <mat-header-cell mat-sort-header *matHeaderCellDef style=" justify-content: flex-start;">
+    Instrument </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span style="position: absolute;left: 0;cursor: pointer;line-height: 0;top: 49%;transform: translate(0, -50%);"
+      *ngIf="checkDont_Info(element)" matTooltipClass='nav_tooltip' matTooltipPosition="above"
+      matTooltip="Added this stock in don't sell" [matTooltipShowDelay]="showDelay.value"
+      [matTooltipHideDelay]="hideDelay.value">
+      <svg width="10" height="10" fill="transparent" class="bi bi-info-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          style="fill: var(--prim-button-color-text); "></path>
+        <path
+          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+          style="fill: var(--prim-button-color-text);"></path>
+      </svg>
+    </span>
+    <span class="accMenuFirst" mat-menu-item>{{element.contractDesc}}</span>
+  </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Position">
+  <mat-header-cell mat-sort-header *matHeaderCellDef > Position </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{sharedData.numberWithCommas(element.position)}}</span>
+  </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Last">
+  <mat-header-cell *matHeaderCellDef > Last</mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{sharedData.numFormatWithComma(element.lastPrice)}}</span>
+  </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Change">
+  <mat-header-cell mat-sort-header *matHeaderCellDef
+    style=" text-align: right; white-space: nowrap;"> Daily Price Change </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{getmarketdata(element.conid,'change')=='' || getmarketdata(element.conid,'change')=='0.0 %'
+      ? '' : (getmarketdata(element.conid,'change')) }}</span>
+  </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Market Value ($)">
+  <mat-header-cell *matHeaderCellDef > Market Value ($) </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{sharedData.numFormatWithComma(element.mktValue)}}</span>
+  </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Daily P&L ($)">
+  <mat-header-cell *matHeaderCellDef > Daily P&L ($) </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{getmarketdata(element.conid,'dailyprofitloss')}}</span>
+    <span class="svg-icon svg-icon-3 svg-icon-success me-2" style="color: #50cd89;"
+      *ngIf="getmarketdata(element.conid,'dailyprofitloss') > 0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor">
+        </rect>
+        <path
+          d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z"
+          fill="currentColor"></path>
+      </svg>
+    </span>
+    <span class="svg-icon svg-icon-3 svg-icon-danger me-2" style="color: #f1416c"
+      *ngIf="getmarketdata(element.conid,'dailyprofitloss') < 0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)"
+          fill="currentColor"></rect>
+        <path
+          d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z"
+          fill="currentColor"></path>
+      </svg>
+    </span>
+    <span class="svg-icon svg-icon-3 svg-icon-danger me-2" style="color: #f1416c;visibility:hidden"
+      *ngIf="getmarketdata(element.conid,'dailyprofitloss') == 0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)"
+          fill="currentColor"></rect>
+        <path
+          d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z"
+          fill="currentColor"></path>
+      </svg>
+    </span>
+  </mat-cell>
+</ng-container>
+
+<mat-header-row *matHeaderRowDef="accountDataSourceHeader;sticky: true"></mat-header-row>
+<mat-row *matRowDef="let row; columns: accountDataSourceHeader;"></mat-row>
+</mat-table>
+<mat-table *ngIf="selectedType == 'P'" matSort [dataSource]="accountDataSourceData" class="common_mat_table accounts_table" matSortDisableClear id="rolemanagement-table"
+matSortDirection="asc" (matSortChange)="onSortPData($event)">
+
+<ng-container matColumnDef="Instrument">
+  <mat-header-cell mat-sort-header *matHeaderCellDef style=" justify-content: flex-start;">
+    Instrument
+  </mat-header-cell>
+  <mat-cell *matCellDef="let element" style=" cursor: pointer;"
+    (click)="assetDes_ModalOpen(element)" data-bs-toggle="modal" data-bs-target="#PortmyexistingModal">
+    <span style="position: absolute;left: 0;cursor: pointer;line-height: 0;top: 49%;transform: translate(0, -50%);"
+      *ngIf="checkDont_Info(element)" matTooltipClass='nav_tooltip' matTooltipPosition="above"
+      matTooltip="Added this stock in don't sell" [matTooltipShowDelay]="showDelay.value"
+      [matTooltipHideDelay]="hideDelay.value">
+      <svg width="10" height="10" fill="transparent" class="bi bi-info-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          style="fill: var(--prim-button-color-text); "></path>
+        <path
+          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+          style="fill: var(--prim-button-color-text);"></path>
+      </svg>
+    </span>
+
+    <span mat-menu-item *ngIf="element.Instrument != null" class="accMenuFirst" style="position: absolute; "
+      matTooltipClass='nav_tooltip' matTooltipPosition="above" [matTooltip]="element.securityDescription"
+      [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value">
+      {{element.Instrument}}
+    </span>
+    <span mat-menu-item *ngIf="element.Instrument == null" class="accMenuFirst" style="position: absolute; "
+      matTooltipClass='nav_tooltip' matTooltipPosition="above" [matTooltip]="element.securityDescription"
+      [matTooltipShowDelay]="showDelay.value" [matTooltipHideDelay]="hideDelay.value">
+      {{element.exchangeCode}}
+    </span>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Position">
+  <mat-header-cell mat-sort-header *matHeaderCellDef > Position </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{sharedData.numberWithCommas(element.Position)}}</span>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Last">
+  <mat-header-cell  *matHeaderCellDef > Last</mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{element.last | number: '1.2-2'}}</span>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Change">
+  <mat-header-cell  *matHeaderCellDef
+    style=" text-align: right; white-space: nowrap;"> Daily Price Change </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item style="position: absolute; " matTooltipClass='nav_tooltip' matTooltipPosition="above"
+      [matTooltip]="element.ChangePercent +'%'" [matTooltipShowDelay]="showDelay.value"
+      [matTooltipHideDelay]="hideDelay.value">
+      <span style="color: #50cd89" *ngIf="isPershingLossorGain(element.Change) &&  element.Change != 0">
+        {{element.Change | number: '1.2-2'}}
+      </span>
+      <span style="color: #f1416c" *ngIf="!isPershingLossorGain(element.Change) &&  element.Change != 0">
+        {{element.Change | number: '1.2-2'}}
+      </span>
+      <span *ngIf="element.Change == 0">
+        {{element.Change | number: '1.2-2'}}
+      </span>
+    </span>
+  </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Market Value ($)">
+  <mat-header-cell  *matHeaderCellDef > Market Value ($)
+  </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span mat-menu-item>{{element.Market_Value | number: '1.2-2' }}</span>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Daily P&L ($)">
+  <mat-header-cell *matHeaderCellDef > Daily P&L ($)
+  </mat-header-cell>
+  <mat-cell *matCellDef="let element" >
+    <span style="color: #50cd89;" *ngIf="isPershingLossorGain(element.Daily_PL) && element.Daily_PL.toFixed(2) != 0">
+      {{ element.Daily_PL | number: '1.2-2'}}
+    </span>
+    <span style="color: #f1416c;" *ngIf="!isPershingLossorGain(element.Daily_PL) && element.Daily_PL.toFixed(2) != 0">
+      {{ element.Daily_PL | number: '1.2-2'}}
+    </span>
+    <span *ngIf="element.Daily_PL.toFixed(2) == 0">
+      {{ element.Daily_PL | number: '1.2-2' }}
+    </span>
+
+  </mat-cell>
+
+</ng-container>
+
+<mat-header-row *matHeaderRowDef="accountDataSourceHeader;sticky: true"></mat-header-row>
+
+<mat-row *matRowDef="let row; columns: accountDataSourceHeader;"></mat-row>
+
+</mat-table>
+
+<div class="modal fade warningautoModel w_Table" id="PortmyexistingModal" tabindex="-1" role="dialog" aria-labelledby="myexistingModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:35%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="close-l" data-bs-dismiss="modal" aria-label="Close" style="z-index:9;"><span class="material-icons">close</span></div>
+          <div class="content-btm p0" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+
+            <h3 style="border-bottom: 1px dotted var(--border); text-align: left;
+            padding: 0.8rem 1.5rem 0.8rem;">Asset Type Description</h3>
+            <table class="table" style=" padding: 0 5rem;width: 80%; margin: auto; margin-bottom: 1rem;">
+              <tbody>
+                <tr>
+                  <td>Asset Sub Sub Type Description :</td>
+                  <td style="">{{pershAssetDes.assetSubSubTypeDescription}}</td>
+                </tr>
+                <tr>
+                  <td>Asset Sub Type Code :</td>
+                  <td style="">{{pershAssetDes.assetSubTypeCode}}</td>
+                </tr>
+                <tr>
+                  <td>Asset Sub Type Description :</td>
+                  <td style="">{{pershAssetDes.assetSubTypeDescription}}</td>
+                </tr>
+                <tr>
+                  <td>Asset Type Code :</td>
+                  <td style="">{{pershAssetDes.assetTypeCode}}</td>
+                </tr>
+                <tr>
+                  <td>Asset Type Description :</td>
+                  <td style="">{{pershAssetDes.assetTypeDescription}}</td>
+                </tr>
+                <tr>
+                  <td>ISIN :</td>
+                  <td style="">{{pershAssetDes.isin}}</td>
+                </tr>
+                <tr>
+                  <td>CUSIP Identifier :</td>
+                  <td style="">{{pershAssetDes.cusipIdentifier}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<form [formGroup]="form">
+  <div class="fac_bg">
+    <div class="matdrop-options">
+      <!---- Toggle Section ---->
+      @if(getFactorMainDataList.selectionOptions != undefined && getFactorMainDataList.selectionOptions.length == 2){
+      <div>
+        <div class="mat__toggle">
+          <span class="label" [style.color]="form.get('selection')?.value === getFactorMainDataList.selectionOptions[0] ? 'var(--iconColorHover)' : 'var(--leftSideText)'">{{getFactorMainDataList.selectionOptions[0]}}</span>
+          <mat-slide-toggle [disabled]="getFactorMainDataList.selectionOptionsDisabled" (change)="onToggleAscendingFactor()" [checked]="form.get('selection')?.value === getFactorMainDataList.selectionOptions[1]" class="example-margin preLabel">
+          </mat-slide-toggle>
+          <span class="label" [style.color]="form.get('selection')?.value === getFactorMainDataList.selectionOptions[1] ? 'var(--iconColorHover)' : 'var(--leftSideText)'">{{getFactorMainDataList.selectionOptions[1]}}</span>
+        </div>
+      </div>
+      }
+      <!---- Toggle Section ---->
+      <!---- Highest/Lowest Section ---->
+      @if(getFactorMainDataList.valueRange != undefined && getFactorMainDataList.valueRange.length>0){
+      <div class="mb0_5rem" style="border-bottom:1px dashed var(--border);">
+        <mat-radio-group aria-label="Select" formControlName="range" (change)="onOptionChange($event, 'factor')">
+          <mat-radio-button *ngFor="let range of getFactorMainDataList.valueRange" [value]="range.value" [disabled]="checkRangeDis(range,'range')">{{range.name}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      }
+      <!---- Highest/Lowest Section Section ---->
+      <!---- Percentage/Count/Value Section ---->
+      @if(getFactorMainDataList.type != undefined && getFactorMainDataList.type.length>0){
+      <div class="mb0_5rem">
+        <mat-radio-group aria-label="Select" formControlName="type" (change)="onOptionChange($event, 'factor')">
+          <mat-radio-button *ngFor="let type of getFactorMainDataList.type" [value]="type.value" [disabled]="checkRangeDis(type,'type')">{{type.name}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      }
+      <!---- Percentage/Count/Value Section ---->
+    </div>
+    <div class="matdrop-inputs d-flex p-rel">
+      <!--<span class="outline-text-top">Stocks</span>-->
+      @if(form.get('range')?.value != 'range'){
+      <mat-form-field appearance="outline" [class.errorBorder]="hfFromValueErr" style="width:30%">
+        <mat-label>From</mat-label>
+        <input maxlength="2" (keydown)="perKeyDown($event)" (keyup)="checkErr('hfFromValue')" type="number" matInput placeholder="" formControlName="fromValue" name="hfFromValue">
+      </mat-form-field>
+      }
+      @else{
+
+      <!--@if(form.get('type')?.value == 'percentage'){}-->
+      <!--- Percentage || Count || Value --->
+      <mat-form-field appearance="outline" [class.errorBorder]="hfFromValueErr" style="width:30%">
+        <mat-label>From</mat-label>
+        <input (keydown)="perKeyDown($event)" (keyup)="checkErr('hfFromValue')" type="number" matInput placeholder="" formControlName="fromValue" name="hfFromValue">
+      </mat-form-field>
+      <mat-form-field appearance="outline" [class.errorBorder]="hfToValueErr" style="width:30%;margin-left:0.5rem">
+        <mat-label>From</mat-label>
+        <input (keydown)="perKeyDown($event)" (keyup)="checkErr('hfToValue')" type="number" matInput placeholder="" formControlName="toValue" name="hfToValue">
+      </mat-form-field>
+      <!--- Percentage || Count || Value --->
+      }
+    </div>
+    @if(hfFromValueErr || hfToValueErr){
+    @if(form.get('type')?.value == 'percent'){
+    <div class="fact-Acc-Error">Value out of range. Please select a value within 0 to 100</div>
+    }
+    @else if(form.get('type')?.value == 'value'){
+    <div class="fact-Acc-Error">Value out of range. Please select a value within 0.001 to 1</div>
+    }
+    }
+  </div>
+  <div class="d-flex align-items-center mt0_5rem" style="width:100%">
+    <span class="outline-text-top">From:</span>
+    <app-ind-select-dropdown class="w-100" [getDataList]="getUniverseDataList" [getDefaultSelected]="getUniverseDefaultSelected" [getFormName]="'universeBy'" (onSelectionChanged)="receiveMatOptionSelectedList($event, 'universeBy')"></app-ind-select-dropdown>
+  </div>
+  @if(form.get('range')?.value != 'range'){
+  @if(form.get('type')?.value == 'percentage'){
+  <p class="hgt-para">{{form.get('selection')?.value}} {{form.get('fromValue')?.value}}% stocks with {{form.get('range')?.value}} <span class="nw">h-factor</span> from {{getUniverseDefaultSelected}}.</p>
+  }@else{
+  <p class="hgt-para">{{form.get('selection')?.value}} {{form.get('fromValue')?.value}} stocks with {{form.get('range')?.value}} <span class="nw">h-factor</span> from {{getUniverseDefaultSelected}}.</p>
+  }
+  }@else{
+  @if(form.get('type')?.value == 'percentage'){
+  <p class="hgt-para">{{form.get('selection')?.value}} between {{form.get('fromValue')?.value}}% to {{form.get('toValue')?.value}}% stocks with {{form.get('range')?.value}} <span class="nw">h-factor</span> from  {{getUniverseDefaultSelected}}.</p>
+  }@else{
+  <p class="hgt-para">{{form.get('selection')?.value}} between {{form.get('fromValue')?.value}} to {{form.get('toValue')?.value}} stocks with {{form.get('range')?.value}} <span class="nw">h-factor</span> from  {{getUniverseDefaultSelected}}.</p>
+  }
+  }
+</form>

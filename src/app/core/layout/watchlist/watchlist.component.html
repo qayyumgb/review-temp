@@ -1,0 +1,378 @@
+<div class="notify-l">
+    <div class="top-header-n">
+        <div class="title-h d-flex justify-content-between align-items-center">
+          <h4>Watchlist</h4>
+          
+          <div class="d-flex align-items-center">          
+            <span class="material-icons" (click)="closeNotify()"> close </span>
+          </div>
+        </div>
+      </div>
+    <div class="content-body-n p-rel" style="min-height:15rem">
+      <div class="d-flex align-items-center cashFlowMat default_mat_dropdown defaulttheme_Mat" style="padding:0.5rem">
+        <!--<p>Select Watchlist:</p>-->
+        <mat-form-field FloatLabelType="never" appearance="outline" style="margin: 0 0.3rem;width:100%">
+          
+          <mat-select [(ngModel)]="selListGrp" (selectionChange)="loadData()">
+            @for(data of listGrpData;track data){
+            <mat-option [value]="data">{{data}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="list-n rightGrid_matTab watchlist_matTab">
+        <mat-tab-group (selectedIndexChange)="onTabChange($event)" [selectedIndex]="selectedInd">
+          @if( sharedData.checkMenuPer(2027, 2234) == 'Y'){
+          <mat-tab>
+            <ng-template mat-tab-label (click)="defScrollBox()">
+              Equity
+              @if(equityData.length > 0){
+              <span class="WLcount ml0_5rem">{{equityData.length}}</span>
+              }
+            </ng-template>
+            <div class="buildYourIndex__sec__rightG">
+              <div class="watch__details">
+                <div class="select__steps__details">
+                  <div class="d-flex align-items-center comp__head">
+                    <div class="search-block">
+                      <div class="d-flex align-items-center" [class.Icons]="searchText">
+                        <input appRemoveSpecialCharacters (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchText" (input)="filterItems()" id="myInput">
+                        <span class="material-icons close_icon"  (click)="clearInput($event)">
+                          close
+                        </span>
+                        <span class="material-icons disable searc_icon">
+                          search
+                        </span>
+                      </div>
+                    </div>
+                    <div class="no_line_height d-flex align-items-center">
+                      <div class="dropdown">
+                        <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          swap_vert
+                        </span>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style=" min-width: 12rem;">
+                          <!-- <div class="component sortbyComp" style="margin-top: 0; margin-bottom: 0; ">
+                        <div class="dropSpace">
+                          <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+                          <div class="component sortbyComp EQ_sorting">
+                            <span class="title">Ascending</span>
+                            <div class="mat__toggle">
+                              <mat-slide-toggle [checked]="ascending_val" class="example-margin preLabel" (change)="onToggleAscending($event)"></mat-slide-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                          <ul>
+                            <li class="d-flex">
+                              <a class="dropdown-item sort_btn">
+                                Sort by
+                                <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('W','equity')"><span class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem;"> refresh</span> Reset</button>
+                              </a>
+
+                            </li>
+                            <li *ngFor="let item of FilterList">
+                              <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                              <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                                @if(ascending_val){
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                        fill="#fff" />
+                                  <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                        fill="#fff" style="opacity: 0.2;" />
+                                </svg>
+                                }
+                                @else{
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                        fill="#fff" style="opacity: 0.2;" />
+                                  <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                        fill="#fff" />
+                                </svg>
+                                }
+                              </span>
+                            </li>
+                          </ul>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="scrollbox outerScroll__Div">
+                    @if(equityData.length>0){
+                    <div class="construction h-100">
+                      @if(equitySearchData.length>0){
+                      <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+                        <ul>
+                          <li *cdkVirtualFor="let data of equitySearchData;let i=index;">
+                            <div class="list__sec" (click)="equityGlobalIndCompSrc(data,'')">
+                              <div class="d__border" [style.border-color]="cl(data.score)">
+                                <p class="ind__name">{{data['companyName'] | nullDashPipe:''}}</p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                  <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                                  <span class="d-flex align-items-center">
+                                    <span class="price text-right" style="color: var(--paraFontColorAlt)">{{data['price'] | priceFormat  :',.1f':data['currency'] }}</span>
+                                    <span class="price text-right med-score" [style.background-color]="cl(data.score)" [style.color]="(data.score>=0 && data.score<=35) || (data.score>=60)?'#fff':'#000'">{{sharedData.formatGScore(data.score)}}</span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </cdk-virtual-scroll-viewport>
+                      }
+                      @else{
+                      <div class="no_data" style="display:flex">No results found. Revise your search.</div>
+                      }
+                    </div>
+                    }
+                    @else{
+                    <div class="no_data" style="display:flex">Begin adding stocks to keep an eye on them</div>
+                    }
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              Indexes
+              @if(indexesData.length > 0){
+              <span class="WLcount ml0_5rem">{{indexesData.length}}</span>
+              }
+            </ng-template>
+            <div class="buildYourIndex__sec__rightG">
+              <div class="watch__details">
+                <div class="select__steps__details">
+                  <div class="d-flex align-items-center comp__head">
+                    <div class="search-block">
+                      <div class="d-flex align-items-center" [class.Icons]="searchTextIndexes">
+
+                        <input appRemoveSpecialCharacters (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchTextIndexes" (input)="filterIndexItems()" id="myInput">
+                        <span class="material-icons close_icon"  (click)="clearInput($event)">
+                          close
+                        </span>
+                        <span class="material-icons disable searc_icon" >
+                          search
+                        </span>
+                      </div>
+                    </div>
+                    <div class="no_line_height d-flex align-items-center">
+                      <div class="dropdown">
+                        <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          swap_vert
+                        </span>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style=" min-width: 12rem;">
+                          <!-- <div class="component sortbyComp" style="margin-top: 0; margin-bottom: 0; ">
+                        <div class="dropSpace">
+                          <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+                          <div class="component sortbyComp EQ_sorting">
+                            <span class="title">Ascending</span>
+                            <div class="mat__toggle">
+                              <mat-slide-toggle [checked]="ascending_val" class="example-margin preLabel" (change)="onToggleIndexAscending($event)"></mat-slide-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                          <ul>
+                            <li class="d-flex">
+                              <a class="dropdown-item sort_btn">Sort by
+                                <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('W','prebuid')"><span  class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem;"> refresh</span> Reset</button>
+                              </a>
+
+                            </li>
+                            <li *ngFor="let item of FilterIndexList">
+                              <a class="dropdown-item" [class.active]="item.value === SelIndexFilter" (click)="FilterIndexChanged(item)">{{item.name}}</a>
+                              <span class="sortingArrow" [style.display]="item.value === SelIndexFilter ? 'block' : 'none'" (click)="onToggleIndexAscending();$event.stopPropagation()">
+                                @if(ascending_val_ind){
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                        fill="#fff" />
+                                  <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                        fill="#fff" style="opacity: 0.2;" />
+                                </svg>
+                                }
+                                @else{
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                        fill="#fff" style="opacity: 0.2;" />
+                                  <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                        fill="#fff" />
+                                </svg>
+                                }
+                              </span>
+                            </li>
+                          </ul>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="scrollbox outerScroll__Div">
+                    @if(indexesData.length > 0){
+                    <div class="construction h-100">
+                      @if(indexesSearchData.length > 0){
+                      <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+                        <ul>
+                          <li *cdkVirtualFor="let data of indexesSearchData;let i=index;">
+                            <div class="list__sec" (click)="equityGlobalIndCompSrc(data,'Index')">
+                              <div>
+                                <p class="ind__name">
+                                  {{data['name'] | nullDashPipe :''}}
+                                </p>
+                                <div class="d-flex align-items-center">
+
+                                  <span class="price text-left">{{data['country'] | nullDashPipe:''}}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </cdk-virtual-scroll-viewport>
+                      }
+                      @else{
+                      <div class="no_data" style="display:flex">No results found. Revise your search.</div>
+                      }
+                    </div>
+                    }
+                    @else{
+                    <div class="no_data" style="display:flex">Begin adding stocks to keep an eye on them</div>
+
+                    }
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          }@else if(sharedData.checkMenuPer(2027, 2234) == 'D'){
+          <mat-tab label="Equity" disabled> </mat-tab>
+          <mat-tab label="Indexes" disabled></mat-tab>
+          }
+
+          @if(sharedData.checkMenuPer(2028, 2250) == 'Y'){
+          <mat-tab>
+            <ng-template mat-tab-label>
+              ETF
+              @if(etfData.length > 0){
+
+              <span class="WLcount ml0_5rem">{{etfData.length}}</span>
+              }
+            </ng-template>
+            <div class="buildYourIndex__sec__rightG">
+              <div class="watch__details">
+                <div class="select__steps__details">
+                  <div class="d-flex align-items-center comp__head">
+                    <div class="search-block">
+                      <div class="d-flex align-items-center" [class.Icons]="searchTextETF">
+                        <input appRemoveSpecialCharacters (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchTextETF" (input)="filterETFItems()" id="myInput">
+                        <span class="material-icons close_icon" (click)="clearInput($event)">
+                          close
+                        </span>
+                        <span class="material-icons disable searc_icon">
+                          search
+                        </span>
+
+                      </div>
+                    </div>
+                    <div class="no_line_height d-flex align-items-center">
+                      <div class="dropdown">
+                        <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          swap_vert
+                        </span>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style=" min-width: 12rem;">
+                          <!-- <div class="component sortbyComp" style="margin-top: 0; margin-bottom: 0; ">
+                        <div class="dropSpace">
+                          <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+                          <div class="component sortbyComp EQ_sorting">
+                            <span class="title">Ascending</span>
+                            <div class="mat__toggle">
+                              <mat-slide-toggle [checked]="ascending_val" class="example-margin preLabel" (change)="onToggleETFAscending($event)"></mat-slide-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                          <ul>
+                            <li class="d-flex">
+                              <a class="dropdown-item sort_btn">Sort by
+                                <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('W','etf')"><span  class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem;"> refresh</span> Reset</button>
+                              </a>
+
+                            </li>
+                            <li *ngFor="let item of FilterETFList">
+                              <a class="dropdown-item" [class.active]="item.value === SelETFFilter" (click)="FilterETFChanged(item)">{{item.name}}</a>
+                              <span class="sortingArrow" [style.display]="item.value === SelETFFilter ? 'block' : 'none'" (click)="onToggleETFAscending();$event.stopPropagation()">
+                                @if(ascending_val_etf){
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                        fill="#fff" />
+                                  <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                        fill="#fff" style="opacity: 0.2;" />
+                                </svg>
+                                }
+                                @else{
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                                        fill="#fff" style="opacity: 0.2;" />
+                                  <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                                        fill="#fff" />
+                                </svg>
+                                }
+                              </span>
+                            </li>
+                          </ul>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="scrollbox outerScroll__Div">
+                    @if(etfData.length > 0){
+                    <div class="construction h-100">
+                      @if(etfSearchData.length > 0){
+                      <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+                        <ul>
+                          <li *cdkVirtualFor="let data of etfSearchData;let i=index;">
+                            <div class="list__sec" (click)="etfGlobalIndexSrc(data)">
+                              <div>
+                                <p class="ind__name">{{data['etfName'] | nullDashPipe :''}}</p>
+                                <div class="d-flex align-items-center">
+
+                                  <span class="ticker text-left">
+                                    <span class="inner__tick"> {{data['ticker'] | nullDashPipe:''}}</span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </cdk-virtual-scroll-viewport>
+                      }
+                      @else{
+                      <div class="no_data" style="display:flex">No results found. Revise your search.</div>
+                      }
+                    </div>
+                    }
+                    @else{
+
+                    <div class="no_data" style="display:flex">Begin adding stocks to keep an eye on them</div>
+                    }
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          }@else if(sharedData.checkMenuPer(2028, 2250) == 'D'){
+          <mat-tab label="ETF" disabled> </mat-tab>
+          }
+        </mat-tab-group>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+.innerC__section{
+    .radio-rect{
+        cursor: pointer;
+        rect{
+            stroke: var(--linkColor);
+            fill: transparent;
+            stroke-width: 2px;
+            &.innerC__rect{
+                display: none;
+            }
+        }
+        &.selected{
+            rect{
+                fill: transparent;
+                stroke-width: 2px;
+                stroke: var(--linkColor);
+                &.innerC__rect{
+                    fill: var(--linkColor);
+                    stroke: var(--linkColor);
+                    display: block;
+                }
+            }
+        }
+    }
+  
+}

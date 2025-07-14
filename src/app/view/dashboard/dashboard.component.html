@@ -1,0 +1,464 @@
+<div id="dashboard__Comp">
+  <a class="disc-br-dashboard" [href]="disclosureHref" target="_blank"> Disclaimers and Disclosures </a>
+  @if(showUniverseMenu){
+  <div class="leftGrid_comp" [style.visibility]="showUniverseMenu?'visible':'hidden'" [style.opacity]="showUniverseMenu?'1':'0'">
+    <span class="gridOptions">
+      <span class="material-icons-outlined" [class.active]="show_Gridoptions" (click)="show_Gridoptions = !show_Gridoptions">apps</span>
+
+      <!--<span class="material-icons" (click)="gridReset()">
+        restart_alt
+      </span>-->
+      <span class="material-icons-outlined" (click)="closeUniverse()">
+        close
+      </span>
+    </span>
+    <div class="openGrid__section__icons w-100 h-100" [style.display]="show_Gridoptions?'block':'none'">
+      @if(showMatLoader_checkBox){
+      <div class="matLoaderBlock">
+      <mat-progress-bar id="showMatLoader" mode="indeterminate" value="40" style="position: absolute;height:0.1rem;overflow: hidden;"></mat-progress-bar>
+        </div>
+      }
+      <div class="close-l" (click)="show_Gridoptions = !show_Gridoptions"><span class="material-icons">close</span></div>
+      <div class="options-Grid">
+        <div class="mat__Div">
+          <mat-slide-toggle [checked]="gridOptionsCheckbox.equity" class="example-margin preLabel" (change)="savePinnedStrategy($event, 'equity')" [disabled]="sharedData.checkShowLeftTab(2027) !='A'">Equity</mat-slide-toggle>
+        </div>
+        <div class="mat__Div">
+          <mat-slide-toggle [checked]="gridOptionsCheckbox.etf" class="example-margin preLabel" (change)="savePinnedStrategy($event, 'etf')" [disabled]="sharedData.checkShowLeftTab(2028) !='A'">ETF</mat-slide-toggle>
+        </div>
+        @if(sharedData.checkMyUserType()){
+        <div class="mat__Div">
+          <mat-slide-toggle [checked]="gridOptionsCheckbox.direct" class="example-margin preLabel" (change)="savePinnedStrategy($event,'direct')" [disabled]="sharedData.checkShowLeftTab(12) !='A'">Approved</mat-slide-toggle>
+        </div>
+        } @else{
+        <div class="mat__Div">
+          <mat-slide-toggle [checked]="gridOptionsCheckbox.direct" class="example-margin preLabel" (change)="savePinnedStrategy($event,'direct')" [disabled]="sharedData.checkShowLeftTab(12) !='A'">Direct Indexing</mat-slide-toggle>
+        </div>
+        }
+        <div class="mat__Div">
+          <mat-slide-toggle [checked]="gridOptionsCheckbox.prebuilt" class="example-margin preLabel" (change)="savePinnedStrategy($event, 'prebuilt')" [disabled]="sharedData.checkShowLeftTab(4) !='A'">Prebuilt</mat-slide-toggle>
+        </div>
+        <div class="mat__Div">
+          <mat-slide-toggle [checked]="gridOptionsCheckbox.thematic" class="example-margin preLabel" (change)="savePinnedStrategy($event, 'thematic')" [disabled]="sharedData.checkShowLeftTab(25) !='A'">Thematic</mat-slide-toggle>
+        </div>
+
+        <!--<div class="mat__Div">
+    <mat-slide-toggle [checked]="gridOptionsCheckbox.portfolio" [disabled]="true" class="example-margin preLabel" (change)="savePinnedStrategy($event, 'portfolio')">Upload Portfolio</mat-slide-toggle>
+  </div>-->
+        <div class="mat__Div">
+          <mat-slide-toggle [checked]="gridOptionsCheckbox.strategies" class="example-margin preLabel" (change)="savePinnedStrategy($event, 'strategies')" [disabled]="sharedData.checkShowLeftTab(6) !='A'">My Strategies</mat-slide-toggle>
+        </div>
+      </div>
+      <!--<a class="apply-btn" (click)="applyGridLayout()">APPLY</a>-->
+    </div>
+    <div class="w-100 h-100" [style.display]="show_Gridoptions?'none':'block'" *ngIf="!show_Gridoptions">
+      <!--<div class="grid-stack"></div>-->
+      @if(!resetCards){
+      <gridstack [options]="gridOptions" class="h-100" (changeCB)="onChange($event)">
+        <gridstack-item class="openGrid__section" *ngFor="let n of items;" [options]="n">
+
+          @switch (n.id) {
+          @case ("equity") {
+          @if(sharedData.checkShowLeftTab(2027)=='A'){
+          <div class="w-100 h-100">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 16.875C13.8408 16.875 16.9189 13.797 16.9189 10C16.9189 6.20304 13.8408 3.125 10.0439 3.125C6.24693 3.125 3.16888 6.20304 3.16888 10C3.16888 13.797 6.24693 16.875 10.0439 16.875Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14.4345 4.71094C16.5986 4.11719 18.2236 4.17187 18.7079 5C19.5673 6.49219 16.3876 9.94531 11.6064 12.7031C6.82513 15.4609 2.24701 16.4922 1.37982 15C0.903258 14.1719 1.66888 12.7344 3.26263 11.1562" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                Equity
+              </p>
+              @if(equityCountryList.length>0){
+              <svg (click)="equityClickMain()" fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg" style="color: var(--prim-button-color);">
+                <path d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor" opacity="0.3"></path>
+                <rect fill="currentColor" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"></path>
+              </svg>
+              }
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of equityCountryList;track data){
+                <li style="cursor:pointer" (click)="equityClick(data)">{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }@else if(sharedData.checkShowLeftTab(2027)=='D'){
+          <div class="w-100 h-100 disabled" data-bs-toggle="modal" data-bs-target="#accessWarningModel">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 16.875C13.8408 16.875 16.9189 13.797 16.9189 10C16.9189 6.20304 13.8408 3.125 10.0439 3.125C6.24693 3.125 3.16888 6.20304 3.16888 10C3.16888 13.797 6.24693 16.875 10.0439 16.875Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14.4345 4.71094C16.5986 4.11719 18.2236 4.17187 18.7079 5C19.5673 6.49219 16.3876 9.94531 11.6064 12.7031C6.82513 15.4609 2.24701 16.4922 1.37982 15C0.903258 14.1719 1.66888 12.7344 3.26263 11.1562" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                Equity
+              </p>
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of equityCountryList;track data){
+                <li>{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }
+          }@case ("etf") {
+          @if(sharedData.checkShowLeftTab(2028)=='A'){
+          <div class="w-100 h-100">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <!-- <img src="../../../assets/images/dashboard-icons/ETFUniverse.svg" alt="Equity Universe" /> -->
+
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0146 13.7773C12.1008 13.7935 13.805 12.1154 13.8212 10.0293C13.8373 7.94312 12.1593 6.23886 10.0731 6.2227C7.987 6.20654 6.28274 7.88459 6.26657 9.97074C6.25041 12.0569 7.92847 13.7612 10.0146 13.7773Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M3.14386 10C3.14386 6.18923 6.23309 3.1 10.0439 3.1C13.3624 3.1 16.1338 5.44273 16.7943 8.56456C17.0184 8.44731 17.2734 8.38099 17.5439 8.38099C17.7003 8.38099 17.8516 8.40318 17.9947 8.44459C17.2693 4.71523 13.9854 1.9 10.0439 1.9C5.57035 1.9 1.94386 5.52649 1.94386 10C1.94386 14.4735 5.57035 18.1 10.0439 18.1C13.9854 18.1 17.2693 15.2848 17.9947 11.5554C17.8516 11.5968 17.7003 11.619 17.5439 11.619C17.2734 11.619 17.0184 11.5527 16.7943 11.4354C16.1338 14.5573 13.3624 16.9 10.0439 16.9C6.23309 16.9 3.14386 13.8108 3.14386 10Z" fill="white" fill-opacity="0.95" />
+                  <circle cx="17.3787" cy="10.1651" r="1.52117" stroke="white" stroke-opacity="0.95" stroke-width="1.2" />
+                </svg>
+                ETF
+              </p>
+              @if(etfList.length>0){
+              <svg (click)="etfClickMain()" fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg" style="color: var(--prim-button-color);">
+                <path d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor" opacity="0.3"></path>
+                <rect fill="currentColor" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"></path>
+              </svg>
+              }
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of etfList;track data){
+                <li style="cursor:pointer" (click)="etfClick(data)">{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }@else if(sharedData.checkShowLeftTab(2028)=='D'){
+          <div class="w-100 h-100 disabled" data-bs-toggle="modal" data-bs-target="#accessWarningModel">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <!-- <img src="../../../assets/images/dashboard-icons/ETFUniverse.svg" alt="Equity Universe" /> -->
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0146 13.7773C12.1008 13.7935 13.805 12.1154 13.8212 10.0293C13.8373 7.94312 12.1593 6.23886 10.0731 6.2227C7.987 6.20654 6.28274 7.88459 6.26657 9.97074C6.25041 12.0569 7.92847 13.7612 10.0146 13.7773Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M3.14386 10C3.14386 6.18923 6.23309 3.1 10.0439 3.1C13.3624 3.1 16.1338 5.44273 16.7943 8.56456C17.0184 8.44731 17.2734 8.38099 17.5439 8.38099C17.7003 8.38099 17.8516 8.40318 17.9947 8.44459C17.2693 4.71523 13.9854 1.9 10.0439 1.9C5.57035 1.9 1.94386 5.52649 1.94386 10C1.94386 14.4735 5.57035 18.1 10.0439 18.1C13.9854 18.1 17.2693 15.2848 17.9947 11.5554C17.8516 11.5968 17.7003 11.619 17.5439 11.619C17.2734 11.619 17.0184 11.5527 16.7943 11.4354C16.1338 14.5573 13.3624 16.9 10.0439 16.9C6.23309 16.9 3.14386 13.8108 3.14386 10Z" fill="white" fill-opacity="0.95"/>
+                  <circle cx="17.3787" cy="10.1651" r="1.52117" stroke="white" stroke-opacity="0.95" stroke-width="1.2"/>
+                  </svg> 
+                ETF
+              </p>
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of etfList;track data){
+                <li>{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }
+          }
+          @case ("direct") {
+          @if(sharedData.checkShowLeftTab(12) == 'A'){
+          @if(sharedData.checkMyUserType()){
+          <div class="w-100 h-100">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 17.5C14.186 17.5 17.5439 14.1421 17.5439 10C17.5439 5.85786 14.186 2.5 10.0439 2.5C5.90175 2.5 2.54388 5.85786 2.54388 10C2.54388 14.1421 5.90175 17.5 10.0439 17.5Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.0439 15C12.8053 15 15.0439 12.7614 15.0439 10C15.0439 7.23858 12.8053 5 10.0439 5C7.28246 5 5.04388 7.23858 5.04388 10C5.04388 12.7614 7.28246 15 10.0439 15Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> Approved
+              </p>
+              @if(dirIndList.length>0){
+              <svg (click)="approvedClickMain()" routerLinkActive="active" fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg" style="color: var(--prim-button-color);">
+                <path d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor" opacity="0.3"></path>
+                <rect fill="currentColor" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"></path>
+              </svg>
+              }
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of dirIndList;track data){
+                <li style="cursor:pointer" (click)="approvedStrategiesClick(data)">{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }@else{
+          <div class="w-100 h-100">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 17.5C14.186 17.5 17.5439 14.1421 17.5439 10C17.5439 5.85786 14.186 2.5 10.0439 2.5C5.90175 2.5 2.54388 5.85786 2.54388 10C2.54388 14.1421 5.90175 17.5 10.0439 17.5Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M10.0439 15C12.8053 15 15.0439 12.7614 15.0439 10C15.0439 7.23858 12.8053 5 10.0439 5C7.28246 5 5.04388 7.23858 5.04388 10C5.04388 12.7614 7.28246 15 10.0439 15Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Direct Indexing
+              </p>
+              @if(dirIndexService._getBetaIndex_Direct.length > 0){
+              <svg (click)="dirIndClickMain()" routerLinkActive="active" fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg" style="color: var(--prim-button-color);">
+                <path d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor" opacity="0.3"></path>
+                <rect fill="currentColor" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"></path>
+              </svg>
+              }
+            </div>
+            <div class="gridster-btm p-rel">
+              @if(dirIndexService._getBetaIndex_Direct.length > 0){
+              <ul class="scrollbox">
+                @for(data of dirIndList;track data){
+                <li style="cursor:pointer" (click)="dirIndClick(data)">{{data['name']}}</li>
+                }
+              </ul>
+              }@else{
+              <div class="mat-spinner-loader" style="left:0">
+                <mat-spinner class="reviewloader-spinner" style="top: -10% !important; transform: scale(0.6) !important;"></mat-spinner>
+              </div>
+              }
+            </div>
+          </div>
+          }
+          } @else if(sharedData.checkShowLeftTab(12) == 'D'){
+          @if(sharedData.checkMyUserType()){
+          <div class="w-100 h-100 disabled" data-bs-toggle="modal" data-bs-target="#accessWarningModel">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 17.5C14.186 17.5 17.5439 14.1421 17.5439 10C17.5439 5.85786 14.186 2.5 10.0439 2.5C5.90175 2.5 2.54388 5.85786 2.54388 10C2.54388 14.1421 5.90175 17.5 10.0439 17.5Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.0439 15C12.8053 15 15.0439 12.7614 15.0439 10C15.0439 7.23858 12.8053 5 10.0439 5C7.28246 5 5.04388 7.23858 5.04388 10C5.04388 12.7614 7.28246 15 10.0439 15Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                Approved
+              </p>
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of dirIndList;track data){
+                <li style="cursor:pointer">{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }@else{
+          <div class="w-100 h-100 disabled" data-bs-toggle="modal" data-bs-target="#accessWarningModel">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 17.5C14.186 17.5 17.5439 14.1421 17.5439 10C17.5439 5.85786 14.186 2.5 10.0439 2.5C5.90175 2.5 2.54388 5.85786 2.54388 10C2.54388 14.1421 5.90175 17.5 10.0439 17.5Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.0439 15C12.8053 15 15.0439 12.7614 15.0439 10C15.0439 7.23858 12.8053 5 10.0439 5C7.28246 5 5.04388 7.23858 5.04388 10C5.04388 12.7614 7.28246 15 10.0439 15Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                Direct Indexing
+              </p>
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of dirIndList;track data){
+                <li style="cursor:pointer">{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }
+          }
+
+          } @case ("thematic") {
+          @if(sharedData.checkShowLeftTab(25)=='A'){
+          <div class="w-100 h-100">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.54388 13.125C10.6505 13.125 13.1689 10.6066 13.1689 7.5C13.1689 4.3934 10.6505 1.875 7.54388 1.875C4.43728 1.875 1.91888 4.3934 1.91888 7.5C1.91888 10.6066 4.43728 13.125 7.54388 13.125Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.5439 18.125C15.6505 18.125 18.1689 15.6066 18.1689 12.5C18.1689 9.3934 15.6505 6.875 12.5439 6.875C9.43728 6.875 6.91888 9.3934 6.91888 12.5C6.91888 15.6066 9.43728 18.125 12.5439 18.125Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M9.6142 7.69531L12.3486 10.4297" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M7.7392 9.57031L10.4736 12.3047" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                Thematic
+              </p>
+              @if(thematicIndexList.length>0){
+              <svg routerLink="/thematicStrategies" (click)="matLoaderOn();trackEV('thematic')" routerLinkActive="active" fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg" style="color: var(--prim-button-color);">
+                <path d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor" opacity="0.3"></path>
+                <rect fill="currentColor" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"></path>
+              </svg>
+              }
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of thematicIndexList;track data){
+                <li style="cursor:pointer" (click)="thematicIndexClick(data)">{{data['indexname']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          } @else if(sharedData.checkShowLeftTab(25) == 'D'){
+          <div class="w-100 h-100 disabled" data-bs-toggle="modal" data-bs-target="#accessWarningModel">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.54388 13.125C10.6505 13.125 13.1689 10.6066 13.1689 7.5C13.1689 4.3934 10.6505 1.875 7.54388 1.875C4.43728 1.875 1.91888 4.3934 1.91888 7.5C1.91888 10.6066 4.43728 13.125 7.54388 13.125Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.5439 18.125C15.6505 18.125 18.1689 15.6066 18.1689 12.5C18.1689 9.3934 15.6505 6.875 12.5439 6.875C9.43728 6.875 6.91888 9.3934 6.91888 12.5C6.91888 15.6066 9.43728 18.125 12.5439 18.125Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M9.6142 7.69531L12.3486 10.4297" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M7.7392 9.57031L10.4736 12.3047" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                Thematic
+              </p>
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of thematicIndexList;track data){
+                <li style="cursor:pointer">{{data['indexname']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }
+
+          }
+          @case ("prebuilt") {
+          @if(sharedData.checkShowLeftTab(4)=='A'){
+          <div class="w-100 h-100">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.9189 10L9.41888 10" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M6.91888 10L3.16888 10" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M16.9189 4.375L15.6689 4.375" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M13.1689 4.375L3.16888 4.375" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M13.1689 6.25L13.1689 2.5" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M16.9189 15.625L13.1689 15.625" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M10.6689 15.625L3.16888 15.625" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M10.6689 13.75L10.6689 17.5" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M6.91888 11.875L6.91888 8.125" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                Prebuilt
+              </p>
+              @if(prebuildIndList.length>0){
+              <svg (click)="prebuildIndClickMain();openPageLoad()" routerLinkActive="active" fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg" style="color: var(--prim-button-color);">
+                <path d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor" opacity="0.3"></path>
+                <rect fill="currentColor" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"></path>
+              </svg>
+              }
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of prebuildIndList;track data){
+                <li style="cursor:pointer" (click)="prebuildIndClick(data)">{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          } @else if(sharedData.checkShowLeftTab(4) == 'D'){
+          <div class="w-100 h-100 disabled" data-bs-toggle="modal" data-bs-target="#accessWarningModel">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.9189 10L9.41888 10" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6.91888 10L3.16888 10" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16.9189 4.375L15.6689 4.375" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M13.1689 4.375L3.16888 4.375" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M13.1689 6.25L13.1689 2.5" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16.9189 15.625L13.1689 15.625" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.6689 15.625L3.16888 15.625" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.6689 13.75L10.6689 17.5" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6.91888 11.875L6.91888 8.125" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                Prebuilt
+              </p>
+            </div>
+            <div class="gridster-btm">
+              <ul class="scrollbox">
+                @for(data of prebuildIndList;track data){
+                <li style="cursor:pointer">{{data['name']}}</li>
+                }
+              </ul>
+            </div>
+          </div>
+          }
+          }
+          @case ("strategies") {
+          @if(sharedData.checkShowLeftTab(6)=='A'){
+          <div class="w-100 h-100">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 10L17.5439 2.5" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M15.3486 4.69531C14.019 3.36168 12.2371 2.57582 10.3557 2.49328C8.47429 2.41073 6.63046 3.03752 5.18913 4.24957C3.74781 5.46163 2.81404 7.17062 2.57264 9.0383C2.33124 10.906 2.79981 12.7962 3.8856 14.3349C4.97139 15.8736 6.59527 16.9486 8.43583 17.3471C10.2764 17.7456 12.1995 17.4386 13.8245 16.4869C15.4495 15.5351 16.658 14.008 17.2108 12.2078C17.7636 10.4075 17.6204 8.46533 16.8095 6.76562" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M12.6923 7.35156C12.073 6.73395 11.2569 6.35279 10.3857 6.27431C9.51457 6.19583 8.64345 6.42497 7.92369 6.92194C7.20392 7.41892 6.68097 8.15231 6.44568 8.99474C6.21039 9.83717 6.27763 10.7354 6.63571 11.5334C6.99379 12.3314 7.6201 12.9788 8.40583 13.3631C9.19157 13.7474 10.0871 13.8443 10.9368 13.637C11.7866 13.4297 12.5369 12.9313 13.0574 12.2283C13.5779 11.5254 13.8357 10.6623 13.7861 9.78906" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                My Strategies
+              </p>
+              @if(recentData.length>0){
+              <svg routerLink="/myStrategies" (click)="matLoaderOn();trackEV('myStrategies')" fill="none" height="15" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg" style="color: var(--prim-button-color);">
+                <path d="M4.7 17.3V7.7C4.7 6.59543 5.59543 5.7 6.7 5.7H9.8C10.2694 5.7 10.65 5.31944 10.65 4.85C10.65 4.38056 10.2694 4 9.8 4H5C3.89543 4 3 4.89543 3 6V19C3 20.1046 3.89543 21 5 21H18C19.1046 21 20 20.1046 20 19V14.2C20 13.7306 19.6194 13.35 19.15 13.35C18.6806 13.35 18.3 13.7306 18.3 14.2V17.3C18.3 18.4046 17.4046 19.3 16.3 19.3H6.7C5.59543 19.3 4.7 18.4046 4.7 17.3Z" fill="currentColor" opacity="0.3"></path>
+                <rect fill="currentColor" height="2" rx="1" transform="rotate(135 21.9497 3.46448)" width="13" x="21.9497" y="3.46448"></rect>
+                <path d="M19.8284 4.97161L19.8284 9.93937C19.8284 10.5252 20.3033 11 20.8891 11C21.4749 11 21.9497 10.5252 21.9497 9.93937L21.9497 3.05029C21.9497 2.498 21.502 2.05028 20.9497 2.05028L14.0607 2.05027C13.4749 2.05027 13 2.52514 13 3.11094C13 3.69673 13.4749 4.17161 14.0607 4.17161L19.0284 4.17161C19.4702 4.17161 19.8284 4.52978 19.8284 4.97161Z" fill="currentColor"></path>
+              </svg>
+              }
+            </div>
+            <div class="gridster-btm scrollbox strategies-list">
+              <div class="strategies-list-group" [class.fullheight]="recentData.length == 0">
+                <div class="strategies-list-content" *ngFor="let item1 of recentData;">
+                  <div style="width:85%">
+                    <p><span class="eclipse_70" style="padding-right:0.25rem">{{item1.fullname}}</span>({{item1.shortname}})</p>
+                    <p style="font-size:0.65rem">{{item1.name}}</p>
+                  </div>
+                  <div style="width:15%"><a (click)="viewFactSheet(item1)">View</a></div>
+                </div>
+                <div class="no-txt" *ngIf="recentData.length ==0">No strategy has been saved at present!</div>
+              </div>
+            </div>
+          </div>
+          } @else if(sharedData.checkShowLeftTab(6) == 'D'){
+          <div class="w-100 h-100 disabled" data-bs-toggle="modal" data-bs-target="#accessWarningModel">
+            <div class="gridster-head d-flex justify-content-between align-items-center">
+              <p>
+                <svg class="dashIcon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0439 10L17.5439 2.5" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M15.3486 4.69531C14.019 3.36168 12.2371 2.57582 10.3557 2.49328C8.47429 2.41073 6.63046 3.03752 5.18913 4.24957C3.74781 5.46163 2.81404 7.17062 2.57264 9.0383C2.33124 10.906 2.79981 12.7962 3.8856 14.3349C4.97139 15.8736 6.59527 16.9486 8.43583 17.3471C10.2764 17.7456 12.1995 17.4386 13.8245 16.4869C15.4495 15.5351 16.658 14.008 17.2108 12.2078C17.7636 10.4075 17.6204 8.46533 16.8095 6.76562" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.6923 7.35156C12.073 6.73395 11.2569 6.35279 10.3857 6.27431C9.51457 6.19583 8.64345 6.42497 7.92369 6.92194C7.20392 7.41892 6.68097 8.15231 6.44568 8.99474C6.21039 9.83717 6.27763 10.7354 6.63571 11.5334C6.99379 12.3314 7.6201 12.9788 8.40583 13.3631C9.19157 13.7474 10.0871 13.8443 10.9368 13.637C11.7866 13.4297 12.5369 12.9313 13.0574 12.2283C13.5779 11.5254 13.8357 10.6623 13.7861 9.78906" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                My Strategies
+              </p>
+            </div>
+            <div class="gridster-btm strategies-list">
+              <div class="strategies-list-group" [class.fullheight]="recentData.length == 0">
+                <div class="strategies-list-content" *ngFor="let item1 of recentData;">
+                  <div style="width:85%">
+                    <p><span class="eclipse_70" style="padding-right:0.25rem">{{item1.fullname}}</span>({{item1.shortname}})</p>
+                    <p style="font-size:0.65rem">{{item1.name}}</p>
+                  </div>
+                  <!--<div><a (click)="viewFactSheet(item1)">View</a></div>-->
+
+                </div>
+                <div class="no-txt" *ngIf="recentData.length ==0">No strategy has been saved at present!</div>
+              </div>
+            </div>
+          </div>
+          }
+
+          }
+          }
+        </gridstack-item>
+      </gridstack>
+      }
+
+    </div>
+  </div>
+  }
+
+  <div class="center-l">
+    @defer (on timer(500ms)) {
+    <app-dashboard-centercircle [gridOption]="gridOptionsCheckbox"></app-dashboard-centercircle>
+    }
+
+  </div>
+</div>

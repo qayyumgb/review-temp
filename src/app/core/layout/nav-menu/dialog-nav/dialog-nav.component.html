@@ -1,0 +1,289 @@
+@if(dialogTitle == 'Select PPT Slides'){
+<div class="dialog-content">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      @if(!expandMore){
+      <span class="close-l material-icons" matTooltip="Expand" style="right: 3rem; font-size: 1.2rem; color: var(--iconColor);" (click)="expandMorePPT()">
+        open_in_full
+      </span>
+      }@else{
+      <span class="close-l material-icons" matTooltip="Collapse" style="right: 3rem; font-size: 1.2rem; color: var(--iconColor);" (click)="expandMorePPT()">
+        close_fullscreen
+      </span>
+      }
+      <div class="close-l" (click)="closeModal()" matTooltip="Close"><span class="material-icons">close</span></div>
+      <div class="content-top">
+        <p>
+          Select Your Presentation
+        </p>
+      </div>
+      <div class="content-btm pptSlidesModal align-items-start">
+        <div class="d-flex w-100">
+          <div class="ppt_list">
+            <ul>
+              @for (list of PPT_All_Data; track PPT_All_Data.id;let idx = $index) {
+              <li class="p-rel cp" (click)="getIndividualPPTData(list)" [class.active]="list.id == SelectedPPTData.id">
+                {{list.name}}
+                @if(list.defaultPresentation == 1){
+                <span class="material-icons">
+                  verified
+                </span>
+                }
+              </li>
+              }
+            </ul>
+          </div>
+          <div class="ppt_images">
+            <div class="outer_box p-rel">
+              <div class="mat__Div">
+                <mat-slide-toggle class="example-margin preLabel altBGSwitch" (change)="savePinnedStrategy($event)">List view</mat-slide-toggle>
+              </div>
+              <div class="list_images">
+                @for (slide of SlidesImagesList; track SlidesImagesList.slideImage;let idx = $index) {
+                <div class="slide" [class.fullWidth]="gridOptionsCheckbox">
+
+                  <img class="np" [src]="isLoadedPPTSlides ? slide.slideImage : '../../../../assets/images/dummy-pptSlide.png'" alt="">
+                  <p [class.grid]="!gridOptionsCheckbox"><!--<span class="material-icons">adjust</span>-->{{slide.slideName}}</p>
+                </div>
+                }
+              </div>
+              <div *ngIf="showSpinnerPPT_list" style="position: absolute; width: 100%; height: 100%; background: var(--border); z-index: 999; left: 0; top: 0;">
+                <mat-spinner class="reviewloader-spinner" style="top: 0px !important;"></mat-spinner>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="content-footer d-flex justify-content-end align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="setAsDefault()">Set as default</button>
+        <button type="button" class="mod-foot-btn-activeS" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+}@else{
+@if(dialogTitle == 'Preferences'){
+<div class="dialog-content">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <div class="content-top">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>
+      <div class="">
+        <div class="preference_wrap">
+          <div class="w-100 preference-left">
+            <ul class="list-unstyled">
+              <li (click)="selPrefer='General'" [class.selPer]="selPrefer == 'General'">General Settings</li>
+              <li (click)="selPrefer='Appearance'" [class.selPer]="selPrefer == 'Appearance'">Appearances</li>
+            </ul>
+          </div>
+          <div  class="w-100 preference-right">
+            @if(selPrefer == 'General'){
+            <div class="w-100">
+              @for(dt of sortListData; track dt.title){
+              <div class="mb1rem">
+                <div class="preference-title"><span>{{dt.title}}</span></div>
+                @if(dt.leftOP){
+                <div class="preference-sort-wrap">
+                  <span class="preference-list">Selection list</span> 
+                  <span class="preference-sort">Sort by</span>
+                   <span class="preference-left-text">{{dt.left}}
+                    <span class="preference-sort">({{dt.sortL}})</span>
+                   </span>
+                  
+                  </div>
+                }
+                @if(dt.rightOP){
+                <div class="preference-sort-wrap">
+                  <span class="preference-list">Components</span>
+                   <span class="preference-sort">Sort by</span> 
+                   <span class="preference-left-text">{{dt.right}}
+                    <span class="preference-sort">({{dt.sortR}})</span>
+                   </span>
+                  
+                  </div>
+                }
+              </div>
+              }
+              @if(watchSortListData.length > 0){
+              <div class="preference-title"><span>Watchlist</span></div>
+              }
+              @for(dt of watchSortListData; track dt.title){
+              <div class="mb0_5rem">
+                <div class="preference-sort-wrap mb0">
+                  <span class="preference-list">{{dt.title}}</span>
+                  <span class="preference-sort">Sort by</span>
+                  <span class="preference-left-text">{{dt.right}} 
+                     <span class="preference-sort">({{dt.sortR}})</span></span>
+                 
+                </div>
+              </div>
+              }
+            </div>
+  
+              }@else{
+              <div>
+                <div class="">
+                  <div class="w-100 mb2rem">
+                    <div class="label border-0" style="margin-top:0rem">
+                      <p class="preference-dynamic-font">Font-size: <span class="fs" style="font-size: 0.7rem;font-family: var(--ff-medium);">({{app_slider_value}}px)</span></p>
+                      <div class="select-modes right_port" id="navRange">
+                        <input type="range" id="customRange1" [(ngModel)]="app_slider_value" min="14" step="1" max="19" (input)="updateSlider($event,true)" style="width: 75%;">
+                      </div>
+
+                    </div>
+                    <p class="checknotes" [ngStyle]="{'font-size': fontSizeRem}">
+                      @if(responsiveFont){
+                      <span class="d-block" style="color: var(--warningColor);">Note:</span>
+                      ( Recommended font size for your screen is above 16px )
+
+                      }
+                      @else{
+                      <span class="d-block" style="color: var(--warningColor);">Note:</span>
+                      ( Recommended font size for your screen  is below 16px )
+                      }
+                    </p>
+                  </div>
+                  <p class=" preference-dynamic-font">
+                    My Palettes:</p>
+                  <div class="w-100  d-flex align-items-center">
+
+                    <div class="color_layout col--1" [class.active]="setLayoutColor == 'D'" (click)="selectLayoutColor('D')">
+                      <span class="material-icons">
+                        done
+                      </span>
+                    </div>
+                    <div class="color_layout col--2" [class.active]="setLayoutColor == 'B'" (click)="selectLayoutColor('B')">
+                      <span class="material-icons">
+                        done
+                      </span>
+                    </div>
+                    <div class="color_layout col--3" [class.active]="setLayoutColor == 'C'" (click)="selectLayoutColor('C')">
+                      <span class="material-icons">
+                        done
+                      </span>
+                    </div>
+                    <div class="color_layout col--4" [class.active]="setLayoutColor == 'A'" (click)="selectLayoutColor('A')">
+                      <span class="material-icons">
+                        done
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                </div>
+              }
+          </div>
+        </div>
+     
+          <!-- Buttons -->
+          @if(selPrefer == 'General'){
+            <div class="content-footer d-flex justify-content-end align-items-center">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-target="#sortResetModal" data-bs-toggle="modal" >Reset all to default</button>
+              <button type="button" class="mod-foot-btn-activeS" (click)="closeModal()">Cancel</button>
+            </div>
+          }
+          @else{
+            <div class="content-footer d-flex justify-content-end align-items-center">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="savePreference()">Save</button>
+              <button type="button" class="mod-foot-btn-activeS" (click)="closeModal()">Cancel</button>
+            </div>
+          }
+          <!-- Buttons -->
+        </div>
+    
+    </div>
+  </div>
+</div>
+}
+@else if(dialogTitle == 'Presentation'){
+<div class="dialog-content">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <div class="content-top">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>
+      <div class="content-btm">
+        <div class="label" *ngIf="sharedData.checkShowLeftTab(27)=='A'">
+          <div class="" style="padding: 0.5rem 1rem;">
+            <mat-slide-toggle [checked]="showPresentMode" class="example-margin preLabel" (change)="presentationMode($event)">Presentation Mode {{pSwitch}}</mat-slide-toggle>
+          </div>
+        </div>
+        <div class="label disabled" *ngIf="sharedData.checkShowLeftTab(27)=='D'">
+          <div class="" style="padding: 0.5rem 1rem;">
+            <mat-slide-toggle [checked]="showPresentMode" class="example-margin preLabel" disabled>Presentation Mode {{pSwitch}}</mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="content-footer d-flex justify-content-end align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="savePreference()">Save</button>
+        <button type="button" class="mod-foot-btn-activeS" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+@else{
+<div class="warningautoModel" tabindex="-1" role="dialog" aria-labelledby="existModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content dialog-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; padding: 1.5rem 2rem; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3 style="border-bottom: 1px dotted var(--border); padding-bottom: 1.2rem;">{{checkModeMsg(sharedData.checkMyAppMessage(0,2))}}</h3>
+            <!--<h3 style="border-bottom: 1px dotted var(--border); padding-bottom: 1.2rem;">Are you certain about switching to the Live mode?</h3>-->
+
+            <div class="foot-l">
+              <button *ngIf="Change_header_LD == 'live'" type="button" class="mod-foot-btn-activeP mr_p_5" (click)="closeModal();Change_header_Environment(dialogTitle);showLiveDemoToggle = false">Yes</button>
+              <button *ngIf="Change_header_LD != 'live'" type="button" class="mod-foot-btn-activeP mr_p_5" (click)="closeModal();Change_header_Environment(dialogTitle);showLiveDemoToggle = false">Yes</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="closeModal();">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}
+}
+<div class="modal fade warningautoModel" id="sortResetModal" tabindex="-1" role="dialog" aria-labelledby="existModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;z-index: 999999;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" transform="scale(1.5)" viewBox="0 0 24 24" width="24px" fill="var(--warningColor)">
+                  <g>
+                    <path d="M0,0h24v24H0V0z" fill="none" />
+                    <path d="M11,7h2v2h-2V7z M11,11h2v6h-2V11z M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20 c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z" />
+                  </g>
+                </svg>
+              </span>
+            </p>
+            <h3>Reset default sort</h3>
+            <p style="font-size: 0.9rem;">Are you sure you want to clear all sorting? This action cannot be undone.</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="sharedData.resetDefalutSort();closeModal()">Confirm</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

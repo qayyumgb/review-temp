@@ -1,0 +1,102 @@
+<!--<div style=" height: 100%; position: absolute; width: 100%; background: var(--topNavbar); z-index: 99999;left:0;top:0;" *ngIf="matloader_DS">
+  <mat-spinner class="reviewloader-spinner"></mat-spinner>
+</div>-->
+
+<!-- Popup -->
+<!--@if(loadDraggedData.length>0){-->
+
+<div id="directTrade">
+  <div class="content-btm p2rem" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+    <p class="title_head">Direct Trade</p>
+    <div class="close-l-popup" (click)="close()"><span class="material-icons">close</span></div>
+    <div class="d-flex col-md-12 align-items-end upload_sec justify-content-between pr1rem">
+      <div class="d-flex align-items-center w-100">
+        <p>Account:  <b>{{currentAccount.accountVan}}</b></p>
+
+        <div class="d-flex align-items-center">
+          <button class="dialog_btn_S ml2rem mr0_5rem d-flex align-items-center" (click)="openDirectUpload()">
+            <span class="material-icons">
+              file_upload
+            </span>
+            Upload here
+          </button>
+          <button class="dialog_btn_P mr0_5rem">Save</button>
+          <button class="dialog_btn_P">Trade Now</button>
+        </div>
+      </div>
+      <p class="d-flex align-items-center" style="font-size:0.8rem">Count:&nbsp; <b>{{dataSource.data.length}}</b></p>
+    </div>
+    <div class="row d-flex mt1rem" id="account_Exclusions">
+      <div class="col-md-12">
+        <div class="example-container mat-elevation-z8">
+
+          <mat-table #table [dataSource]="dataSource" class="common_mat_table ">
+
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+                <span class="material-icons delete_ico" (click)="removeSelectedRows()">
+                  delete_outline
+                </span>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ticker">
+              <mat-header-cell *matHeaderCellDef> Ticker </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.ticker}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef style="justify-content: flex-start;"> Action </mat-header-cell>
+              <mat-cell *matCellDef="let element" style="justify-content: flex-start;"> {{element.action}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"
+                     (click)="selection.toggle(row)">
+            </mat-row>
+          </mat-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--}@else{-->
+<!--<div id="directTrade">
+  <div class="content-btm pt4rem p1rem" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+
+    <div class="d-flex col-md-12 align-items-end upload_sec_first justify-content-start pr1rem">
+      <div class="section">
+        <span class="material-icons" style="font-size: 2.5rem;color: var(--prim-button-color);">
+          upload_file
+        </span>
+        <p class="title_head">Direct Trade</p>
+        <p style="font-size:0.8rem">Upload documents you want to trade using below customize button.</p>
+        <p>Account:  <b>NAADEV0001</b></p>
+        <button class="dialog_btn_S d-flex align-items-center" (click)="openDirectUpload()">
+          <span class="material-icons">
+            file_upload
+          </span>
+          Customize here
+        </button>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!--}-->
+
+

@@ -1,0 +1,16 @@
+<div class="dialog-content">
+
+    <div class="warningautoModel">
+        <div class="content-btm no_border">
+            <p style="text-align: center;">
+                <span  class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;"> error </span>
+              </p>
+              <h3>Unsaved changes</h3>
+              <p style="font-size: 0.9rem;">    {{dialogTitle}}</p>
+              <div class="foot-l">
+                <button type="button" class="btn_primary_xs dialog_btn_P mr_p_5" (click)="confirm()">Yes</button>
+                <button type="button" class="btn_primary_xs dialog_btn_S" (click)="closeModal()">No</button>
+              </div>
+        </div>
+    </div>
+  </div>

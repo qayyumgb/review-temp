@@ -1,0 +1,234 @@
+@use '../../../core/layout/styles/mixins' as *;
+#myModal {
+  background: #00000080 !important;
+
+  .modal-body {
+    padding: 0;
+    background: var(--modalcontentBody);
+    border-radius: 0 0 0.4rem 0.4rem;
+  }
+
+  .custom_radio input[type="radio"] {
+    display: none;
+  }
+
+  .custom_radio input[type="radio"] + label {
+    position: relative;
+    display: inline-block;
+    padding-left: 1.2rem;
+    cursor: pointer;
+    line-height: 1em;
+    font-family: var(--ff-light);
+    font-size: 0.7rem;
+    color: var(--leftSideText);
+    width: 134px;
+    text-align: left;
+    margin-bottom: 0.5rem;
+
+    span {
+      display: block;
+      text-align: left !important;
+      width: auto !important;
+      font-size: 0.6rem !important;
+      margin-top: 0.2rem;
+    }
+
+    &.disabled {
+      cursor: not-allowed !important;
+    }
+  }
+
+  .custom_radio input[type="radio"] + label:before,
+  .custom_radio input[type="radio"] + label:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.8rem;
+    height: 0.8rem;
+    text-align: center;
+    color: white;
+    font-family: Times;
+    border-radius: 50%;
+  }
+
+  .custom_radio input[type="radio"] + label:before {
+    box-shadow: inset 0 0 0 1px var(--prim-button-color-text);
+  }
+
+  .custom_radio input[type="radio"]:checked + label:before {
+    box-shadow: 0px 0px 0px 1px var(--prim-button-color);
+    background-color: var(--prim-button-color);
+    border: 3px solid #1e1e2d;
+  }
+}
+
+#myModal .modal-header {
+  background: var(--modalcontentHeader);
+  width: 100%;
+  text-align: center;
+  @include flex-align-center;
+  justify-content: space-between;
+  padding: 0.7rem 0.9rem 0.6rem;
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+  position: relative;
+  /* border: 0; */
+  border-bottom: 1px solid var(--border);
+}
+  #myModal .modal-header button {
+    opacity: 1;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    span{
+      font-size: 1.2rem;
+      color: var(--closeIcon);
+    }
+  }
+#myModal .modal-header h4 {
+  margin: 0 !important;
+  font-size: .9rem;
+  font-family: var(--ff-medium);
+  color: var(--leftSideText);
+}
+  #myModal .modal-body .hifix {
+    height: 50vh !important;
+  }
+  #myModal .bodyOuter {
+    padding: 0.5rem 0.9rem;
+    background: var(--modalcontentBody);
+    border-top: 1px solid var(--border);
+    height: 73vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+#myModal .bodyOuter label {
+  @include flex-align-center;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 100;
+  font-family: var(--ff-regular);
+  font-size: 0.7rem;
+  line-height: 1.8;
+  color: var(--leftSideText);
+  span{
+    color: var(--errorColor);
+  }
+}
+  
+#myModal .bodyOuter .radio-inline {
+    line-height: 0;
+    margin-bottom: 0.8rem;
+  }
+  #myModal .bodyOuter .radio-inline input {
+    height: auto;
+  }
+  #myModal .bodyOuter .form-inline {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: inherit;
+  }
+  #myModal .bodyOuter .form-inline .form-group {
+    display: block;
+  }
+  #myModal .bodyOuter .form-inline .form-group label {
+    display: block;
+  }
+  #myModal .bodyOuter .form-group input.form-control, #myModal .bodyOuter .form-group select.form-control {
+    color: var(--leftSideText) !important;
+    background: var(--topNavbar) !important;
+    border: 1px solid var(--border);
+    height: 2rem;
+    font-size: 0.8rem !important;
+    border-radius: 0.275rem;
+  }
+  #myModal .bodyOuter .form-group input:focus,
+#myModal .bodyOuter .form-group select {
+  box-shadow: none;
+}
+#myModal .bodyOuter .form-group {
+  /* margin-bottom: 0.5rem; */
+  position: relative;
+}
+#myModal .form_foot {
+  @include flex-align-center;
+    justify-content: space-between;
+    background: var(--modalcontentBody);
+    padding: 0.5rem 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+  #myModal .modal-content {
+    border-radius: 8px 8px 6px 6px;
+    background: var(--modalBodyColor);
+  }
+  .hSec1 #myModal .close img {
+    height: 0.9rem;
+    width: auto;
+    margin-right: 1rem;
+  }
+  .formModal input:-webkit-autofill,
+.formModal input:-webkit-autofill:hover,
+.formModal input:-webkit-autofill:focus,
+.formModal input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--btn-bg-alt) inset !important;
+  -webkit-text-fill-color: var(--leftSideText) !important;
+}
+.formModal select:-webkit-autofill,
+.formModal select:-webkit-autofill:hover,
+.formModal select:-webkit-autofill:focus,
+.formModal select:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--btn-bg-alt) inset !important;
+  -webkit-text-fill-color: var(--leftSideText) !important;
+}
+label.error {
+  color: #ff3333 !important;
+  font-size: 0.7rem;
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+  white-space: nowrap;
+}
+.logIn-container {
+  padding: 0;
+  width: 100%;
+}
+a.formLink {
+  font-size: 0.8rem;
+  color: #1676F3;
+  font-family: var(--ff-medium);
+  margin: 0 !important;
+}
+.formSuccess {
+  text-align: center;
+  padding: 2rem;
+  margin: 0 auto;
+}
+.formSuccess .successMsg svg.checkmark {
+  display: block;
+  margin: 0 auto;
+}
+.formSuccess span.thankyouTitle {
+  font-size: .9rem;
+  font-family: var(--ff-medium);
+  color: var(--modalcontenttext);
+  margin: 0.5rem 0;
+  display: block;
+}
+.formSuccess p {
+  color: var(--modalcontenttext);
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+}
+.modalSubmit {
+  background: var(--prim-button-color-text);
+  font-size: .8rem;
+  font-family: var(--ff-regular);
+  padding: 0.5rem 1rem;
+  border: 0 solid transparent !important;
+  margin-right: 0.5rem;
+  line-height: 1;
+  width: auto;
+  color: var(--link-theme-color-text);
+}

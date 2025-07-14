@@ -1,0 +1,45 @@
+<div class="bcum-list-l-n d-flex align-items-center w-100" [class.hideLeftAnimate] ="sharedData._getSelectedLeftSide != 'Y'">
+  <div class="b-outer d-flex align-items-center">
+    <div class="d-flex align-items-center">
+      @if(showBackBtn){
+      <div class="b-drop-n1 d-flex" (click)="onPreviousGrp()">
+        <div class="go-back-ico"><span class="material-icons">arrow_back_ios</span></div>
+      </div>
+      <div class="clkdTxtView d-flex">
+        <span class="b-text-n-d" *ngIf="selectedPath.length<2">
+          {{selectedPath[selectedPath.length-1].name}}
+        </span>
+        <span class="d-flex align-items-center">
+          <span class="b-text-n-d" *ngIf="selectedPath.length>= 2" [style.fontSize]="checkFontLength()">
+            {{selectedPath[selectedPath.length-1].name}}
+            <!--<span class="bcumToolTip">{{selectedPath[selectedPath.length-1].name}}</span>-->
+          </span>
+          @if(selectedPath[selectedPath.length-1].ticker != undefined && selectedPath[selectedPath.length-1].ticker != null){
+          <span class="b-text-n-d"> ({{selectedPath[selectedPath.length-1].ticker}})</span>
+          }
+        </span>
+        <span class="d-flex align-items-center">
+          <span class="material-icons go-home-ico" (click)="gotoHome()">home</span>
+          <span class="b-text-n-ico" (click)="gotoHome()" style="color: var(--linkColor); padding-left: 0.1rem;">ETFs</span>
+          <span class="b-text-n-ico">
+            @for (bcrumb of selectedPath |firstAndLast; track bcrumb;let index = $index) {
+            <span class="d-flex align-items-center hideB">
+              <span class="material-icons __horiz" *ngIf="selectedPath.length>0">navigate_next</span>
+              <span class="b__list">{{bcrumb.name}}</span>
+              @if(bcrumb.indexName != null && bcrumb.indexName != undefined){
+              <span class="b__list" style="padding-left:0.25rem">({{bcrumb.indexName}})</span>
+              }
+            </span>
+            }
+          </span>
+        </span>
+</div>
+      }
+      @else{
+      <div class="clkdTxtView d-flex pl2rem">
+        <span class="b-text-n nw">ETFs</span>
+      </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+/*** Modal Button ***/
+@use '../styles/fonts' as *;
+@use '../styles/mixins' as *;
+.dialog_btn_P {
+  @include button(var(--defButtonBgColor), var(--leftSideText-B), $font-size_xss);
+
+  &:disabled {
+    @include buttonDisabled(var(--linkColor), var(--headFontColor));
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &.small {
+    font-size: 0.65rem !important;
+  }
+
+  white-space: nowrap;
+}
+.dialog_btn_outline{
+  @include button_outline(var(--linkColor), var(--linkColor), $font-size_xss);
+  &:focus-visible{
+    outline: none;
+  }
+  &.small {
+    font-size: 0.65rem !important;
+  }
+  &.active{
+    @include button_active(var(--linkColor), var(--leftSideText-B),$font-size_xss)
+  }
+}
+.dialog_btn_S {
+  @include button(var(--cancelButtonBg), var(--btnTextColorLight), $font-size_xss);
+  &:focus-visible{
+    outline: none;
+  }
+  &.small {
+    font-size: 0.65rem !important;
+  }
+}
+.btn_gp {
+  @include button(var(--defButtonBgColor), var(--leftSideText-B), $font-size_xs);
+  &:disabled {
+    @include buttonDisabled(var(--linkColor), var(--headFontColor));
+  }
+  &:focus-visible{
+    outline: none;
+  }
+}
+.btn_g_outline {
+  @include button__theme(transparant, var(--leftSideText-B), $font-size_xs,0.5rem 1rem);
+  &:disabled {
+    @include buttonDisabled(var(--linkColor), var(--headFontColor));
+  }
+  &:focus-visible{
+    outline: none;
+  }
+}
+.btn_gs {
+  @include button(var(--cancelButtonBg), var(--btnTextColorLight), $font-size_xs);
+  &:focus-visible{
+    outline: none;
+  }
+}
+.mod-foot-btn-activeP {
+  @include button(var(--defButtonBgColor), var(--leftSideText-B), 0.8rem);
+  padding: 0.5rem 1rem;
+  @include reset-button;
+
+  &:hover {
+    @include button-hover-opacity;
+  }
+
+  &.small {
+    font-size: 0.65rem !important;
+  }
+
+  &:disabled {
+    @include buttonDisabled(var(--defButtonBgColor), var(--leftSideText-B));
+  }
+}
+.mod-foot-btn-activeS {
+  @include button(var(--cancelButtonBg), var(--paraFontColor), 0.8rem);
+  padding:0.5rem 1rem;
+  @include reset-button;
+
+  &:hover {
+    @include button-hover-opacity;
+  }
+
+  &.small {
+    font-size: 0.65rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+
+  &:disabled {
+    @include buttonDisabled(var(--cancelButtonBg), var(--paraFontColor));
+  }
+}
+.mod-foot-btn-activeError {
+  @include button(var(--errorColor), var(--primary-logo), 0.8rem);
+  padding: 0.5rem 1rem;
+  @include reset-button;
+
+  &:hover {
+    @include button-hover-opacity;
+  }
+
+  &.small {
+    font-size: 0.65rem !important;
+  }
+
+  &:disabled {
+    @include buttonDisabled(var(--defButtonBgColor), var(--leftSideText-B));
+  }
+}
+// .btn--theme--default {
+//   background: var(--prim-button-color) !important;
+//   color: #fff !important;
+//   font-size: 0.75rem;
+//   padding: 0.3rem 1rem;
+//   border: 0;
+//   font-family: "Poppins-regular" !important;
+//   border-radius: 0.4rem;
+//   text-align: center;
+//   opacity: 1;
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   &:hover {
+//     background-color: var(--prim-button-color) !important;
+//     color: #fff !important;
+//     opacity: 0.85;
+//   }
+// }

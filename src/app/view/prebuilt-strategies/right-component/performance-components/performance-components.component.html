@@ -1,0 +1,608 @@
+<div class="buildYourIndex__sec__rightG prebuild__Comp__rightG">
+  <div>
+    <div class="icon__select__top mb0_5rem" *ngIf="showIndexPer">
+      @if(sharedData.checkMenuPer(4,102) == 'Y' && !checkDisableIcon()){
+      <div class="__selectIco select__accounts pb0_5rem pt0_5rem" (click)="openConst()">
+        <span class="material-icons-outlined">stacked_line_chart</span>
+        <p>Index Construction</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(4,102) == 'D' || checkDisableIcon()){
+      <div class="__selectIco select__accounts pb0_5rem pt0_5rem disableMenu">
+        <span class="material-icons-outlined">stacked_line_chart</span>
+        <p>Index Construction</p>
+      </div>
+      }
+    </div>
+    <div class="icon__select">
+      <!--- Performance Permission --->
+      @if(sharedData.checkMenuPer(4,104) == 'Y' && !checkDisableIcon()){
+      <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'performance'" (mouseenter)="showDefault_select_hover('performance');sharedData.openRightSideGrid();" (click)="toggleIconSelect('performance');eventTrack('performance')">
+        <span class="material-icons-outlined">
+          query_stats
+        </span>
+        <p>Performance</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(4,104) == 'D' || checkDisableIcon()){
+      <div class="__selectIco select__accounts disableMenu">
+        <span class="material-icons-outlined">
+          query_stats
+        </span>
+        <p>Performance</p>
+      </div>
+      }
+      <!--- Performance Permission --->
+      <!--- Description Permission --->
+      @if(sharedData.checkMenuPer(4,101) == 'Y'){
+      <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'description'" (mouseenter)="showDefault_select_hover('description');sharedData.openRightSideGrid();" (click)="toggleIconSelect('description'); eventTrack('description')">
+        <span class="material-icons-outlined">description</span>
+        <p>Description</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(4,101) == 'D'){
+      <div class="__selectIco select__accounts disableMenu">
+        <span class="material-icons-outlined">description</span>
+        <p>Description</p>
+      </div>
+      }
+      <!--- Description Permission --->
+      <!--- Components Permission --->
+      @if(sharedData.checkMenuPer(4,103) == 'Y'){
+      <div class="__selectIco select__steps" [class.active]="showDefault_select == 'company'" (mouseenter)="showDefault_select_hover('company');sharedData.openRightSideGrid();" (click)="toggleIconSelect('company');componentClick();eventTrack('company')">
+        <span class="material-icons-outlined">
+          attach_file
+        </span>
+        <p>Components</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(4,103) == 'D'){
+      <div class="__selectIco select__steps disableMenu">
+        <span class="material-icons-outlined">
+          attach_file
+        </span>
+        <p>Components</p>
+      </div>
+      }
+      <!--- Components Permission --->
+      <!--- Statistics Permission --->
+      @if(sharedData.checkMenuPer(4,105) == 'Y' && !checkDisableIcon()){
+      <div *ngIf="showIndexPer" class="__selectIco select__accounts" [class.active]="showDefault_select == 'statistics'" (mouseenter)="showDefault_select_hover('statistics');sharedData.openRightSideGrid();" (click)="toggleIconSelect('statistics'); eventTrack('statistics')">
+        <span class="material-icons-outlined">analytics</span>
+        <p>Statistics</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(4,105) == 'D' || checkDisableIcon()){
+      <div *ngIf="showIndexPer" class="__selectIco select__accounts disableMenu">
+        <span class="material-icons-outlined">analytics</span>
+        <p>Statistics</p>
+      </div>
+      }
+      <!--- Statistics Permission --->
+      <!--- Quick Facts --->
+      @if(sharedData.checkMenuPer(4,105) == 'Y' && !checkDisableIcon()){
+      <div *ngIf="showIndexPer" class="__selectIco select__accounts" [class.active]="showDefault_select == 'quickFacts'" (mouseenter)="showDefault_select_hover('quickFacts');sharedData.openRightSideGrid();"  (click)="toggleIconSelect('quickFacts'); eventTrack('quickFacts')">
+        <span class="material-icons-outlined">fact_check</span>
+        <p>Quick Facts</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(4,105) == 'D' || checkDisableIcon()){
+      <div *ngIf="showIndexPer" class="__selectIco select__accounts disableMenu">
+        <span class="material-icons-outlined">fact_check</span>
+        <p>Quick Facts</p>
+      </div>
+      }
+      <!--- Quick Facts --->
+      <!--- Sector Weights Permission --->
+      @if(sharedData.checkMenuPer(4,106) == 'Y' && !checkDisableIcon()){
+      <div *ngIf="showIndexPer" class="__selectIco select__steps" [class.active]="showDefault_select == 'sectorWeights'" (mouseenter)="showDefault_select_hover('sectorWeights');sharedData.openRightSideGrid();" (click)="toggleIconSelect('sectorWeights'); eventTrack('sectorWeights')">
+        <span class="material-icons-outlined">scale</span>
+        <p>Sector Weights</p>
+      </div>
+      }@else if(sharedData.checkMenuPer(4,106) == 'D' || checkDisableIcon()){
+      <div *ngIf="showIndexPer" class="__selectIco select__steps disableMenu">
+        <span class="material-icons-outlined">scale</span>
+        <p>Sector Weights</p>
+      </div>
+      }
+      <!--- Sector Weights Permission --->
+    </div>
+  </div>
+  <div class="rightSideDefGrid" style="min-height:50%" [class.showRightAnimate]="sharedData._getSelectedRightSide  != 'N'">
+    <!--@if(showDefault_select != ''){-->
+    <div class="icon__details">
+      <div class="select__steps__details desc__sec pl0_5rem" [style.display]="showDefault_select == 'description'?'block':'none'">
+        <span class="material-icons-outlined close__card pin__bar__comp p-abs" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components')">
+          push_pin
+        </span>
+        <div>
+          <h4 class="pb1rem">Description</h4>
+        </div>
+        <p>{{indexDescription}}</p>
+      </div>
+      <div class="select__steps__details prebuil_perf__sec pl0_5rem sector__weights" [style.display]="showDefault_select == 'sectorWeights'?'block':'none'">
+        <span class="material-icons-outlined close__card pin__bar__comp p-abs" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components')">
+          push_pin
+        </span>
+        <div class="mb0_5rem">
+          <h4 class="mb1 mr-0">Sector Weights & <br> Top Holdings</h4>
+        </div>
+        <div class="commonScrollBox scrollbox mt1rem">
+          <div class="tab__head  d-flex justify-content-between align-items-center">
+            <div class="tab_Cell" [style.width]="showDefault_select == 'sectorWeights' ?'70%':'30%'">Sector</div>
+            <div class="tab_Cell" [style.width]="showDefault_select != 'sectorWeights' ?'70%':'30%'">Weight</div>
+          </div>
+          @for (data of SectorBreakDownData; track data) {
+          <div class="tab__body perform_borbtm d-flex justify-content-between align-items-center">
+            <div class="tab_Cell" *ngIf="sharedData.nullCheck(data, 'name', true).length <= 30" [style.width]="showDefault_select == 'sectorWeights' ?'70%':'30%'">{{data['name'] | nullDashPipe:''}}</div>
+            <div class="tab_Cell" *ngIf="sharedData.nullCheck(data, 'name', true).length > 30" [style.width]="showDefault_select == 'sectorWeights' ?'70%':'30%'" [matTooltip]="data['name']">{{data['name'] | nullDashPipe:''}}</div>
+            <div class="tab_Cell high__color" [style.width]="showDefault_select != 'sectorWeights' ?'70%':'30%'">{{data['weight'] | nullDashPipe:''}}</div>
+          </div>
+          }
+          <p class="perform__RTN text-right d-block mt0_5rem mb0">As of {{asOfDate}}</p>
+          <div class="mt1rem tab__head mt0_5rem d-flex justify-content-between align-items-center">
+            <div class="tab_Cell" [style.width]="showDefault_select != 'sectorWeights' ?'70%':'30%'">Company</div>
+            <div class="tab_Cell" [style.width]="showDefault_select != 'sectorWeights' ?'70%':'30%'">Weight</div>
+          </div>
+          @for (data of Top10HoldingData; track data) {
+          <div class="tab__body perform_borbtm d-flex justify-content-between align-items-center">
+            <div class="tab_Cell" *ngIf="sharedData.nullCheck(data, 'compname', true).length <= 25" [style.width]="showDefault_select == 'sectorWeights' ?'70%':'30%'">{{data['compname'] | nullDashPipe:''}}</div>
+            <div class="tab_Cell" *ngIf="sharedData.nullCheck(data, 'compname', true).length > 25" [style.width]="showDefault_select == 'sectorWeights' ?'70%':'30%'" [matTooltip]="data['compname']" [matTooltipPosition]="'above'">{{data['compname'] | nullDashPipe:''}}</div>
+            <div class="tab_Cell high__color" [style.width]="showDefault_select != 'sectorWeights' ?'70%':'30%'">{{data['indexWeight'] | weightFormat:'per'}}</div>
+          </div>
+          }
+          <p class="perform__RTN text-right d-block mt0_5rem">As of {{asOfDate}}</p>
+        </div>
+      </div>
+      <div class="select__steps__details  pl0_5rem prebuild_stat__sec" [style.display]="showDefault_select == 'statistics' ?'block':'none'">
+        <span class="material-icons-outlined close__card pin__bar__comp p-abs" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components')">
+          push_pin
+        </span>
+        <div class="mb0_5rem">
+          <h4 class="mb1">Statistics & Characteristics</h4>
+        </div>
+        <div class="scrollbox commonScrollBox">
+          <ng-container *ngIf="fsIndexPerformance.length>0">
+            <div class="tab__head mt0_5rem d-flex justify-content-end align-items-center">
+              <div class="tab_Cell">&nbsp;</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">First Value Date</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['firstValueDt']| nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center" *ngIf="selIndexSector.length>0">
+              <div class="">Primary Capitalization</div>
+              <div class=" high__color">{{selIndexSector[0]['primaryCapitalization']| nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center" *ngIf="selIndexSector.length>0">
+              <div class="">Geographic Focus</div>
+              <div class=" high__color">{{selIndexSector[0]['geographicfocus']| nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Current # of Holdings</div>
+              <div class=" high__color">{{sortedDirectIndexGridData.length}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center" *ngIf="selIndexSector.length>0">
+              <div class="">Benchmark</div>
+              <div class=" high__color">{{selIndexSector[0]['benchMark']| nullDashPipe:''}}</div>
+            </div>
+            @if(!showFixedIncome){
+            @if(!showFamilyIndex){
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Batting Average</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['battingAvg'] | numFormatWithDash:'per'}}</div>
+            </div>
+            }
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Standard Deviation</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['stdDeviation'] | numFormatWithDash:'per'}}</div>
+            </div>
+            }
+            @if(sharedData.nullCheck(fsIndexPerformance[0], 'divYield', false)){
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Dividend Yield</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['divYield'] | weightFormat:''}}</div>
+            </div>
+            }
+            @if(showStaData){
+            <div class="tab__head mt0_5rem d-flex justify-content-between align-items-center">
+              <div class="tab_Cell">&nbsp;</div>
+            </div>
+            @if(showFixedIncome){
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Average Effective Duration</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['avgEffDuration'] | numFormatWithDash:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Yield to Maturity</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['yieldtoMaturity'] | weightFormat:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Yield to Worst</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['yieldtoWorst'] | weightFormat:''}}</div>
+            </div>
+            }@else{
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Annualized Alpha</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['alpha'] | numFormatWithDash:'per'}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Information Ratio</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['infoRatio'] | numFormatWithDash:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Tracking Error</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['trackingError'] | numFormatWithDash:'per'}}</div>
+            </div>
+            }
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Sharpe Ratio</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['sharpeRatio'] | numFormatWithDash:''}}</div>
+            </div>
+            @if(showFixedIncome){
+            }@else{
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Beta</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['beta'] | numFormatWithDash:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">R Squared</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['rSquared'] | numFormatWithDash:'' }}</div>
+            </div>
+            }
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Upside Capture</div>
+              <div class=" high__color">{{fsIndexPerformance[0]['upCapture'] | numFormatWithDash:'per'}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between align-items-center">
+              <div class="">Downside Capture</div>
+              <div class="high__color">{{fsIndexPerformance[0]['downCapture'] | numFormatWithDash:'per'}}</div>
+            </div>
+            }
+            <div class="vs_text" *ngIf="selIndexSector.length>0">
+              @if(indexperformanceData.length==1){
+              <span>{{formName(selIndexSector[0]['indexName'])}}</span>
+              }@else{
+              <span>{{formName(selIndexSector[0]['indexName'])}}</span> vs. <span>{{selIndexSector[0]['benchMark'] | nullDashPipe:''}}</span>
+              }
+            </div>
+            <!--<p class="perform__RTN text-right d-block mt0_5rem">As of: {{fsiAsofDate}}</p>-->
+            <p class="perform__RTN text-right d-block mt0_5rem w66">{{asOfDateRange}}</p>
+          </ng-container>
+        </div>
+      </div>
+      <div class="select__steps__details  pl0_5rem prebuild_stat__sec" [style.display]="showDefault_select == 'quickFacts' ?'block':'none'">
+        <span class="material-icons-outlined close__card pin__bar__comp p-abs" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components')">
+          push_pin
+        </span>
+        <div class="mb1rem">
+          <h4 class="mb1">Quick Facts</h4>
+        </div>
+        <div class="scrollbox commonScrollBox">
+          <ng-container *ngIf="selIndexSector.length>0">
+            <div class="tab__head d-flex justify-content-between">
+              <div class="tab_Cell">&nbsp;</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between">
+              <div class="w-40">Ticker</div>
+              <div class=" text-right high__color" style="width:55%">{{selIndexSector[0]['indexCode'] | nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between">
+              <div class="w-40">Weighting</div>
+              <div class=" text-right high__color" style="width:55%">{{replacehf(selIndexSector[0]['weighting'])}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between ">
+              <div class="w-40">Rebalance</div>
+              <div class=" text-right high__color" style="width:55%">{{selIndexSector[0]['reviewfrequency'] | nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between ">
+              <div class="w-40">Inception Value/Inception Date</div>
+              <div class=" text-right high__color" style="width:55%">{{selIndexSector[0]['baseValueDt'] | nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between">
+              <div class="w-40">Calculation Frequency</div>
+              <div class=" text-right high__color" style="width:55%">{{selIndexSector[0]['calcFreq'] | nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between ">
+              <div class="w-40">Dividend Treatment</div>
+              <div class=" text-right high__color" style="width:55%">{{selIndexSector[0]['dividendtreatment'] | nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between">
+              <div class="w-40">Estimated <span class="nw">Back-Tested</span> History Availability</div>
+              <div class="text-right high__color">{{selIndexSector[0]['backTestAvail'] | nullDashPipe:''}}</div>
+            </div>
+            <div class="tab__body d-flex justify-content-between">
+              <div class="w-40">Live Date</div>
+              <div class="text-right high__color" style="width:55%">{{sharedData.formatDates(checkDOI(selIndexSector[0]))}}</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      @if(sharedData.checkMenuPer(4,103) == 'Y'){
+      <div class="select__steps__details" [style.display]="showDefault_select == 'company'?'block':'none'">
+       
+        <div class="d-flex align-items-center comp__head justify-content-between pb1rem pl0_5rem pr0_5rem">
+          @if(sortedDirectIndexGridData.length>0){
+          <h4 class="d-flex align-items-center">
+            Components
+            <span class="count d-flex">{{sortedDirectIndexGridData.length}}</span>
+          </h4>
+          }@else{
+          <h4 class="d-flex align-items-center">Components</h4>
+          }
+          <div class="no_line_height d-flex align-items-center">
+            <span class="material-icons mr0rem" (click)="openSearch()">
+              search
+            </span>
+            <div class="dropdown">
+              <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                swap_vert
+              </span>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <!-- <div class="component sortbyComp" style="margin-top: 0.5rem; margin-bottom: 0; ">
+        <div class="dropSpace">
+          <span style="font-size: 0.7rem;color: #fff;margin-bottom: 0.2rem;display: block;">Sort by:</span>
+          <div class="component sortbyComp">
+            <span class="title">Ascending</span>
+            <div class="mat__toggle">
+              <mat-slide-toggle (change)="onToggleAscending($event)" [checked]="ascending_val" class="example-margin preLabel"></mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div> -->
+                <ul>
+                  <li class="d-flex">
+                    <a class="dropdown-item sort_btn">
+                      Sort by
+                      <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('R','prebuild')"><span class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem;"> refresh</span> Reset</button>
+                    </a>
+
+                  </li>
+                  <li *ngFor="let item of FilterList">
+                    <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                    <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                      @if(ascending_val){
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                      </svg>
+                      }
+                      @else{
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" />
+                      </svg>
+                      }
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <span class="material-icons-outlined close__card pin__bar__comp" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('components')">
+              push_pin
+            </span>
+          </div>
+        </div>
+        <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+          <div class="d-flex align-items-center">
+            <span class="material-icons disable">
+              search
+            </span>
+            <input appRemoveSpecialCharacters (keydown)="onkeysDown($event)" minlength="1" maxlength="50" class="search-control" type="text" placeholder="search" [(ngModel)]="searchText" (input)="filterItems()" #searchBox>
+            <span class="material-icons" (click)="searchClose()">
+              close
+            </span>
+          </div>
+        </div>
+        <div class="scrollbox outerScroll__Div componentScroll">
+          <div class="construction h-100">
+            @if(sortedDirectIndexGridData.length>0){
+            <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+              <ul>
+                <li *cdkVirtualFor="let data of sortedDirectIndexGridData;">
+                  <div class="list__sec pr0" (click)="clickComp(data)" [class.active]="data.stockkey == highlightList">
+                    <div class="d__border" [style.border-color]="cl(data.scores*100)">
+                      <p class="ind__name">{{data['compname'] | nullDashPipe:''}}</p>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                        <span class="price text-right nw w-30" style="color: var(--paraFontColorAlt)">{{data['price'] | priceFormat  :',.1f':data['currency'] }}</span>
+                        <span class="price text-right">{{data['indexWeight'] | wtFormatPerDig }}</span>
+                        <span class="price text-right ">
+                          <span class="med-e" [style.background-color]="cl(data.scores*100)" [style.color]="(data.scores*100>=0 && data.scores*100<=35) || (data.scores*100>=60)?'#fff':'#000'">{{sharedData.formatGScore(data.scores*100)}}</span>
+                        </span>
+                        <div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+            </cdk-virtual-scroll-viewport>
+            }@else{
+            @if(!sharedData._showCenterLoader){
+            <div class="no_data" style="display:flex">No results found. Revise your search.</div>
+            }@else{
+            <div class="no_data" style="display:flex">Loading please wait...</div>
+            }
+            }
+          </div>
+        </div>
+      </div>
+      }
+      @if(sharedData.checkMenuPer(4,104) == 'Y'){
+      <div class="">
+        <div class="select__accounts__details prebuil_perf__sec pl0_5rem" style="min-height:25vh" [style.display]="showDefault_select == 'performance'?'block':'none'">
+          <span class="material-icons-outlined close__card pin__bar__comp p-abs" [class.pinned]="pinnedCompRight" (click)="defaultPushPin('performance');">
+            push_pin
+          </span>
+          @if(showSpinner){
+          <div class="common-prog-loader per-loader" [style.display]="showSpinner ? 'flex' : 'none'" style="position: absolute; top: 0; left: 0; width: 100%; height: calc(100%); z-index: 9; display: flex; align-items: center; justify-content: center; flex-direction: column;border-radius:0.3rem ">
+            <span style=" font-size: 0.7rem; padding-bottom: 0.4rem; margin-right: 10px; color: var(--leftSideText-B);">Loading <span style="font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace; color: var(--paraFontColorAlt);">{{direct_progress}}</span></span>
+            <mat-progress-bar mode="determinate" [value]="0" style="padding-left: 10px; padding-right: 10px;margin-right:10px; width: 80%; transition: all .10s"></mat-progress-bar>
+          </div>
+          }@else{
+          @if(showIndexPer){
+          <div>
+            <h4 class="mb1">Performance</h4>
+            <div class="d-flex justify-content-between mb0_5rem">
+              <p class="perform__RTN  d-block">Performance : As of {{asOfDate}}</p>
+              <span class="svg-icon svg-icon-1 openCM_chart" (click)="openCumulativeChart()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="8" y="9" width="3" height="10" rx="1.5" fill="currentColor"></rect>
+                  <rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="currentColor"></rect>
+                  <rect x="18" y="11" width="3" height="8" rx="1.5" fill="currentColor"></rect>
+                  <rect x="3" y="13" width="3" height="6" rx="1.5" fill="currentColor"></rect>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="scrollbox commonScrollBox mt1rem" style="max-height: calc(100vh - 14rem);">
+            <div class="tab__head d-flex justify-content-between align-items-center" *ngIf="selIndexSector.length>0">
+              <div class="tab_Cell">&nbsp;</div>
+              <div class="tab_Cell" *ngIf="selIndexSector[0]['indexCode'].length <= 6" [style.width]="indexperformanceData.length ==1 ? '50%' : '25%'">{{selIndexSector[0]['indexCode']}}</div>
+              <div class="tab_Cell" *ngIf="selIndexSector[0]['indexCode'].length > 6" [style.width]="indexperformanceData.length ==1 ? '50%' : '25%'" [matTooltip]="selIndexSector[0]['indexCode']" [matTooltipPosition]="'above'">{{selIndexSector[0]['indexCode']}}</div>
+              <div class="tab_Cell" [class.hide]="indexperformanceData.length ==1" [matTooltip]="selIndexSector[0]['benchMark']" [matTooltipPosition]="'above'">{{selIndexSector[0]['benchMark']}}</div>
+            </div>
+            <div class="tab__body perform_borbtm" *ngIf="indexperformanceData.length>0">
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">Value</div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['Value'] | numFormatWithDash}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['Value']| numFormatWithDash}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">Daily</div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['DailyReturn'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['DailyReturn'] | weightFormat:'per'}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center ytd_hgt_color">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">YTD</div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['YTDReturn'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['YTDReturn'] | weightFormat:'per'}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">1 Year</div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['Y1Return'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['Y1Return'] | weightFormat:'per'}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">3 Year</div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['Y3Return'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['Y3Return'] | weightFormat:'per'}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">5 Year</div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['Y5Return'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['Y5Return'] | weightFormat:'per'}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">10 Year</div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['Y10Return'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['Y10Return'] | weightFormat:'per'}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" matTooltip="Cumulative Performance Since Inception" [matTooltipPosition]="'above'" style="line-height: 1.1;" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">
+                  <!--<span class="material-icons p-rel" style="font-size: 0.7rem; padding-right: 0rem;color: var(--prim-button-color);top:0.15rem">info_outline</span>-->
+                  <sup>1</sup> Cumulative Performance
+                </div>
+                <div class="tab_Cell ">{{indexperformanceData[0]['CumReturns'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['CumReturns'] | weightFormat:'per'}}</div>
+              </div>
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" matTooltip="Annualized Performance Since Inception" [matTooltipPosition]="'above'" style="line-height: 1.1;" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">
+                  <!--<span class="material-icons p-rel" style="font-size: 0.7rem; padding-right: 0rem; color: var(--prim-button-color); top: 0.15rem">info_outline</span>-->
+                  <sup>2</sup> Annualized Performance
+                </div>
+                <div class="tab_Cell">{{indexperformanceData[0]['AnnReturns'] | weightFormat:'per'}}</div>
+                <div class="tab_Cell high__color" *ngIf="indexperformanceData.length>1">{{indexperformanceData[1]['AnnReturns'] | weightFormat:'per'}}</div>
+              </div>
+            </div>
+            <div class="tab__head mt0_5rem d-flex justify-content-between align-items-center" *ngIf="selIndexSector.length>0">
+              <div class="tab_Cell">Annual Returns</div>
+              <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '50%' : '25%'" *ngIf="selIndexSector[0]['indexCode'].length <= 6">{{selIndexSector[0]['indexCode']}}</div>
+              <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '50%' : '25%'" *ngIf="selIndexSector[0]['indexCode'].length > 6" [matTooltip]="selIndexSector[0]['indexCode']" [matTooltipPosition]="'above'">{{selIndexSector[0]['indexCode']}}</div>
+              <div class="tab_Cell" [class.hide]="indexperformanceData.length ==1" [matTooltip]="selIndexSector[0]['benchMark']" [matTooltipPosition]="'above'">{{selIndexSector[0]['benchMark']}}</div>
+            </div>
+            <div class="tab__body perform_borbtm" *ngIf="YRData.length>0">
+              @for (data of YRData; track YRData) {
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell" [style.width]="indexperformanceData.length ==1 ? '75%' : '50%'">{{data['year']}}</div>
+                <div class="tab_Cell ">{{data['perfVal']}}</div>
+                <div class="tab_Cell high__color" [class.hide]="indexperformanceData.length ==1">{{data['BMVal']}}</div>
+              </div>
+              }
+            </div>
+          </div>
+          <span class="sup_details" style=" margin-top: 0.5rem;"><sup>1</sup>Cumulative Performance Since Inception</span>
+          <span class="sup_details"><sup>2</sup>Annualized Performance Since Inception</span>
+          }@else{
+          <div>
+            <h4 class="mb1">Performance Statistics</h4>
+            <div class="d-flex justify-content-between">
+              <p class="perform__RTN d-block">Returns as of {{asOfDate}}</p>
+              <span class="svg-icon svg-icon-1 openCM_chart" (click)="openCumulativeChartStgy()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="8" y="9" width="3" height="10" rx="1.5" fill="currentColor"></rect>
+                  <rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="currentColor"></rect>
+                  <rect x="18" y="11" width="3" height="8" rx="1.5" fill="currentColor"></rect>
+                  <rect x="3" y="13" width="3" height="6" rx="1.5" fill="currentColor"></rect>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="scrollbox commonScrollBox">
+            <div class="tab__head mt0_5rem d-flex justify-content-between align-items-center">
+              <div class="tab_Cell">Performance</div>
+              <div class="tab_Cell" [style.width]="showIndexPer ?'25%':'50%'">Your Strategy</div>
+            </div>
+            <div class="tab__body perform_borbtm">
+              @for (data of perData; track data.Performance) {
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell">{{data['Performance']}}</div>
+                <div class="tab_Cell high__color" [style.width]="showIndexPer ?'25%':'50%'">{{data['yourIndex']}}</div>
+              </div>
+              }
+            </div>
+            @if(showStaData){
+            <div class="mt1rem tab__head mt0_5rem d-flex justify-content-between align-items-center">
+              <div class="tab_Cell">Statistics</div>
+              <div class="tab_Cell" [style.width]="showIndexPer ?'25%':'50%'">
+                <span style="visibility: hidden;">&nbsp;</span>
+              </div>
+            </div>
+            <div class="tab__body perform_borbtm">
+              @for (data of StatData; track data.Statistics) {
+              <div class="b__sec d-flex justify-content-between align-items-center">
+                <div class="tab_Cell">{{data['Statistics']}}</div>
+                <div class="tab_Cell high__color" [style.width]="showIndexPer ?'25%':'50%'">{{data['yourIndex']}}</div>
+              </div>
+              }
+            </div>
+            }
+          </div>
+          <p class="perform__RTN text-right d-block mt0_5rem w66">{{asOfDateRange}}</p>
+          }
+          }
+        </div>
+      </div>
+      }
+    </div>
+    <!--}-->
+  </div>
+</div>
+  <!--<div class="modal" id="indexStaLine" data-backdrop="static" style="background: rgba(0, 0, 0, 0.19); ">
+    <div class="modal-dialog modal-dialog-centered ifrUrl" style="     margin-top: 1.4rem;">
+      <div class="modal-content" style=" padding:1rem;    padding-bottom: 0;">
+        <div>
+          <div class="mod-Header" style="background: transparent;">
+            <button id="premod-close" (click)="closeLineChart()" class="md-close" style="top: 1rem; right: 1rem;"><span class="material-icons" style="font-size: 1.3rem;">close</span></button>
+          </div>
+          <div style="margin: 0rem 1rem; font-size: 1rem; font-family: 'poppins-semiBold'; justify-content: space-between; display: flex; color: var(--prim-button-color);">
+            <span>Cumulative Performance</span>
+            <span style="font-size: 0.65rem; margin-right: 1.5rem; align-items: center; display: flex; color: var(--leftSideText)" id="indexStacompDate"></span>
+          </div>
+          <div class="modal-body mat-White-bg matSlides" style="min-height:500px">
+            <div id="indexStaLineChart" style="width: 100%; height: 100%; min-height: calc(100vh - 10rem);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>-->

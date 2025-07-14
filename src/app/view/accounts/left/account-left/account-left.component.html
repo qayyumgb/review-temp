@@ -1,0 +1,88 @@
+<div class="funded_sec d-flex align-items-center justify-content-between">
+  <ul class="nav nav-tabs" id="accNavTab1" role="tablist">
+    <li class="nav-item" id="funTabActive" (click)="fundedTab();reference.value='';resetInputFilter()">
+      <a class="nav-link " data-bs-toggle="tab" href="#Funded">Funded</a>
+    </li>
+    <li class="nav-item d-flex" id="nonfunTabActive" (click)="refreshNonFundedTab();reference.value='';resetInputFilter()" style="align-items:center;">
+      <a class="nav-link active" data-bs-toggle="tab" href="#NonFunded">Non Funded</a>
+    </li>
+  </ul>
+  <a matTooltipClass='nav_tooltip' matTooltipPosition="above" matTooltip="Refresh" [matTooltipShowDelay]="showDelay.value"
+  [matTooltipHideDelay]="hideDelay.value" class="d-flex align-items-center refreshBtn_funded"
+  *ngIf="!show_fundedTab" (click)="startRefresh_NF=true;refreshaccounts_DB()" id="nonFundedRefresh">
+ <span class="material-icons" style="font-size:0.85rem"> refresh</span>
+</a>
+</div>
+<div class="default-vs-search-item no_bg input-h2" style="position: relative; top: -0.1rem; width: 100%; padding-right: 0.4rem !important; margin-bottom: 0.2rem;" [style.width]="'100%'">
+  <mat-form-field appearance="outline">
+    <input appalphanumCharacters maxlength="10" #reference matInput placeholder="Search account" (keyup)="doFilter($event)">
+    <mat-icon  id="vsSrcCls" matSuffix (click)="showSearchBox_vs = false; reference.value='';resetInputFilter()">search_off</mat-icon>
+  </mat-form-field>
+</div>
+<div class="acc-tabs-content">
+  <div class="tab-content">
+    <div id="Funded" class="tab-pane position-relative">
+      <div *ngIf="startRefresh_NF" style="position: absolute; width: 100%; height: 100%; background: var(--primary-color); z-index: 999; left: 0; top: 0;">
+        <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+      </div>
+ 
+      <ng-container *ngIf="getAcc_list_AccountList_Funded.length>0">
+        <cdk-virtual-scroll-viewport #viewport2 [itemSize]="10" minBufferPx="200" maxBufferPx="400" class="example-viewport-r scrollbox" style="padding-top:0.8rem">
+          <ul class="scrollbox">
+            <ng-container *cdkVirtualFor="let framwork of getAcc_list_AccountList_Funded; let i=index;">
+              <li  [class.active]="individual_selectedAcc == framwork.accountId" (click)="selectedAccountDropdown(framwork.accountId, '',framwork.accountVan,framwork.type,i);">
+                <div class="acctlist" >
+                  <span class="material-icons" style="font-size: 0.5rem; padding-right: 0.2rem;"> radio_button_unchecked </span>
+                  {{ framwork.accountVan}} <span class="subTitle ng-star-inserted">  ({{framwork.accountTitle}})</span>
+                </div>
+              </li>
+            </ng-container>
+          
+          </ul>
+        </cdk-virtual-scroll-viewport>
+    
+      </ng-container>
+       <!--- No Data --->
+       <ng-container class="example-viewport-r scrollbox" *ngIf="getAcc_list_AccountList_Funded.length==0">
+        <ul class="scrollbox" style="height: 70vh; display: flex; align-items: center;justify-content: center;">
+          <li class="norec" style=" text-align: center; justify-content: center; background:transparent;">
+            No records in funded.
+          </li>
+        </ul>
+      </ng-container>
+      <!--- No Data --->
+    </div>
+    <div id="NonFunded" class="tab-pane active position-relative">
+      <div *ngIf="startRefresh_NF" style="position: absolute; width: 100%; height: 100%; background: var(--primary-color); z-index: 999; left: 0; top: 0;">
+        <mat-spinner class="reviewloader-spinner" style="top: -10% !important;"></mat-spinner>
+      </div>
+      <ng-container *ngIf="getAcc_list_AccountList.length>0">
+        <cdk-virtual-scroll-viewport #viewport2 itemSize="30" minBufferPx="700" maxBufferPx="100" class="example-viewport-r scrollbox" style="padding-top:0.8rem">
+          <ul class="scrollbox">
+            <ng-container *cdkVirtualFor="let framwork of getAcc_list_AccountList; let i=index;">
+              <li  [class.active]="individual_selectedAcc_NF == framwork.accountId" (click)="selectedAccountNonfunded(framwork.accountId, framwork);">
+                <div class="acctlist" >
+                  <span class="material-icons" style="font-size: 0.5rem; padding-right: 0.2rem;"> radio_button_unchecked </span>
+                  {{ framwork.accountVan}} <span class="subTitle ng-star-inserted"> ({{framwork.accountTitle}})</span>
+                </div>
+              </li>
+            </ng-container>
+          
+          </ul>
+        </cdk-virtual-scroll-viewport>
+     
+      </ng-container>
+           <!--- No Data --->
+           <ng-container class="example-viewport-r scrollbox" *ngIf="getAcc_list_AccountList.length==0">
+            <ul class="scrollbox" style="height: 70vh; display: flex; align-items: center;justify-content: center;">
+              <li class="norec" style=" text-align: center; justify-content: center; background:transparent;">
+                No records in Non funded.
+              </li>
+            </ul>
+          </ng-container>
+          <!--- No Data --->
+  
+       
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="dialog-content errormodal" [class.show]="addAnimate" id="lockInfoRebalance">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+    <div class="content-btm text-center">
+      @if(getRebalancesData.length>0){
+      <div *ngIf="getRebalancesData.length>0" style=" width: 100%;">
+        <p style="text-align: center;">
+          <span class="bell material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+            notifications_none
+          </span>
+        </p>
+        <h3 style="margin-bottom: 2rem;">{{dialogTitle}}</h3>
+
+        <div class="scrollbox">
+          <div class="cal_lockDesign d-flex p-rel" *ngFor="let item of getRebalancesData">
+            <div class="timeline-item" style="width: 100%;">
+              <div class="fw-mormal timeline-content text-muted">
+                <span class="acc">
+                  {{formatName(item.name)}}
+                  {{'('+item.shortname+')'}} using {{item.accountno}} {{item.accountname}}
+                </span>
+                <div class="d-flex justify-content-between align-items-center date_box">
+                  <span [className]="rebalClass(item)">{{item.nextRebalanceDate}}</span>
+                  <a (click)="showTradedStrategy()" class="dialog_btn_P" style="cursor: pointer;" data-bs-dismiss="modal">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }@else{
+      <div style=" width: 100%; padding-top: 1.5rem; ">
+        <p style="text-align: center;">
+          <span class="material-icons" style="font-size: 2rem; color: var(--warningColor); opacity: .75;">
+            error_outline
+          </span>
+        </p>
+        <h3 style="margin-bottom: 1.2rem;">{{dialogTitle}}</h3>
+        <div class="nodata w-100 d-flex justify-content-center align-items-center mb1rem" style="min-height: auto;">
+          <span>Currently, there are no accounts scheduled for rebalancing.</span>
+        </div>
+        <a data-bs-dismiss="modal" class="dialog_btn_P cursor-pointer" (click)="closeModal()">Ok</a>
+      </div>
+      }
+    </div>
+    </div>
+  </div>
+</div>

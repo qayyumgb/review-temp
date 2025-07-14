@@ -1,0 +1,413 @@
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin cursor-hover {
+  cursor: pointer;
+  transition: all .2s;
+}
+
+@mixin text-ellipse {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#compare__Comp {
+  svg.commonSVGCircle {
+    position: fixed;
+    z-index: 0;
+    top: 50%;
+    left: 49%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+.clkd_cmp_active {
+  .sRect1, .sText-cmp, .sText1-cmp, .mCircle-cmp {
+    fill: var(--prim-button-color) !important;
+  }
+
+  .mText-cmp {
+    fill: var(--leftSideText-B) !important
+  }
+}
+
+@mixin text-ellipse {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#compare__Comp {
+  .left-l {
+    position: relative;
+    z-index: 9;
+    height: 100%;
+    padding: 1rem;
+    width: 30%;
+    min-width: 18rem;
+
+    .subHead {
+      padding-left: 0rem;
+      font-size: 1.4rem;
+      color: var(--leftSideText-B);
+      font-family: var(--ff-semibold);
+      margin-bottom: .5rem;
+    }
+
+    h3 {
+      font-size: 0.85rem;
+      font-family: var(--ff-regular);
+      color: var(--leftSideText);
+      display: flex;
+      align-items: center;
+
+      span {
+        max-width: 15rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: normal;
+      }
+    }
+  }
+
+  .right-l {
+    position: absolute;
+    z-index: 9;
+    height: 100%;
+    padding: 1rem;
+    width: 19%;
+    right: 2rem;
+    top: 0;
+    padding-top: 3rem;
+    min-width: 17rem;
+
+    .no-r-f {
+      font-size: 0.8rem;
+      color: var(--leftSideText);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .mat__Div {
+      position: absolute;
+      width: 100%;
+      top: 1.8rem;
+      display: flex;
+      align-items: center;
+      left: 0;
+
+      .mdc-switch {
+        transform: scale(.75) !important;
+      }
+    }
+
+    .custom_check {
+
+      p {
+        margin: 0 !important;
+        padding-left: 0.5rem;
+        color: var(--leftSideText);
+        font-family: var(--ff-medium);
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+#compare__Comp .icon__details {
+  width: 100%;
+  background-color: var(--topNavbar);
+  height: fit-content;
+  border-radius: 0.5rem;
+  position: absolute;
+  right: 0rem;
+  top: 2rem;
+  bottom: 0;
+  margin: auto;
+  padding: 0.5rem 0;
+  padding-top: 1rem;
+
+  .comp__head {
+    span {
+      font-size: 1.2rem;
+      color: var(--leftSideText-B);
+      @include cursor-hover;
+
+      &:hover {
+        color: var(--prim-button-color);
+      }
+    }
+
+    span.count {
+      color: var(--linkColor);
+      font-family: var(--ff-semibold);
+      border-left: 1px solid var(--leftSideText);
+      padding-left: 0.5rem;
+      cursor: default;
+      margin-left: 0.5rem;
+      line-height: 1;
+      font-size: 0.75rem;
+    }
+  }
+
+  .search-block {
+    background: var(--border);
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 0.3rem 0.3rem 0 0;
+    padding: 0.5rem;
+    display: none;
+    z-index: 99;
+
+    &.active {
+      display: block;
+    }
+
+    span {
+      color: var(--iconColor);
+      font-size: 1rem;
+      cursor: pointer;
+
+      &.disable {
+        opacity: .75;
+        cursor: default;
+      }
+
+      &:hover:not(.disable) {
+        color: var(--prim-button-color);
+      }
+    }
+
+    input {
+      background: var(--border);
+      outline: none;
+      box-shadow: none;
+      border: none;
+      width: 100%;
+      color: var(--leftSideText);
+      font-size: 0.72rem;
+    }
+
+    input::placeholder {
+      color: var(--leftSideText) !important;
+      font-size: 0.72rem;
+    }
+  }
+
+  h4 {
+    font-size: 0.75rem;
+    font-family: var(--ff-medium);
+    text-transform: uppercase;
+    color: #fff;
+    margin-right: 1rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0rem;
+  }
+}
+
+@mixin scrollBoxHeight__cards($calc__rem) {
+  height: calc(100vh - $calc__rem);
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.outerScroll__Div {
+  @include scrollBoxHeight__cards(13rem);
+  padding-right: 2px;
+  background: var(--topNavbar);
+  border-radius: 0.2rem;
+  padding: 1rem 0.5rem;
+
+  @media (max-width: 1300px) and (min-height: 769px) {
+    height: calc(100vh - 23rem);
+  }
+}
+
+.outerScroll__Div__18 {
+  @include scrollBoxHeight__cards(18rem);
+}
+
+
+.construction {
+  .list__sec {
+    padding: 0.325rem 0.5rem;
+    line-height: 1.2;
+    border-bottom: 1px dotted var(--border);
+    cursor: pointer;
+    position: relative;
+    // &:before {
+    //   display: block;
+    //   content: "";
+    //   position: absolute;
+    //   width: 0.15rem;
+    //   height: 70%;
+    //   left: 0.2rem;
+    //   top: 0;
+    //   bottom: 0;
+    //   margin: auto;
+    //   background: #7e7e85;
+    // }
+    .d__border {
+      border-left: 0.15rem solid #ccc;
+      padding-left: 0.5rem;
+    }
+
+    .select_ico {
+      display: none;
+      color: var(--prim-button-color);
+      font-size: 0.4rem;
+      position: absolute;
+      left: 0.4rem;
+      z-index: 9;
+    }
+
+    &.active {
+      background: var(--cardsHighlightColorDark) !important;
+
+      &:before {
+        background: var(--prim-button-color);
+      }
+    }
+
+    &.added {
+      opacity: .3;
+    }
+
+    &.added:not(:hover) {
+      background: transparent;
+    }
+
+    &:hover {
+      background: var(--cardsHighlightColorDark);
+
+      &:before {
+        background: var(--prim-button-color);
+      }
+
+      .ticker {
+        color: var(--leftSideText-B) !important;
+      }
+
+      .price {
+        color: var(--leftSideText-B) !important;
+      }
+    }
+
+    &:last-child {
+      border-bottom: 0px solid var(--primary-color);
+    }
+    /*.list__view {
+          line-height: 1.2;
+          padding: 0.2rem;
+          border-bottom: 1px dotted var(--border);
+        }*/
+
+    .ind__name {
+      margin-bottom: 0 !important;
+      font-size: 0.70rem;
+      color: var(--leftSideText);
+      width: 10.5rem;
+      @include text-ellipse;
+    }
+
+    .inner__tick {
+      background: var(--border);
+      padding: 0.1rem;
+      border-radius: 0.2rem;
+      margin-top: 0.15rem;
+      display: inline-flex;
+      min-width: 3rem;
+      justify-content: center;
+    }
+
+    .ticker {
+      width: 36%;
+      font-size: 0.60rem;
+      color: var(--leftSideText-B);
+    }
+
+    .price {
+      width: 25%;
+      font-size: 0.60rem;
+      color: var(--leftSideText-B);
+
+      &.w-50 {
+        width: 50%;
+      }
+
+      .excRemoveBtn_comp {
+        .material-icons {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+/* Hide the default checkbox */
+.custom-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 !important;
+  padding-left: 0.5rem;
+  color: var(--leftSideText);
+  font-family: var(--ff-medium);
+  font-size: 0.9rem;
+}
+
+/* Checkmark (unchecked) */
+.custom-checkbox .checkmark {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  position: relative;
+  margin-right: 10px;
+  border: 1px solid var(--iconColor);
+}
+
+/* Checkmark (checked) */
+.custom-checkbox input[type="checkbox"]:checked ~ .checkmark {
+  background-color: var(--prim-button-color);
+  border: 1px solid var(--prim-button-color);
+}
+
+.custom-checkbox .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show checkmark when checked */
+.custom-checkbox input[type="checkbox"]:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* Style the checkmark/indicator (tick) */
+.custom-checkbox .checkmark::after {
+  left: 3px;
+  top: -1px;
+  width: 4px;
+  height: 9px;
+  border: solid var(--accordionChild);
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+
+@import '../../../core/layout/styles/responsive/equity.scss'

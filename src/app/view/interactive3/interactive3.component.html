@@ -1,0 +1,601 @@
+
+
+<div class="canvas">
+   
+
+  
+    <div id="canvas">
+      <div class="default_mat_dropdown" >
+        <ul>
+          <li>
+            <button class="connect_btn" matTooltip="Add Connector" matTooltipPosition="left" (click)="connectSelectedCards()" [disabled]="selectedCards.size < 2">
+              <span class="icons">
+                <svg width="24" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg>
+              </span>
+            </button>
+          </li>
+          <li>
+            <button class="remove_btn" (click)="removeSelectedCards()" disabled>
+              <span class="icons">
+                
+<svg width="24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 107.68"><defs><style>.cls-1{fill-rule:evenodd;}</style></defs><title>remove-link</title><path class="cls-1" fill="var(--primary-logo)" d="M97.62,40.71A25.26,25.26,0,1,1,72.37,66,25.25,25.25,0,0,1,97.62,40.71ZM51,31.51a5.35,5.35,0,0,1-7.57-7.57L60.79,6.62c5-5,12-7,19-6.56a30.61,30.61,0,0,1,19.37,8.5,30.61,30.61,0,0,1,8.5,19.37,28.07,28.07,0,0,1-.28,6.29,33.23,33.23,0,0,0-9.72-1.44h-.88A17.64,17.64,0,0,0,97,28.6a19.71,19.71,0,0,0-5.41-12.47,19.69,19.69,0,0,0-12.47-5.41c-4.08-.25-8,.8-10.72,3.47L51,31.51ZM63.8,36.32a5.35,5.35,0,0,1,7.56,7.57L43.88,71.36a5.35,5.35,0,0,1-7.56-7.56L63.8,36.32Zm-7.33,40A5.35,5.35,0,1,1,64,83.92L46.89,101.07c-5,5-12,7-19,6.55a30.64,30.64,0,0,1-19.37-8.5A30.61,30.61,0,0,1,.06,79.75c-.44-7,1.56-14,6.56-19L23.76,43.64a5.35,5.35,0,1,1,7.57,7.57L14.19,68.36C11.52,71,10.47,75,10.72,79.08a19.69,19.69,0,0,0,5.41,12.47A19.71,19.71,0,0,0,28.6,97c4.08.26,8-.79,10.72-3.46L56.47,76.35Zm55.07-13.07v5.36a2,2,0,0,1-2,2H85.68a2,2,0,0,1-2-2V63.28a2,2,0,0,1,2-2h23.88a2,2,0,0,1,2,2Z"/></svg>
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="plumb-select-mode">
+        <button (click)="zoomIn()" matTooltip="Zoom In" matTooltipPosition="left">
+          <i class="fa fa-plus"></i> 
+        </button>
+        <!-- <span> <span>{{ (zoom * 100).toFixed(0) }}%</span></span> -->
+        <button (click)="zoomOut()" matTooltip="Zoom Out" matTooltipPosition="left">
+          <i class="fa fa-minus"></i> 
+        </button>
+        <button (click)="resetZoom()" matTooltip="Reset Zoom" matTooltipPosition="left">
+          <i class="fa fa-refresh"></i> 
+        </button>
+      </div>
+      <div class="d_grid" (wheel)="onWheel($event)">
+        <!-- <div class="grid-item position-relative">
+          <h5>Add Component</h5>
+          <ng-container *ngIf="!isUniverse">
+            <div class="grid-item-wrap" *ngFor="let filter of filterData">
+              <span class="sub_title" *ngIf="filter.value === 'universe'">Universe</span>
+              <span class="sub_title" *ngIf="filter.value === 'liquidity'">Filters</span>
+              @if (filter.value == "universe") {
+                <div class="grid-item-content" (click)="showUniverse(filter.value)">
+                  @if (filter.value == "universe") {
+                    <span class="icons">
+                      <svg width="24" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg>
+                    </span>
+                  }
+                  @else {
+                    <span class="icons warning">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C14.8058 4.19021 15.1133 4.7437 14.9615 5.27473L10.9615 19.2747C10.8098 19.8058 10.2563 20.1133 9.72529 19.9615C9.19426 19.8098 8.88677 19.2563 9.03849 18.7253L13.0385 4.72529C13.1902 4.19426 13.7437 3.88677 14.2747 4.03849Z" fill="var(--warningColor)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7071 4.29289C15.0977 4.68342 15.0977 5.31658 14.7071 5.70711L9.41424 11H17C17.4045 11 17.7691 11.2436 17.9239 11.6173C18.0787 11.991 17.9931 12.4211 17.7071 12.7071L10.7071 19.7071C10.3166 20.0976 9.68345 20.0976 9.29292 19.7071C8.9024 19.3166 8.9024 18.6834 9.29292 18.2929L14.5858 13H7.00003C6.59557 13 6.23093 12.7564 6.07615 12.3827C5.92137 12.009 6.00692 11.5789 6.29292 11.2929L13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289Z" fill="var(--warningColor)"></path></svg>
+                    </span>
+                  }
+                  <p> {{filter.label}}</p>
+                </div>
+              }
+              @else {
+                <div class="grid-item-content" (click)="addDraggable(filter.value)" [ngClass]="{'selected': filter.value === 'group' && isGroupSelected}">
+                  @if (filter.value == "universe") {
+                    <span class="icons" >
+                      <svg width="24" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg>
+                    </span>
+                  }
+                  @else {
+                    <span class="icons warning" [ngClass]="getIconClass(filter.value)">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C14.8058 4.19021 15.1133 4.7437 14.9615 5.27473L10.9615 19.2747C10.8098 19.8058 10.2563 20.1133 9.72529 19.9615C9.19426 19.8098 8.88677 19.2563 9.03849 18.7253L13.0385 4.72529C13.1902 4.19426 13.7437 3.88677 14.2747 4.03849Z" fill="var(--primary-logo)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7071 4.29289C15.0977 4.68342 15.0977 5.31658 14.7071 5.70711L9.41424 11H17C17.4045 11 17.7691 11.2436 17.9239 11.6173C18.0787 11.991 17.9931 12.4211 17.7071 12.7071L10.7071 19.7071C10.3166 20.0976 9.68345 20.0976 9.29292 19.7071C8.9024 19.3166 8.9024 18.6834 9.29292 18.2929L14.5858 13H7.00003C6.59557 13 6.23093 12.7564 6.07615 12.3827C5.92137 12.009 6.00692 11.5789 6.29292 11.2929L13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289Z" fill="var(--primary-logo)"></path></svg>
+                    </span>
+                  }
+                  <p> {{filter.label}}</p>
+                </div>
+              }
+            
+             
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isUniverse">
+            <div class="d-flex align-items-center mb-2">
+              <div  class="go-back-ico d-flex align-items-center cursor-pointer" (click)="backToUniverse()">
+                <span  class="material-icons icons">arrow_back_ios</span>
+                <span>Universe</span>
+              </div>
+            
+            </div>
+            <div id="account_Exclusions">
+              <ul class="universe-list">
+                <li class="default-search-item-dropdownList" *ngFor="let item of universeList">
+                  <mat-radio-group aria-label="Select" [(ngModel)]="selectedItem" (change)="onOptionChange($event, item)">
+                    <mat-radio-button [value]="item.name" style="min-width:100%;margin-bottom:0.5rem;">{{item.name}}</mat-radio-button>
+                   
+                  </mat-radio-group>
+                </li>
+              </ul>
+              <button class="mod-foot-btn-activeP" style="    position: absolute;
+              bottom: 0.5rem;
+              right: 0.5rem;" (click)="addUniverse()">
+                Add Universe
+              </button>
+            </div>
+          </ng-container>
+       
+        </div> -->
+        <ng-container>
+          <div class="grid-item-wrap" *ngFor="let filter of filterData1">
+
+                    @if (filter.value == "universe") {
+          <div class="grid-item-content universeGrid" (click)="showUniverse(filter.value)">
+                      @if (filter.value == "universe") {
+          <div class="universeSVG">
+          <span class="innerLayer">
+          <svg width="20" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.0439 16.875C13.8408 16.875 16.9189 13.797 16.9189 10C16.9189 6.20304 13.8408 3.125 10.0439 3.125C6.24693 3.125 3.16888 6.20304 3.16888 10C3.16888 13.797 6.24693 16.875 10.0439 16.875Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M14.4345 4.71094C16.5986 4.11719 18.2236 4.17187 18.7079 5C19.5673 6.49219 16.3876 9.94531 11.6064 12.7031C6.82513 15.4609 2.24701 16.4922 1.37982 15C0.903258 14.1719 1.66888 12.7344 3.26263 11.1562" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          </span>
+          </div>
+                      }
+                      @else {
+          <div class="universeSVG">
+          <span class="innerLayer icons warning">
+          <svg width="20" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.0439 16.875C13.8408 16.875 16.9189 13.797 16.9189 10C16.9189 6.20304 13.8408 3.125 10.0439 3.125C6.24693 3.125 3.16888 6.20304 3.16888 10C3.16888 13.797 6.24693 16.875 10.0439 16.875Z" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M14.4345 4.71094C16.5986 4.11719 18.2236 4.17187 18.7079 5C19.5673 6.49219 16.3876 9.94531 11.6064 12.7031C6.82513 15.4609 2.24701 16.4922 1.37982 15C0.903258 14.1719 1.66888 12.7344 3.26263 11.1562" stroke="white" stroke-opacity="0.95" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          </span>
+          </div>
+                      }
+          <p> {{filter.label}}</p>
+          </div>
+                    }
+                    @else {
+          <div class="grid-item-content" (click)="addDraggable(filter.value)" [ngClass]="{'selected': filter.value === 'group' && isGroupSelected}">
+                      @if (filter.value == "universe") {
+          <span class="icons">
+          <svg width="24" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg>
+          </span>
+                      }
+                      @else {
+          <span class="icons warning" [ngClass]="getIconClass(filter.value)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2747 4.03849C14.8058 4.19021 15.1133 4.7437 14.9615 5.27473L10.9615 19.2747C10.8098 19.8058 10.2563 20.1133 9.72529 19.9615C9.19426 19.8098 8.88677 19.2563 9.03849 18.7253L13.0385 4.72529C13.1902 4.19426 13.7437 3.88677 14.2747 4.03849Z" fill="var(--primary-logo)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7071 4.29289C15.0977 4.68342 15.0977 5.31658 14.7071 5.70711L9.41424 11H17C17.4045 11 17.7691 11.2436 17.9239 11.6173C18.0787 11.991 17.9931 12.4211 17.7071 12.7071L10.7071 19.7071C10.3166 20.0976 9.68345 20.0976 9.29292 19.7071C8.9024 19.3166 8.9024 18.6834 9.29292 18.2929L14.5858 13H7.00003C6.59557 13 6.23093 12.7564 6.07615 12.3827C5.92137 12.009 6.00692 11.5789 6.29292 11.2929L13.2929 4.29289C13.6834 3.90237 14.3166 3.90237 14.7071 4.29289Z" fill="var(--primary-logo)"></path></svg>
+          </span>
+                      }
+          <p> {{filter.label}}</p>
+          </div>
+                    }
+           
+           
+                  </div>
+          </ng-container>
+        <div id="canvas-wrapper" [style.transform]="'scale(' + zoom + ')'" #board>
+          <!--  -->
+         
+            <ng-container>
+            <!--<div class="d-flex align-items-center mb-2">
+            <div class="go-back-ico d-flex align-items-center cursor-pointer" (click)="backToUniverse()">
+            <span class="material-icons icons">arrow_back_ios</span>
+            <span>Universe</span>
+            </div>
+            </div>-->
+            </ng-container>
+          <!--  -->
+          <div class="position-relative zoomable-canvas" id="zoomPanel">
+            @for(card of cards;track card){
+            @if(card.type == 'group'){
+              <!-- [style.width.px]="(card?.group.length>0)?((card?.group.length*150)+20) :180" -->
+            <div class="cardGrp" [id]="card.id" [style.top.px]="card.top"
+                 [style.left.px]="card.left" >
+              @if(card?.data?.name != null || card?.data?.name != undefined){
+              {{  card?.data?.name }}
+              }@else{
+              <span *ngIf="card?.group.length == 0"> {{  card.label }}</span>
+              }
+              @if(card?.group.length >0){
+              @for(grp of card?.group;track grp){
+              <!--@if(grp?.type == 'subGrp' && grp?.subGrp.length>0){
+              <div class="subGrpChild">
+                <span class="icons"><svg width="15" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg></span>
+                @for(sugrp of grp?.subGrp;track sugrp){
+                <div class="card groupchild" >
+                  @if(sugrp?.data?.name != null || sugrp?.data?.name != undefined){
+                  {{  sugrp?.data?.name }}
+                  }@else{
+                  {{  sugrp.label }}
+                  }
+                  <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardChildClick(card.id,grp.id)">delete</span>
+                </div>
+                }
+              </div>
+              }@else{-->
+            <div class="card groupchild" [id]="grp.id" (click)="groupChildClick(card,$event)" data-bs-toggle="modal" data-bs-target="#filtermodal">
+              @if(grp?.data?.name != null || grp?.data?.name != undefined){
+              {{  grp?.data?.name }}
+              }@else{
+              {{  grp.label }}
+              }
+              @if(grp?.type == 'subGrp' && grp?.subGrp.length>0){
+              <span class="icons d-flex" style="position:absolute;top:0;right:0;"><svg width="15" viewBox="0 0 24 24"><path d="m5 2c-1.6568 0-3 1.3432-3 3s1.3432 3 3 3 3-1.3432 3-3-1.3432-3-3-3zm0 2c0.55228 0 1 0.44772 1 1s-0.44772 1-1 1-1-0.44772-1-1 0.44772-1 1-1z" fill="var(--prim-button-color)"></path><path d="m19 16c-1.6569 0-3 1.3431-3 3s1.3431 3 3 3 3-1.3431 3-3-1.3431-3-3-3zm0 2c0.5523 0 1 0.4477 1 1s-0.4477 1-1 1-1-0.4477-1-1 0.4477-1 1-1z" fill="var(--prim-button-color)"></path><path d="M10 4C11.5977 4 12.9037 5.24892 12.9949 6.82373L13 7V17C13 17.5128 13.386 17.9355 13.8834 17.9933L14 18H17V20H14C12.4023 20 11.0963 18.7511 11.0051 17.1763L11 17V7C11 6.48716 10.614 6.06449 10.1166 6.00673L10 6H7V4H10Z" fill="var(--prim-button-color)"></path></svg></span>
+              }
+              <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardChildClick(card.id,grp.id)">delete</span>
+            </div>
+              <!--}-->
+              }
+              }
+              <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardClick(card.id)">delete</span>
+            </div>
+            }@else{
+            
+            <div class="card" [id]="card.id" [style.top.px]="card.top"
+                 [style.left.px]="card.left">
+              @if(card?.data?.name != null || card?.data?.name != undefined){
+              {{  card?.data?.name }}
+              }@else{
+              {{  card.label }}
+              }
+              <span class="three_dot" (click)="threeDotClick(card.id)">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </span>
+              <div class="card-child-dropdown delete-dropdown" *ngIf="visibledeleteDropdownId === card.id">
+                <div class="grid-item-wrap" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardClick(card.id)">
+                  <div class="grid-item-content">
+                    <span class="icons delete material-icons">
+                      delete_forever
+                    </span>
+                    <p> Remove</p>
+                  </div>
+                </div>
+              </div>
+              <!-- <span class="material-icons more_option" data-bs-toggle="modal" data-bs-target="#cardDelModal" (click)="deleteCardClick(card.id)">delete</span> -->
+              <span class="add-card" (click)="showDropdown($event,card.id);$event.stopPropagation()"><i class="fa fa-plus"></i></span>
+              @if(card.label == 'factors'){
+                <div>
+                  <div class="card-child-dropdown card-dropdown-body" *ngIf="visibleDropdowncard === card.id && isfactorlist !== card.id">
+                    <div class="d-flex justify-content-between">
+                      <span class="sub_title">{{cardname}}</span>
+                      <i class="fa fa-plus close_icon" (click)="openfactors(card.id)"></i>
+                    </div>
+                    <div class="grid-item-content mt2rem mb2rem text-center" *ngIf="selectfactordata.length == 0">
+                      <p> Press the “+” button to add the factors.</p>
+                    </div>
+                    <ng-container *ngIf="selectfactordata.length > 0">
+                      <div class="factorslist_scroll scrollbox">
+                        <div class="grid-item-content grid-item-factor"  *ngFor="let factor of selectfactordata">
+                          <span class="display_title">{{ factor.displayname }}</span>
+                          <div class="">
+                            <p>
+                              <span class="highlighttext">Remove</span> &nbsp;<span> <input type="text" class="form-control"></span>&nbsp;
+                              <span class="highlighttext"> percentage</span> Stocks with <span class="highlighttext">Largest</span>
+                              {{ factor.displayname }} from Universe
+                            </p>
+                           
+                          </div>
+                        </div>
+                      </div>
+                  
+                    </ng-container>
+                 
+                  </div>
+                </div>
+             
+                <!-- Select factors -->
+                <div class="card-child-dropdown factorslist" *ngIf="isfactorlist === card.id">
+                  <div class="d-flex justify-content-between">
+                    <span class="sub_title" (click)="backfactors()">
+                      <i class="fa fa-arrow-left close_icon mr0_5rem"></i>
+                      Select factors</span>
+                   
+                  </div>
+                  <div class="factorslist_scroll scrollbox">
+                    <div *ngFor="let category of factorlist">
+                      <div class="grid-item-content text-left" *ngIf="category.menu[0].category !== 'Alpha'">
+                        <p> {{ category.menu[0].category }}</p>
+                        <ul>
+                          <li *ngFor="let item of category.menu" [ngClass]="{'active': isItemSelected(item)}">
+                            <i class="fa fa-check"></i>
+                            <span (click)="selectfactor(item)">
+                         
+                              {{ item.displayname }}
+                            </span>
+                         
+                          </li>
+                         
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+               
+                 
+                </div>
+                <!-- Select factors -->
+              }
+              @else{
+                <div class="card-child-dropdown card-dropdown-body" *ngIf="visibleDropdowncard === card.id">
+                  <div class="d-flex justify-content-between">
+                    <span class="sub_title">{{cardname}}</span>
+                    <span class="material-icons close_icon" (click)="closeDropdown($event,card.id)">close</span>
+                  </div>
+                 
+                  <div class="grid-item-content" *ngIf="card.type != 'stockprice'">
+                    <p>
+                      Trading Values Minimum of $ <span><input type="text" class="form-control"></span>
+                      million 6-month average daily trading values.
+                    </p>
+                   
+                  </div>
+                  <div class="grid-item-content mb-0" *ngIf="card.type != 'marketcap'">
+                    <p> Stock price eligibility ($) <span><input type="text" class="form-control"></span></p>
+                   
+                    
+                  </div>
+                  <div class="grid-item-content-btn text-right">
+                    <a href="" class="dialog_btn_P">Apply</a>
+                  </div>
+                </div>
+              }
+            
+              <div class="card-child-dropdown" *ngIf="visibleDropdownId === card.id">
+                <span class="sub_title">Filters</span>
+                <div class="grid-item-wrap" *ngFor="let filter of filterData">
+                
+                
+                
+                  <div class="grid-item-content" *ngIf="filter.value !== 'universe'" (click)="addDraggable(filter.value)"
+                    [ngClass]="{'selected': filter.value === 'group' && isGroupSelected}">
+                    <span class="icons warning" *ngIf="filter.value === 'liquidity'">
+                
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M13.9856 7.25772C13.7904 4.29535 11.3231 1.9529 8.30807 1.9529C5.22778 1.9529 2.71917 4.39788 2.62109 7.451M2.82266 9.1523C3.48668 11.5555 5.69105 13.3204 8.30807 13.3204C10.9251 13.3204 12.9427 11.5555 13.6067 9.1523"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M14.2207 11.0898L13.6262 9.13435L11.7356 9.91564" stroke="white" stroke-width="0.8"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.27734 5.74219L2.67442 7.5387L4.42382 6.08206" stroke="white" stroke-width="0.8"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8.1123 9.94183V10.4028V10.8639" stroke="white" stroke-width="0.8" stroke-linecap="round" />
+                        <path d="M8.1123 4.40985V4.87087V5.33188" stroke="white" stroke-width="0.8" stroke-linecap="round" />
+                        <path
+                          d="M9.72608 6.48432C9.72608 5.8478 9.00368 5.33179 8.11255 5.33179C7.22143 5.33179 6.49902 5.8478 6.49902 6.48432C6.49902 7.12085 7.22143 7.63686 8.11255 7.63686C9.00368 7.63686 9.72608 8.15287 9.72608 8.7894C9.72608 9.42592 9.00368 9.94193 8.11255 9.94193C7.22143 9.94193 6.49902 9.42592 6.49902 8.7894"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" />
+                      </svg>
+                
+                    </span>
+                    <span class="icons warning" *ngIf="filter.value === 'h-factor'">
+                
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.4436 6.64286C7.70517 4.92021 4.88662 4.92021 3.14819 6.64286C1.40976 8.36551 1.40976 11.1585 3.14819 12.8811C4.88662 14.6038 7.70517 14.6038 9.4436 12.8811C11.182 11.1585 11.182 8.3655 9.4436 6.64286Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M8.95063 6.16608L12.7511 2.1149C12.9555 1.90281 13.2351 1.78137 13.5283 1.77728C13.8216 1.7732 14.1045 1.88681 14.3148 2.09312C14.5251 2.29943 14.6456 2.58154 14.6498 2.8774C14.654 3.17325 14.5416 3.45861 14.3372 3.6707L9.83952 7.04676"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                
+                    </span>
+                    <span class="icons warning" *ngIf="filter.value === 'gics'">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M8 9.00024C8.82843 9.00024 9.5 8.32867 9.5 7.50024C9.5 6.67182 8.82843 6.00024 8 6.00024C7.17157 6.00024 6.5 6.67182 6.5 7.50024C6.5 8.32867 7.17157 9.00024 8 9.00024Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M11.7312 6.22243C11.9654 6.82845 12.0483 7.48237 11.973 8.12766C11.8977 8.77295 11.6663 9.39018 11.2989 9.92598C10.9315 10.4618 10.4391 10.9 9.86435 11.2028C9.28956 11.5056 8.64967 11.6639 8 11.6639C7.35033 11.6639 6.71044 11.5056 6.13565 11.2028C5.56086 10.9 5.06848 10.4618 4.70108 9.92598C4.33367 9.39018 4.1023 8.77295 4.02698 8.12766C3.95165 7.48237 4.03463 6.82845 4.26875 6.22243"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M4.775 13.0565C3.68021 12.3586 2.84129 11.3245 2.38419 10.1094C1.92709 8.89424 1.87646 7.5636 2.2399 6.31723C2.60335 5.07086 3.36126 3.97599 4.39986 3.19699C5.43846 2.41799 6.70172 1.99689 8 1.99689C9.29828 1.99689 10.5615 2.41799 11.6001 3.19699C12.6387 3.97599 13.3967 5.07086 13.7601 6.31723C14.1235 7.5636 14.0729 8.89424 13.6158 10.1094C13.1587 11.3245 12.3198 12.3586 11.225 13.0565"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="icons warning" *ngIf="filter.value === 'factors'">
+                
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M8 6.75024C9.38071 6.75024 10.5 5.63096 10.5 4.25024C10.5 2.86953 9.38071 1.75024 8 1.75024C6.61929 1.75024 5.5 2.86953 5.5 4.25024C5.5 5.63096 6.61929 6.75024 8 6.75024Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M11.75 13.2502C13.1307 13.2502 14.25 12.131 14.25 10.7502C14.25 9.36953 13.1307 8.25024 11.75 8.25024C10.3693 8.25024 9.25 9.36953 9.25 10.7502C9.25 12.131 10.3693 13.2502 11.75 13.2502Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M4.25 13.2502C5.63071 13.2502 6.75 12.131 6.75 10.7502C6.75 9.36953 5.63071 8.25024 4.25 8.25024C2.86929 8.25024 1.75 9.36953 1.75 10.7502C1.75 12.131 2.86929 13.2502 4.25 13.2502Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                
+                    </span>
+                    <span class="icons warning" *ngIf="filter.value === 'marketcap'">
+                
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M8 6.75024C9.38071 6.75024 10.5 5.63096 10.5 4.25024C10.5 2.86953 9.38071 1.75024 8 1.75024C6.61929 1.75024 5.5 2.86953 5.5 4.25024C5.5 5.63096 6.61929 6.75024 8 6.75024Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M11.75 13.2502C13.1307 13.2502 14.25 12.131 14.25 10.7502C14.25 9.36953 13.1307 8.25024 11.75 8.25024C10.3693 8.25024 9.25 9.36953 9.25 10.7502C9.25 12.131 10.3693 13.2502 11.75 13.2502Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M4.25 13.2502C5.63071 13.2502 6.75 12.131 6.75 10.7502C6.75 9.36953 5.63071 8.25024 4.25 8.25024C2.86929 8.25024 1.75 9.36953 1.75 10.7502C1.75 12.131 2.86929 13.2502 4.25 13.2502Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                
+                    </span>
+                    <span class="icons warning" *ngIf="filter.value === 'stockprice'">
+                
+                
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M6 7.50024C8.76142 7.50024 11 6.49288 11 5.25024C11 4.0076 8.76142 3.00024 6 3.00024C3.23858 3.00024 1 4.0076 1 5.25024C1 6.49288 3.23858 7.50024 6 7.50024Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1 5.25024V7.75024C1 8.99399 3.2375 10.0002 6 10.0002C8.7625 10.0002 11 8.99399 11 7.75024V5.25024"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M4 7.31274V9.81274" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M11 6.04401C13.2812 6.25651 15 7.16276 15 8.25026C15 9.49401 12.7625 10.5003 10 10.5003C8.775 10.5003 7.65 10.3003 6.78125 9.97526"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M5 9.95649V10.7502C5 11.994 7.2375 13.0002 10 13.0002C12.7625 13.0002 15 11.994 15 10.7502V8.25024"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 10.3127V12.8127" stroke="white" stroke-width="0.8" stroke-linecap="round"
+                          stroke-linejoin="round" />
+                        <path d="M8 7.31274V12.8127" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                
+                
+                    </span>
+                    <span class="icons warning" *ngIf="filter.value === 'stocks'">
+                
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M13 9.00024H3C2.72386 9.00024 2.5 9.2241 2.5 9.50024V12.0002C2.5 12.2764 2.72386 12.5002 3 12.5002H13C13.2761 12.5002 13.5 12.2764 13.5 12.0002V9.50024C13.5 9.2241 13.2761 9.00024 13 9.00024Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M13 3.50024H3C2.72386 3.50024 2.5 3.7241 2.5 4.00024V6.50024C2.5 6.77639 2.72386 7.00024 3 7.00024H13C13.2761 7.00024 13.5 6.77639 13.5 6.50024V4.00024C13.5 3.7241 13.2761 3.50024 13 3.50024Z"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                
+                
+                    </span>
+                    <span class="icons warning" *ngIf="filter.value === 'group'">
+                
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 2.50024H7" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M7 13.5002H9" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M11.5 2.50024H13C13.1326 2.50024 13.2598 2.55292 13.3536 2.64669C13.4473 2.74046 13.5 2.86764 13.5 3.00024V4.50024"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.5 9.00024V7.00024" stroke="white" stroke-width="0.8" stroke-linecap="round"
+                          stroke-linejoin="round" />
+                        <path
+                          d="M11.5 13.5002H13C13.1326 13.5002 13.2598 13.4476 13.3536 13.3538C13.4473 13.26 13.5 13.1329 13.5 13.0002V11.5002"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2.5 7.00024V9.00024" stroke="white" stroke-width="0.8" stroke-linecap="round"
+                          stroke-linejoin="round" />
+                        <path
+                          d="M4.5 13.5002H3C2.86739 13.5002 2.74021 13.4476 2.64645 13.3538C2.55268 13.26 2.5 13.1329 2.5 13.0002V11.5002"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M4.5 2.50024H3C2.86739 2.50024 2.74021 2.55292 2.64645 2.64669C2.55268 2.74046 2.5 2.86764 2.5 3.00024V4.50024"
+                          stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11 5.00024H5V11.0002H11V5.00024Z" stroke="white" stroke-width="0.8" stroke-linecap="round"
+                          stroke-linejoin="round" />
+                      </svg>
+                
+                
+                    </span>
+                    <p> {{filter.label}}</p>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+            }
+            }
+          </div>
+        </div>
+      
+      </div>
+   
+      
+    </div>
+  </div>
+  <!-- Universe list -->
+  <div id="account_Exclusions" *ngIf="isUniverse">
+    <ul class="universe-list" [@listAnimation]="universeList.length">
+    <li class="default-search-item-dropdownList" *ngFor="let item of universeList">
+    <div class="list-item">
+    <span (click)="addUniverse(item)">{{item.name}}</span>
+    </div>
+    </li>
+    </ul>
+    </div>
+      <!-- Universe list -->
+      <!-- Universe overlay -->
+    <div class="universeOverlay" (click)="closeoverlay()" [style.display]="(universeOverlay) ? 'flex':'none'"></div>
+    <!-- Universe overlay -->
+  <div class="modal fade warningautoModel" id="cardDelModal" aria-modal="true" tabindex="-1" role="dialog" aria-labelledby="cardDelModal"
+        data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+      <div class="modal-content">
+        <div class="split-mod-l">
+          <div class="split-mod-right">
+            <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+              <p style="text-align: center;">
+                <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                  error_outline
+                </span>
+              </p>
+              <h3>Are you sure?</h3>
+              <p style="font-size: 0.9rem;">Do you really want to delete this card.</p>
+              <div class="foot-l" style="margin-bottom:1rem">
+                <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="deleteSelected(cardDel)">Delete</button>
+                <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade warningautoModel" id="filtermodal" tabindex="-1" role="dialog"
+       aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+    <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:45%">
+      <div class="modal-content">
+        <div class="split-mod-l">
+          <div class="split-mod-right">
+            <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; padding: 0;">
+              <div class="w-head">
+                <p>h-factor</p>
+                <div class="close-l" data-bs-dismiss="modal" aria-label="Close"><span class="material-icons">close</span></div>
+              </div>
+              <div class="accEditValues">
+                
+                <div id="canvas">
+                
+                    <!-- <div class="popupcardGrp">
+                      @for(card of groups;track card){
+                      <div class="card groupchild" [id]="card.id" [style.top.px]="card.top"
+                      [style.left.px]="card.left">
+                        {{  card.label }}
+                      </div>
+                    }
+                    </div> -->
+                    <div cdkDropList class="popupcardGrp sub-branches" (cdkDropListDropped)="drop($event)" [cdkDropListData]="groups">
+                      <div *ngFor="let card of groups;trackBy: trackByCardId" cdkDrag cdkDragLockAxis="y" class=" withSubchild">
+                      @if(card.type == 'subGrp'){
+                        <div class="position-relative">
+                          <div class=" groupchild card">
+                            {{ card.label }}
+                          </div>
+                          <div class="lineBox"></div>
+                          <div class="sub-branches mt3_5rem">
+                            @for(grp of card?.subGrp;track grp){
+                           
+                              @if(grp?.type == 'subGrp' && grp?.subGrp.length>0){
+                              <div class="subChild">
+                                <div class=" card">
+                                  {{ grp.label }}
+                                </div>
+                              </div>
+      
+                              }
+                              @else{
+                              <div class="subChild">
+                                <div class=" card">
+                                  {{ grp.label }}
+                                </div>
+                              </div>
+                              }
+                              }
+                          </div>
+                       
+                        </div>
+                     
+                      
+                          
+                     
+                      }
+                      @else {
+                        <div class="groupchild card">
+                          {{ card.label }}
+                        </div>
+                     
+                      }
+                       
+                      
+                      </div>
+                    </div>
+              
+                </div>
+              </div>
+              <div class="foot-l accUpdate">
+              
+                <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal">
+                  update
+                </button>
+                <button type="button" class="dialog_btn_S cp" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

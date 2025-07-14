@@ -1,0 +1,349 @@
+
+<div class="customIndex__Prebuild d-flex" id="customIndex__Prebuild" style="padding-top:3rem">
+  <div class="left-pl">
+
+    <div class="section scrollBox default-search-item-dropdownList mt1rem">
+      <!--- Dropdown Top --->
+      <div class="basdeOn_top d-flex align-items-center">
+        <div class="basedOn__sec d-flex align-items-center justify-content-start"><h3>{{selectedPYListName}}</h3></div>
+        @if(volatilityDataList.length>0){
+        <div class="basedOn__sec_dropdown dropdown" [class.active]="isOpenFactorDrpdwn" (click)="openFactorList()"><span class="material-icons" style="font-size:1.2rem"> expand_more </span></div>
+        }@else{
+        <div class="basedOn__sec_dropdown dropdown disabled" [class.active]="isOpenFactorDrpdwn"><span class="material-icons" style="font-size:1.2rem"> expand_more </span></div>
+        }
+      </div>
+      @if(isOpenFactorDrpdwn){
+      <div class="basdeOn_bottom d-flex align-items-center">
+        <div class="basedOn__sec mt0_5rem">
+          @for (data of volatilityDataList; track data) {
+          <p (click)="selectPYList(data)" [class.active]="data.name==selectedPYListName">{{data.name}}</p>
+          }
+        </div>
+      </div>
+      }
+      <!--- Dropdown Top --->
+      <!--- Components --->
+      @if(displayFieldList[0].showUniverse){
+      <div class="matdrop-sec">
+        <app-universe-dropdown [universeDataList]="universeList" (universeSelectedList)="receiveUnivSelectedList($event)"></app-universe-dropdown>
+      </div>
+      }
+      @if(displayFieldList[0].showTradingValue){
+      <div class="matdrop-sec align-items-center justify-content-between">
+        <p class="label">Trading Values:</p>
+        <div class="matdrop-inputs" style="width:100%">
+          <div class="d-flex align-items-end" style=" font-size: 0.8rem; font-family: 'poppins-medium'; color: var(--leftSideText);">
+
+
+            <span>
+              Minimum of $&nbsp;&nbsp;
+            </span>
+            <mat-form-field appearance="outline" class="example-full-width" style="width:40%" [class.errorBorder]="(minSixmonth_avgDaily <=0)">
+              <mat-label></mat-label>
+              <input min="1" type="number" matInput placeholder="" [(ngModel)]="minSixmonth_avgDaily">
+            </mat-form-field>
+            <span>
+              &nbsp;&nbsp; million
+            </span>
+          </div>
+          <span style=" font-size: 0.8rem; font-family: 'poppins-medium'; color: var(--leftSideText);">
+            6-month average daily trading values.
+          </span>
+
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showStockPrice){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">
+          Strock Price Eligibility ($):
+        </p>
+        <div class="matdrop-inputs" style="width:48%">
+          <mat-form-field appearance="outline" class="example-full-width" [class.errorBorder]="(min_stock_price <=0)">
+            <mat-label></mat-label>
+            <input min="1" type="number" matInput placeholder="" [(ngModel)]="min_stock_price">
+          </mat-form-field>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showCoreStockAmt){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">
+          Core Stocks Amount:
+        </p>
+        <div class="matdrop-inputs" style="width:48%">
+          <mat-form-field appearance="outline" class="example-full-width" [class.errorBorder]="(core_stocks_amount <=0)">
+            <mat-label></mat-label>
+            <input min="1" type="number" matInput placeholder="" [(ngModel)]="core_stocks_amount">
+          </mat-form-field>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showSelectGics){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Selection GICS:</p>
+        <div style="width:48%">
+          <app-ind-select-dropdown [getDataList]="universeMatData" [getDefaultSelected]="defaultDropdownValues.gicsBy" [getFormName]="'gicsBy'" (onSelectionChanged)="receiveMatOptionSelectedList($event, 'gicsBy')"></app-ind-select-dropdown>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showHfactor){
+      <div class="matdrop-sec">
+        <p class="label">h-factor:</p>
+        <div class="inner-div">
+          <app-hfactor-component [getFactorMainDataList]="factorMatData" [getUniverseDataList]="universeMatData" [getUniverseDefaultSelected]="defaultDropdownValues.universeBy" (onSelectionUniverseChanged)="receiveMatOptionSelectedList($event, 'universeBy')" (onFactorDataChanged)="receiveHFactorData($event)"></app-hfactor-component>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showStocks){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Number of stocks:</p>
+        <div class="matdrop-inputs" style="width:48%">
+          <mat-form-field appearance="outline" class="example-full-width" [class.errorBorder]="n_final_stocksErr">
+            <mat-label>Number of stocks</mat-label>
+            <input maxlength="4" (keyup)="checkErr('n_final_stocks')" (keydown)="countKeyDown($event)" type="text" matInput placeholder="" [(ngModel)]="n_final_stocks">
+          </mat-form-field>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showWeight){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Weight:</p>
+        <div style="width:48%">
+          <app-ind-select-dropdown [getDataList]="weightMatData" [getDefaultSelected]="defaultDropdownValues.weightBy" [getFormName]="'weightBy'" (onSelectionChanged)="receiveMatOptionSelectedList($event, 'weightBy')"></app-ind-select-dropdown>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showSelection){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Selection:</p>
+        <div style="width:48%">
+          <app-ind-select-dropdown [getDataList]="selectionMatData" [getDefaultSelected]="defaultDropdownValues.selectBy" [getFormName]="'selectBy'" (onSelectionChanged)="receiveMatOptionSelectedList($event, 'selectBy')"></app-ind-select-dropdown>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showRebalance){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Rebalance:</p>
+        <div style="width:48%">
+          <app-ind-select-dropdown [getDataList]="rebalanceMatData" [getDefaultSelected]="defaultDropdownValues.rebalanceBy" [getFormName]="'rebalanceBy'" (onSelectionChanged)="receiveMatOptionSelectedList($event, 'rebalanceBy')"></app-ind-select-dropdown>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showBacktest){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Back Test:</p>
+        <div style="width:48%">
+          <app-ind-select-dropdown [getDataList]="backTestMatData" [getDefaultSelected]="defaultDropdownValues.backtestBy" [getFormName]="'backtestBy'" (onSelectionChanged)="receiveMatOptionSelectedList($event, 'backtestBy')"></app-ind-select-dropdown>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showAccValue){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Current Account Value:</p>
+        <div class="matdrop-inputs" style="width:48%">
+          <mat-form-field class="example-full-width" appearance="outline" [class.errorBorder]="curAccValueErr">
+            <mat-label>Current Account Value</mat-label>
+            <input maxlength="10" (keyup)="checkErr('current_account_value')" (keydown)="valKeyDown($event)" type="text" matInput placeholder="" [(ngModel)]="current_account_value">
+          </mat-form-field>
+        </div>
+      </div>
+      }
+      @if(displayFieldList[0].showRebComp){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Rebalance components</p>
+        <mat-slide-toggle class="example-margin preLabel" [(ngModel)]="return_rebalance_components"></mat-slide-toggle>
+      </div>
+      }
+      @if(displayFieldList[0].showUnivWeight){
+      <div class="matdrop-sec d-flex align-items-center justify-content-between">
+        <p class="label">Universe Weight</p>
+        <mat-slide-toggle class="example-margin preLabel" [(ngModel)]="return_universe_mix"></mat-slide-toggle>
+      </div>
+      }
+    </div>
+    
+    @if(showApplyChange){
+    <button type="button" class="dialog_btn_P applyBtn mr_p_5" (click)="applChg()">Calculate</button>
+    }@else{
+    <button type="button" class="dialog_btn_P mr_p_5 applyBtn disabled">Calculate</button>
+    }
+
+  </div>
+  @if(perData.length>0){
+  <div class="right-pl">
+    <div class="right-l">
+      <div class="buildYourIndex__sec__rightG">
+        <div class="icon__select">
+          @if(holdingData .length >0){
+          <div class="__selectIco select__steps" [class.active]="showDefault_select == 'company'" (click)="showDefault_select = 'company';componentClick()">
+            <span class="material-icons-outlined" style="transform: rotate(45deg)">
+              attach_file
+            </span>
+            <p>Components</p>
+          </div>
+          }@else if(holdingData.length ==0){
+          <div class="__selectIco select__steps disableMenu">
+            <span class="material-icons-outlined" style="transform: rotate(45deg)">
+              attach_file
+            </span>
+            <p>Components</p>
+          </div>
+          }
+          <div class="__selectIco select__accounts" [class.active]="showDefault_select == 'performance'" (click)="showDefault_select = 'performance'">
+            <span class="material-icons-outlined">
+              query_stats
+            </span>
+            <p>Performance</p>
+          </div>
+          @if(universeMixData .length >0){
+          <div class="__selectIco select__steps" [class.active]="showDefault_select == 'universeMix'" (click)="showDefault_select = 'universeMix';">
+            <span class="material-icons-outlined">
+              query_stats
+            </span>
+            <p>Weightage</p>
+          </div>
+          }@else if(universeMixData.length ==0){
+          <div class="__selectIco select__steps disableMenu">
+            <span class="material-icons-outlined">
+              query_stats
+            </span>
+            <p>Weightage</p>
+          </div>
+          }
+        </div>
+        <div class="icon__details">
+          <div class="ind_sec select__steps__details" [style.display]="showDefault_select == 'company'?'block':'none'">
+            <!--<span class="material-icons-outlined close__card pin__bar__comp" [class.pinned]="pinnedCompRight">push_pin</span>-->
+            <div class="d-flex align-items-center justify-content-between comp__head pb1rem pl0_5rem pr1rem">
+              @if(holdingData.length>0){
+              <h4 class="d-flex align-items-center">
+                Components
+                <span class="count d-flex">{{holdingData.length}}</span>
+              </h4>
+              }@else{
+              <h4 class="d-flex align-items-center">Components</h4>
+              }
+            </div>
+            <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+
+            </div>
+
+            <div class="scrollbox outerScroll__Div componentScroll">
+              <div class="construction h-100">
+                @if(holdingData.length>0){
+                <cdk-virtual-scroll-viewport itemSize="30" minBufferPx="700" maxBufferPx="700" class="w-100 h-100 scrollbox" style="padding-top:0.8rem">
+                  <ul>
+                    <li *cdkVirtualFor="let data of holdingData;">
+                      <div class="list__sec" [class.active]="data.stockKey == highlightList">
+                        <div class="d__border" [style.border-color]="'var(--border)'" [attr.data-index]="data.stockKey">
+                          <p class="ind__name">{{data['compname'] | nullDashPipe:''}}</p>
+                          <div class="d-flex align-items-center justify-content-between customW_Price">
+                            <span class="ticker text-left"><span class="inner__tick">{{data['ticker'] | nullDashPipe :''}}</span></span>
+                            <!--<span class="price text-right" style="color: var(--paraFontColorAlt)">{{data['price'] | priceFormat  :',.2f':data['currency'] }}</span>-->
+                            <span class="price text-right">{{data['weight'] | weightFormat :'per' }}</span>
+                            <div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                </cdk-virtual-scroll-viewport>
+                }
+                @else{
+                @if(!sharedData._showCenterLoader){
+                <div class="no_data" style="display:flex">No results found. Revise your search.</div>
+                }@else{
+                <div class="no_data" style="display:flex">Loading please wait...</div>
+                }
+                }
+              </div>
+
+            </div>
+          </div>
+          <div class="ind_sec select__accounts__details p-rel prebuil_perf__sec h-auto pl0_5rem pb1rem" [style.display]="showDefault_select == 'performance'?'block':'none'">
+            <!--<span class="material-icons-outlined close__card pin__bar__comp" [class.pinned]="pinnedPerformanceRight">push_pin</span>-->
+            <div>
+              <h4 class="mb1 p-rel" style="z-index:10">Performance Statistics</h4>
+              <p class="perform__RTN d-block">Returns as of {{asOfDate}}</p>
+            </div>
+            <div class="w-100 p-rel scroll_div_perf scrollbox" style="max-height: calc(100vh - 15rem)">
+              <div class="tab__head d-flex justify-content-between align-items-center">
+                <div class="tab_Cell">Performance</div>
+                <div class="tab_Cell" *ngIf="indexName.length <= 8">{{indexName}}</div>
+                <div class="tab_Cell" *ngIf="indexName.length > 8" [matTooltip]="indexName" [matTooltipPosition]="'above'">{{indexName}}</div>
+                <div class="tab_Cell">{{Strategyname == ''?'My Index':Strategyname}}</div>
+              </div>
+              <div class="tab__body border_btm">
+                @if(perData.length>0){
+                @for (data of perData; track data) {
+                <div class="b__sec d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">{{data['Performance']}}</div>
+                  <div class="tab_Cell high__color">{{data['ETFticker']}}</div>
+                  <div class="tab_Cell">{{data['yourIndex']}}</div>
+                </div>
+                }
+                }@else{
+                <div class="b__sec d-flex justify-content-between align-items-center">
+                  <span>no data</span>
+                </div>
+                }
+              </div>
+              <div class="mt1rem tab__head d-flex justify-content-between align-items-center">
+                <div class="tab_Cell">Statistics*</div>
+                <div class="tab_Cell" *ngIf="indexName.length <= 8">{{indexName}}</div>
+                <div class="tab_Cell" *ngIf="indexName.length > 8" [matTooltip]="indexName" [matTooltipPosition]="'above'">{{indexName}}</div>
+                <div class="tab_Cell">{{Strategyname == ''?'My Index':Strategyname}}</div>
+              </div>
+              <div class="tab__body border_btm">
+                @if(StatData.length>0){
+                @for (data of StatData; track data) {
+                <div class="b__sec d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">{{data['Statistics']}}</div>
+                  <div class="tab_Cell high__color">{{data['ETFticker']}}</div>
+                  <div class="tab_Cell">{{data['yourIndex']}}</div>
+                </div>
+                }
+                }@else{
+                <div class="b__sec d-flex justify-content-between align-items-center">
+                  <span>no data</span>
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="ind_sec select__accounts__details p-rel prebuil_perf__sec h-auto pl0_5rem pb1rem" [style.display]="showDefault_select == 'universeMix'?'block':'none'">
+            <!--<span class="material-icons-outlined close__card pin__bar__comp" [class.pinned]="pinnedPerformanceRight">push_pin</span>-->
+            <div>
+              <h4 class="mb1 p-rel" style="z-index:10;padding-bottom:0.5rem">Weightage</h4>
+            </div>
+            <div class="w-100 p-rel scroll_div_perf scrollbox" style="max-height: calc(100vh - 15rem)">
+              <div class="tab__head d-flex justify-content-between align-items-center">
+                <div class="tab_Cell">Universe</div>
+                <div class="tab_Cell">Weight</div>
+              </div>
+              <div class="tab__body border_btm">
+                @if(universeMixData.length>0){
+                @for (data of universeMixData; track data) {
+                <div class="b__sec d-flex justify-content-between align-items-center">
+                  <div class="tab_Cell">{{universeName(data)}}</div>
+                  <div class="tab_Cell">{{data['percent']| weightFormat :''}}</div>
+                </div>
+                }
+                }@else{
+                <div class="b__sec d-flex justify-content-between align-items-center">
+                  <span>no data</span>
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+

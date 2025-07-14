@@ -1,0 +1,98 @@
+/*svg.commonSVGCircle {
+  position: fixed;
+  z-index: 0;
+  top: 52%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}*/
+#resetAL, #pullRemove {
+  .ptext {
+    text-anchor: middle;
+    font-size: 11px;
+    font-family: var(--ff-medium);
+    fill: var(--leftSideText-B);
+    line-height: 1.2;
+    padding-bottom: 4px;
+  }
+}
+
+.text-drag {
+  transform: translate(-27px,-135px) rotate(-2deg);
+  font-size: 16px;
+  fill: #fff;
+  font-family: var(--ff-medium);
+}
+
+.trag-arw1 {
+  opacity: 1;
+  animation: showHide 4s linear infinite;
+  font-family: monospace;
+}
+
+.trag-arw2 {
+  opacity: 1;
+  animation: showHide1 4s linear infinite;
+  font-family: monospace;
+}
+@keyframes showHide1 {
+  0% {
+    opacity: 0;
+    fill: #fff;
+  }
+
+  25% {
+    opacity: 0;
+    fill: #fff;
+  }
+
+  40% {
+    opacity: 1;
+    fill: #fff;
+  }
+
+  65% {
+    opacity: 1;
+    fill: #fff;
+  }
+
+  85% {
+    opacity: 1;
+    fill: #fff;
+  }
+
+  100% {
+    opacity: 0;
+    fill: #fff;
+  }
+}
+
+@keyframes showHide {
+  0% {
+    opacity: 0;
+    fill: #fff;
+    display: block;
+  }
+
+  50% {
+    opacity: 0;
+    fill: #fff;
+  }
+
+  65% {
+    opacity: 1;
+    fill: #fff;
+    display: block;
+  }
+
+  85% {
+    opacity: 1;
+    fill: #fff;
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    fill: #fff;
+  }
+}

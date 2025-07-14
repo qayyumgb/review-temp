@@ -1,0 +1,237 @@
+<div class="p-rel">
+  <!--- Top Draggable Circles -->
+  <div class="sunB_left">
+    <!--<h3>Add component</h3>-->
+    <!--[ngStyle]="{ top: box.top + 'px', left: box.left + 'px' }"-->
+    <div class="d-flex inner-border">
+    
+      <div *ngFor="let box of boxes"
+           [id]="'draggable-' + box.id"
+           class="draggable_box" (mousedown)="onDragStart($event, box)">
+           <p> {{ box.label }}</p>
+       
+        <span  [ngStyle]="{'--border-color': box.color}" class="draggable_Circle">
+            <span *ngIf="box.type == 'universe'" [style.backgroundColor]="box.color">
+              <svg width="22" height="22" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="universe">
+                  <path id="Vector"
+                    d="M8.5 14.3438C11.7274 14.3438 14.3438 11.7274 14.3438 8.5C14.3438 5.27259 11.7274 2.65625 8.5 2.65625C5.27259 2.65625 2.65625 5.27259 2.65625 8.5C2.65625 11.7274 5.27259 14.3438 8.5 14.3438Z"
+                    stroke="#282D39" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path id="Vector_2"
+                    d="M12.2313 4.00428C14.0707 3.4996 15.452 3.54608 15.8637 4.24999C16.5942 5.51835 13.8914 8.4535 9.82737 10.7976C5.76331 13.1418 1.8719 14.0183 1.13479 12.75C0.729714 12.0461 1.3805 10.8242 2.73518 9.4828"
+                    stroke="#282D39" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+              </svg>
+            </span>
+            <span *ngIf="box.type == 'liquidity'" [style.backgroundColor]="box.color">
+             
+<svg width="22" height="22" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="Group 9">
+  <path id="Vector" d="M23.4738 9.7006C23.1322 4.51644 18.8144 0.417167 13.5382 0.417167C8.14764 0.417168 3.75758 4.69588 3.58594 10.0388M3.93868 13.0161C5.10071 17.2218 8.95836 20.3102 13.5382 20.3102C18.1179 20.3102 21.6487 17.2218 22.8107 13.0161" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g id="Group 8">
+  <g id="Group 5">
+  <path id="Vector_2" d="M23.8848 16.4067L22.8444 12.9847L19.5358 14.3519" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="Group 7">
+  <path id="Vector_3" d="M1.23633 7.04843L3.68121 10.1923L6.74267 7.64322" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="Group 6">
+  <path id="Vector_4" d="M13.1973 14.3978V15.2046V16.0114" stroke="#282D39" stroke-width="0.8" stroke-linecap="round"/>
+  <path id="Vector_5" d="M13.1973 4.71683V5.5236V6.33038" stroke="#282D39" stroke-width="0.8" stroke-linecap="round"/>
+  <path id="Vector_6" d="M16.0204 8.34717C16.0204 7.23324 14.7562 6.33023 13.1967 6.33023C11.6373 6.33023 10.373 7.23324 10.373 8.34717C10.373 9.46109 11.6373 10.3641 13.1967 10.3641C14.7562 10.3641 16.0204 11.2671 16.0204 12.381C16.0204 13.495 14.7562 14.398 13.1967 14.398C11.6373 14.398 10.373 13.495 10.373 12.381" stroke="#282D39" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+  </g>
+  </g>
+  </svg>
+  
+            </span>
+            <span *ngIf="box.type == 'h-factor'" [style.backgroundColor]="box.color">
+           
+<svg width="22" height="23" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="Group 2">
+  <path id="Vector" d="M16.5261 9.62457C13.4838 6.60994 8.55134 6.60994 5.50909 9.62457C2.46684 12.6392 2.46684 17.5269 5.50909 20.5415C8.55135 23.5562 13.4838 23.5562 16.5261 20.5415C19.5683 17.5269 19.5683 12.6392 16.5261 9.62457Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_2" d="M15.6629 8.79019L22.3138 1.70063C22.6714 1.32948 23.1607 1.11695 23.6739 1.1098C24.187 1.10265 24.6821 1.30147 25.0502 1.66251C25.4182 2.02356 25.6291 2.51726 25.6365 3.035C25.6438 3.55274 25.447 4.05212 25.0893 4.42328L17.2184 10.3314" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  </svg>
+  
+            </span>
+            <span *ngIf="box.type == 'market-cap'" [style.backgroundColor]="box.color">
+              <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="factors">
+                <path id="Vector" d="M14 11.8125C16.4162 11.8125 18.375 9.85375 18.375 7.4375C18.375 5.02125 16.4162 3.0625 14 3.0625C11.5838 3.0625 9.625 5.02125 9.625 7.4375C9.625 9.85375 11.5838 11.8125 14 11.8125Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path id="Vector_2" d="M20.5625 23.1875C22.9787 23.1875 24.9375 21.2287 24.9375 18.8125C24.9375 16.3963 22.9787 14.4375 20.5625 14.4375C18.1463 14.4375 16.1875 16.3963 16.1875 18.8125C16.1875 21.2287 18.1463 23.1875 20.5625 23.1875Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path id="Vector_3" d="M7.4375 23.1875C9.85375 23.1875 11.8125 21.2287 11.8125 18.8125C11.8125 16.3963 9.85375 14.4375 7.4375 14.4375C5.02125 14.4375 3.0625 16.3963 3.0625 18.8125C3.0625 21.2287 5.02125 23.1875 7.4375 23.1875Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                </svg>
+            </span>
+            <span *ngIf="box.type == 'factors'" [style.backgroundColor]="box.color">
+             
+<svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="factors">
+  <path id="Vector" d="M14 11.8125C16.4162 11.8125 18.375 9.85375 18.375 7.4375C18.375 5.02125 16.4162 3.0625 14 3.0625C11.5838 3.0625 9.625 5.02125 9.625 7.4375C9.625 9.85375 11.5838 11.8125 14 11.8125Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_2" d="M20.5625 23.1875C22.9787 23.1875 24.9375 21.2287 24.9375 18.8125C24.9375 16.3963 22.9787 14.4375 20.5625 14.4375C18.1463 14.4375 16.1875 16.3963 16.1875 18.8125C16.1875 21.2287 18.1463 23.1875 20.5625 23.1875Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_3" d="M7.4375 23.1875C9.85375 23.1875 11.8125 21.2287 11.8125 18.8125C11.8125 16.3963 9.85375 14.4375 7.4375 14.4375C5.02125 14.4375 3.0625 16.3963 3.0625 18.8125C3.0625 21.2287 5.02125 23.1875 7.4375 23.1875Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  </svg>
+  
+            </span>
+            <span *ngIf="box.type == 'stock-price'" [style.backgroundColor]="box.color">
+             
+<svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="Coins">
+  <path id="Vector" d="M10.5 13.125C15.3325 13.125 19.25 11.3621 19.25 9.1875C19.25 7.01288 15.3325 5.25 10.5 5.25C5.66751 5.25 1.75 7.01288 1.75 9.1875C1.75 11.3621 5.66751 13.125 10.5 13.125Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_2" d="M1.75 9.1875V13.5625C1.75 15.7391 5.66562 17.5 10.5 17.5C15.3344 17.5 19.25 15.7391 19.25 13.5625V9.1875" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_3" d="M7 12.7969V17.1719" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_4" d="M19.25 10.5766C23.2422 10.9484 26.25 12.5344 26.25 14.4375C26.25 16.6141 22.3344 18.375 17.5 18.375C15.3562 18.375 13.3875 18.025 11.8672 17.4563" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_5" d="M8.75 17.4234V18.8125C8.75 20.9891 12.6656 22.75 17.5 22.75C22.3344 22.75 26.25 20.9891 26.25 18.8125V14.4375" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_6" d="M21 18.0469V22.4219" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_7" d="M14 12.7969V22.4219" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  </svg>
+  
+            </span>
+            <span *ngIf="box.type == 'gics'" [style.backgroundColor]="box.color">
+             
+<svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="gics">
+  <path id="Vector" d="M14 15.75C15.4497 15.75 16.625 14.5747 16.625 13.125C16.625 11.6753 15.4497 10.5 14 10.5C12.5503 10.5 11.375 11.6753 11.375 13.125C11.375 14.5747 12.5503 15.75 14 15.75Z" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_2" d="M20.5297 10.8888C20.9394 11.9493 21.0846 13.0937 20.9528 14.223C20.821 15.3522 20.4161 16.4324 19.7731 17.37C19.1302 18.3077 18.2685 19.0746 17.2626 19.6045C16.2567 20.1344 15.1369 20.4113 14 20.4113C12.8631 20.4113 11.7433 20.1344 10.7374 19.6045C9.73151 19.0746 8.86984 18.3077 8.22688 17.37C7.58393 16.4324 7.17903 15.3522 7.04721 14.223C6.91539 13.0937 7.06061 11.9493 7.47031 10.8888" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="Vector_3" d="M8.35625 22.8484C6.44036 21.6272 4.97226 19.8176 4.17233 17.691C3.3724 15.5645 3.2838 13.2359 3.91983 11.0548C4.55586 8.87362 5.8822 6.95761 7.69975 5.59436C9.51731 4.23111 11.728 3.49417 14 3.49417C16.272 3.49417 18.4827 4.23111 20.3002 5.59436C22.1178 6.95761 23.4441 8.87362 24.0802 11.0548C24.7162 13.2359 24.6276 15.5645 23.8277 17.691C23.0277 19.8176 21.5596 21.6272 19.6438 22.8484" stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  </svg>
+  
+            </span>
+            <span *ngIf="box.type == 'stocks'" [style.backgroundColor]="box.color">
+              <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Rows">
+                  <path id="Vector"
+                    d="M22.75 15.75H5.25C4.76675 15.75 4.375 16.1418 4.375 16.625V21C4.375 21.4832 4.76675 21.875 5.25 21.875H22.75C23.2332 21.875 23.625 21.4832 23.625 21V16.625C23.625 16.1418 23.2332 15.75 22.75 15.75Z"
+                    stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                  <path id="Vector_2"
+                    d="M22.75 6.125H5.25C4.76675 6.125 4.375 6.51675 4.375 7V11.375C4.375 11.8582 4.76675 12.25 5.25 12.25H22.75C23.2332 12.25 23.625 11.8582 23.625 11.375V7C23.625 6.51675 23.2332 6.125 22.75 6.125Z"
+                    stroke="#282D39" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+              </svg>
+            </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!--- Top Draggable Circles -->
+  <!--- Left legends -->
+  <div class="right_legend">
+    <div *ngFor="let legend of legendShowList"
+         [id]="'legend-' + legend.id"
+         class="legendBulletList d-flex align-items-center" (mouseover)="onLegendHighlight('show', legend)" (mouseout)="onLegendHighlight('hide', legend)">
+      <span class="legendBox" [style.backgroundColor]="getLegendBgColor(legend)"></span>{{ legend.name }}
+    </div>
+  </div>
+  <!--- Left legends -->
+
+  <div id="sunB" style="height:17rem; transform:scale(0.4)">
+    <svg id="arcChartMainSVG" viewBox="-464,-464,928,928" style="font: 12.5px sans-serif;">
+      <g id="mainPath"></g>
+      <g id="comp"></g>
+      <g id="crlChart" transform="scale(1.5)"></g>
+   
+     
+    
+      @if(dragging_type=='search'){
+     
+        <g class="LiquidityCircle" app-filter-globalsearch transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+      }
+   
+      @else if(dragging_type=='liquidity'){
+        <g class="LiquidityCircle" app-filter-liquidity transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+        }
+      @else if(dragging_type=='market-cap'){
+        <g class="LiquidityCircle" app-filter-market transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+        }
+      @else if(dragging_type=='stock-price'){
+      <g class="LiquidityCircle" app-filter-liquidity transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+      }@else if(dragging_type=='h-factor'){
+      <g class="LiquidityCircle" app-filter-hfactor transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+      }
+      @else if(dragging_type=='factors'){
+        <g class="LiquidityCircle" app-filter-hfactor transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+        }
+      @else if(dragging_type=='universe'){
+      <g class="LiquidityCircle" app-filter-universe transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+      }@else if(dragging_type=='stocks'){
+      <g class="LiquidityCircle" app-filter-stocks transform="translate(0, -170)" (receiveFilterClose)="receiveFiltersClose($event)"></g>
+      }
+      @else {
+        <defs><clipPath id="defalutmyMask"><circle cx="160" cy="160" r="265" fill="white" /></clipPath></defs>
+        <g clip-path="url(#defalutmyMask)" id="scrollableCircleMask" transform="translate(-160, -158)">
+          <!--<circle cx="160" cy="160" r="265" fill="var(--primary-color)" />-->
+          <g transform="translate(160, 160)">
+            <g id="slidingSVG">
+              <g class="scollableInner"><g id="arcChartCircle"></g></g>
+              <g class="scollableInner" transform="translate(560,0)"><g id="arcChartCircle1"></g></g>
+            </g>
+            <g id="dropZoneLine"></g>
+            <!------------ Left & Right controls -------------->
+            <!--<g class="controls" transform="translate(-240, 0)">
+          <g id="left" transform="translate(0, 0)" class="disable">
+            <g (click)="controlLeft()" style="cursor:pointer" transform="translate(-39, -54)">
+              <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(0px, 31px);"></rect>
+              <path class="st1" d="M13.8,47l4.9-4.9 c0.4-0.4,0.4-0.9,0-1.3s-0.9-0.4-1.3,0l-5.5,5.5c-0.3,0.3-0.4,0.9,0,1.3l5.5,5.5c0.4,0.4,0.9,0.4,1.3,0c0.4-0.4,0.4-0.9,0-1.3l0,0 L13.8,47z" style="fill: var(--theme-def-bg);" />
+            </g>
+            <circle class="disableLeftCircle" cx="-35" cy="0" r="60" fill="#fff" stroke="#e5e5e5" style="opacity:0" />
+          </g>
+          <g id="right" transform="translate(462, 0)" class="">
+            <g (click)="controlRight()" style="cursor: pointer; transform: translate(19px, -54px);">
+              <rect rx="50" ry="50" width="30" height="30" style="fill: var(--topNavbar) !important; transform: translate(8px, 31px);"></rect>
+              <path id="Icon_ionic-ios-arrow-back-2" class="st1" d="M25,47l-4.9-4.9c-0.4-0.4-0.4-0.9,0-1.3c0.4-0.4,0.9-0.4,1.3,0l5.5,5.5 c0.3,0.3,0.4,0.9,0,1.3l-5.5,5.5c-0.4,0.4-0.9,0.4-1.3,0c-0.4-0.4-0.4-0.9,0-1.3L25,47z" style=" fill: var(--theme-def-bg);" />
+            </g>
+            <circle class="disableRightCircle" cx="53" cy="0" r="60" fill="#fff" stroke="#e5e5e5" style="opacity:0;display:none;" />
+          </g>
+        </g>-->
+            <!------------ Left & Right controls -------------->
+            <!--<g id="Circle_SliderDots"></g>-->
+          </g>
+        </g>
+      }
+    </svg>
+  </div>
+  <div class="right-l">
+    <interactive-right-components></interactive-right-components>
+  </div>
+</div>
+
+<div class="pietooltip" id="tooltip">
+  <span class="dots"></span>
+  <span class="tooltipTxt"></span>
+</div>
+
+
+
+<div class="modal fade warningautoModel" id="deleteArcModal" tabindex="-1" role="dialog" aria-labelledby="existModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z"
+                        fill="var(--errorColor)" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Info</h3>
+            <p style="font-size: 0.9rem;">{{delWrnTxt}}</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal" (click)="deletecenterArc();">
+                Confirm
+              </button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

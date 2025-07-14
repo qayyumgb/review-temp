@@ -1,0 +1,84 @@
+<div class="dialog-content">
+  <div class="split-mod-l">
+    <div class="split-mod-right">
+      <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+      <div class="content-top" style="background: var(--topNavbar);">
+        <p>
+          {{dialogTitle}}
+        </p>
+      </div>
+      <div class="content-btm" style="background: var(--primary-color);">
+        <div id="Construction" class="w-100">
+
+          <div class="d-flex justify-content-between construction-rules">
+            <div class="univ-chart">
+              <div class="box-c"></div>
+              <div class="box-d">
+                <span class="text-c" >
+                  Universe
+                </span>
+              </div>
+              <div class="text-b">
+                <p><span>{{cuselindName}} </span> @if(cuselindTicker != ''){({{cuselindTicker}})}</p>
+              </div>
+            </div>
+            <div class="calc-chart">
+              <div class="box-c"></div>
+              <div class="box-d">
+                <span class="text-c" >
+                  Calculation
+                </span>
+              </div>
+              <div class="text-b">
+                @if(index_const_calcu > 0){
+                <p>Removed <b>{{index_const_calcu}}</b> stocks</p>
+                <span *ngIf="dialogData.length>0 || selectedCompany.length > 0 || selectedGics.length > 0">
+                  using&nbsp;
+                  <span *ngIf="(dialogData.factorid == 18 )" style="margin-right: 0.2rem;">Avoid the Losers (h-factor)</span>
+                  <span *ngIf="(selectedCompany.length > 0)" style="margin-right: 0.4rem;">Company</span>
+                  <span *ngIf="(selectedGics.length > 0)" style="margin-right: 0.4rem;">Sectors (GICS)</span>
+                  <ng-container *ngFor="let f_data of dialogData">
+                    <span style="margin-right: 0.2rem;">{{checkfactorName(f_data.factorid)}}</span>
+                  </ng-container>
+                  filters.
+                </span>
+                }@else{
+                <p>Removed 0 stocks</p>
+                }
+              </div>
+            </div>
+            <div class="weight-chart">
+              <div class="box-c"></div>
+              <div class="box-d">
+                <span class="text-c" >
+                  Weighting
+                </span>
+              </div>
+              <div class="text-b">
+                <p>
+                  Selected by <b>{{index_const_select}}</b> Scores.
+                </p>
+                <hr />
+                <p>
+                  Weighted by <b>{{index_const_weight}}</b> Scores.
+                </p>
+                <hr />
+                <p>
+                  Number of components <b>{{bldMyIndselNoCompVal}}</b>.
+                </p>
+                @if(index_const_tax == 'Y'){
+                <hr>
+                <p><b>Yes</b> Tax Optimization.</p>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="content-footer d-flex justify-content-end align-items-center">
+        <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="savePreference()">Save</button>
+        <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="closeModal()">Cancel</button>
+      </div>-->
+    </div>
+  </div>
+</div>

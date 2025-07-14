@@ -1,0 +1,395 @@
+<div class="trade_Page">
+
+  <div class="dialog-content">
+    <div class="split-mod-l">
+      <div class="split-mod-right">
+        <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+        <div class="content-top" style="background: var(--topNavbar);">
+          <p>
+            Index Construction
+          </p>
+        </div>
+        <div class="index_construction p1rem position-relative index_construction_height" style="background:var(--cardsHighlightColorDark);">
+          @if(showSpinnerAcc_loaded){
+            <div class="mat-spinner-loader-popup">
+              <mat-spinner class="reviewloader-spinner" style=""></mat-spinner>
+            </div>
+            }
+        <div class="d-flex">
+          <div *ngIf="isCheckdevWorld" class="go-back-ico mr1rem" (click)="backDevWorld()">
+            <span class="material-icons">arrow_back_ios</span>
+          </div>
+          <div>
+            <div [style.display]="selIndexSector.length>0 ? 'block':'none'">
+          
+              <span style="font-size: 1.2rem;" class="title">
+                {{indexName}}  ({{indexCode}})
+            
+              </span>
+            </div>
+                    <div [style.display]="selIndexSector.length>0 ? 'block':'none'">
+                      <span class="desc">{{description}}</span>
+                    </div>
+          </div>
+
+        </div>
+      
+                  <div class="down-Btn" *ngIf="(selIndexSector.length>0 && methodologyURL[0].MethodologyURL != null && methodologyURL[0].MethodologyURL != undefined)" style="display: flex;justify-content: flex-end;margin: 0.5rem 0rem;">
+                    <div>
+                      <a id="methodDown" target="_blank" class="btn_gp" [attr.href]="methodologyURL[0].MethodologyURL" style=" display: flex; align-items: center; font-size: 0.8rem"><span class="material-icons" style="font-size: 1rem; margin-right: 0.25rem; color: var(--leftSideText-B);">file_download</span> Methodology</a>
+                    </div>
+                  </div>
+                  <div class="construction-chart">
+
+                    @if(type == 'type1'){
+                    <div class="type-1">
+                      <div class="c-box">
+                        <span>1</span>
+                        <p class="title-box">Universe</p>
+                        @for(data of Universe;track data){
+                        <div class="c-box-content">
+                          <p>{{data.Universe}}</p>
+                        </div>
+                        }
+                      </div>
+                      <div class="c-box">
+                        <span>2</span>
+                        <p class="title-box">Liquidity</p>
+                        @for(data of Liquidity;track data){
+                        <div class="c-box-content">
+                          <p>{{data.Liquidity}}</p>
+                        </div>
+                        }
+                      </div>
+                      <div class="c-box">
+                        <span>3</span>
+                        <p class="title-box">Calculation</p>
+                        @for(data of Calculation;track data){
+                        <div class="c-box-content">
+                          @for(calc of data.Calculation;track calc){
+                          <p>{{calc}}</p>
+                          }
+                          <!-- <p>Select top 10 stocks with the largest market-cap and ERF scores less than highest 20% as the Core 10</p>
+        <p>Select 90 stocks with the best ERF scores based on industry group exposure</p> -->
+                        </div>
+                        }
+                      </div>
+                      <div class="c-box">
+                        <span>4</span>
+                        <p class="title-box">Weighting</p>
+                        @for(data of Weighting;track data){
+                        <div class="c-box-content">
+                          @for(weight of data.Weighting;track weight){
+                          <p>{{weight}}</p>
+                          }
+
+                        </div>
+                        }
+                      </div>
+                    </div>
+                    }
+                    @else if(type == 'type2'){
+                    <div class="type-2 mt2rem" *ngIf="!isCheckdevWorld">
+                      <div class="c-box">
+                        <div class="c-box-content">
+                          @if(checkIndexPermission((indexCode=='HFDXTT'?'HFETT75':'HFELVT75'))){
+                          <p style="cursor:default !important">{{title[0].tile1}}</p>
+                          }@else{
+                          <span class="material-icons eyeicon" (click)="indexCode=='HFDXTT'?getDevworld('HFETT75'):getDevworld('HFELVT75')">
+                            visibility
+                          </span>
+                          <p (click)="indexCode=='HFDXTT'?getDevworld('HFETT75'):getDevworld('HFELVT75')">{{title[0].tile1}}</p>
+                          }
+                        </div>
+                        <p class="value-box">
+                          <span>{{checkrebDtres(europe)}}</span>
+                          <span class="value-loading" *ngIf="checkrebDtres(uk) == null">loading...</span>
+                        </p>
+                      </div>
+                      <div class="c-box">
+                        <div class="c-box-content">
+                          @if(checkIndexPermission((indexCode=='HFDXTT'?'HFUTT5':'HFULVT5'))){
+                          <p style="cursor:default !important">{{title[0].tile2}}</p>
+                          }@else{
+                          <span class="material-icons eyeicon" (click)="indexCode=='HFDXTT'?getDevworld('HFUTT5'):getDevworld('HFULVT5')">
+                            visibility
+                          </span>
+                          <p (click)="indexCode=='HFDXTT'?getDevworld('HFUTT5'):getDevworld('HFULVT5')">{{title[0].tile2}}</p>
+                          }
+                        </div>
+                        <p class="value-box">
+                          <span>{{checkrebDtres(uk)}}</span>
+                          <span class="value-loading" *ngIf="checkrebDtres(uk) == null">loading...</span>
+                        </p>
+                      </div>
+                      <div class="c-box">
+                        <div class="c-box-content">
+                          @if(checkIndexPermission((indexCode=='HFDXTT'?'HFJTT5':'HFJLVT5'))){
+                          <p style="cursor:default !important">{{title[0].tile3}}</p>
+                          }@else{
+                          <span class="material-icons eyeicon" (click)="indexCode=='HFDXTT'?getDevworld('HFJTT5'):getDevworld('HFJLVT5')">
+                            visibility
+                          </span>
+                          <p (click)="indexCode=='HFDXTT'?getDevworld('HFJTT5'):getDevworld('HFJLVT5')">{{title[0].tile3}}</p>
+                          }
+                        </div>
+                        <p class="value-box">
+                          <span>{{checkrebDtres(japan)}}</span>
+                          <span class="value-loading" *ngIf="checkrebDtres(uk) == null">loading...</span>
+                        </p>
+                      </div>
+                    </div>
+                    <span class="asofDate" *ngIf="!isCheckdevWorld">* As of {{ICasOf}}</span>
+                    <p class="asofDate" *ngIf="!isCheckdevWorld">Click tile to see underlying index construction</p>
+                    }
+                    @else{
+                    <!--New Age Alpha USD High Yield Corporate Bond Index (HFUHYT-->
+                    <div class=" padb-6 const76 tabConstruc m2rem">
+                      <div class="chart">
+                        <div class="svgScroll">
+                          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                               viewBox="0 0 1601.9 350.96" style="enable-background:new 0 0 1601.9 667.96;" xml:space="preserve">
+<style type="text/css">
+  .const76 .st0 {
+    fill: var(--svgbg);
+  }
+
+  .const76 .st1 {
+    fill: none;
+    stroke: var(--theme-def-bg);
+  }
+
+  .const76 .st2 {
+    fill: none;
+  }
+
+  .const76 .st3 {
+    fill: #fff;
+  }
+
+  .const76 .st4 {
+    font-family: var(--ff-regular);
+  }
+
+  .const76 .st5 {
+    font-size: 16px;
+  }
+
+  .const76 .st6 {
+    font-size: 16.1257px;
+  }
+
+  .const76 .st7 {
+    fill: var(--svgbg);
+  }
+
+  .const76 .st8 {
+    fill: var(--svgbg) !important;
+  }
+
+  .const76 .st9 {
+    fill: var(--svgbg);
+  }
+
+  .const76 .st10 {
+    fill: var(--svgbg);
+  }
+
+  .const76 .st11 {
+    fill: none;
+    stroke: var(--leftSideText);
+    stroke-dasharray: 4;
+  }
+
+  .const76 .st12 {
+    fill: none;
+    stroke: var(--leftSideText);
+    stroke-dasharray: 4;
+  }
+
+  .const76 .st13 {
+    font-size: 13.822px;
+  }
+</style>
+<g>
+<g id="Rectangle_447_1_" transform="translate(175 656)">
+<path class="st0" d="M-152.34-569.37H31.95c3.18,0,5.76,2.58,5.76,5.76v71.41c0,3.18-2.58,5.76-5.76,5.76h-184.29
+c-3.18,0-5.76-2.58-5.76-5.76v-71.41C-158.1-566.79-155.52-569.37-152.34-569.37z" />
+<path class="st1" d="M-152.34-568.79H31.95c2.86,0,5.18,2.32,5.18,5.18v71.41c0,2.86-2.32,5.18-5.18,5.18h-184.29
+c-2.86,0-5.18-2.32-5.18-5.18v-71.41C-157.53-566.47-155.21-568.79-152.34-568.79z" />
+</g>
+<g>
+<rect x="34.4" y="104.7" class="st2" width="160.8" height="46.79" />
+<text transform="matrix(1 0 0 1 35.4295 116.5425)"><tspan x="0" y="0" class="st3 st4 st5">S&amp;P Global USD High </tspan><tspan x="15.27" y="23" class="st3 st4 st5">Yield Bond Index</tspan></text>
+</g>
+<g id="Rectangle_450_1_" transform="translate(627 656)">
+<path class="st0" d="M-56.42-569.8h184.29c3.18,0,5.76,2.58,5.76,5.76v71.41c0,3.18-2.58,5.76-5.76,5.76H-56.42
+c-3.18,0-5.76-2.58-5.76-5.76v-71.41C-62.18-567.22-59.6-569.8-56.42-569.8z" />
+<path class="st1" d="M-56.42-569.23h184.29c2.86,0,5.18,2.32,5.18,5.18v71.41c0,2.86-2.32,5.18-5.18,5.18H-56.42
+c-2.86,0-5.18-2.32-5.18-5.18v-71.41C-61.6-566.91-59.28-569.23-56.42-569.23z" />
+</g>
+<g id="Group_2555_1_" transform="translate(93)">
+<g id="Rectangle_451_1_" transform="translate(838 656)">
+<path class="st0" d="M-86.28-569.8H98.01c3.18,0,5.76,2.58,5.76,5.76v71.41c0,3.18-2.58,5.76-5.76,5.76H-86.28
+c-3.18,0-5.76-2.58-5.76-5.76v-71.41C-92.04-567.22-89.46-569.8-86.28-569.8z" />
+<path class="st1" d="M-86.28-569.23H98.01c2.86,0,5.18,2.32,5.18,5.18v71.41c0,2.86-2.32,5.18-5.18,5.18H-86.28
+c-2.86,0-5.18-2.32-5.18-5.18v-71.41C-91.46-566.91-89.14-569.23-86.28-569.23z" />
+</g>
+<text transform="matrix(1 0 0 1 764.3982 121.9038)" class="st3 st4 st6">Remove issuers with</text>
+<text transform="matrix(1 0 0 1 774.8796 144.9409)" class="st3 st4 st6">highest h-factor</text>
+</g>
+<g id="Group_2553_1_" transform="translate(143)">
+<g id="Rectangle_453_1_" transform="translate(1027 656)">
+<path class="st7" d="M-49.99-569.8H134.3c3.18,0,5.76,2.58,5.76,5.76v71.41c0,3.18-2.58,5.76-5.76,5.76H-49.99
+c-3.18,0-5.76-2.58-5.76-5.76v-71.41C-55.75-567.22-53.17-569.8-49.99-569.8z" />
+<path class="st8" d="M-49.99-569.23H134.3c2.86,0,5.18,2.32,5.18,5.18v71.41c0,2.86-2.32,5.18-5.18,5.18H-49.99
+c-2.86,0-5.18-2.32-5.18-5.18v-71.41C-55.17-566.91-52.85-569.23-49.99-569.23z" />
+</g>
+<!--<text transform="matrix(1 0 0 1 986.7976 111.5376)" class="st3 st4 st6">Select 100 bonds </text>-->
+<text transform="matrix(1 0 0 1 1004.7976 134.5747)" class="st3 st4 st6">Select 100 bonds </text>
+<!--<text transform="matrix(1 0 0 1 1044.9822 157.6108)" class="st3 st4 st6">Factor</text>-->
+</g>
+<g id="Group_2552_1_" transform="translate(143)">
+<g id="Rectangle_455_1_" transform="translate(1027 758)">
+<path class="st9" d="M-49.99-554.32H134.3c3.18,0,5.76,2.58,5.76,5.76v26.49c0,3.18-2.58,5.76-5.76,5.76H-49.99
+c-3.18,0-5.76-2.58-5.76-5.76v-26.49C-55.75-551.74-53.17-554.32-49.99-554.32z" />
+<path class="st1" d="M-49.99-553.74H134.3c2.86,0,5.18,2.32,5.18,5.18v26.49c0,2.86-2.32,5.18-5.18,5.18H-49.99
+c-2.86,0-5.18-2.32-5.18-5.18v-26.49C-55.17-551.42-52.85-553.74-49.99-553.74z" />
+</g>
+<text transform="matrix(1 0 0 1 996.8552 229.0249)" class="st3 st4 st6">&gt;90 Unique Issuers</text>
+</g>
+<g id="Group_2551_1_" transform="translate(143)">
+<g id="Rectangle_456_1_" transform="translate(1027 820)">
+<path class="st9" d="M-49.99-544.9H134.3c3.18,0,5.76,2.58,5.76,5.76v26.49c0,3.18-2.58,5.76-5.76,5.76H-49.99
+c-3.18,0-5.76-2.58-5.76-5.76v-26.49C-55.75-542.32-53.17-544.9-49.99-544.9z" />
+<path class="st1" d="M-49.99-544.33H134.3c2.86,0,5.18,2.32,5.18,5.18v26.49c0,2.86-2.32,5.18-5.18,5.18H-49.99
+c-2.86,0-5.18-2.32-5.18-5.18v-26.49C-55.17-542.01-52.85-544.33-49.99-544.33z" />
+</g>
+<text transform="matrix(1 0 0 1 991.1951 300.439)" class="st3 st4 st6">Limit Sector weights</text>
+</g>
+<g id="Group_2554_1_" transform="translate(177)">
+<g id="Rectangle_454_1_" transform="translate(1232 656)">
+<path class="st10" d="M-13.7-569.8h184.29c3.18,0,5.76,2.58,5.76,5.76v71.41c0,3.18-2.58,5.76-5.76,5.76H-13.7
+c-3.18,0-5.76-2.58-5.76-5.76v-71.41C-19.46-567.22-16.88-569.8-13.7-569.8z" />
+<path class="st1" d="M-13.7-569.23h184.29c2.86,0,5.18,2.32,5.18,5.18v71.41c0,2.86-2.32,5.18-5.18,5.18H-13.7
+c-2.86,0-5.18-2.32-5.18-5.18v-71.41C-18.89-566.91-16.57-569.23-13.7-569.23z" />
+</g>
+<text transform="matrix(1 0 0 1 1251.2537 110.3862)" class="st3 st4 st6">New Age Alpha</text>
+<text transform="matrix(1 0 0 1 1257.8738 133.4224)" class="st3 st4 st6">USD High Yield </text>
+<text transform="matrix(1 0 0 1 1224.3484 156.4595)" class="st3 st4 st6">Corporate Bond Index</text>
+</g>
+<g id="Rectangle_448_1_" transform="translate(403 524)">
+<path class="st0" d="M-106.55-517.5H77.74c3.18,0,5.76,1.83,5.76,4.09v235.31c0,2.26-2.58,4.09-5.76,4.09h-184.29
+c-3.18,0-5.76-1.83-5.76-4.09v-235.31C-112.31-515.67-109.73-517.5-106.55-517.5z" />
+<path class="st1" d="M-106.55-517.09H77.74c2.86,0,5.18,1.65,5.18,3.68v235.31c0,2.03-2.32,3.68-5.18,3.68h-184.29
+c-2.86,0-5.18-1.65-5.18-3.68v-235.31C-111.74-515.45-109.42-517.09-106.55-517.09z" />
+</g>
+<g id="Rectangle_449_1_" transform="translate(420 556)">
+<path class="st0" d="M-107.43-529.7H43.46c3.18,0,5.76,2.58,5.76,5.76v36.86c0,3.18-2.58,5.76-5.76,5.76h-150.89
+c-3.18,0-5.76-2.58-5.76-5.76v-36.86C-113.19-527.12-110.61-529.7-107.43-529.7z" />
+<path class="st11" d="M-107.43-529.12H43.46c2.86,0,5.18,2.32,5.18,5.18v36.86c0,2.86-2.32,5.18-5.18,5.18h-150.89
+c-2.86,0-5.18-2.32-5.18-5.18v-36.86C-112.61-526.8-110.29-529.12-107.43-529.12z" />
+</g>
+<g id="Rectangle_449-2_1_" transform="translate(420 556)">
+<path class="st0" d="M-107.43-452.53H43.46c3.18,0,5.76,2.58,5.76,5.76v36.86c0,3.18-2.58,5.76-5.76,5.76h-150.89
+c-3.18,0-5.76-2.58-5.76-5.76v-36.86C-113.19-449.95-110.61-452.53-107.43-452.53z" />
+<path class="st11" d="M-107.43-451.95H43.46c2.86,0,5.18,2.32,5.18,5.18v36.86c0,2.86-2.32,5.18-5.18,5.18h-150.89
+c-2.86,0-5.18-2.32-5.18-5.18v-36.86C-112.61-449.63-110.29-451.95-107.43-451.95z" />
+</g>
+<g id="Rectangle_449-3_1_" transform="translate(420 556)">
+<path class="st0" d="M-107.43-374.2H43.46c3.18,0,5.76,2.58,5.76,5.76v36.86c0,3.18-2.58,5.76-5.76,5.76h-150.89
+c-3.18,0-5.76-2.58-5.76-5.76v-36.86C-113.19-371.62-110.61-374.2-107.43-374.2z" />
+<path class="st11" d="M-107.43-373.62H43.46c2.86,0,5.18,2.32,5.18,5.18v36.86c0,2.86-2.32,5.18-5.18,5.18h-150.89
+c-2.86,0-5.18-2.32-5.18-5.18v-36.86C-112.61-371.3-110.29-373.62-107.43-373.62z" />
+</g>
+<line id="Line_1361_1_" class="st12" x1="212.94" y1="128.24" x2="291.26" y2="128.24" />
+<line id="Line_1362_1_" class="st12" x1="486.5" y1="128.24" x2="564.82" y2="128.24" />
+<line id="Line_1363_1_" class="st12" x1="761.21" y1="128.24" x2="839.54" y2="128.24" />
+<line id="Line_1364_1_" class="st12" x1="1035.35" y1="128.24" x2="1113.67" y2="128.24" />
+<line id="Line_1366_1_" class="st12" x1="1212.16" y1="196.77" x2="1212.16" y2="169.13" />
+<line id="Line_1367_1_" class="st12" x1="1212.16" y1="269.34" x2="1212.16" y2="241.7" />
+<line id="Line_1365_1_" class="st12" x1="1310.06" y1="128.24" x2="1388.39" y2="128.24" />
+<path id="Icon_material-play-arrow_1_" class="st3" d="M239.14,116.15v24.19l19.01-12.09L239.14,116.15z" />
+<path id="Icon_material-play-arrow-2_1_" class="st3" d="M522.49,116.15v24.19l19.01-12.09L522.49,116.15z" />
+<g>
+<rect x="361" y="36.8" class="st2" width="57.12" height="29.79" />
+<text transform="matrix(1 0 0 1 362.1115 47.0248)"><tspan x="0" y="0" class="st3 st4 st13">Liquidity </tspan><tspan x="0.2" y="18" class="st3 st4 st13">Screens</tspan></text>
+</g>
+<g>
+<rect x="361" y="113.82" class="st2" width="57.12" height="29.79" />
+<text transform="matrix(1 0 0 1 372.9821 124.0477)"><tspan x="0" y="0" class="st3 st4 st13">Price </tspan><tspan x="-10.67" y="16.59" class="st3 st4 st13">Screens</tspan></text>
+</g>
+<g>
+<rect x="322.96" y="192.19" class="st2" width="133.2" height="29.79" />
+<text transform="matrix(1 0 0 1 323.0514 202.4178)"><tspan x="0" y="0" class="st3 st4 st13">Effective Duration &amp; </tspan><tspan x="9.83" y="16.59" class="st3 st4 st13">Maturity Screens</tspan></text>
+</g>
+<g>
+<rect x="582.33" y="110.03" class="st2" width="160.8" height="46.79" />
+<text transform="matrix(1 0 0 1 611.515 121.9615)"><tspan x="0" y="0" class="st3 st4 st6">Apply Market </tspan><tspan x="0.72" y="23" class="st3 st4 st6">Cap screens</tspan></text>
+</g>
+</g>
+</svg>
+
+                        </div>
+                      </div>
+                    </div>
+                    }
+                    <div class="type-1" *ngIf="isCheckdevWorld">
+                      <div class="c-box">
+                        <span>1</span>
+                        <p class="title-box">Universe</p>
+                        @for(data of Universe;track data){
+                        <div class="c-box-content">
+                          <p>{{data.Universe}}</p>
+                        </div>
+                        }
+                      </div>
+                      <div class="c-box">
+                        <span>2</span>
+                        <p class="title-box">Liquidity</p>
+                        @for(data of Liquidity;track data){
+                        <div class="c-box-content">
+                          <p>{{data.Liquidity}}</p>
+                        </div>
+                        }
+                      </div>
+                      <div class="c-box">
+                        <span>3</span>
+                        <p class="title-box">Calculation</p>
+                        @for(data of Calculation;track data){
+                        <div class="c-box-content">
+                          @for(calc of data.Calculation;track calc){
+                          <p>{{calc}}</p>
+                          }
+
+                        </div>
+                        }
+                      </div>
+                      <div class="c-box">
+                        <span>4</span>
+                        <p class="title-box">Weighting</p>
+                        @for(data of Weighting;track data){
+                        <div class="c-box-content">
+                          @for(weight of data.Weighting;track weight){
+                          <p>{{weight}}</p>
+                          }
+                        </div>
+                        }
+                      </div>
+                    </div>
+                    <span class="asofDateF" id="rebalceDateF" [style.display]="familyChartIndex.length>0 ? 'flex':'none'"></span>
+                    <div class="type-4 pt1rem p-rel familyChart" [style.display]="familyChartIndex.length>0 ? 'flex':'none'">
+
+                    </div>
+
+
+                  </div>
+
+                    <div id="SectorChart" style="height: 300px; display: none;    position: relative;
+          top: -5rem;"></div>
+                  </div>
+    
+      </div>
+    </div>
+  </div>
+</div>

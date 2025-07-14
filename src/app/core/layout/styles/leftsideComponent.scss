@@ -1,0 +1,62 @@
+.iconleft__select {
+  .__selectIco {
+    padding: 0.5rem 0;
+    margin-bottom: 0rem;
+    font-size: 0.40rem;
+    letter-spacing: -0.1px;
+    font-family: var(--ff-semibold);
+    @include cursor-hover;
+
+    span {
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin-bottom: 0 !important;
+    }
+
+    &:hover:not(.disableMenu) {
+      color: var(--leftSideText-B);
+    }
+
+    &.active {
+      background: var(--prim-button-color);
+      color: var(--primary-logo);
+      border-radius: 0.3rem;
+
+      &:hover {
+        color: var(--primary-logo) !important;
+      }
+    }
+  }
+}
+.left-l {
+  left: 0;
+  transition: all .2s ease-in;
+
+  .drilldown__cards__list {
+    position: relative;
+  }
+
+  .close__card {
+    position: static;
+    right: 0.5rem;
+    top: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    color: var(--iconColor);
+    transform: rotate(0deg);
+    cursor: pointer;
+    transition: all 0.2s;
+    padding-left:0rem;
+
+    &.pin__bar__comp {
+      transform: rotate(45deg);
+    }
+
+    &.pinned {
+      transform: rotate(0deg);
+      color: var(--prim-button-color);
+    }
+  }
+}

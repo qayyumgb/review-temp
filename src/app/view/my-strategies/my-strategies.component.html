@@ -1,0 +1,1052 @@
+<div id="my-strategies">
+  <div class="container-fill">
+    <div class="d-flex align-items-center left-g-s justify-content-between">
+      <ul class="nav nav-pills" role="tablist">
+        @if(sharedData.checkShowLeftTab(3) == 'A'){
+        <li class="nav-item active" [class.active]="clickTab=='saved'">
+          <a class="nav-link active" [class.active]="clickTab=='saved'" data-bs-toggle="pill" href="#customIndex" style=" margin-left: 0;" (click)="dataRefresh();clearInput();clickTab ='saved'">Custom Index Strategies</a>
+        </li>
+        }@else if(sharedData.checkShowLeftTab(3) == 'D'){
+        <li class="nav-item">
+          <a class="nav-link disabled" data-bs-toggle="pill" style=" margin-left: 0;">Custom Index Strategies</a>
+        </li>
+        }
+  
+        @if(sharedData.checkMyUserType()){
+        @if(sharedData.checkShowLeftTab(12) == 'A'){
+        <li class="nav-item" [class.active]="clickTab=='direct'">
+          <a class="nav-link" [class.active]="clickTab=='direct'" data-bs-toggle="pill" href="#directIndex" (click)="getDirectIndex();dataRefresh();clearInputDI();clickTab ='direct'">Approved Strategies</a>
+        </li>
+        }@else if(sharedData.checkShowLeftTab(12) == 'D'){
+        <li class="nav-item">
+          <a class="nav-link disabled" data-bs-toggle="pill">Approved Strategies</a>
+        </li>
+        }
+        }@else{
+        @if(sharedData.checkShowLeftTab(12) == 'A'){
+        <li class="nav-item" [class.active]="clickTab=='direct'">
+          <a class="nav-link" [class.active]="clickTab=='direct'" data-bs-toggle="pill" href="#directIndex" (click)="getDirectIndex();dataRefresh();clickTab ='direct'">Direct Index Strategies</a>
+        </li>
+        }@else if(sharedData.checkShowLeftTab(12) == 'D'){
+        <li class="nav-item">
+          <a class="nav-link disabled" data-bs-toggle="pill">Direct Index Strategies</a>
+        </li>
+        }
+        }
+  
+        @if(sharedData.checkShowLeftTab(13) == 'A'){
+        <li class="nav-item" [class.active]="clickTab=='traded'">
+          <a class="nav-link " [class.active]="clickTab=='traded'" data-bs-toggle="pill" href="#tradedStrategies" id="triggerTraded" (click)="getTradedStrategies();dataRefresh();clickTab ='traded'">Traded Strategies</a>
+        </li>
+        }@else if(sharedData.checkShowLeftTab(13) == 'D'){
+        <li class="nav-item">
+          <a class="nav-link disabled" data-bs-toggle="pill" id="triggerTraded">Traded Strategies</a>
+        </li>
+        }
+      </ul>
+      <!-- Checkbox Filter -->
+      <div class="d-flex align-items-center">
+        <div id="account_Exclusions" class="d-flex align-items-center  mystrategies_checkFilter" *ngIf="clickTab !='traded' && clickTab =='saved' && strategies_grouping_dp.length > 0">
+          <ng-container>
+            <mat-checkbox class="example-margin" (change)='onSavedFilChange($event)' [(ngModel)]='isSavedFilCheck'>  Saved
+            strategies
+          </mat-checkbox>
+          </ng-container>
+          <ng-container>
+            <mat-checkbox class="example-margin ml1rem" (change)='onTradeFilChange($event)' [(ngModel)]='isTradeFilCheck'>  Enable for trading
+          </mat-checkbox>
+          </ng-container>
+        </div>
+       
+          <ng-container *ngIf="clickTab=='traded' && tradedData.length > 0">
+            <div class="expandAll" >
+              <mat-slide-toggle [checked]="isExpand" class="example-margin preLabel" (change)="onToggleExpand($event)" [disabled]="norec == true"> Expand All</mat-slide-toggle>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="clickTab=='saved' && strategies_grouping.length > 0">
+            <div class="expandAll" >
+              <mat-slide-toggle [checked]="isExpand" class="example-margin preLabel" (change)="onToggleExpand($event)" [disabled]="norec == true"> Expand All</mat-slide-toggle>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="clickTab=='direct' && DIEnabletradinglist.length > 0">
+            <div class="expandAll" >
+              <mat-slide-toggle [checked]="isExpand" class="example-margin preLabel" (change)="onToggleExpand($event)" [disabled]="norec == true"> Expand All</mat-slide-toggle>
+            </div>
+          </ng-container>
+     
+      
+      </div>
+    
+      <!-- Checkbox Filter -->
+    </div>
+   
+    <div class="tab-content mystrategies_accordion position-relative" id="myTabContent">
+      <!-- Custom Indexing -->
+    
+      @if(sharedData.checkShowLeftTab(3) == 'A'){
+      <div class="tab-pane fade show active mystrategies_accordion_child" [class.active]="clickTab=='saved'" [class.show]="clickTab=='saved'" id="customIndex" role="tabpanel" aria-labelledby="home-tab">
+     
+        <!-- @if(sharedData.checkMyUserType()){
+        <div *ngIf="DIEnabletradinglist.length == 0" class="d-flex align-items-center justify-content-center norecords">
+          <p class="nodata">No Approved Strategies has been saved!</p>
+        </div>
+        }@else{
+        <div *ngIf="DIEnabletradinglist.length == 0" class="d-flex align-items-center justify-content-center norecords">
+          <p class="nodata">No direct indexing has been saved!</p>
+        </div>
+        } -->
+        <div *ngIf="showLoadTabs" id="linechart-spinner"
+        style=" width: 100%; height: 100%; position: absolute; background: var(--primary-color); z-index: 99;">
+     <mat-spinner class="reviewloader-spinner-stat"
+                  style="display: block; margin: auto !important ;inset: 0;position: absolute!important; transform: translate(-50%, -50%) !important;">
+     </mat-spinner>
+   </div>
+        <div class="p-stat-box" *ngIf="strategies_grouping_dp.length == 0">
+          <span class="nodata"
+            style="justify-content: center; display: flex; height: calc(100vh - 10rem); width: 100%; align-items: center; font-size: 1rem; color: var(--leftSideText);">
+            No
+            custom indexing has been saved!
+          </span>
+        </div>
+        <!-- No data for saved strategy checkbox filter -->
+        <div class="p-stat-box" [style.display]="strategies_grouping.length == 0 && emptyFilterText ? 'flex':'none'">
+          <span class="nodata"
+            style="justify-content: center; display: flex; height: calc(100vh - 10rem); width: 100%; align-items: center; font-size: 1rem; color: var(--leftSideText);">
+            No
+            custom indexing has been saved in the selected filters!
+          </span>
+        </div>
+          <!-- No data for saved strategy checkbox filter -->
+        <ng-container *ngIf="strategies_grouping.length > 0">
+          <div class="customIndex-header d-flex align-items-center justify-content-between">
+            <mat-form-field class="filterInput">
+              <input minlength="1" maxlength="50" appRemoveSpecialCharacters (keydown)="onkeysDown($event)" matInput [(ngModel)]="searchText" (input)="filterItems()" placeholder="Filter by BasedOn...">
+              <mat-icon id="eScBtn" *ngIf="!searchText">search</mat-icon>
+              <mat-icon id="close_btn" class="cursor-pointer"  *ngIf="searchText" (click)="clearInput()">close</mat-icon>
+            </mat-form-field>
+            <mat-paginator #Custompaginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+          <div class="customIndex-container mat-elevation-z8 scrollbox">
+            <mat-table #table [dataSource]="dataSource" matSort class="strategies-name " (matSortChange)="onSortCusData($event)" matSortDisableClear>
+              <ng-container matColumnDef="Action">
+                <mat-header-cell  style="text-align: left;align-items: center;" *matHeaderCellDef>
+                  Action
+                </mat-header-cell>
+                <mat-cell style="text-align: left; " *matCellDef="let element">
+                  <span class="accordion-extend" (click)="checkExpand()">
+                    <span class="material-icons expand-down-arrow arrow-border parent_arrow">expand_more</span>
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="strategyName">
+                <mat-header-cell mat-sort-header style="text-align:right;align-items: center;" *matHeaderCellDef>
+                  Strategy Name
+                </mat-header-cell>
+                <mat-cell  *matCellDef="let element">
+                  <span>
+                    {{element.showname}}
+                    <span *ngIf="element.showticker != null" class="ml-1">({{element.showticker}})</span>
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="basedOn">
+                <mat-header-cell  style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Based On
+                </mat-header-cell>
+                <mat-cell style=" text-align: right" *matCellDef="let element">
+                  <span>{{element.basedOn}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="m_date">
+                <mat-header-cell mat-sort-header style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Created Date
+                </mat-header-cell>
+                <mat-cell style="text-align: right;" *matCellDef="let element">
+                  <span style="visibility: hidden; opacity: 0">{{element.m_date}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="t_date">
+                <mat-header-cell mat-sort-header style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Last Updated Date
+                </mat-header-cell>
+                <mat-cell style="text-align: right;" *matCellDef="let element">
+                  <span style="visibility: hidden; opacity: 0">{{element.t_date}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Status">
+                <mat-header-cell  style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Status
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span>{{element.Status}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="ViewFactsheet">
+                <mat-header-cell  style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Factsheet
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span><!--View--></span>
+                </mat-cell>
+              </ng-container>
+              <!--</div>-->
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row #elementRef  *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row strategies-expand-custom" (click)="checkExpand()"
+                       [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl">
+              </mat-row>
+            </mat-table>
+            <p *ngIf="norec==true" class="matTable_noFound">No matching records found</p>
+          </div>
+          <ng-template #tpl let-element >
+            <div class="mat-row detail-row d-flex" [@detailExpand] style="overflow: hidden"> 
+              <mat-table #table [dataSource]="element.str_group" class="expandedList scrollbox">
+                <ng-container matColumnDef="Action">
+                  <mat-header-cell style="text-align: left;align-items: center;" *matHeaderCellDef>
+                    Action
+                  </mat-header-cell>
+                  <mat-cell style="text-align: left" *matCellDef="let element">
+                    <span class="accordion-extend">
+                      <span class="expand-down-arrow-outer" *ngIf="checkAcclen(element,'accChild')">
+                        <span class="material-icons expand-down-arrow" matRipple>expand_more</span>
+                      </span>
+                      <span class="expand-down-arrow-outer" *ngIf="!checkAcclen(element,'accChild')">
+                        <span class="material-icons expand-down-arrow disabled" style="cursor: no-drop;" matRipple>expand_more</span>
+                      </span>
+                      @if(checkDeleteBtn(element)){
+                      <span class="material-icons delete-ico" matTooltip="Delete" matTooltipPosition="above" data-bs-target="#deleteModal"
+                            data-bs-toggle="modal" (click)="deleteStgy(element);stopPropagation($event)">delete_forever</span>
+                      }@else{
+                      <span (click)="stopPropagation($event)" class="material-icons delete-ico disabled" matTooltip="Delete" matTooltipPosition="above">delete_forever</span>
+                      }
+                      <span class="material-icons edit-ico" matTooltip="Edit" matTooltipPosition="above" (click)="CustToolEdit(element);stopPropagation($event)">edit</span>
+                      <!--<span class="material-icons clone-ico" matTooltip="Clone" matTooltipPosition="above" data-bs-toggle="modal" data-bs-target="#mycloneDataModal" (click)="cloneStgyD(element);stopPropagation($event)">content_copy</span>-->
+                    </span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="strategyName">
+                  <mat-header-cell style="text-align:right;align-items: center;" *matHeaderCellDef>
+                    Strategy Name
+                  </mat-header-cell>
+                  <mat-cell  *matCellDef="let element">
+                    <span *ngIf="checkStrName(element['accParent'][0]).length <= 16"> {{checkStrName(element['accParent'][0])}}</span>
+                    <span class="elip_text" *ngIf="checkStrName(element['accParent'][0]).length > 16"  matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                      {{checkStrName(element['accParent'][0])}}
+                      <span class="defaultLeftTooltipText" [matTooltip]="hoverStrNameTraded(element['accParent'][0])" [matTooltipPosition]="'above'"
+                            matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                         
+                    </span>
+                    <span>&nbsp; ({{element['accParent'][0].shortname}})</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="basedOn">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Based On
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="checkBasedIndexName(element['accParent'][0]).length <= 20"> {{checkBasedIndexName(element['accParent'][0])}}</span>
+                    <span class="elip_text" *ngIf="checkBasedIndexName(element['accParent'][0]).length > 20"  matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                      {{checkBasedIndexName(element['accParent'][0])}}
+                      <span class="defaultLeftTooltipText" [matTooltip]="NamehoverTraded(element['accParent'][0])" [matTooltipPosition]="'above'"
+                            matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                         
+                    </span>
+                    <span *ngIf="element['accParent'][0].Ticker != null">&nbsp; ({{element['accParent'][0].Ticker}})</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="m_date">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Created Date
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="element['accParent'][0].createddate != null">{{modifiedDateTime(element['accParent'][0].createddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                    <span *ngIf="element['accParent'][0].createddate == null">-</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="t_date">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Last Updated Date
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="element['accParent'][0].modifieddate != null">   {{modifiedDateTime(element['accParent'][0].modifieddate)+'Z' | date: 'MM/dd/yyyy HH:mm'}}</span>
+                    <span *ngIf="element['accParent'][0].modifieddate == null">-</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Status">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Status
+                  </mat-header-cell>
+                  <mat-cell  *matCellDef="let element">
+                    <span>Saved Strategy</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ViewFactsheet">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Factsheet
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" class="justify-content-between" *matCellDef="let element">
+                    <ng-container *ngIf="checkFactsheetAvailMas(element['accParent'][0])">
+                      <span class="view-factsheet-btn" style="pointer-events: auto;" (click)="viewCustIndFactsheet(element['accParent'][0]);stopPropagation($event)">View</span>
+                      <div class="title-ticker flexcolumn lastBtn" *ngIf="checkTradeStgy(element['accChild'])">
+                        <button class="dialog_btn_P" style="font-size:0.75rem" (click)="tradeStrategy(element['accChild'],'Trade');stopPropagation($event)">
+                          Trade Strategy
+                        </button>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="!checkFactsheetAvailMas(element['accParent'][0])">
+                      <span class="view-factsheet-btn">-</span>
+                      <span *ngIf="checkTradeStgy(element['accChild'])" class="pulse-loader-dots" style=" margin-right: 3rem;" [style.width]="'1.5rem'" [style.height]="'0.5rem'" [style.color]="'var(--border)'">
+                        <span></span><span></span><span></span>
+                      </span>
+                    </ng-container>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" [cdkDetailRowTpl]="tplChild" [cdkDetailRow]="row" class="element-row" [class.disable]="disable(row)">
+                </mat-row>
+
+
+              </mat-table>
+            </div>
+          </ng-template>
+          <ng-template #tplChild let-elements>
+            <div class="mat-row detail-row d-flex" [@detailExpand] style="overflow: hidden">
+              <div class="nested-table table subChild-table">
+                <ng-container *ngFor="let item2 of elements['accChild']">
+                  <div class="d-grid" *ngIf="checkMyStatus(item2) != 'Trade Completed'">
+                    <p>
+                    </p>
+                    <p>{{item2.accountNo}}</p>
+                    <p>
+                      <span *ngIf="checkBasedIndexName(item2).length <= 19">{{checkBasedIndexName(item2)}}</span>
+                      <span class="elip_text" *ngIf="checkBasedIndexName(item2).length > 19"  matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                        {{checkBasedIndexName(item2)}}
+                        <span class="defaultLeftTooltipText" [matTooltip]="NamehoverTraded(item2)" [matTooltipPosition]="'above'"
+                              matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                           
+                      </span>
+                      <span *ngIf="item2.Ticker != null">&nbsp;({{item2.Ticker}})</span>
+                    </p>
+                    <p *ngIf="item2.createddate != null">
+                      {{modifiedDateTime(item2.createddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}
+                    </p>
+                    <p *ngIf="item2.createddate == null">
+                      -
+                    </p>
+                    <p *ngIf="item2.modifieddate != null"> {{modifiedDateTime(item2.modifieddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</p>
+                    <p *ngIf="item2.modifieddate == null">-</p>
+                    <p>
+                      {{checkMyStatus(item2)}}
+                      <svg *ngIf="checkMyStatus(item2) == 'Trade Completed'" width="16" height="16" style="margin-left:0.25rem"
+                           viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke="var(--successColor)" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                        <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z"
+                              stroke="var(--successColor)" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <svg *ngIf="checkMyStatus(item2) == 'Enabled For Trading'" width="16" height="16" style="margin-left:0.25rem"
+                           viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke="var(--warningColor)" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                        <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z"
+                              stroke="var(--warningColor)" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </p>
+                    <div *ngIf="checkFactsheetAvail(item2)" class="d-flex align-items-center justify-content-between" style="padding-right: 16px;">
+                      <a class="view-factsheet-btn" (click)="viewCustIndFactsheet(item2);stopPropagation($event)">{{ 'View' }}</a>
+                      <div class="d-flex align-items-center">
+                        <div class="title-ticker flexcolumn lastBtn d-flex"
+                             *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkTradeBtn(item2) && checkEnableTradingAvail(item2)">
+                          <div id="account_Exclusions">
+                            <span [style.padding-right]="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkReallocBtn(item2) && checkEnableTradingAvail(item2) ? '1.2rem':'1.2rem'">
+                              <mat-checkbox class="example-margin" [(ngModel)]="item2['activeTrade']" color='primary'> </mat-checkbox>
+                            </span>
+                          </div>
+                          <button (click)="checkAccInfo(item2,'CI')" *ngIf="checkTradeBtn(item2) && !checkReallocBtn(item2)" class="dialog_btn_P" style="font-size: 0.72rem; min-width: 5.6rem;">
+                            Trade
+                          </button>
+                        </div>
+                        <div class="title-ticker  lastBtn" style=" color: var(--QtrSelActive)"
+                             *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkReallocBtn(item2) && checkEnableTradingAvail(item2)">
+                          <button class="dialog_btn_P" style="font-size: 0.72rem; min-width: 5.6rem;" (click)="checkAccInfo(item2,'CI')">
+                            Reallocate
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <p *ngIf="!checkFactsheetAvail(item2)">-</p>
+                  </div>
+                </ng-container>
+
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+
+      </div>
+      }
+      <!-- Custom Indexing End-->
+      <!-- Direct Indexing -->
+      @if(sharedData.checkShowLeftTab(12) == 'A'){
+      <div class="tab-pane fade mystrategies_accordion_child" [class.active]="clickTab=='direct'" [class.show]="clickTab=='direct'" id="directIndex" role="tabpanel" aria-labelledby="profile-tab">
+        <div *ngIf="showLoadTabs" id="linechart-spinner"
+             style=" width: 100%; height: 100%; position: absolute; background: var(--primary-color); z-index: 99;">
+          <mat-spinner class="reviewloader-spinner-stat"
+                       style="display: block; margin: auto !important ;inset: 0;position: absolute!important; transform: translate(-50%, -50%) !important;">
+          </mat-spinner>
+        </div>
+        @if(sharedData.checkMyUserType()){
+        <div *ngIf="DIEnabletradinglist.length == 0" class="d-flex align-items-center justify-content-center norecords">
+          <p class="nodata">No Approved Strategies has been saved!</p>
+        </div>
+        }@else{
+        <div *ngIf="DIEnabletradinglist.length == 0" class="d-flex align-items-center justify-content-center norecords">
+          <p class="nodata">No direct indexing has been saved!</p>
+        </div>
+        }
+        <ng-container *ngIf="DIEnabletradinglist.length > 0">
+          <div class="customIndex-header d-flex align-items-center justify-content-between">
+            <mat-form-field class="filterInput">
+              <input minlength="1" maxlength="50" appRemoveSpecialCharacters (keydown)="onkeysDown($event)" matInput [(ngModel)]="searchText" (input)="directIndexfilter()" placeholder="Filter by BasedOn...">
+              <mat-icon id="eScBtn" *ngIf="!searchText">search</mat-icon>
+              <mat-icon id="close_btn" class="cursor-pointer"  *ngIf="searchText" (click)="clearInputDI()">close</mat-icon>
+            </mat-form-field>
+            <mat-paginator #directPaginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+          </div>
+          <div class="customIndex-container mat-elevation-z8">
+            <mat-table #table [dataSource]="dataSource2" matSort matSortDisableClear matSortDirection="asc" (matSortChange)="onSortData($event)" class="strategies-name">
+              <ng-container matColumnDef="Action">
+                <mat-header-cell style="text-align: left;align-items: center;" *matHeaderCellDef>
+                  Action
+                </mat-header-cell>
+                <mat-cell style="text-align: left" *matCellDef="let element">
+                  <span class="accordion-extend">
+                    <span class="material-icons expand-down-arrow arrow-border parent_arrow" (click)="checkExpand()">expand_more</span>
+                    <span (click)="loadDirectIndexEdit1(element);stopPropagation($event)" class="material-icons edit-ico" style="margin:0rem 0.5rem" matTooltip="Edit" matTooltipPosition="above">edit</span>
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="strategyName">
+                <mat-header-cell mat-sort-header style="text-align:right;align-items: center;" *matHeaderCellDef>
+                  Strategy Name
+                </mat-header-cell>
+                <mat-cell  *matCellDef="let element">
+                  <span [matTooltip]='element.name' [matTooltipPosition]="'above'">{{checkStrNameDirect(element)}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="basedOn">
+                <mat-header-cell  style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Based On
+                </mat-header-cell>
+                <mat-cell  *matCellDef="let element">
+                  <ng-container *ngIf="checkBasedOn1(element).length <= 21">
+                    <span *ngIf="element.basedon != null">{{checkBasedOn1(element)}}</span>
+                  </ng-container>
+                 <ng-container *ngIf="checkBasedOn1(element).length > 21">
+                  <span class="elip_text" *ngIf="element.basedon != null" matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                    {{checkBasedOn1(element)}} 
+                    <span class="defaultLeftTooltipText" [matTooltip]='Namehover(element)' [matTooltipPosition]="'above'"
+                          matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                       
+                  </span>
+                 </ng-container>
+               
+                  <span *ngIf="element.showticker != null"> &nbsp; ({{element.showticker}})</span>
+               
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="m_date">
+                <mat-header-cell mat-sort-header style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Created Date
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+
+                  <span *ngIf="element.createddate!=null"> {{modifiedDateTime(element.createddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                  <span *ngIf="element.createddate==null">-</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="t_date">
+                <mat-header-cell mat-sort-header style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Last Updated Date
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span *ngIf="element.modifieddate!=null"> {{modifiedDateTime(element.modifieddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                  <span *ngIf="element.modifieddate==null">-</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Status">
+                <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Status
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span>Saved Strategy</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="ViewFactsheet">
+                <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Factsheet
+                </mat-header-cell>
+                <mat-cell style="text-align: right" class="justify-content-between" *matCellDef="let element">
+                  <span class="view-factsheet-btn" style="cursor:pointer;" (click)="viewDirIndFactsheet(element,'H');stopPropagation($event)">View</span>
+                  <div class="title-ticker flexcolumn lastBtn" *ngIf="checkTradeStgy(element.str_group)">
+                    <button class="dialog_btn_P" style="font-size:0.75rem" (click)="tradeStrategyDI(element.str_group,'Trade');stopPropagation($event)">
+                      Trade Strategy
+                    </button>
+                  </div>
+                </mat-cell>
+              </ng-container>
+              <!--</div>-->
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row strategies-expand" (click)="checkExpand()"
+                       [cdkDetailRow]="row" [cdkDetailRowTpl]="tpls">
+              </mat-row>
+            </mat-table>
+            <p *ngIf="norec==true" class="matTable_noFound">No matching records found</p>
+          </div>
+
+          <ng-template #tpls let-element>
+            <div class="mat-row detail-row d-flex" [@detailExpand] style="overflow: hidden">
+
+              <mat-table #table [dataSource]="element.str_group" class="expandedList scrollbox">
+                <ng-container matColumnDef="Action">
+                  <mat-header-cell style="text-align: left;align-items: center;" *matHeaderCellDef>
+                    Action
+                  </mat-header-cell>
+                  <mat-cell style="text-align: left" *matCellDef="let element">
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="strategyName">
+                  <mat-header-cell style="text-align:right;align-items: center;" *matHeaderCellDef>
+                    Strategy Name
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span>{{element.accountNo}}</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="basedOn">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Based On
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="checkBasedOn2(element).length <= 21">{{checkBasedOn2(element)}}</span>
+                    <ng-container *ngIf="checkBasedOn2(element).length > 21">
+                      <span class="elip_text" matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                        {{checkBasedOn2(element)}} 
+                        <span class="defaultLeftTooltipText" [matTooltip]='Namehover2(element)' [matTooltipPosition]="'above'"
+                              matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                           
+                      </span>
+                     </ng-container>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="m_date">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Created Date
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="element.createddate!=null"> {{modifiedDateTime(element.createddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                    <span *ngIf="element.createddate==null">-</span>
+
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="t_date">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Last Updated Date
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="element.modifieddate!=null">
+                      {{modifiedDateTime(element.modifieddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}
+                    </span>
+                    <span *ngIf="element.modifieddate==null">-</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Status">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Status
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span>
+                      {{checkMyStatus(element)}}
+                      <svg *ngIf="checkMyStatus(element) == 'Enabled For Trading'" width="16" height="16" style="margin-left:0.25rem"
+                           viewBox="0 0 18 18" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.0938 7.3125L7.96641 11.25L5.90625 9.28125" stroke="var(--warningColor)" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                        <path d="M9 15.75C12.7279 15.75 15.75 12.7279 15.75 9C15.75 5.27208 12.7279 2.25 9 2.25C5.27208 2.25 2.25 5.27208 2.25 9C2.25 12.7279 5.27208 15.75 9 15.75Z"
+                              stroke="var(--warningColor)" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ViewFactsheet">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Factsheet
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element" class="justify-content-between">
+                    <span class="view-factsheet-btn" style="cursor:pointer;" (click)="viewDirIndFactsheet(element,'B');stopPropagation($event)">View</span>
+                    <div id="account_Exclusions" *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkTradeBtn(element) && checkEnableTradingAvail(element)">
+                      <ng-container [style.padding-right]="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkReallocBtn(element) && checkEnableTradingAvail(element) ? '6.8rem':'1.4rem'">
+                        <mat-checkbox class="example-margin" [(ngModel)]="element['activeTrade']"></mat-checkbox>
+                      </ng-container>
+                    </div>
+
+                    <!-- Trade -->
+                    <div class="title-ticker flexcolumn lastBtn" *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkTradeBtn(element) && !checkReallocBtn(element) && checkEnableTradingAvail(element)">
+                      <button class="dialog_btn_P" style="font-size: 0.72rem; min-width: 5.6rem;" (click)="checkAccInfo(element,'DI');stopPropagation($event)">Trade</button>
+                    </div>
+                    <!-- Trade End -->
+                    <!-- Reallocate -->
+                    <div class="title-ticker flexcolumn lastBtn" style=" color: var(--QtrSelActive)"
+                         *ngIf="sharedData.checkShowLeftTab(13) == 'A' && sharedData.checkShowLeftTab(5) == 'A' && checkReallocBtn(element) && checkEnableTradingAvail(element)">
+                      <button (click)="checkAccInfo(element,'DI');stopPropagation($event)" class="dialog_btn_P" style="font-size: 0.72rem; min-width: 5.6rem;">Reallocate</button>
+                    </div>
+                    <!-- Reallocate End-->
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row" style="cursor: default;">
+                </mat-row>
+              </mat-table>
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+      }
+      <!-- Direct Indexing End-->
+      <!-- Traded Strategies -->
+      @if(sharedData.checkShowLeftTab(13) == 'A'){
+      <div class="tab-pane fade mystrategies_accordion_child mystrategies_accordion_TRstrategy" [class.active]="clickTab=='traded'" [class.show]="clickTab=='traded'" id="tradedStrategies" role="tabpanel" aria-labelledby="contact-tab">
+        <div *ngIf="showLoadTabs" id="linechart-spinner"
+             style=" width: 100%; height: 100%; position: absolute; background: var(--primary-color); z-index: 99;">
+          <mat-spinner class="reviewloader-spinner-stat"
+                       style="display: block; margin: auto !important ;inset: 0;position: absolute!important; transform: translate(-50%, -50%) !important;">
+          </mat-spinner>
+        </div>
+        <div *ngIf="tradedData.length == 0" class="d-flex align-items-center justify-content-center norecords">
+          <p class="nodata">No traded has been saved!</p>
+        </div>
+        <ng-container *ngIf="tradedData.length > 0">
+          <div class="customIndex-header d-flex align-items-center justify-content-between">
+            <mat-form-field class="filterInput">
+              <input minlength="1" maxlength="50" appRemoveSpecialCharacters (keydown)="onkeysDown($event)" matInput [(ngModel)]="searchText" (input)="tradedfilter()" placeholder="Filter by BasedOn...">
+              <mat-icon id="eScBtn" *ngIf="!searchText">search</mat-icon>
+              <mat-icon id="close_btn" class="cursor-pointer"  *ngIf="searchText" (click)="clearInputTS()">close</mat-icon>
+            </mat-form-field>
+            <mat-paginator #tradedPaginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+          <div class="customIndex-container mat-elevation-z8">
+            <mat-table #table [dataSource]="dataSource3" matSort class="strategies-name" (matSortChange)="onSortTradedData($event)" matSortDisableClear matSortDirection="asc">
+              <ng-container matColumnDef="Action">
+                <mat-header-cell  style="text-align: left;align-items: center;" *matHeaderCellDef>
+                  Action
+                </mat-header-cell>
+                <mat-cell style="text-align: left" *matCellDef="let element">
+                  <span class="accordion-extend" (click)="checkExpand()">
+                    <span class="material-icons expand-down-arrow arrow-border parent_arrow">expand_more</span>
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="strategyName">
+                <mat-header-cell mat-sort-header style="text-align:right;align-items: center;" *matHeaderCellDef>
+                  Strategy Name
+                </mat-header-cell>
+
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span>
+                    {{element.showname}}
+                    <span *ngIf="element.showticker != null" class="ml-1">({{element.showticker}})</span>
+                  </span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="basedOn">
+                <mat-header-cell  style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Based On
+                </mat-header-cell>
+                <mat-cell style=" text-align: right" *matCellDef="let element">
+                  <span>{{element.basedOn}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="m_date">
+                <mat-header-cell mat-sort-header style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Modified Date
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span>{{element.m_date}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="t_date">
+                <mat-header-cell mat-sort-header style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Last Traded
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span>{{element.t_date}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Nextrebalance">
+                <mat-header-cell  style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Next Rebalance
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span>{{element.Nextrebalance}}</span>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="ViewFactsheet">
+                <mat-header-cell  style="text-align: right; align-items: center;" *matHeaderCellDef>
+                  Factsheet
+                </mat-header-cell>
+                <mat-cell style="text-align: right" *matCellDef="let element">
+                  <span><!--View--></span>
+                </mat-cell>
+              </ng-container>
+              <!--</div>-->
+              <mat-header-row *matHeaderRowDef="displayedColumnsTraded"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumnsTraded;" matRipple class="element-row  TRstrategies-expand-custom" (click)="checkExpand()"
+                       [cdkDetailRow]="row" [cdkDetailRowTpl]="trs1">
+              </mat-row>
+            </mat-table>
+            <p *ngIf="norec==true" class="matTable_noFound">No matching records found</p>
+          </div>
+
+          <ng-template #trs1 let-element>
+            <div class="mat-row detail-row d-flex" [@detailExpandT] style="overflow: hidden">
+              <mat-table #table [dataSource]="element.str_group" class="expandedList scrollbox">
+                <ng-container matColumnDef="Action">
+                  <mat-header-cell style="text-align: left;align-items: center;" *matHeaderCellDef>
+                    Action
+                  </mat-header-cell>
+                  <mat-cell style="text-align: left" *matCellDef="let element">
+                    <span class="accordion-extend">
+                      <span class="expand-down-arrow-outer" *ngIf="checkAcclen(element,'accChild')">
+                        <span class="material-icons expand-down-arrow" matRipple>expand_more</span>
+                      </span>
+                      <span class="expand-down-arrow-outer" *ngIf="!checkAcclen(element,'accChild')">
+                        <span class="material-icons expand-down-arrow disabled" style="cursor: no-drop;" matRipple>expand_more</span>
+                      </span>
+                      @if(checkUser(element)){
+                      <span class="material-icons edit-ico" matTooltip="Edit" matTooltipPosition="above" (click)="CustToolEditTraded(element);stopPropagation($event)">edit</span>
+                      }@else{
+                      <span class="material-icons edit-ico disabled" style="cursor: default; pointer-events: none; " matTooltip="Edit" matTooltipPosition="above">edit</span>
+                      }
+                      @if(element['accParent'][0].type =='C'){
+                      <span data-bs-toggle="modal" data-bs-target="#mycloneDataModal" (click)="cloneStgyD(element);stopPropagation($event)" class="material-icons clone-ico" matTooltip="Clone" matTooltipPosition="above">content_copy</span>
+                      }
+                    </span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="strategyName">
+                  <mat-header-cell style="text-align:right;align-items: center;" *matHeaderCellDef>
+                    Strategy Name
+                  </mat-header-cell>
+                  <mat-cell  *matCellDef="let element">
+                    <span *ngIf="checkStrName(element['accParent'][0]).length <= 16"> {{checkStrName(element['accParent'][0])}}</span>
+                    <ng-container *ngIf="checkStrName(element['accParent'][0]).length > 16">
+                      <span class="elip_text" matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                        {{checkStrName(element['accParent'][0])}}
+                        <span class="defaultLeftTooltipText" [matTooltip]="hoverStrNameTraded(element['accParent'][0])" [matTooltipPosition]="'above'"
+                              matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                           
+                      </span>
+                     </ng-container>
+                    <span>&nbsp; ({{element['accParent'][0].shortname}})</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="basedOn">
+                  <mat-header-cell style=" align-items: center;" *matHeaderCellDef>
+                    Based On
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="checkBasedIndexName(element['accParent'][0]).length <= 20"> {{checkBasedIndexName(element['accParent'][0])}}</span>
+                    <ng-container *ngIf="checkBasedIndexName(element['accParent'][0]).length > 20">
+                      <span class="elip_text" matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                        {{checkBasedIndexName(element['accParent'][0])}}
+                        <span class="defaultLeftTooltipText" [matTooltip]="NamehoverTraded(element['accParent'][0])" [matTooltipPosition]="'above'"
+                              matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                           
+                      </span>
+                     </ng-container>
+                    <span *ngIf="element['accParent'][0].Ticker != null">&nbsp; ({{element['accParent'][0].Ticker}})</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="m_date">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Created Date
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="element['accParent'][0].modifieddate != null">{{modifiedDateTime(element['accParent'][0].modifieddate)+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                    <span *ngIf="element['accParent'][0].modifieddate == null">-</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="t_date">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Last Updated Date
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <span *ngIf="element['accParent'][0].accmodifieddate != null">{{modifiedDateTime(element['accParent'][0].accmodifieddate)+'Z' | date: 'MM/dd/yyyy HH:mm'}}</span>
+                    <span *ngIf="element['accParent'][0].accmodifieddate == null">-</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Nextrebalance">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Next Rebalance
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" *matCellDef="let element">
+                    <!--<span>{{modifiedDateTime(element.nextRebalanceDate)+'Z' | date: 'MM/dd/yyyy HH:mm'}}</span>
+                <span *ngIf="element.nextRebalanceDate == null">-</span>-->
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ViewFactsheet">
+                  <mat-header-cell style="text-align: right; align-items: center;" *matHeaderCellDef>
+                    Factsheet
+                  </mat-header-cell>
+                  <mat-cell style="text-align: right" class="d-flex justify-content-between" *matCellDef="let element">
+                    <!--<span class="view-factsheet-btn" (click)="stopPropagation($event)">View</span>-->
+
+
+                    <ng-container>
+                      <span class="view-factsheet-btn" (click)="viewCustIndFactsheetTraded(element['accParent'][0], 'default');stopPropagation($event)">View</span>
+                      <div class="title-ticker flexcolumn lastBtn">
+                        <button class="dialog_btn_P" style="font-size:0.75rem" (click)="tradeStrategy(element['accChild'],'Rebalance');stopPropagation($event)">
+                          Rebalance Strategy
+                        </button>
+                      </div>
+                    </ng-container>
+                    <!--<ng-container *ngIf="!checkFactsheetAvailMasTraded(element['accParent'][0])">
+                  <span class="view-factsheet-btn">-</span>
+                  <span *ngIf="checkTradeStgy(['accChild'])" class="pulse-loader-dots" style=" margin-right: 3rem;" [style.width]="'1.5rem'" [style.height]="'0.5rem'" [style.color]="'var(--border)'">
+                    <span></span><span></span><span></span>
+                  </span>
+                </ng-container>-->
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumnsTraded"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsTraded;" matRipple class="element-row"
+                         [cdkDetailRow]="row" [cdkDetailRowTpl]="tplChild">
+                </mat-row>
+              </mat-table>
+            </div>
+          </ng-template>
+          <ng-template #tplChild let-elements>
+            <div class="mat-row detail-row d-flex" [@detailExpandT] style="overflow: hidden">
+              <div class="nested-table table subChild-table">
+                <ng-container *ngFor="let item2 of elements['accChild']">
+
+                  <div class="d-grid" *ngIf="item2.tradeStatus == 'Y'">
+                    <p>
+                    </p>
+                    <p> {{item2.accountNo}}</p>
+                    <p>
+                      <span *ngIf="checkBasedIndexName(item2).length <= 21">{{checkBasedIndexName(item2)}} </span>
+                      <ng-container *ngIf="checkBasedIndexName(item2).length > 21">
+                        <span class="elip_text" matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                          {{checkBasedIndexName(item2)}}
+                          <span class="defaultLeftTooltipText" [matTooltip]="NamehoverTraded(item2)" [matTooltipPosition]="'above'"
+                                matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                             
+                        </span>
+                       </ng-container>
+                      <span *ngIf="item2.Ticker != null">&nbsp;({{item2.Ticker}})</span></p>
+                    <!--<p *ngIf="item2.Ticker != null">&nbsp;({{item2.Ticker}})</p>-->
+                    <p>{{modifiedDateTime(item2.modifieddate)+'Z' | date: 'MM/dd/yyyy HH:mm'}}</p>
+                    <p>{{modifiedDateTime(item2.accmodifieddate)+'Z' | date: 'MM/dd/yyyy HH:mm'}}</p>
+                    <p><span [className]="rebalClass(item2)">{{modifiedDateTime(item2.nextRebalanceDate)+'Z' | date: 'MM/dd/yyyy'}}</span></p>
+                    <p class="d-flex justify-content-between align-items-center" style="padding:0;padding-right:16px;">
+                      <a class="view-factsheet-btn" (click)="viewCustIndFactsheetTraded(item2, '');stopPropagation($event)">{{ 'View' }}</a>
+                      <span class="title-ticker flexcolumn lastBtn d-flex">
+                        <div id="account_Exclusions">
+                          <span class="pr1_5rem">
+                            <mat-checkbox class="example-margin" [(ngModel)]="item2['activeTrade']" color='primary'> </mat-checkbox>
+                          </span>
+                        </div>
+                        <button class="dialog_btn_P" style="font-size: 0.72rem; min-width: 5.6rem;" (click)="rebalanceInfo(item2);stopPropagation($event)">
+                          Rebalance
+                        </button>
+                      </span>
+                    </p>
+                  </div>
+                </ng-container>
+
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+      }
+      <!-- Traded Strategies End-->
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="existModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z"
+                        fill="var(--errorColor)" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Strategy</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(6,97)}}</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr_p_5" data-bs-dismiss="modal" (click)="deleteStrategyDashboard();">
+                Confirm
+              </button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="mycloneDataModal" tabindex="-1" role="dialog" aria-labelledby="cloneModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:25%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;    color: var(--warningColor);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3>Clone Strategies</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(3,73)}}</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="cloneConfirm()" data-bs-dismiss="modal">Yes</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal" (click)="cloneDy = undefined">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="lockTradeModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem;">
+              The current account has been locked and cannot be selected for further
+              proceedings.
+            </p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="pauseTradeModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(6,99)}}</p>
+            <div class="cal_lockDesign">
+              <div class="timeline-item"  *ngIf="pausedDataInfo.length>0">
+                <span class="acc" style="margin: 0.5rem 1rem 1rem; display: flex; color: var(--leftSideText-B);">Paused Accounts</span>
+                <!--begin::Text-->
+                <div class="fw-mormal timeline-content text-muted ps-3" *ngFor="let data of pausedDataInfo">
+                  <span class="acc">{{data.accountId}}</span>
+                  <span><span style="color: var(--leftSideText-B)">by&nbsp;</span>{{data.pauseUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P mr0_5rem" (click)="unPauseAcc()" data-bs-dismiss="modal">
+                Continue
+              </button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="lockPauseInfoTradeModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:36%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <div style="max-height: 60vh; overflow: auto;">
+              <p *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length>0" style="font-size: 0.8rem; padding: 1rem !important">{{sharedData.checkMyAppMessage(12,87)}}</p>
+
+              <p *ngIf="lockedDataInfo.length>0 && pausedDataInfo.length<=0" style="font-size: 0.8rem; padding: 1rem !important">{{sharedData.checkMyAppMessage(12,88)}}</p>
+              <div class="cal_lockDesign d-flex p-rel" *ngIf="lockedDataInfo.length>0">
+                <div class="timeline-badge">
+                  <span class="material-icons">
+                    lock
+                  </span>
+                </div>
+                <div class="timeline-item">
+                  <span class="acc" style="margin: 0.5rem 1rem 1rem; display: flex; color: var(--leftSideText-B);">Locked Accounts</span>
+                  <!--begin::Text-->
+                  <div class="fw-mormal timeline-content text-muted ps-3" *ngFor="let data of lockedDataInfo">
+                    <span class="acc">{{data.accountNo}}</span>
+                    <span><span style="color: var(--leftSideText-B)">by&nbsp;</span> {{data.lockedUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.lockedDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <p *ngIf="pausedDataInfo.length>0 && lockedDataInfo.length<=0" style="font-size: 0.8rem; padding: 1rem !important">{{sharedData.checkMyAppMessage(12,89)}}</p>
+              <div class="cal_lockDesign d-flex p-rel" *ngIf="pausedDataInfo.length>0">
+                <div class="timeline-badge">
+                  <span class="material-icons">
+                    admin_panel_settings
+                  </span>
+                </div>
+                <div class="timeline-item">
+                  <span class="acc" style="margin: 0.5rem 1rem 1rem; display: flex; color: var(--leftSideText-B);">Paused Accounts</span>
+                  <!--begin::Text-->
+                  <div class="fw-mormal timeline-content text-muted ps-3" *ngFor="let data of pausedDataInfo">
+                    <span class="acc">{{data.accountNo}}</span>
+                    <span><span style="color: var(--leftSideText-B)">by&nbsp;</span>{{data.pauseUserName}}&nbsp; <span style="color: var(--leftSideText-B)">on&nbsp;</span> {{data.pauseDate+'Z'  | date: 'MM/dd/yyyy HH:mm'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="pausedDataInfo.length>0" class="foot-l" style="margin-top:2rem !important">
+              <button  type="button" class="dialog_btn_P mr0_5rem" (click)="initTrade()" data-bs-dismiss="modal">Continue</button>
+              <button type="button" class="dialog_btn_S" data-bs-dismiss="modal">Cancel</button>
+            </div>
+            <div *ngIf="pausedDataInfo.length==0 && lockedDataInfo.length>0" class="foot-l" style="margin-top:2rem !important">
+              <button type="button" class="dialog_btn_P" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

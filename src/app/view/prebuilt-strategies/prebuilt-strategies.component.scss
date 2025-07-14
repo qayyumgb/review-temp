@@ -1,0 +1,135 @@
+#prebuilt__Comp {
+  .left-l {
+    position: relative;
+    z-index: 9;
+    height: 100%;
+    padding: 1rem 0 0 0.5rem;
+    width: 16%;
+    min-width: 15rem;
+  }
+
+  .right-l {
+    position: fixed;
+    z-index: 99;
+    height: 100%;
+    padding: 1rem 0 0 1rem;
+    width: 17%;
+    min-width: 16rem;
+    right: 0;
+    top: 0;
+    padding-top: 3rem;
+  }
+}
+.no_data {
+  color: var(--leftSideText);
+  font-size: 0.85rem;
+  font-family: var(--ff-regular);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  text-align: center;
+}
+.reviewFactsheet_Prebuilt {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-left: 22rem;
+  padding-top: 3rem;
+  z-index: 1;
+}
+
+.basedOn__sec {
+  position: fixed;
+  top: 3.2rem;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: fit-content;
+  font-size: 0.65rem;
+  color: var(--leftSideText-B);
+  font-family: var(--ff-semibold);
+  background: var(--topNavbar);
+  padding: 0.2rem 1rem;
+  border-radius: 0.3rem;
+
+  .indName {
+    color: var(--linkColor);
+  }
+
+  .divided {
+    color: var(--paraFontColorAlt);
+    font-size: 0.6rem;
+  }
+}
+#naaLineChart{
+  svg{
+      .category{
+        
+          text{
+              fill: var(--leftSideText);
+              font-family: var(--ff-regular);
+              &.name{
+                  text-anchor: middle;
+                  font-size: 13px;
+              }
+              &.subname{
+                  text-anchor: middle;
+                  font-size: 17px;
+                  font-family: var(--ff-medium);
+              }
+          }
+      }
+  }
+}
+.reviewFactsheet_Direct {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-left: 22rem;
+  padding-top: 3rem;
+  z-index: 1;
+
+  &.w-95 {
+    width: 95% !important;
+  }
+}
+.viewReportBtn {
+  background: var(--topNavbar);
+  border-radius: 0.3rem;
+  padding: 1rem 0.8rem;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--leftSideText);
+  cursor: pointer;
+
+  .report_icon{
+    background: var(--border);
+    padding: 0.35rem;
+    border-radius: 0.4rem;
+    margin-right: 0.7rem;
+  }
+}
+.drilldown__cards__list {
+
+  .scrollable__div {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 69vh;
+  }
+  }
+
+.prebuilt_index_comp .selected {
+  background: var(--prim-button-color) !important;
+  color: var(--leftSideText-B);
+
+  .report_icon {
+    background: #1552c3 !important;
+  }
+}
+  @import '../../core/layout/styles/responsive/prebuild.scss';

@@ -1,0 +1,179 @@
+.logIn-container {
+  .mat-form-field-infix {
+    padding: 0.9rem 0 0.6rem !important;
+    margin-top: 0;
+    border-top: 0;
+  }
+}
+
+.logIn-container {
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      height: 2.6rem;
+
+      .mat-mdc-form-field-flex {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        .mat-mdc-form-field-infix {
+          padding: 0;
+          display: flex;
+          align-items: center;
+
+          input {
+            color: var(--leftSideText-B);
+            font-size: 0.8rem !important;
+            font-family: var(--ff-regular);
+            -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+            -webkit-box-shadow: 0 0 0px 1000px var(--cards) inset;
+          }
+        }
+
+        .mdc-notched-outline__leading,
+        .mdc-notched-outline__trailing {
+          border-color: var(--border) !important;
+        }
+      }
+
+      &:hover {
+        border-color: var(--border);
+      }
+    }
+  }
+
+  .N-pass {
+    .mat-mdc-form-field {
+      .mat-mdc-form-field-subscript-wrapper {
+        // bottom: -1rem;
+        &::before {
+          display: inline;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  input.mat-form-field-autofill-control {
+    // background: var(--globalSearch);
+    // -webkit-box-shadow: 0 0 0 30px var(--globalSearch) inset !important;
+    -webkit-text-fill-color: var(--leftSideText-B) !important;
+  }
+
+  .mat-input-element {
+    caret-color: var(--prim-button-color-text);
+  }
+
+  &.loginautoFill {
+    input.mat-form-field-autofill-control {
+      -webkit-box-shadow: 0 0 0px 1000px var(--topnavbarBgColor) inset;
+    }
+  }
+
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline-start {
+      border-radius: 0;
+      border-right-style: none;
+      min-width: 0px;
+      border: 0px solid currentColor;
+      min-width: 0px;
+      border-width: 0px !important;
+    }
+
+    .mat-form-field-outline-end {
+      border-radius: 0;
+      border-left-style: none;
+      flex-grow: 1;
+      border: 0px solid currentColor;
+      min-width: 0px;
+      border-width: 0px !important;
+    }
+
+    .mat-form-field-outline {
+      color: var(--leftSideText);
+      background: var(--topnavbarBgColor);
+      border: 1px solid var(--border);
+    }
+
+    .mat-form-field-subscript-wrapper {
+      padding: 0;
+      margin-top: 4px;
+      font-size: 11px;
+      font-family: var(--ff-regular);
+    }
+
+    .mat-form-field-outline-thick {
+      .mat-form-field-outline-end {
+        border-width: 0px !important;
+        transition: border-color .3s cubic-bezier(.25, .8, .25, 1);
+      }
+
+      .mat-form-field-outline-gap {
+        border-width: 0px !important;
+        transition: border-color .3s cubic-bezier(.25, .8, .25, 1);
+      }
+
+      .mat-form-field-outline-start {
+        border-width: 0px !important;
+        transition: border-color .3s cubic-bezier(.25, .8, .25, 1);
+      }
+    }
+  }
+
+  .mat-mdc-form-field-error-wrapper {
+    padding-left: 0;
+
+    .mat-mdc-form-field-bottom-align::before {
+      content: "";
+      display: inline-block;
+      height: auto;
+    }
+
+    .mat-mdc-form-field-error {
+      color: var(--errorColor) !important;
+      font-family: var(--ff-regular);
+      font-size: 0.7rem;
+      /*text-shadow: 0px 0px 4px rgb(0 0 0 / 25%);*/
+      text-shadow: none;
+      line-height: 1;
+      margin-top: 0.2rem;
+
+      @media (min-width: 1600px) {
+        margin-top: 0.4rem;
+      }
+    }
+  }
+
+  .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
+    opacity: 1;
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .mat-form-field {
+    width: 100% !important;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .logIn-container .mat-form-field-infix {
+    padding: 10px 0px 6px !important;
+    margin-top: 0;
+    border-top: 0;
+  }
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 0;
+  border-right-style: none;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 0;
+  border-left-style: none;
+  flex-grow: 1;
+}

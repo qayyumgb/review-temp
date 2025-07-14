@@ -1,0 +1,10 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" _ngcontent-ng-cli-universal-c14="" viewBox="-7 12 30 30" class="ng-star-inserted">
+  <g _ngcontent-ng-cli-universal-c14="" class="chart_ico" style="cursor: pointer;display: block;transform: translate(-9px, 10px);">
+    <g _ngcontent-ng-cli-universal-c14="">
+      <circle _ngcontent-ng-cli-universal-c14="" cx="17" cy="17" r="14" style="fill: #fff;stroke-miterlimit: 10;stroke-width: 1.5px;stroke: #319de0;"/>
+      <g _ngcontent-ng-cli-universal-c14="" style="transform: translate(11px, 25px);">
+        <text _ngcontent-ng-cli-universal-c14="" style="font-size: 19px;font-family: 'var(--ff-semibold)';fill: #339ee0;">T</text>
+      </g>
+    </g>
+  </g>
+</svg>

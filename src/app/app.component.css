@@ -1,0 +1,136 @@
+/*:host {
+    max-width: 1280px;
+    padding: 2rem;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background: #F2F2F2;
+}
+
+tr:nth-child(odd) {
+    background: #FFF;
+}
+
+th, td {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+table {
+    margin: 0 auto;
+}
+*/
+/*Cookie*/
+.cookie-outer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  background: var(--topNavbar);
+  color: #fff;
+  box-shadow: 4px 2px 8px #00000059;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0;
+  z-index: 9147483659;
+  transition: .4s;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accept-btn {
+  background-image: linear-gradient(45deg, #00b9ff, #2e4c99);
+  border: 0;
+  font-size: 9pt;
+  font-family: opensans-semibold;
+  white-space: nowrap;
+  min-width: 60px;
+}
+
+.cookie-outer p {
+  font-size: 13px;
+}
+
+#cookie-close .btn-themeW {
+  font-family: var(--ff-medium);
+  color: var(--leftSideText-B);
+  background-color: var(--prim-button-color-text);
+  padding: 0.5rem 1.5rem !important;
+  font-size: 0.8rem;
+  white-space: nowrap;
+
+}
+  #cookie-close .btn-themeW:hover {
+    color: var(--leftSideText-B) !important;
+    opacity: .8;
+  }
+
+  #cookie-close .btn-themeW:hover, #cookie-close .btn-themeW:focus {
+    color: var(--primary-color) !important;
+  }
+
+#cookie-close .max-layout {
+  width: 100%;
+}
+
+
+.cookie-outer .container-fill {
+  padding: 0px 15px;
+}
+
+.cookie-outer a {
+  transition: .4s;
+}
+
+  .cookie-outer a:hover {
+    color: var(--prim-button-color-text);
+    /*color: #6ea8fe !important;*/
+  }
+
+.M_notify {
+  background: var(--topNavbar);
+  color: var(--leftSideText);
+  font-family: var(--ff-regular);
+  font-size: 0.8rem;
+  left: 2rem;
+  bottom: 3rem;
+  width: 30rem;
+  padding: 1.5rem;
+  z-index: 9999;
+  border-radius: 5px;
+  position: fixed;
+  box-shadow: 0px 0px 10px #0000002b;
+  display: none;
+}
+
+  .M_notify .closeBtn {
+    position: absolute;
+    top: -1rem;
+    right: -0.5rem;
+    font-size: 1rem;
+    color: var(--prim-button-color);
+    text-shadow: none;
+  }
+
+  .M_notify b {
+    font-family: var(--ff-medium);
+    font-weight: 500;
+    color: var(--leftSideText-B);
+  }
+
+  .M_notify .d-flex-cont {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .M_notify p {
+    margin: 0;
+    font-size: 0.8rem !important;
+    padding: 0 1rem;
+  }
+
+  .M_notify img {
+    height: auto;
+    width: 20rem;
+  }

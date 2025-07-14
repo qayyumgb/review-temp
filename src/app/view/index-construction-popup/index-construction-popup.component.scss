@@ -1,0 +1,127 @@
+.content-top {
+}
+
+.content-btm {
+  .label {
+    font-size: .8rem;
+    color: var(--leftSideText);
+    font-family: var(--ff-regular);
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+      border-bottom: 0px solid var(--border);
+    }
+
+    p {
+      font-size: .8rem;
+      color: var(--leftSideText);
+      font-family: var(--ff-regular);
+      margin: 0 !important;
+      width: 33%;
+      line-height: 1.5 !important;
+      text-align: left;
+    }
+
+    .right_port {
+      width: 67%;
+      cursor: pointer;
+
+      input {
+        position: relative;
+        -webkit-transition: all ease .1s;
+      }
+    }
+  }
+
+  .construction-rules {
+    padding: 1rem;
+
+    .calc-chart {
+      .text-b {
+        span {
+          position: relative;
+          // margin-right: 5px;
+          font-family: var(--ff-regular);
+          font-size: 0.7rem;
+          &:after {
+            content: ",";
+            position: absolute;
+            // right: -1px;
+          }
+
+          &:last-child {
+            span {
+              position: relative;
+              margin-right: 0px;
+            }
+
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .box-c {
+      width: 9rem;
+      height: 2.5rem;
+      border: 1px dashed var(--prim-button-color);
+      border-radius: 0.2rem;
+      position: relative;
+    }
+
+    .box-d {
+      width: 9rem;
+      height: 2.5rem;
+      background: var(--prim-button-color);
+      border-radius: 0.2rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      top: -1.5rem;
+      left: 1.5rem;
+    }
+
+    .text-c {
+      color: var(--leftSideText-B);
+      font-size: 0.80rem;
+      font-family: var(--ff-semibold);
+    }
+
+    .text-b {
+      color: var(--leftSideText-B);
+      font-size: 0.80rem;
+      font-family: var(--ff-regular);
+      width: 11rem;
+      padding-left: 0.5rem;
+      text-align: left;
+
+      p {
+        margin: 0 !important;
+        font-size: 0.70rem;
+        color: var(--leftSideText-B);
+
+        b {
+          color: var(--prim-button-color);
+          font-weight: 500;
+          font-family: var(--ff-medium);
+        }
+      }
+
+      hr {
+        border-color: var(--border);
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,286 @@
+<div class="notify-l">
+  <div class="top-header-n">
+    <div class="title-h d-flex justify-content-between align-items-center">
+      <h4>Notifications</h4>
+      <div class="d-flex align-items-center">
+        @if(getNotificationData.length > 0){
+        <a class="ng-star-inserted" (click)="sharedData.getNotificationDataReload();sharedData.getHNotificationDataReload();sharedData.getTradeNotificationDataReload()" style="line-height: 1;padding: 0.2rem 0.5rem 0.1rem;">
+          <span class="material-icons">refresh</span>
+        </a>
+        <a (click)="deleteAll_row(sharedData.checkMyAppMessage(0,5),'deleteAll')">Dismiss all</a>
+        }
+        <span class="material-icons" (click)="closeNotify()"> close </span>
+      </div>
+    </div>
+  </div>
+  <div class="content-body-n p-rel">
+    @if(getNotificationData.length == 0){
+    <div class="list-n d-flex justify-content-center align-items-center">
+      <span style="color: var(--leftSideText); font-size: 0.8rem;margin: 2rem 0;">{{sharedData.checkMyAppMessage(0, 13)}}</span>
+    </div>
+    }@else{
+    <div class="list-n">
+      @for (item of getNotificationData; track item) {
+      @if(item['notifyViewType'] == 'Queue'){
+      <div class="inner-list-n" *ngIf="item.notifyStatus != 'D' && item.displayQueue != 'N'">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <svg width="20" height="20" viewBox="0 0 12 12" fill="none" style="margin-right: 0.5rem;">
+              <rect width="12" height="12" rx="2" fill="#292A4E" />
+              <path d="M7.25 3.27197C7.87227 3.55719 8.37829 4.04664 8.68406 4.65907C8.98984 5.2715 9.07697 5.97009 8.931 6.63886C8.78504 7.30764 8.41475 7.90639 7.88161 8.33572C7.34846 8.76506 6.68452 8.99915 6 8.99915C5.31548 8.99915 4.65155 8.76506 4.1184 8.33572C3.58526 7.90639 3.21497 7.30764 3.069 6.63886C2.92304 5.97009 3.01017 5.2715 3.31594 4.65907C3.62171 4.04664 4.12773 3.55719 4.75 3.27197" stroke="#B5B5E1" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="notify-s-head">Strategy</span>
+          </div>
+          <span class="d-flex align-items-center">
+            <span class="c-p-text time" style="display: block;margin-right: 0.7rem;font-size: 0.6rem;">{{modifiedDate(item.createddate)+'Z'  | date: 'MM/dd/yyyy HH:mm:ss' }}</span>
+            <span class="material-icons close_row" (click)="closeNotify_row(item)"> close </span>
+          </span>
+        </div>
+        <p class="c-g-text mt0_5rem">
+          <span style="color: var(--linkColor);">{{checkAccVal(item)}} </span>
+          {{item.Name}} ({{item.shortName}})
+          <span class="c-p-text based-n" style="display: block; font-size: 0.65rem;"><span class="time">Based on</span>&nbsp; <span class="c-p-text ticker-n">{{item.BasedOn}} </span><span *ngIf="checkTicker(item)!='Equity Universe'">({{checkTicker(item)}})</span>&nbsp;</span>
+        </p>
+        <span class="w-100 d-flex justify-content-between align-items-center">
+          <a style="font-size: 0.7rem; font-family: var(--ff-medium); color: var(--errorColor);" *ngIf="item.queueStatus == 'Failed'">ERROR!</a>
+          <a (click)="notifyAdminError(item)" style="font-size: 0.7rem; font-family: var(--ff-medium); padding-right: 1rem; cursor: pointer; color: var(--prim-button-color-text) !important" *ngIf="!checkErrorType(item.errMessage) && item.queueStatus == 'Failed'">Notify Support</a>
+          <a (click)="insufficientCountClick(item)" style="font-size: 0.7rem; font-family: var(--ff-medium); padding-right: 1rem; cursor: pointer; color: var(--prim-button-color-text) !important" *ngIf="checkErrorType(item.errMessage) && item.queueStatus == 'Failed'">Edit Strategies</a>
+        </span>
+        <p style="font-size: 0.6rem; display: block; margin: 0 !important;" *ngIf="item.queueStatus == 'Failed'">{{item.errMessage}}</p>
+        <div class="step-wizard" *ngIf="item.queueStatus != 'Failed'">
+          <ul class="form-wizard-steps">
+            <li [class.bluebg]="item.notifyStatus != 'A' && item.notifyStatus == 'I' || item.notifyStatus == 'E'"
+                [style.opacity]="item.notifyStatus == 'A' ? '1':'0.4'">
+              <span class="inprogress" [class.inprogress]="item.notifyStatus == 'A' || item.notifyStatus == 'I' || item.notifyStatus == 'E'"></span>
+              <p>Queue</p>
+            </li>
+            <li [class.bluebg]="item.notifyStatus != 'A' && item.notifyStatus != 'I' && item.notifyStatus == 'E'"
+                [style.opacity]="item.notifyStatus == 'I' ? '1':'0.4'">
+              <span class="inprogress" [class.inprogress]="item.notifyStatus != 'A' && item.notifyStatus == 'I' || item.notifyStatus == 'E'"></span>
+              <p>In Progress</p>
+            </li>
+            <li [style.opacity]="item.notifyStatus == 'E' ? '1':'0.4'">
+              <span class="active" [class.active]="item.notifyStatus != 'A' && item.notifyStatus != 'I' && item.notifyStatus == 'E'">
+                <i class="material-icons i_check">
+                  check
+                </i>
+              </span>
+              <p>Completed</p>
+            </li>
+          </ul>
+          <a class="options-v-n" (click)="viewIndex(item)" *ngIf="item.notifyStatus == 'E'">View</a>
+        </div>
+      </div>
+      }@else if(item['notifyViewType'] == 'Holding'){
+      <div class="inner-list-n" style="padding-bottom: 0rem;" *ngIf="item.notifyStatus != 'D' && item.displayQueue != 'N'">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.5rem;">
+              <rect width="12" height="12" rx="2" fill="#292A4E" />
+              <path d="M4.6875 5.4375L6 6.75L7.3125 5.4375" stroke="#B5B5E1" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M6 3.25V6.75" stroke="#B5B5E1" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M8.75 6.75V8.5C8.75 8.5663 8.72366 8.62989 8.67678 8.67678C8.62989 8.72366 8.5663 8.75 8.5 8.75H3.5C3.4337 8.75 3.37011 8.72366 3.32322 8.67678C3.27634 8.62989 3.25 8.5663 3.25 8.5V6.75" stroke="#B5B5E1" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="notify-s-head">Downloads</span>
+          </div>
+          <span class="d-flex align-items-center">
+            <span class="c-p-text time" style="display: block;margin-right: 0.7rem;font-size: 0.6rem;">{{modifiedDate(item.createddate)+'Z'  | date: 'MM/dd/yyyy HH:mm:ss' }}</span>
+            <span class="material-icons close_row" (click)="closeNotify_row(item)"> close </span>
+          </span>
+        </div>
+        <p class="c-g-text mt0_5rem" style="margin-bottom: 0.2rem !important;">
+          <span>[Holdings Report] - </span>
+          <span style="color: var(--linkColor);">{{checkAccVal(item)}} </span>
+          {{item.Name}} ({{item.shortName}})
+          <span class="c-p-text based-n" style="display: block; font-size: 0.65rem;"><span class="time">Based on</span>&nbsp; <span class="c-p-text ticker-n">{{item.BasedOn}} </span><span *ngIf="checkTicker(item)!='Equity Universe'">({{checkTicker(item)}})</span></span>
+        </p>
+        <span class="w-100 d-flex justify-content-between align-items-center">
+          <a style="font-size: 0.7rem; font-family: var(--ff-medium); color: var(--errorColor);" *ngIf="item.queueStatus == 'Failed'">ERROR!</a>
+        </span>
+        <p style="font-size: 0.6rem; display: block; margin: 0 !important;" *ngIf="item.queueStatus == 'Failed'">{{item.errMessage}}</p>
+        <div class="step-wizard" style="flex-wrap:wrap" *ngIf="item.queueStatus != 'Failed'">
+          <div class="d-flex justify-content-between w-100 mb0_5rem h-factsheet">
+           @if(item.notifyStatus == 'E'){
+            <span>
+              <a class="active cp" (click)="downloadHis(item)">
+                <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="var(--prim-button-color-text)"><path d="m720-120 160-160-56-56-64 64v-167h-80v167l-64-64-56 56 160 160ZM560 0v-80h320V0H560ZM240-160q-33 0-56.5-23.5T160-240v-560q0-33 23.5-56.5T240-880h280l240 240v121h-80v-81H480v-200H240v560h240v80H240Zm0-80v-560 560Z" /></svg>
+                View Holdings Report
+              </a>
+            </span>
+            <span class="material-icons">
+              check_circle
+            </span>
+            }@else{
+            <span>
+              <a>Downloading...</a>
+            </span>
+            }
+          </div>
+          @if(item.notifyStatus != 'E'){
+          <mat-progress-bar id="showMatLoader" mode="indeterminate" value="40" style="height:0.1rem;left:0;overflow: hidden;margin-bottom:1rem"></mat-progress-bar>
+          }
+          <!--<ul class="form-wizard-steps">
+            <li [class.bluebg]="item.notifyStatus != 'A' && item.notifyStatus == 'I' || item.notifyStatus == 'E'"
+                [style.opacity]="item.notifyStatus == 'A' ? '1':'0.4'">
+              <span class="inprogress" [class.inprogress]="item.notifyStatus == 'A' || item.notifyStatus == 'I' || item.notifyStatus == 'E'"></span>
+              <p>Queue</p>
+            </li>
+            <li [class.bluebg]="item.notifyStatus != 'A' && item.notifyStatus != 'I' && item.notifyStatus == 'E'"
+                [style.opacity]="item.notifyStatus == 'I' ? '1':'0.4'">
+              <span class="inprogress" [class.inprogress]="item.notifyStatus != 'A' && item.notifyStatus == 'I' || item.notifyStatus == 'E'"></span>
+              <p>In Progress</p>
+            </li>
+            <li [style.opacity]="item.notifyStatus == 'E' ? '1':'0.4'">
+              <span class="active" [class.active]="item.notifyStatus != 'A' && item.notifyStatus != 'I' && item.notifyStatus == 'E'">
+                <i class="material-icons i_check">
+                  check
+                </i>
+              </span>
+              <p>Completed</p>
+            </li>
+          </ul>-->
+          <!--<a class="options-v-n d-flex align-items-center" style="flex-direction:column;top:0" (click)="downloadHis(item)" *ngIf="item.notifyStatus == 'E'">
+            <span class="material-icons" style="font-size:1.2rem;margin-bottom:0.3rem">download</span>
+            <p>Download</p>
+          </a>-->
+        </div>
+      </div>
+      }
+      @else if(item['notifyViewType'] == 'Trade'){
+      <div class="inner-list-n" style="padding-bottom: 0.5rem;">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.5rem;">
+              <rect width="12" height="12" rx="2" fill="#292A4E" />
+              <path d="M9.25 3.75L6.25 6.75L5 5.5L2.75 7.75" stroke="#BFBFBF" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M9.25 5.75V3.75H7.25" stroke="#BFBFBF" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            <span class="notify-s-head">Trade</span>
+          </div>
+          <span class="d-flex align-items-center">
+            <span class="c-p-text time" style="display: block;margin-right: 0.7rem;font-size: 0.6rem;">{{modifiedDate(item.completionTimeStamp)+'Z'  | date: 'MM/dd/yyyy HH:mm:ss' }}</span>
+            <span class="material-icons close_row" (click)="closeNotify_rowTrade(item)"> close </span>
+          </span>
+        </div>
+        <p class="c-g-text mt0_5rem">
+          <span style="color: var(--prim-button-color);">{{item.accountno}} </span>
+          @if(item.slName == null){}@else{ {{item.slName}} ({{item.shortname}}) }
+        </p>
+        <div class="step-wizard ng-star-inserted">
+          <p>Status: {{item.summaryStatus}}</p>
+        </div>
+      </div>
+      }
+      }
+    </div>
+    }
+  </div>
+</div>
+
+
+<div class="modal fade warningautoModel" id="viewWarningModel" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" style="background: #00000080 !important;display:none;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3>Warning</h3>
+            <p style="font-size: 0.9rem;">{{warMsg}}</p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="deleteModalRow" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="#dc3545" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Queue</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(0,4)}}</p>
+
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="removestrategyRecordQueue();">Confirm</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="deleteAllModalRow" tabindex="-1" role="dialog" aria-labelledby="deleteAllModalRow" aria-hidden="true" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="#dc3545" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Queue</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(0,5)}}</p>
+
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="removeallstrategyRecordQueue();removeallstrategyRecord()">Confirm</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="deletetradeModalRow" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="#dc3545" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Notification</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(0, 14)}}</p>
+
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="removestrategyRecord();">Confirm</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

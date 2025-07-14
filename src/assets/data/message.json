@@ -1,0 +1,722 @@
+[
+    {
+        "Id": 1,
+        "Message": "Are you sure you want to permanently delete this Okta account?",
+        "MenuId": 0,
+        "Type": "D"
+    },
+    {
+        "Id": 2,
+        "Message": "Are you certain about switching to the (MODE) mode?",
+        "MenuId": 0,
+        "Type": "D"
+    },
+    {
+        "Id": 3,
+        "Message": "Note that any changes made will reflect based on the previously chosen filters. Component count cannot fall behind",
+        "MenuId": 0,
+        "Type": "C"
+    },
+    {
+        "Id": 4,
+        "Message": "Are you sure you want to remove this queue?",
+        "MenuId": 0,
+        "Type": "D"
+    },
+    {
+        "Id": 5,
+        "Message": "Are you sure you want to remove all the queues?",
+        "MenuId": 0,
+        "Type": "D"
+    },
+    {
+        "Id": 6,
+        "Message": "Notified support team on queue failure. Please try again later",
+        "MenuId": 0,
+        "Type": "I"
+    },
+    {
+        "Id": 7,
+        "Message": "Notification has been successfully removed.",
+        "MenuId": 0,
+        "Type": "S"
+    },
+    {
+        "Id": 8,
+        "Message": "This queue has been successfully removed.",
+        "MenuId": 0,
+        "Type": "S"
+    },
+    {
+        "Id": 9,
+        "Message": "This queue has been successfully removed.",
+        "MenuId": 0,
+        "Type": "S"
+    },
+    {
+        "Id": 10,
+        "Message": "Successfully removed",
+        "MenuId": 0,
+        "Type": "S"
+    },
+    {
+        "Id": 11,
+        "Message": "There is an error in the connection.",
+        "MenuId": 0,
+        "Type": "E"
+    },
+    {
+        "Id": 12,
+        "Message": "There is an error in the connection.",
+        "MenuId": 0,
+        "Type": "E"
+    },
+    {
+        "Id": 13,
+        "Message": "There are no new notification(s) currently.",
+        "MenuId": 0,
+        "Type": "I"
+    },
+    {
+        "Id": 14,
+        "Message": "Are you sure you want to remove this notification?",
+        "MenuId": 0,
+        "Type": "D"
+    },
+    {
+        "Id": 15,
+        "Message": "Are you sure you want to remove all the nofifications?",
+        "MenuId": 0,
+        "Type": "D"
+    },
+    {
+        "Id": 16,
+        "Message": "Saved successfully",
+        "MenuId": 0,
+        "Type": "S"
+    },
+    {
+        "Id": 17,
+        "Message": "Trading has been successfully enabled.",
+        "MenuId": 0,
+        "Type": "S"
+    },
+    {
+        "Id": 18,
+        "Message": "Trading has been successfully disabled.",
+        "MenuId": 0,
+        "Type": "S"
+    },
+    {
+        "Id": 19,
+        "Message": "There are no records currently.",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 20,
+        "Message": "No stock(s) have been added",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 21,
+        "Message": "Invalid company names detected in the input. Kindly proceed with their removal for accuracy and compliance upon saving.",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 22,
+        "Message": "Your changes are ready to be saved. Are you sure you want to proceed ahead?",
+        "MenuId": 5,
+        "Type": "C"
+    },
+    {
+        "Id": 23,
+        "Message": "{{deleteConfTxt}}",
+        "MenuId": 5,
+        "Type": null
+    },
+    {
+        "Id": 24,
+        "Message": "Are you sure you want to delete this list(s)? It will be permanently removed and cannot be recovered.",
+        "MenuId": 5,
+        "Type": "D"
+    },
+    {
+        "Id": 25,
+        "Message": "The file has been uploaded successfully. Duplicate entries Have Been filtered out.",
+        "MenuId": 5,
+        "Type": "S"
+    },
+    {
+        "Id": 26,
+        "Message": "Your uploaded Excel file is missing the required header(s). Please re-upload the file with appropriate header(s).",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 27,
+        "Message": "Uploaded Excel file is empty. Please add appropriate data before re-uploading.",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 28,
+        "Message": "Currently you dont have any selected account.",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 29,
+        "Message": "Insufficient funds to proceed. Can we include components marked as <b>Don't sell</b> despite the cash limitation?",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 30,
+        "Message": "Insufficient funds to proceed. Would you like to revisit the <b>liquidation</b> option despite the cash limitation?",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 31,
+        "Message": "The current account has been locked and cannot be upgrade for further proceedings.",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 32,
+        "Message": "Do you intent to authorize trading activities for this account?",
+        "MenuId": 5,
+        "Type": "C"
+    },
+    {
+        "Id": 33,
+        "Message": "Are you sure you want to remove this account?",
+        "MenuId": 5,
+        "Type": "D"
+    },
+    {
+        "Id": 34,
+        "Message": "High server demand awaits performance data retrieval.",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 35,
+        "Message": "Same result is being obtained since no new changes have been made",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 36,
+        "Message": "Same result is being obtained since no new changes have been made",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 37,
+        "Message": "Same result is being obtained since no new changes have been made",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 38,
+        "Message": "Same result is being obtained since no new changes have been made",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 39,
+        "Message": "Same result is being obtained since no new changes have been made",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 40,
+        "Message": "Same result is being obtained since no new changes have been made",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 41,
+        "Message": "Tax Target updated successfully",
+        "MenuId": 5,
+        "Type": "S"
+    },
+    {
+        "Id": 42,
+        "Message": "Tax Target updated successfully",
+        "MenuId": 5,
+        "Type": "S"
+    },
+    {
+        "Id": 43,
+        "Message": "Please choose a date within the defined range",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 44,
+        "Message": "Account name updated successfully",
+        "MenuId": 5,
+        "Type": "S"
+    },
+    {
+        "Id": 45,
+        "Message": "Account settings updated successfully",
+        "MenuId": 5,
+        "Type": "s"
+    },
+    {
+        "Id": 46,
+        "Message": "Cash Target updated successfully",
+        "MenuId": 5,
+        "Type": "s"
+    },
+    {
+        "Id": 47,
+        "Message": "Cash Raise updated successfully",
+        "MenuId": 5,
+        "Type": "S"
+    },
+    {
+        "Id": 48,
+        "Message": "Liquidate settings updated successfully",
+        "MenuId": 5,
+        "Type": "s"
+    },
+    {
+        "Id": 49,
+        "Message": "This information has been prepared for informational purposes only and does not replace information you receive directly from your custodian.  This report has been prepared from data believed to be reliable, but no representation is being made as to it",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 50,
+        "Message": "This information has been prepared for informational purposes only and does not replace information you receive directly from your custodian.  This report has been prepared from data believed to be reliable, but no representation is being made as to it",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 51,
+        "Message": "Are you sure you want to clear these filters?",
+        "MenuId": 3,
+        "Type": "D"
+    },
+    {
+        "Id": 52,
+        "Message": "Are you sure you want to clear these factors?",
+        "MenuId": 3,
+        "Type": "D"
+    },
+    {
+        "Id": 53,
+        "Message": "Are you sure you want to clear this Alpha Factor?",
+        "MenuId": 3,
+        "Type": "D"
+    },
+    {
+        "Id": 54,
+        "Message": "Exiting without saving will result in the irretrievable loss of your recent strategy modifications. Please confirm your intent to exit without saving.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 55,
+        "Message": "This account has been saved by the below user in their strategy.",
+        "MenuId": 3,
+        "Type": "I"
+    },
+    {
+        "Id": 56,
+        "Message": "Saving this account in your strategy will lead to its removal from the previously saved strategies. Do you want to continue?",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 57,
+        "Message": "This account is currently being used for trading by the below user.",
+        "MenuId": 3,
+        "Type": "I"
+    },
+    {
+        "Id": 58,
+        "Message": "Do you want to proceed with reallocating this account to you?",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 59,
+        "Message": "Accounts - are already under process and excluded from the selection. Further process could be continued only with the other selected accounts",
+        "MenuId": 3,
+        "Type": "I"
+    },
+    {
+        "Id": 60,
+        "Message": "The current account has been locked and cannot be selected for further proceedings.",
+        "MenuId": 3,
+        "Type": "I"
+    },
+    {
+        "Id": 61,
+        "Message": "The account is currently paused. To proceed with them, click continue.",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 62,
+        "Message": "Locked account(s) - have been excluded from the selection. Additionally, some accounts are currently paused. To proceed with the paused accounts selection , click continue.",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 63,
+        "Message": "Accounts - are already under process and excluded from the selection. Further process could be continued only with the other selected accounts",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 64,
+        "Message": "The accounts - are currently paused. To proceed with them, click continue.",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 65,
+        "Message": "Insufficient market value in the selected account for current calculation. Please re-evaluate component selection or choose alternative account(s).",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 66,
+        "Message": "Insufficient market value with the provided cash target for selected stocks. Consider adjusting your cash target.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 67,
+        "Message": "Insufficient market value with the provided cash target for selected stocks. Consider adjusting your cash target.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 68,
+        "Message": "Currently you dont have any steps to be mentioned.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 69,
+        "Message": "Insufficient market value with the provided cash target for selected stocks. Consider adjusting your cash target.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 70,
+        "Message": "This feature is only available through an agreement with New Age Alpha and your firm. To learn more about agreements and partnerships, please call 212-922-2688.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 71,
+        "Message": "Are you sure you want to delete this strategy?",
+        "MenuId": 3,
+        "Type": "D"
+    },
+    {
+        "Id": 72,
+        "Message": "Select below list for existing strategy",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 73,
+        "Message": "Are you sure you want to clone this strategy?",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 74,
+        "Message": "The information provided will not include the exact holdings or weight of holdings as the underlying (MODE).  The performance information of the underlying (MODE) will reflect the actual performance.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 75,
+        "Message": "This strategy is already in queue.",
+        "MenuId": 3,
+        "Type": "I"
+    },
+    {
+        "Id": 76,
+        "Message": "Are you sure you want to switch option?",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 77,
+        "Message": "High server demand awaits performance data retrieval.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 78,
+        "Message": "An error has occured while creating a strategy.",
+        "MenuId": 3,
+        "Type": "W"
+    },
+    {
+        "Id": 79,
+        "Message": "The account is currently paused. To proceed with them, click continue.",
+        "MenuId": 3,
+        "Type": "C"
+    },
+    {
+        "Id": 80,
+        "Message": "Kindly await as the latest data is being fetched.",
+        "MenuId": 1,
+        "Type": "I"
+    },
+    {
+        "Id": 81,
+        "Message": "This feature is only available through an agreement with New Age Alpha and your firm. To learn more about agreements and partnerships, please call 212-922-2688.",
+        "MenuId": 1,
+        "Type": "W"
+    },
+    {
+        "Id": 82,
+        "Message": "This feature is only available through an agreement with New Age Alpha and your firm. To learn more about agreements and partnerships, please call 212-922-2688.",
+        "MenuId": 1,
+        "Type": "W"
+    },
+    {
+        "Id": 83,
+        "Message": "Kindly await as the latest data is being fetched.",
+        "MenuId": 1,
+        "Type": "I"
+    },
+    {
+        "Id": 84,
+        "Message": "Connection error. Please try again later.",
+        "MenuId": 12,
+        "Type": "E"
+    },
+    {
+        "Id": 85,
+        "Message": "You donot have required permission to download this file.",
+        "MenuId": 12,
+        "Type": "W"
+    },
+    {
+        "Id": 86,
+        "Message": "This feature is only available through an agreement with New Age Alpha and your firm. To learn more about agreements and partnerships, please call 212-922-2688.",
+        "MenuId": 12,
+        "Type": "W"
+    },
+    {
+        "Id": 87,
+        "Message": "Locked account(s) - have been excluded from the selection. Additionally, some accounts are currently paused. To proceed with the paused accounts selection , click continue.",
+        "MenuId": 12,
+        "Type": "C"
+    },
+    {
+        "Id": 88,
+        "Message": "Accounts - are already under process and excluded from the selection. Further process could be continued only with the other selected accounts",
+        "MenuId": 12,
+        "Type": "C"
+    },
+    {
+        "Id": 89,
+        "Message": "The accounts - are currently paused. To proceed with them, click continue.",
+        "MenuId": 12,
+        "Type": "C"
+    },
+    {
+        "Id": 90,
+        "Message": "Insufficient market value in the selected account for current calculation. Please re-evaluate component selection or choose alternative account(s).",
+        "MenuId": 12,
+        "Type": "W"
+    },
+    {
+        "Id": 91,
+        "Message": "This account has been saved by the below user in their strategy.",
+        "MenuId": 12,
+        "Type": "I"
+    },
+    {
+        "Id": 92,
+        "Message": "Saving this account in your strategy will lead to its removal from the previously saved strategies. Do you want to continue?",
+        "MenuId": 12,
+        "Type": "C"
+    },
+    {
+        "Id": 93,
+        "Message": "Insufficient market value with the provided cash target for selected stocks. Consider adjusting your cash target.",
+        "MenuId": 12,
+        "Type": "W"
+    },
+    {
+        "Id": 94,
+        "Message": "High server demand awaits performance data retrieval.",
+        "MenuId": 12,
+        "Type": "W"
+    },
+    {
+        "Id": 95,
+        "Message": "An error has occured while creating a strategy.",
+        "MenuId": 12,
+        "Type": "E"
+    },
+    {
+        "Id": 96,
+        "Message": "This strategy is already in queue.",
+        "MenuId": 12,
+        "Type": "W"
+    },
+    {
+        "Id": 97,
+        "Message": "Are you sure you want to delete this index?",
+        "MenuId": 6,
+        "Type": "D"
+    },
+    {
+        "Id": 98,
+        "Message": "This strategy is already in queue.",
+        "MenuId": 6,
+        "Type": "I"
+    },
+    {
+        "Id": 99,
+        "Message": "The account is currently paused. To proceed with them, click continue.",
+        "MenuId": 6,
+        "Type": "C"
+    },
+    {
+        "Id": 100,
+        "Message": "The current account has been locked and cannot be selected for further proceedings.",
+        "MenuId": 6,
+        "Type": "W"
+    },
+    {
+        "Id": 101,
+        "Message": "The preview could not be loaded.",
+        "MenuId": 6,
+        "Type": "W"
+    },
+    {
+        "Id": 102,
+        "Message": "Holdings preview could not be loaded.",
+        "MenuId": 6,
+        "Type": "W"
+    },
+    {
+        "Id": 103,
+        "Message": "High server demand awaits performance data retrieval.",
+        "MenuId": 6,
+        "Type": "E"
+    },
+    {
+        "Id": 104,
+        "Message": "Review all the information before finalizing the trade purchase. Once confirmed, the transaction cannot be reversed.",
+        "MenuId": 6,
+        "Type": "C"
+    },
+    {
+        "Id": 105,
+        "Message": "Note: The price information of holdings in any factsheets or SPACE inquiries may be subject to changes or variations based upon the current market price of securities listed at the time of retrieval or execution.",
+        "MenuId": 6,
+        "Type": "I"
+    },
+    {
+        "Id": 106,
+        "Message": "The current account has been locked and cannot be upgrade for further proceedings.",
+        "MenuId": 6,
+        "Type": "W"
+    },
+    {
+        "Id": 107,
+        "Message": "Invalid company names detected in the input. Kindly proceed with their removal for accuracy and compliance upon saving.",
+        "MenuId": 5,
+        "Type": "I"
+    },
+    {
+        "Id": 108,
+        "Message": "Your changes are ready to be saved. Are you sure you want to proceed ahead?",
+        "MenuId": 5,
+        "Type": "C"
+    },
+    {
+        "Id": 109,
+        "Message": "Your changes have not been saved. Do you want to continue without saving?",
+        "MenuId": 5,
+        "Type": "C"
+    },
+    {
+        "Id": 110,
+        "Message": "Are you sure you want to delete this list(s)? It will be permanently removed and cannot be recovered.",
+        "MenuId": 5,
+        "Type": "D"
+    },
+    {
+        "Id": 111,
+        "Message": "The file has been uploaded successfully. Duplicate entries Have Been filtered out.",
+        "MenuId": 5,
+        "Type": "S"
+    },
+    {
+        "Id": 112,
+        "Message": "Your uploaded Excel file is missing the required header(s). Please re-upload the file with appropriate header(s).",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 113,
+        "Message": "Uploaded Excel file is empty. Please add appropriate data before re-uploading.",
+        "MenuId": 5,
+        "Type": "W"
+    },
+    {
+        "Id": 114,
+        "Message": "Holdings preview could not be loaded.",
+        "MenuId": 13,
+        "Type": "W"
+    },
+    {
+        "Id": 115,
+        "Message": "myTradeListErrorModal",
+        "MenuId": 13,
+        "Type": "E"
+    },
+    {
+        "Id": 116,
+        "Message": "High server demand awaits performance data retrieval.",
+        "MenuId": 13,
+        "Type": "E"
+    },
+    {
+        "Id": 117,
+        "Message": "Review all the information before finalizing the trade purchase. Once confirmed, the transaction cannot be reversed.",
+        "MenuId": 13,
+        "Type": "C"
+    },
+    {
+        "Id": 118,
+        "Message": "The current account has been locked and cannot be upgrade for further proceedings.",
+        "MenuId": 13,
+        "Type": "I"
+    },
+    {
+        "Id": 119,
+        "Message": "This feature is only available through an agreement with New Age Alpha and your firm. To learn more about agreements and partnerships, please call 212-922-2688.",
+        "MenuId": 0,
+        "Type": "W"
+    },
+    {
+        "Id": 120,
+        "Message": "New Age Alpha is committed to diligently pursuing the selected tax loss target. However, we acknowledge the possibility that we may not always attain this objective, which could result in higher-than-anticipated capital gains. It's important to note th",
+        "MenuId": 0,
+        "Type": "W"
+    }
+]

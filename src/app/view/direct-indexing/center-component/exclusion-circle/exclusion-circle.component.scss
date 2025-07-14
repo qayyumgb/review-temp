@@ -1,0 +1,70 @@
+#Layer_ww .cls-1 {
+  fill: url(#linear-gradient-2_ww) !important;
+}
+
+#Layer_ww .cls-2 {
+  clip-path: url(#clippath_ww) !important;
+}
+
+#Layer_ww .cls-3 {
+  fill: none;
+}
+
+#Layer_ww .cls-4 {
+  fill: url(#linear-gradient_ww) !important;
+}
+
+#Layer_ww path {
+  fill: var(--leftSideText-B);
+}
+/*svg.commonSVGCircle {
+  position: fixed;
+  z-index: 0;
+  top: 52%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}*/
+
+  .RCsince-info {
+    rect, text {
+      cursor: pointer !important
+    }
+    &:hover {
+      .RCsince {
+        display: block !important;
+      }
+    }
+  }
+
+.slider1 {
+  .STw_middle {
+    .name-txt {
+      fill: #d8dce5 !important;
+    }
+  }
+
+  text.STW_PriceHead {
+    fill: #fff !important;
+  }
+
+  #STW_Price rect {
+    stroke: var(--border);
+  }
+
+  #STW_Price path {
+    fill: var(--clkdIndex);
+  }
+
+  .STw_middle .name {
+    fill: #d8dce5 !important;
+  }
+
+  #custStrName {
+    fill: #d8dce5 !important;
+  }
+
+  #custIndTab {
+    fill: #d8dce5 !important;
+  }
+}

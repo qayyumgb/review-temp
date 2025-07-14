@@ -1,0 +1,96 @@
+<div class="notify-l">
+  <div class="top-header-n">
+    <div class="title-h d-flex justify-content-between align-items-center">
+      <h4>Trade Notifications</h4>
+      <div class="d-flex align-items-center">
+        @if(getTradeNotificationQueue.length > 0){
+          <a class="ng-star-inserted" (click)="refreshAll_row()"
+          style="line-height: 1;padding: 0.2rem 0.5rem 0.1rem;">
+         <span class="material-icons">refresh</span>
+       </a>
+       <a (click)="deleteAll_row()">Dismiss all</a>
+        }
+   
+        <span class="material-icons" (click)="closeNotify()"> close </span>
+      </div>
+    </div>
+  </div>
+  <div class="content-body-n p-rel">
+    @if(getTradeNotificationQueue.length == 0){
+    <div class="list-n d-flex justify-content-center align-items-center">
+      <span style="color: var(--leftSideText); font-size: 0.8rem;margin: 2rem 0;">{{sharedData.checkMyAppMessage(0, 13)}}</span>
+    </div>
+    }@else{
+    <div class="list-n">
+      @for (item of getTradeNotificationQueue; track item) {
+      <div class="inner-list-n">
+        <span class="material-icons close_row" (click)="closeNotify_row(item)"> close </span>
+        <p class="c-g-text">
+          <span style="color: var(--prim-button-color);">{{item.accountno}} </span>
+          {{item.slName}} ({{item.shortname}})
+          <span class="c-p-text based-n">
+            <span class="c-p-text time" style="display: block; margin-top: 0.3rem; font-size: 0.6rem;">{{modifiedDate(item.completionTimeStamp)+'Z'  | date: 'MM/dd/yyyy HH:mm:ss' }}</span>
+          </span>
+        </p>
+        <div class="step-wizard ng-star-inserted">
+          <p>Status: {{item.summaryStatus}}</p>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+<div class="modal fade warningautoModel" id="deletetradeModalRow" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="#dc3545" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Notification</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(0, 14)}}</p>
+
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="removestrategyRecord();">Confirm</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade warningautoModel" id="deleteAllTradeModalRow" tabindex="-1" role="dialog" aria-labelledby="deleteAllTradeModalRow" aria-hidden="true" data-keyboard="false" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 9V19H8V9H16ZM14.5 3H9.5L8.5 4H5V6H19V4H15.5L14.5 3ZM18 7H6V19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7Z" fill="#dc3545" />
+                </svg>
+              </span>
+            </p>
+            <h3>Delete Notification</h3>
+            <p style="font-size: 0.9rem;">{{sharedData.checkMyAppMessage(0, 15)}}</p>
+
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" data-bs-dismiss="modal" (click)="removeallstrategyRecord();">Confirm</button>
+              <button type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

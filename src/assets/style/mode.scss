@@ -1,0 +1,409 @@
+body.dark {
+  .highcharts-background {
+    fill: transparent !important;
+  }
+
+  .skeleton-loader.progress:before {
+    background-image: linear-gradient(90deg,rgba(255,255,255,0),rgb(42 42 60),rgba(255,255,255,0));
+  }
+
+  #lineChartBuyModel text {
+    fill: var(--leftSideText) !important;
+  }
+
+  #barChartBuyModel_popup1 text {
+    font-weight: 500 !important;
+    // fill: var(--leftSideText) !important;
+  }
+
+  #lineChartBuyModel .highcharts-yaxis-grid path {
+    stroke: var(--buyModelCheckbox);
+  }
+
+  #lineChartBuyModel path.highcharts-axis-line, #lineChartBuyModel path.highcharts-tick {
+    stroke: var(--buyModelCheckbox);
+  }
+  ////// center comp styles
+  /***** Dark mode *****/
+
+  .highcharts-background {
+    fill: transparent !important;
+  }
+
+  .mat-dialog-container {
+    margin: 10px;
+    background: var(--modalcontentBody);
+  }
+
+  .gogg-modalbox, .custom-dialogbox {
+    .mat-dialog-container {
+      background: var(--primary-color);
+    }
+  }
+
+  .mat-CusVirTable, .grid-list-l.excGicsList ul li .D_list, .grid-list-l.excGicsList ul li .D_list {
+    background: var(--dropdwn-info-bg) !important;
+  }
+
+  .outerDiv .centerDiv .buyTable {
+    background-color: var(--buyTable);
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #1f2633 !important;
+  }
+
+  .highcharts-root {
+    .highcharts-legend-item text {
+      fill: #9ba3b1 !important;
+      font-weight: 300 !important;
+    }
+
+    text {
+      fill: var(--leftSideText) !important;
+    }
+
+    .highcharts-axis.highcharts-yaxis, .highcharts-axis.highcharts-xaxis {
+      text {
+        fill: var(--leftSideText-B) !important;
+      }
+    }
+
+    .highcharts-tooltip {
+
+      text {
+        fill: #4b4b4b !important;
+      }
+    }
+  }
+
+  .compList {
+    .crect {
+      fill: #818181;
+    }
+  }
+
+  #defCenCircle_loader .circle-loader-ske-default circle {
+    /* fill: #1f2633 !important;*/
+  }
+
+  #TimeLineCircle .circle-loader-ske rect {
+    fill: #1f2633 !important;
+  }
+
+  .Yr-sec ul {
+    background: #1e1e2d;
+  }
+
+  .Yr-sec ul li.active {
+    background: var(--prim-button-color);
+    color: #fff;
+  }
+
+  .Yr-sec ul li {
+    background: #2a2a3c;
+    border: 0px solid #fff;
+    color: #d8dce5;
+  }
+
+  .switch-yrs {
+    color: #d8dce5;
+  }
+
+  .switch-yrs input:checked + .slider {
+    background-color: var(--prim-button-color);
+  }
+
+  svg {
+    .circle_overlay {
+      stroke: #a2aab8 !important;
+    }
+
+    .HFCompRange0_25.ALNaaIndex_active {
+      fill: #0aa1f5 !important;
+    }
+  }
+
+  .Circle_Slider {
+    rect:not(.move_rect_rem):not(.move_rect):not(.mainrect) {
+      fill: var(--primary-color) !important;
+    }
+
+
+    #pullRemove rect, #pullRemove path {
+      fill: var(--prim-button-color) !important;
+    }
+
+    #ToolSvgSlider #resetAL .ptext, #ToolSvgSlider #pullRemove .ptext, #ToolSvgSlider1 #resetAL .ptext, #ToolSvgSlider1 #pullRemove .ptext {
+      fill: var(--leftSideText);
+    }
+
+    .tabs {
+      .move_rect {
+        fill: var(--prim-button-color) !important;
+      }
+
+      .cum {
+        rect {
+          fill: transparent !important;
+        }
+      }
+    }
+
+    .analysis-box {
+      rect.mainrect {
+        fill: #3a4659 !important;
+      }
+    }
+  }
+
+
+
+  .start-ring {
+    fill: var(--primary-color);
+  }
+
+  #exclugCompetitiveRect .on text, #defaultgCompetitiveRect .on text, #gCompetitive .on text, #gHisTimeCompetitive .on text {
+    fill: #aaa !important;
+  }
+
+  svg #slidingSVG, svg #wlcmHomeText {
+    /*  text:not(.h-factValue, #c_removed_per, #c_remaining_per, .SelCompScore, #hcumRet_1, #hannRet_1) {
+      fill: #eee !important;
+    }*/
+
+    text:not(.h-factValue):not(#c_removed_per):not(#c_remaining_per):not(.SelCompScore):not(#hcumRet):not(#hannRet):not(#hcumRet_1):not(#hannRet_1):not(.STW_PriceHead):not(.name-txt.h-fact):not(.hcumRet_1):not(.hannRet_1):not(#hcumRet_2):not(#hannRet_2) {
+      fill: #d8dce5 !important;
+    }
+
+    .text-G-Def {
+      fill: #d8dce5 !important;
+    }
+  }
+
+  #indexStaLine, #NAAindexStaLine {
+    .modal-content > div {
+      background: transparent !important;
+      color: var(--prim-button-color-text);
+
+      #indexStacompDate {
+        color: #fff;
+      }
+    }
+
+    svg {
+      text {
+        fill: #c6c6d0 !important;
+      }
+
+      .highcharts-legend-item text {
+        fill: #c6c6d0 !important;
+        font-weight: 300 !important;
+      }
+
+      text {
+        fill: #c6c6d0 !important;
+      }
+
+      .highcharts-tooltip {
+
+        text {
+          fill: #4b4b4b !important;
+        }
+      }
+    }
+  }
+
+  #lineChartModal {
+    .highcharts-background {
+      fill: var(--btn-bg-alt);
+    }
+
+    .highcharts-legend-item text {
+      fill: #c6c6d0 !important;
+      font-weight: 300 !important;
+    }
+
+    text {
+      fill: #c6c6d0 !important;
+    }
+
+    .highcharts-tooltip {
+
+      text {
+        fill: #4b4b4b !important;
+      }
+    }
+  }
+
+  #lineChartBuyModel {
+    .highcharts-background {
+      fill: #242d3c;
+    }
+
+    .highcharts-legend-item text {
+      fill: #c6c6d0 !important;
+      font-weight: 300 !important;
+    }
+
+    text {
+      fill: #c6c6d0 !important;
+    }
+
+    .highcharts-yaxis-grid {
+      path {
+        stroke: var(--buyModelCheckbox);
+      }
+    }
+
+    path.highcharts-axis-line, path.highcharts-tick {
+      stroke: var(--buyModelCheckbox);
+    }
+
+    .highcharts-tooltip {
+
+      text {
+        fill: #4b4b4b !important;
+      }
+    }
+  }
+
+  svg {
+
+
+    #ToolSvgSlider .slider1 text.STW_PriceHead, #ToolSvgSlider1 .slider1 text.STW_PriceHead, #ToolSvgSlider .slider1 .Sel_midCompS1 .impRev .name-txt {
+      fill: #fff !important;
+    }
+
+    #ToolSvgSlider .slider1 .Sel_midCompS1 .impRev path, #ToolSvgSlider .slider1 #STW_Price path, #ToolSvgSlider .slider1 #fil_STW_Price path, #ToolSvgSlider .slider1 .fil_STW_Price_path path {
+      fill: var(--clkdIndex);
+
+      &.enable-edit {
+        fill: transparent;
+        stroke: var(--prim-button-color-text);
+      }
+    }
+
+    #ToolSvgSlider .slider1 #STW_PriceRefresh {
+      path {
+        fill: var(--prim-button-color);
+      }
+
+      rect {
+        fill: transparent !important;
+        stroke: transparent !important;
+      }
+    }
+
+    #ToolSvgSlider .slider1 .Sel_midCompS1 .impRev rect, #ToolSvgSlider .slider1 #STW_Price rect, .slider1 #fill_STW_Price rect {
+      stroke: var(--border);
+    }
+
+    #ToolSvgSlider .slider1 .Sel_midCompS1 .impRev #IRGRToolTip rect {
+      stroke: var(--prim-button-color-text);
+    }
+
+    #ToolSvgSlider .slider1 .Sel_midCompS1 .impRev .IRGRToolTip .name-txt {
+      fill: var(--prim-button-color-text) !important;
+    }
+
+    #gchart #cSlider .sRect, #excluRHScharts #cSlider .sRect {
+      fill: #1a202c !important;
+    }
+
+    #ToolSvgSlider .slider1 .STw_middle .name, #ToolSvgSlider .slider1 .STw_middle .name-txt, #ToolSvgSlider1 .slider1 .STw_middle .name, #ToolSvgSlider1 .slider1 .STw_middle .name-txt {
+      fill: #d8dce5 !important;
+    }
+  }
+
+  #ToolSvgSlider .controls path.st0, #ToolSvgSlider1 .controls path.st0 {
+    fill: var(--clkdIndex) !important;
+  }
+
+  #ToolSvgSlider .controls .st1, #ToolSvgSlider1 .controls .st1 {
+    fill: #fff !important;
+  }
+
+  #ToolSvgSlider .controls .disable path.st0, #ToolSvgSlider1 .controls .disable path.st0 {
+    fill: var(--clkdIndex) !important;
+    opacity: .25;
+  }
+
+  #ToolSvgSlider .controls .disable .st1, #ToolSvgSlider1 .controls .disable .st1 {
+    fill: #fff !important;
+    opacity: .5;
+  }
+
+  svg .gfillCompMouseover text {
+    fill: #aaa !important;
+  }
+
+
+  svg {
+    #slidingSVG {
+      text.STW_PriceHead, text.STW_PriceHead {
+        fill: #3e434a !important;
+      }
+    }
+
+    #gchart #crlChart .AddSlider .sText1-cmp, #gchart #crlChart .AddSlider .sText-cmp {
+      fill: #ceced9;
+    }
+
+    #gchart #crlChart .AddSlider .mCircle-cmp {
+      fill: #3a4659;
+    }
+
+    #gchart #crlChart .AddSlider .sRect {
+      fill: var(--primary-color);
+    }
+
+    #gchart #crlChart .AddSlider.clkd_cmp_active .sText-cmp, #gchart #crlChart .AddSlider.clkd_cmp_active .sText1-cmp, #gchart #crlChart .AddSlider.clkd_cmp_active .mCircle-cmp {
+      fill: var(--prim-button-color-text) !important;
+    }
+
+    #qSlider {
+      text tspan {
+        fill: #727884 !important;
+      }
+
+      text tspan.q_on {
+        fill: var(--prim-button-color-text) !important;
+      }
+    }
+
+    #qSlider .qAddSlider .sRect1 {
+      height: 1px;
+      width: 25px;
+      opacity: 1;
+      fill: #727884 !important;
+    }
+  }
+
+  svg {
+    .Circle_Slider .ETF_Switch {
+      .drop-fil-shadow1 {
+        rect {
+          fill: var(--btn-bg-alt) !important;
+        }
+      }
+
+      .sel_NAAIndex, .sel_ETFComp {
+        rect {
+          stroke: var(--prim-button-color) !important;
+          fill: var(--prim-button-color) !important;
+        }
+
+        text {
+          fill: var(--prim-button-color) !important;
+          stroke: none;
+        }
+      }
+    }
+  }
+  //}
+  /***** Dark mode *****/
+  ////// center comp styles
+}

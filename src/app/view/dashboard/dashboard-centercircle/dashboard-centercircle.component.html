@@ -1,0 +1,148 @@
+<svg id="excluTempCircle" class="noselect_mousepointer commonSVGCircle sp_500Circle" viewBox="180 45 1220 700" width="100%" height="100%"
+     xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <circle class="start-ring1" fill="var(--primary-color)" style="fill:var(--primary-color)" id="maincircle1" r="395" transform="translate(810, 405)">
+  </circle>
+  <g class="Homecenter" style="" transform="translate(810,285)">
+    <circle id="maincircle" class="start-ring" fill="var(--primary-color)" r="154" style="stroke-width: 0px;"transform="translate(0, 120)"></circle>
+    <g style="transform: translate(-100px, 138px);" *ngIf="noDataFound">
+      <rect x="0" y="0" width="200" height="35" rx="5" ry="5" style="
+    fill: var(--topNavbar);
+    stroke: var(--border);"></rect>
+      <text style="
+    text-anchor: start;
+    fill: var(--leftSideText);
+    font-size: 0.75rem;
+    font-family: var(--ff-regular);" y="20" x="10">No data found.</text>
+    </g>
+    <g id="" style="display: block; transform: scale(0.5) translate(-165px, 180px)">
+      <foreignObject x="20" y="20" width="300" height="100">
+        <app-svg-space-img></app-svg-space-img>
+      </foreignObject>
+    </g>
+    <!--<g transform="translate(-110,100)">
+  <foreignObject x="0" y="0" width="220" height="35">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="default-search-item alt_bg_color">
+      <form>
+        <mat-form-field>
+          <input type="text" #glbSearchBox matInput placeholder="Search" [formControl]="glbSearch" [(ngModel)]="inputValue" (keyup.enter)="filtering($event)"
+                 [matAutocomplete]="auto" (focus)="inputFocused($event,'in')" (ngModelChange)="onInputChange($event)">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class="DrilldownSearchBar" (optionSelected)="gloSrcEnter($event)">-->
+    <!--<mat-option *ngIf="noDataFound" class="autocompletedNoData">No data found</mat-option>-->
+    <!--@for (data of filteredOptions; track data) {
+              @if(data['type']== "Equity Universe"){
+              <mat-optgroup label="Equity">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  @if(d['category']== "Index"){
+                  <span class="d-flex justify-content-between align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                    <span class="pbName">{{d.country}}</span>
+                  </span>
+                  }@else{
+                  <span class="">
+                    <span class="w-100 d-flex justify-content-start align-items-center">
+                      <span class="indName">{{d.company}}</span>
+                      <span class="pbName_ticker">({{d.ticker}})</span>
+                    </span>
+                    <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                      <span class="indName_sub">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                      <span class="pbName">{{d.country}}</span>
+                    </span>
+                  </span>
+                  }
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "ETF"){
+              <mat-optgroup label="ETF">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="d-flex justify-content-between align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                    <span class="pbName">{{d.ticker}}</span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "PreBuilt"){
+              <mat-optgroup label="PreBuilt">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="">
+                    <span class="w-100 d-flex justify-content-start align-items-center">
+                      <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+
+                    </span>
+                    <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                      <span class="indName_sub">
+                        @if(d.ticker != null && d.ticker != undefined && d.ticker != ""){
+                        ({{d.ticker}})
+                        }
+                      </span>
+                      <span class="indName_sub">&nbsp;</span>
+                      <span class="pbName">{{d.country}}</span>
+                    </span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "Thematic"){
+              <mat-optgroup label="Thematic">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="d-flex justify-content-between align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              @else if(data['type']== "DirectIndexing"){
+              <mat-optgroup [label]="(sharedData.checkMyUserType()?'Approved':'Direct')">
+                <mat-option *ngFor="let d of data['items']" [value]="d">
+                  <span class="w-100 d-flex justify-content-start align-items-center">
+                    <span class="indName">{{d.indexName.replace('New Age Alpha ', 'NAA ')}}</span>
+                  </span>
+                  <span class="w-100 d-flex justify-content-between align-items-center" style="margin-top:0.2rem;">
+                    <span class="indName_sub">{{d.company}}</span>
+                    <span class="pbName">{{d.country}}</span>
+                  </span>
+                </mat-option>
+              </mat-optgroup>
+              }
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </div>
+    </foreignObject>
+    <g transform="translate(195,10)">
+      <g transform="translate(-10,-10)" *ngIf="showSearchLoader">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35px" height="35px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+        <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50" style="fill: var(--iconColor);">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform>
+          </path>
+        </svg>
+      </g>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" *ngIf="!inputValue && !showSearchLoader">
+        <path fill="none" d="M0 0h24v24H0z" />
+        <path fill="var(--iconColor)"
+              d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.98-5-5.78-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.31 5.34 5.78a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+      </svg>
+      <g class="cursor-pointer" (click)="clearInput()" *ngIf="!showSearchLoader">
+        <svg *ngIf="inputValue" xmlns="http://www.w3.org/2000/svg"
+             width="16" height="16" viewBox="0 -960 960 960" fill="#6c6c9f">
+          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
+        <rect width="15" height="15" style="transform: translate(0px, 0px);fill: transparent;"></rect>
+      </g>
+    </g>
+    <g transform="translate(175,10)" style="cursor: pointer;" (click)="speackClick()">
+      <g xmlns="http://www.w3.org/2000/svg" style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="scale(0.17)">
+        <path d="M 45 70.968 c -16.013 0 -29.042 -13.028 -29.042 -29.042 c 0 -1.712 1.388 -3.099 3.099 -3.099 c 1.712 0 3.099 1.388 3.099 3.099 C 22.157 54.522 32.404 64.77 45 64.77 c 12.595 0 22.843 -10.248 22.843 -22.843 c 0 -1.712 1.387 -3.099 3.099 -3.099 s 3.099 1.388 3.099 3.099 C 74.042 57.94 61.013 70.968 45 70.968 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--leftSideText); fill-rule: nonzero; opacity: 1; " transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+        <path d="M 45 60.738 L 45 60.738 c -10.285 0 -18.7 -8.415 -18.7 -18.7 V 18.7 C 26.3 8.415 34.715 0 45 0 h 0 c 10.285 0 18.7 8.415 18.7 18.7 v 23.337 C 63.7 52.322 55.285 60.738 45 60.738 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--prim-button-color-text); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+        <path d="M 45 89.213 c -1.712 0 -3.099 -1.387 -3.099 -3.099 V 68.655 c 0 -1.712 1.388 -3.099 3.099 -3.099 c 1.712 0 3.099 1.387 3.099 3.099 v 17.459 C 48.099 87.826 46.712 89.213 45 89.213 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--leftSideText); fill-rule: nonzero; opacity: 1; " transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+        <path d="M 55.451 90 H 34.549 c -1.712 0 -3.099 -1.387 -3.099 -3.099 s 1.388 -3.099 3.099 -3.099 h 20.901 c 1.712 0 3.099 1.387 3.099 3.099 S 57.163 90 55.451 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: var(--leftSideText); fill-rule: nonzero; opacity: 1; " transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"></path>
+      </g>
+    </g>
+  </g>-->
+  </g>
+  <g id="exclusionTempchart" transform="translate(810 ,405)">
+    <g id="TempcrlChart"></g>
+  </g>
+</svg>

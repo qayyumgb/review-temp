@@ -1,0 +1,242 @@
+<div class="buildYourIndex__sec__leftG__C equity__Comp__leftG">
+  <div class="icon__select">
+    <!--@if(sharedData.checkMenuPer(2027, 2236) == 'Y'){-->
+    <div class="__selectIco select__steps" [class.active]="showDefault_select == 'showList'" (mouseenter)="showDefault_select_hover('showList');sharedData.openLeftSideGrid()" (click)="toggleIconSelect('showList');" style="padding-bottom: 3.5rem;">
+      <span class="material-icons-outlined">
+        attach_file
+      </span>
+      <p>ETFs List</p>
+    </div>
+    <!--}@else if(sharedData.checkMenuPer(2027, 2236) == 'D'){
+    <div class="__selectIco select__steps disableMenu" style="padding-bottom: 3.5rem;">
+      <span class="material-icons-outlined">
+        attach_file
+      </span>
+      <p>ETFs</p>
+    </div>
+    }-->
+  </div>
+  <div class="showPinnedLeftGrid" [class.hideLeftAnimate]="showDefault_select != 'showList'">
+    @if(drilldown_List.length>0){
+    <div class="drilldown__cards__list" [style.maxHeight]="showToolCustomBtn?'calc(100vh - 14rem)':'calc(100vh - 9.5rem)'" [style.visibility]="drilldown_List.length>0?'visible':'hidden'">
+      <!--<div class="search_sec w-100 p-rel">
+    <div class="default-search-item w-100">
+      <form>
+        <mat-form-field class="SearchFormField">
+          <input type="text" matInput placeholder="Search ticker or company" [(ngModel)]="inputValue" [formControl]="glbSearch" [matAutocomplete]="auto" (focus)="inputFocused($event,'in')" (ngModelChange)="onInputChange($event)">
+          <mat-icon id="eScBtn" *ngIf="!inputValue" matPrefix>search</mat-icon>
+          <mat-icon id="close_btn" matPrefix *ngIf="inputValue" (click)="clearInput()">close</mat-icon>
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" class="DrilldownSearchBar DrilldownSearchBarETF" (optionSelected)="etfService.gloSrcEnter($event);resetSrc()">-->
+      <!--<mat-option *ngIf="noDataFound" class="autocompletedNoData">No data found</mat-option>-->
+      <!--@for (data of filteredOptions | async; track data) {
+            <mat-option [value]="data">
+              <span class="d-flex justify-content-between align-items-center mb0_5rem">
+                <span class="indName">{{data.name}}</span>
+                <span class="pbName">{{data.ticker}}</span>
+              </span>
+              <span class="d-flex justify-content-between align-items-center">
+                <span class="pbName">ETF</span>
+                <span class="pbcat">{{data.category}}</span>
+              </span>
+            </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>-->
+      <!--No data text-->
+      <!--<p  *ngIf="noDataFound" class="search-ND-f">No data found</p>-->
+      <!--No data text-->
+      <!--</div>-->
+      <div class="showEtfMenu mt0_5rem">
+        @if(drilldown_List.length>0){
+        <div class="d-flex justify-content-between align-items-center common-drill-dwn">
+
+          <span class="sec_type" [@slideLeft]>{{industryName(drilldown_List[0].group)}}</span>
+          <div class="d-flex pr0_5rem">
+
+            <div class="dropdown">
+              <span class="material-icons" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                swap_vert
+              </span>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="sortingDrop">
+                <ul>
+                  <li>
+                    <a class="dropdown-item sort_btn">
+                      Sort by
+                      <button class="btn btn-primary d-flex align-items-center sort-reset" (click)="sharedData.sortResetDefault('L','etf')"><span class="material-icons" style="font-size: 0.85rem;margin-right:0.2rem;padding: 0;"> refresh</span> Reset</button>
+                    </a>
+
+                  </li>
+                  <li *ngFor="let item of FilterList">
+                    <a class="dropdown-item" [class.active]="item.value === SelFilter" (click)="FilterChanged(item)">{{item.name}}</a>
+                    <span class="sortingArrow" [style.display]="item.value === SelFilter ? 'block' : 'none'" (click)="onToggleAscending();$event.stopPropagation()">
+                      @if(ascending_val){
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                      </svg>
+                      }
+                      @else{
+                      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.68765 0.390435C3.84778 0.190272 4.15222 0.190272 4.31235 0.390434L7.4801 4.35012C7.68962 4.61203 7.50315 5 7.16775 5H0.83225C0.496848 5 0.310378 4.61203 0.519902 4.35012L3.68765 0.390435Z"
+                              fill="#fff" style="opacity: 0.2;" />
+                        <path d="M4.31235 12.6096C4.15222 12.8097 3.84778 12.8097 3.68765 12.6096L0.519903 8.64988C0.310378 8.38797 0.496847 8 0.83225 8H7.16775C7.50315 8 7.68962 8.38797 7.4801 8.64988L4.31235 12.6096Z"
+                              fill="#fff" />
+                      </svg>
+                      }
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <span class="material-icons-outlined close__card pin__bar__comp" [class.pinned]="pinnedCompLeft" (click)="defaultPushPin();">
+              push_pin
+            </span>
+          </div>
+        </div>
+        }
+        <div class="df_grid card-body scrollbox" [style.maxHeight]="showToolCustomBtn?'calc(100vh - 20rem)':'calc(100vh - 12rem)'">
+          <div *ngIf="(drilldown_List.length>0)" class="grid-list-l w-100" style=" padding-bottom: 0.5rem;">
+            <ul>
+              @for(data of drilldown_List;track data){
+              <li (click)="leftGridClick(data)" [@slideLeft]>
+                <span class="material-icons" [class.activeLeftGrid]="checkGridClass(data)">chevron_right</span>
+                <span class="d-flex align-items-center justify-content-between" style="width: calc(100% - 1rem)">
+                  <span class="elip_text n" [class.activeLeftGrid]="checkGridClass(data)" *ngIf="sharedData.nullCheck(data, 'name', true).length < 25">{{data.name}}  <span *ngIf="sharedData.nullCheck(data, 'ticker') && data.ticker != ''">({{data.ticker}})</span></span>
+
+                  <span class="elip_text" [class.activeLeftGrid]="checkGridClass(data)" matTooltipClass="defaultLeftTooltip" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()" *ngIf="sharedData.nullCheck(data, 'name') && data.name.length >= 25">
+                    {{data.name}}
+                    <span class="defaultLeftTooltipText" [matTooltip]='formatNamehover(data)' [matTooltipPosition]="'above'"
+                          matTooltipClass="defaultLeftTooltip" #tooltip="matTooltip"></span>
+                    <span *ngIf="sharedData.nullCheck(data, 'ticker') && data.ticker != '' && data.ticker != undefined">({{data.ticker}})</span>
+                  </span>
+
+                  @if(data.med != undefined){
+                  <span class="med_center_val">{{digitFormat(data.med)}}</span>
+                  }
+                </span>
+              </li>
+              }
+            </ul>
+          </div>
+          <!--<div class="no-r-f" *ngIf="drilldown_List.length <= 0">No Result Found.</div>-->
+        </div>
+      </div>
+    </div>
+    }
+    @if(showToolCustomBtn && sharedData.checkShowLeftTab(3) == 'A'){
+    <div class="left_icon__details">
+      <div class="select__steps__details top_bg tool_cust mt1rem" style="padding: 1rem 0.5rem 1rem 1rem;" (click)="openToolCustom()">
+        <div class="d-flex align-items-center">
+          <span class="icon_bg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="196" height="50" viewBox="0 0 196 197" fill="none">
+              <path d="M95.5329 8.34609C119.397 7.69171 142.544 16.5441 159.881 32.9558C177.218 49.3675 187.325 71.9941 187.98 95.8581" stroke="url(#paint0_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+              <path d="M182.556 129.191C176.452 145.914 165.525 160.452 151.158 170.966C136.792 181.479 119.63 187.497 101.843 188.257C84.0562 189.017 66.4436 184.485 51.2322 175.235C36.0209 165.986 23.8941 152.433 16.3852 136.291" stroke="url(#paint1_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+              <path d="M7.98706 98.3255C7.98706 80.6917 13.1665 63.4463 22.8823 48.7305C32.5981 34.0147 46.4223 22.4767 62.6383 15.5492" stroke="url(#paint2_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+              <path d="M63.4756 98.3235H78.8198V132.848H63.4756V98.3235ZM117.18 82.9793H132.525V132.848H117.18V82.9793ZM90.328 59.9629H105.672V132.848H90.328V59.9629Z" fill="#5A5A89"></path>
+              <defs>
+                <linearGradient id="paint0_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#E323FF"></stop>
+                  <stop offset="1" stop-color="#7517F8"></stop>
+                </linearGradient>
+                <linearGradient id="paint1_linear_699_114074" x1="98.0003" y1="196.054" x2="98.0003" y2="0.59728" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#8AFF6C"></stop>
+                  <stop offset="1" stop-color="#02C751"></stop>
+                </linearGradient>
+                <linearGradient id="paint2_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FFD422"></stop>
+                  <stop offset="1" stop-color="#FF7D05"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <div>
+            <p>Customization</p>
+            <h5>Tool</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    }@else if(showToolCustomBtn && sharedData.checkShowLeftTab(3) == 'D'){
+    <div class="left_icon__details disabled">
+      <div class="select__steps__details top_bg tool_cust mt1rem" style="padding: 1rem 0.5rem 1rem 1rem;">
+        <div class="d-flex align-items-center">
+          <span class="icon_bg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="196" height="50" viewBox="0 0 196 197" fill="none">
+              <path d="M95.5329 8.34609C119.397 7.69171 142.544 16.5441 159.881 32.9558C177.218 49.3675 187.325 71.9941 187.98 95.8581" stroke="url(#paint0_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+              <path d="M182.556 129.191C176.452 145.914 165.525 160.452 151.158 170.966C136.792 181.479 119.63 187.497 101.843 188.257C84.0562 189.017 66.4436 184.485 51.2322 175.235C36.0209 165.986 23.8941 152.433 16.3852 136.291" stroke="url(#paint1_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+              <path d="M7.98706 98.3255C7.98706 80.6917 13.1665 63.4463 22.8823 48.7305C32.5981 34.0147 46.4223 22.4767 62.6383 15.5492" stroke="url(#paint2_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+              <path d="M63.4756 98.3235H78.8198V132.848H63.4756V98.3235ZM117.18 82.9793H132.525V132.848H117.18V82.9793ZM90.328 59.9629H105.672V132.848H90.328V59.9629Z" fill="#5A5A89"></path>
+              <defs>
+                <linearGradient id="paint0_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#E323FF"></stop>
+                  <stop offset="1" stop-color="#7517F8"></stop>
+                </linearGradient>
+                <linearGradient id="paint1_linear_699_114074" x1="98.0003" y1="196.054" x2="98.0003" y2="0.59728" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#8AFF6C"></stop>
+                  <stop offset="1" stop-color="#02C751"></stop>
+                </linearGradient>
+                <linearGradient id="paint2_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FFD422"></stop>
+                  <stop offset="1" stop-color="#FF7D05"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <div>
+            <p>Customization</p>
+            <h5>Tool</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+    <!--@if(etfService.checkFillCompCreation()){
+    <div class="bottom-l">
+      @if(sharedData.checkMenuPer(2028, 2257)=='Y'){
+      <img class="cp" (click)="openHisTimeline()" matTooltip="History Timeline" matTooltipPosition="below" src="../../../../assets/images/footer_ico/his_timeline_ico.svg" alt="new age alpha history timeline" />
+      }@else if(sharedData.checkMenuPer(2028, 2257)=='D'){
+      <img class="disabled" matTooltip="History Timeline" matTooltipPosition="below" src="../../../../assets/images/footer_ico/his_timeline_ico.svg" alt="new age alpha history timeline" />
+      }
+      @if(sharedData.checkMenuPer(2028, 2256)=='Y'){
+      <img class="cp" (click)="openVsCompare()" matTooltip="vs" matTooltipPosition="below" src="../../../../assets/images/footer_ico/vs_ico.svg" alt="new age alpha VS" />
+      }@else if(sharedData.checkMenuPer(2028, 2256)=='D'){
+      <img class="disabled" matTooltip="vs" matTooltipPosition="below" src="../../../../assets/images/footer_ico/vs_ico.svg" alt="new age alpha VS" />
+      }
+
+      @if(etfService._SRValue > 0 && etfService._SRValue < 100){
+      @if(sharedData.checkMenuPer(2028, 2249)=='Y' && breadcrumbdata.length>0){
+      <img class="cp AVLalert_a" style="display:block;" matTooltip="Alert" matTooltipPosition="below" (click)="etfService.openAllocDialog()" src="../../../../assets/images/footer_ico/alert_ico.svg" alt="new age alpha avoid alert" />
+      <img class="cp AVLalert_c" style="display:none" matTooltip="Alert" matTooltipPosition="below" (click)="etfService.openAllocDialog()" src="../../../../assets/images/footer_ico/alert_filled_ico.svg" alt="new age alpha alert" />
+      }@else if(sharedData.checkMenuPer(2028, 2249)=='D' && breadcrumbdata.length>0){
+      <img class="disabled" style="display:block;" matTooltip="Alert" matTooltipPosition="below" src="../../../../assets/images/footer_ico/alert_ico.svg" alt="new age alpha avoid alert" />
+      }
+      @if(sharedData.checkMenuPer(2028, 2254)=='Y'){
+      <img class="cp" (click)="openAvoidLosers()" matTooltip="Avoid Losers" matTooltipPosition="below" src="../../../../assets/images/footer_ico/avoid_losers_ico.svg" alt="new age alpha avoid losers" />
+      } @else if(sharedData.checkMenuPer(2028, 2254)=='D'){
+      <img class="disabled" matTooltip="Avoid Losers" matTooltipPosition="below" src="../../../../assets/images/footer_ico/avoid_losers_ico.svg" alt="new age alpha avoid losers" />
+      }
+      }
+      @if(showWatchListIcon && sharedData.checkMenuPer(2028, 2250) == 'Y'){
+      @if(watchListIconClicked){
+      <img (click)="addWatchList()" class="cp" matTooltip="Watchlist" matTooltipPosition="below" src="../../../../assets/images/footer_ico/watchlist_ico_filled.svg" alt="new age alpha Watchlist" />
+      }@else{
+      <img (click)="addWatchList()" class="cp" matTooltip="Watchlist" matTooltipPosition="below" src="../../../../assets/images/footer_ico/watchlist_ico.svg" alt="new age alpha Watchlist" />
+      }
+      }@else if(showWatchListIcon && sharedData.checkMenuPer(2028, 2250) == 'D'){
+      <img class="cp disabled" matTooltip="Watchlist" matTooltipPosition="below" src="../../../../assets/images/footer_ico/watchlist_ico.svg" alt="new age alpha Watchlist" />
+      }
+      @if(showTimelineBtn && showCompareBtn){
+      @if(sharedData.checkMenuPer(2028, 2258)=='Y'){
+      <img class="cp" (click)="openCompare()" matTooltip="Compare" matTooltipPosition="below" src="../../../../assets/images/footer_ico/compare_ico.svg" alt="new age alpha compare" />
+      }@else if(sharedData.checkMenuPer(2028, 2258)=='D'){
+      <img class="disabled" matTooltip="Compare" matTooltipPosition="below" src="../../../../assets/images/footer_ico/compare_ico.svg" alt="new age alpha compare" />
+      }
+      }
+    </div>
+    }-->
+  </div>

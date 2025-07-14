@@ -1,0 +1,121 @@
+<div class="trade_Page dontSell_page">
+  <div class="dialog-content">
+    <div class="split-mod-l">
+      <div class="split-mod-right">
+        <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+        <div class="content-top" style="background: var(--topNavbar);">
+          <p>
+            Don't sell information
+          </p>
+        </div>
+        <div>
+          <div style=" height: 100%; position: absolute; width: 100%; background: var(--topNavbar); z-index: 99999;left:0;top:0;" *ngIf="matloader_DS">
+            <mat-spinner class="reviewloader-spinner"></mat-spinner>
+          </div>
+          <div class="content naa-ind-hgt scrollbox p1rem pb0" style="margin: 0;" id="rsTable">
+            <ng-container >
+              <div class="scrollbox p-rel" *ngIf="tabledata.length > 0">
+                <div class="top-head-t">
+                  <div class="title-ticker flexcolumn">
+                    Action
+                  </div>
+                  <div class="title-ticker flexcolumn" (click)="onSortClick($event,'contractDesc')">
+                    Instrument 
+                    <i class="fa-solid fa-angle-up material-icons" (click)="onSortClickIcon($event,'contractDesc')">
+                      {{ isIconVisible ? 'expand_more' : 'expand_less' }}
+                    </i>
+                  </div>
+                  <div class="title-ticker flexcolumn" (click)="onSortClick($event,'companyName')">
+                    Company name <i class="fa-solid fa-angle-up material-icons" (click)="onSortClickIcon($event,'companyName')">  {{ isIconVisible ? 'expand_more' : 'expand_less' }}</i>
+                  </div>
+                  <div class="title-ticker flexcolumn" (click)="onSortClick($event,'position')" >
+                    Position <i class="fa-solid fa-angle-up material-icons" (click)="onSortClickIcon($event,'position')" style="    margin-right: 0.2rem;">{{ isIconVisible ? 'expand_more' : 'expand_less' }}</i>
+                  </div>
+                  <div class="title-ticker flexcolumn"  >
+                    Last Price ($)
+                  </div>
+                  <!-- <div class="title-ticker flexcolumn"  >
+                    Last Price ($) <i class="fa-solid fa-angle-up material-icons" style="    margin-right: 0.2rem;">{{ isIconVisible ? 'expand_more' : 'expand_less' }}</i>
+                  </div> -->
+                </div>
+                <ng-container *ngFor="let group of tabledata; index as i">
+                  <div class="card cardheading">
+                    <div class="card-header parentAccor">
+                      <span class="actionclm" id="account_Exclusions">
+                        <a *ngIf="group.grpTaxlot.length > 0" class="collapsed card-link" data-bs-toggle="collapse" [href]="hrefpar1(i)" aria-expanded="false">
+                          <span class="accordion-extend">
+                            <span class="material-icons expand-down-arrow arrow-border">chevron_right</span></span>
+                        </a>
+                        <span *ngIf="group.grpTaxlot.length > 0">
+                          <!-- <mat-checkbox (change)="changeTaxlotH(group)" [(ngModel)]="group.checkH"></mat-checkbox> -->
+                          <ng-container>
+                            <mat-checkbox (change)="changeTaxlotH(group)" [(ngModel)]="group.checkH" class="example-margin ml0_5rem"></mat-checkbox>
+                          </ng-container>
+                        </span>
+                      </span>
+        
+                      <span>{{group.contractDesc}}</span>
+                      <span class="table_text_ellips">{{checkCompName(group)}}</span>
+                      <span style="text-align:right;">{{sharedData.numFormatWithComma(group.position)}}</span>
+                      <span style="text-align:right;">{{sharedData.numFormatWithComma(group.last)}}</span>
+                    </div>
+                    <div [id]="collapsepar1(i)" class="panel-collapse collapse" [attr.data-bs-parent]="datapar1(i)">
+                      <div class="card-body" [id]="Childpar1(i)" style="padding: 0;">
+                        <div class="p-stat-box1 childAccor" *ngIf="group.grpTaxlot.length > 0">
+                          <div class="top-head-t-child">
+                            <div class="title-ticker flexcolumn">
+        
+                            </div>
+                            <div class="title-ticker flexcolumn">
+                              Entry Date (MM/DD/YYYY)
+                            </div>
+                            <div class="title-ticker flexcolumn">
+                              Taxlot Id
+                            </div>
+                            <!--<div class="title-ticker flexcolumn">Company</div>-->
+                            <div class="title-ticker flexcolumn" style="justify-content: flex-end;">
+                              Quantity
+                            </div>
+                            <div class="title-ticker flexcolumn" style="justify-content: flex-end;">
+                              Unit Cost ($)
+                            </div>
+                            <!-- <div class="title-ticker flexcolumn" style="justify-content: flex-end;">
+                              Last Price
+                            </div> -->
+                            <div class="title-ticker flexcolumn" style="padding-left:1rem;    justify-content: end;">
+                              Unrealized <span class="nw">P&L ($)</span>
+                            </div>
+                          </div>
+                          <ng-container *ngFor="let item1 of group.grpTaxlot;">
+                            <div class="card-header parentAccor">
+                              <span id="account_Exclusions">
+                                <mat-checkbox (change)="changeTaxlotB(group)" [(ngModel)]="item1.checkB" class="example-margin" style="margin-left: 1.99rem;"></mat-checkbox>
+                              </span>
+                              <span>{{item1.entryDate | date: 'MM/dd/yyyy'}}</span>
+                              <span>{{item1.taxLotIdentifier}}</span>
+                              <!--<span>{{item1.companyName}}</span>-->
+                              <span style="text-align:right;">{{sharedData.numberWithCommas(item1.noofShares)}}</span>
+                              <span style="text-align:right;">{{sharedData.numFormatWithComma(item1.unitCost)}}</span>
+                              <!-- <span style="text-align:right;">{{sharedData.numFormatWithComma(item1.price)}}</span> -->
+                              <span style="padding-left:1rem;text-align: right;" [style.color]="isPershingLossorGain(item1.unrealizedGainLoss) ? '#50cd89': '#f1416c'">{{item1.unrealizedGainLoss | numWithComma:',.2f'}}</span>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <span class="d-flex justify-content-center align-items-center" style=" margin: auto; color: var(--leftSideText); font-size: 0.8rem; min-height: 10rem;height:100%" *ngIf="tabledata.length <= 0">Data not available</span>
+            </ng-container>
+          
+          </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-end dontSellBtm mt1_5rem" style="padding: 0.5rem;" *ngIf="tabledata.length > 0">
+          <button type="button" class="dialog_btn_P" (click)="conforStopAll()" style="min-width: auto;"><i class="fa fa-circle-o-notch fa-spin" *ngIf="dontSellLoad_Btn"></i> {{dontSellLoad_Btn?'Please wait...':'Save'}}</button>
+          <button type="button" class="dialog_btn_S ml0_5rem" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

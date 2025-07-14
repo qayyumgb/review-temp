@@ -1,0 +1,184 @@
+
+@media only screen and (max-width: 1260px) and (min-height: 500px) and (max-height:750px) {
+  svg#vsCompCircle {
+      width: 70%;
+  }
+  .buildYourIndex__sec__rightG {
+    .icon__details {
+      .heightRght {
+        .scrollbox{
+          height: calc(100vh - 21rem);
+        }
+      }
+    }
+  }
+  .perf__mat_scroll{
+    max-height: calc(100vh - 22rem);
+    height: auto;
+  }
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .main-layout .center-l svg {
+    transform: translate(-50%, -50%) scale(0.9) !important;
+  }
+}
+@media (min-device-width: 768px) and (max-device-width: 1024px) {
+  .etf__Comp__rightG .outerScroll__Div{
+    height: calc(100vh - 50rem);
+}
+}
+@media (min-device-width: 834px) and (max-device-width: 1194px) and (orientation: landscape){
+  .etf__Comp__rightG .outerScroll__Div{
+    height: calc(100vh - 20rem);
+}
+}
+@media only screen and (min-device-width: 810px) and (max-device-width: 740px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+@media only screen and (max-width: 1260px) and (min-height:750px) {
+  .main-layout .center-l svg {
+    top: 50% !important;
+  }
+  #customIndex__Comp .center-l svg {
+    width: 80%;
+  }
+  .buildYourIndex__sec__rightG .outerScroll__Div {
+    // height: calc(65vh - 1rem) !important;
+  }
+  #customIndex__Comp .outerScroll__Div__18 {
+    max-height: calc(60vh - 18rem);
+  }
+  #etf__Comp .left-l, #vsComp__Comp .left-l {
+    position: fixed !important;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    display: flex;
+    /*left: 2rem;*/
+
+    .bcum-list-l-n .b-text-n-d {
+      width: 50%;
+    }
+  }
+  #etf__Comp .left-l .drilldown__cards__list{
+    padding-top: 0.5rem;
+  }
+  #vsComp__Comp {
+    height: 95vh;
+
+    .seletfname{
+      position: absolute !important;
+      flex-direction: column;
+      justify-content: center;
+      left: 0;
+      top: 40%;
+    }
+
+    .left-l {
+      left: 2rem;
+    }
+  }
+
+    .scrollHeight {
+      max-height: calc(100vh - 23rem);
+      height: auto !important;
+      overflow: auto;
+    }
+
+    svg#hisTimelineCircle {
+      transform: translate(-50%, -50%) scale(0.7);
+    }
+
+    #hisTimeline__Comp {
+      height: 100vh;
+      overflow: hidden;
+
+      .left-l {
+        // width: 29%;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        height: auto !important;
+      }
+
+      .year-list-l ng-scrollbar {
+        height: auto !important;
+        display: block;
+        max-height: calc(100vh - 34rem);
+        overflow: auto;
+      }
+    }
+
+    #compare__Comp {
+      height: 100vh;
+
+      .right-l {
+        .mat__Div {
+          top: 3.8rem !important;
+        }
+      }
+
+      svg.commonSVGCircle {
+        transform: translate(-50%, -50%) scale(0.9) !important;
+      }
+    }
+
+    #timeline__Comp {
+      height: 100vh;
+      overflow: hidden;
+
+
+      .left-l {
+        // width: 29% !important;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        height: auto !important;
+      }
+
+      svg.commonSVGCircle {
+        transform: translate(-50%, -50%) scale(0.9) !important;
+      }
+    }
+
+    #vsComp__Comp #vsCompCircle {
+      width: 65%;
+    }
+  #compare__Comp .left-l {
+    position: absolute;
+    top: 50%;
+    transform: translate(0px, -50%);
+    height: auto !important;
+  }
+  }
+/* Login page End*/
+@media(max-width: 1024px){
+  #vsComp__Comp{
+    height: 100vh;
+        overflow: hidden;
+  }
+}
+@media(max-width:1128px){
+  .perf__mat_scroll{
+    height: auto;
+  }
+  #vsComp__Comp{
+    .buildYourIndex__sec__rightG{
+      height: calc(100vh - 15rem);
+    }
+  }
+ 
+}
+@media only screen 
+and (min-width: 1024px) 
+and (max-width: 1366px) 
+and (orientation: landscape) 
+and (-webkit-min-device-pixel-ratio: 1.5){
+  #vsComp__Comp{
+    overflow: hidden;
+    .outerScroll__Div{
+        height: calc(100vh - 23rem) !important;
+    }
+}
+}

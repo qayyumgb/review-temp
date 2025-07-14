@@ -1,0 +1,92 @@
+
+@media only screen and (max-width: 1260px) and (min-height:750px){
+    #customIndex__Comp {
+        .left-l{
+            z-index: 9999 !important;
+        }
+        .right-l{
+            z-index: 99 !important;
+        }
+        .reviewFactsheet_Custom{
+            padding-left: 20.8rem !important;
+        }
+    }
+
+    .reviewFact__CustomIndex{
+        display: block !important;
+        position: relative;
+       #openFactsheet__loader{
+        width: 100% !important;
+       }
+        .reviewFact__inner__right{
+            width: 33% !important;
+            background: var(--accordion);
+            padding: 0.8rem;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transition: transform 0.3s ease;
+            transform: translate(0, -50%) translateX(100%);
+            span.reviewFact__inner__right_components_toggle{
+                display: flex !important;
+                flex-direction: column;
+            }
+          
+            &.open{
+                transform: translate(0, -50%) translateX(0);
+            }
+            .bottom__section{
+                max-height: calc(100vh - 12.9rem) !important;
+            }
+        }
+        .reviewFact__inner__left{
+            width: 94% !important;
+            .reviewFact__inner__table{
+                &.pb_md_3{
+                    // padding-bottom: 3rem;
+                }
+            }
+            .scrollableDiv{
+                height: calc(100vh - 10rem) !important;
+            }
+        }
+    }
+   
+}
+@media(max-width: 1024px){
+    .reviewFact__CustomIndex{
+        display: block !important;
+        position: relative;
+       #openFactsheet__loader{
+        width: 100% !important;
+       }
+        .reviewFact__inner__right{
+            width: 33% !important;
+            background: var(--accordion);
+            padding: 0.8rem;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transition: transform 0.3s ease;
+            transform: translate(0, -50%) translateX(100%);
+            span.reviewFact__inner__right_components_toggle{
+                display: flex !important;
+                flex-direction: column;
+            }
+          
+            &.open{
+                transform: translate(0, -50%) translateX(0);
+            }
+            .bottom__section{
+                max-height: calc(100vh - 12.9rem) !important;
+            }
+        }
+        .reviewFact__inner__left{
+            width: 94% !important;
+
+            .scrollableDiv{
+                height: calc(100vh - 10rem) !important;
+            }
+        }
+    }
+}

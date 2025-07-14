@@ -1,0 +1,42 @@
+#etf__Comp {
+  .left-l {
+    position: relative;
+    z-index: 9;
+    height: 100%;
+    padding: 1rem 0 0 0.5rem;
+    width: 16%;
+    min-width: 15rem;
+    /*   position: fixed;
+    z-index: 9;
+    height: 100%;
+    padding: 4rem 0 0 1rem;
+    width: 16%;
+    top: 0;
+    left: 0;*/
+  }
+
+  .right-l {
+    position: fixed;
+    z-index: 9;
+    height: 100%;
+    padding: 1rem 0 0 1rem;
+    width: 17%;
+    min-width: 16rem;
+    right: 0;
+    top: 0;
+    padding-top: 3rem;
+  }
+}
+.no_data {
+  color: var(--leftSideText);
+  font-size: 0.85rem;
+  font-family: var(--ff-regular);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  text-align: center;
+}
+/*Responsive*/
+@import '../../core/layout/styles/responsive/etf.scss';

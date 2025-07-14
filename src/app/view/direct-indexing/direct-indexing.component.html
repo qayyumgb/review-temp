@@ -1,0 +1,53 @@
+<div class="direct_index_comp" id="directIndex__Comp" style="padding-top:3rem">
+  <div class="left-l" [style.display]="sharedData._showDefaultSideGrids?'block':'none'" (mouseenter)="sharedData.onSidebarEnter()" (mouseleave)="sharedData.onSidebarLeave()" >
+    <app-breadcrumb-list></app-breadcrumb-list>
+    @if(!showStartIndex){ <app-dilldown-list></app-dilldown-list> }
+    @else{ <app-build-your-index></app-build-your-index> }
+  </div>
+  <div class="center-l" [style.display]="showReviewIndexLoaded?'none':'block'">
+    <app-circle-loader-svg></app-circle-loader-svg>
+    @if(!showStartIndex){ <DI-default-circle></DI-default-circle> }
+    @else{ <DI-exclusion-circle></DI-exclusion-circle> }
+  </div>
+  <div class="right-l" [style.display]="showReviewIndexLoaded?'none':'block'" (mouseenter)="sharedData.onSidebarRightEnter()" (mouseleave)="sharedData.onSidebarRightLeave()"
+        [style.visibility]="sharedData._showDefaultSideGrids?'visible':'hidden'" [style.opacity]="sharedData._showDefaultSideGrids?1:0">
+    @if(showStartIndex){
+    <app-performance-components></app-performance-components>
+    }
+  </div>
+  @if(showReviewIndexLoaded){
+  <div class="reviewFactsheet_Direct">
+    <app-review-factsheet></app-review-factsheet>
+  </div>
+  }
+  @if(currentSList!=undefined){
+  <div class="basedOn__sec">
+    <span class="indName">{{currentSList.srName}}</span>
+    <span class="divided ml0_5rem mr0_5rem">Based On</span>
+    <span class="basedOn">{{currentSList.basedOn}}</span>
+  </div>
+  }
+</div>
+
+<div class="modal fade warningautoModel" id="lockTradeModal" tabindex="-1" role="dialog"
+     aria-labelledby="viewQueueModal" aria-hidden="true" style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem;">The current account has been locked and cannot be selected for further proceedings.</p>
+            <div class="foot-l">
+              <button type="button" class="dialog_btn_P" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

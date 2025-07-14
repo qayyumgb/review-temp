@@ -1,0 +1,298 @@
+$sm-menu-width: 248px !default;
+$sm-menu-bg: #ccc !default;
+
+$sm-link-color: #fff !default;
+$sm-link-padding: 12px 24px !default;
+
+$sm-transition-dur: 300ms !default;
+$sm-transition-easing: ease-in-out !default;
+
+
+@mixin list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.slide-menu {
+  /*width: 248px;*/
+  /*max-width: 250px;*/
+  /*height: 60vh !important;*/
+  position: relative;
+  top: 0;
+  right: 0;
+  display: block;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: $sm-menu-bg;
+  transition: transform $sm-transition-dur $sm-transition-easing;
+  transform: translateX(0%);
+  /*will-change: transform;*/
+  z-index: 1000;
+
+  #etfParentList li a span.medCircle {
+    /*width: 46px;
+    height: 46px;*/
+    display: inline-flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    min-width: 40.5px;
+    min-height: 40.5px;
+    top: 0;
+  }
+
+  #gblParentList li a span.medCircle {
+    display: inline-flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    min-width: 40.5px;
+    min-height: 40.5px;
+    top: 0;
+  }
+
+  #fxdParentList li a span.medCircle {
+    display: inline-flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    min-width: 40.5px;
+    min-height: 40.5px;
+    top: 0;
+  }
+
+  .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: transform $sm-transition-dur $sm-transition-easing;
+    transform: translateX(0);
+    /*will-change: transform;*/
+  }
+
+  .translateLeft {
+    transform: translate(-100%);
+  }
+
+  .translateLeft200 {
+    transform: translate(-200%);
+  }
+
+  ul {
+    @include list-unstyled;
+    position: relative;
+    width: $sm-menu-width;
+    max-width: 100%;
+    margin: 0;
+    transition: all .3s;
+
+    ul {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      display: none;
+    }
+
+    ul.etfChildList.active, ul.gblChildList.active, ul.fxdChildList.active {
+      display: block;
+      left: 99%;
+
+      li {
+        cursor: pointer;
+
+        &:hover {
+          background: #00b9ff !important;
+          /*
+          a {
+            color: #fff !important;
+          }*/
+        }
+      }
+
+      li span.medCircle {
+        max-width: 40.5px;
+        max-height: 40.5px;
+        display: flex;
+        width: 40.5px;
+        height: 40.5px;
+        /* padding: 13px 10px 11px 10px; */
+        display: flex;
+        border-radius: 50%;
+        text-anchor: middle;
+        color: #fff;
+        justify-content: center;
+        font-size: 12px;
+        font-family: Open Sans Semibold;
+        align-items: center;
+        min-width: 40.5px;
+        min-height: 40.5px;
+        margin-right: 13px;
+        top: 0 !important;
+        left: -20px !important;
+      }
+
+      li a.slide-menu-control {
+        background: #fff !important;
+        color: #00b9ff !important;
+        font-size: 13px;
+        padding: 5px 5px 5px 20px;
+        transition: all .3s;
+        margin-bottom: 6px;
+
+        &:hover {
+          background: #fff !important;
+          color: #00b9ff !important;
+
+          .fa {
+            color: #ccc !important
+          }
+        }
+
+        .fa {
+          position: relative;
+          right: 3px;
+          transition: all .3s;
+          font-size: 15px;
+        }
+      }
+    }
+
+
+    a {
+      display: block;
+      padding: 6px 3px 3px 18px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      /*background: #eee;*/
+      margin-bottom: 0px;
+      font-size: 12px;
+      font-family: Open sans Semibold;
+      position: relative;
+
+
+      .fa-angleright {
+        position: absolute;
+        right: 15px;
+        top: 19px;
+        color: #ccc;
+      }
+
+      &:hover {
+        background: #00b9ff;
+        /* color: #fff !important;*/
+        .fa-angleright {
+          color: #fff !important;
+        }
+      }
+    }
+
+    ul.etfChildList li a, ul.gblChildList li a, ul.fxdChildList li a {
+      background: transparent;
+      cursor: pointer;
+      margin-bottom: 2px;
+      font-size: 10px;
+      padding: 0;
+      padding-left: 0px;
+      position: relative;
+      left: -28px;
+      /*&:hover {*/
+      /*background: #fff !important;*/
+      /*color: #fff !important;
+      }*/
+    }
+  }
+
+  &.no-transition, &.no-transition * {
+    transition: none !important;
+  }
+}
+
+#ETFbackward, #Globalbackward, #Fixedbackward {
+  position: relative;
+  height: 26px;
+
+  span {
+    padding: 0px 10px;
+    border-radius: 50px;
+    /* width: 100%; */
+    display: block;
+    background: #00b9ff;
+    cursor: pointer;
+    position: absolute;
+    top: 1px;
+    color: #fff;
+    font-size: 10px;
+    font-family: Open Sans Semibold;
+    border: 1px solid white;
+    margin-left: 20px;
+    height: 20px;
+    /* line-height: 1; */
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .fa {
+    position: relative;
+    right: 3px;
+    transition: all .3s;
+    font-size: 15px;
+  }
+}
+
+.plr-2 {
+  padding: 6px 3px 3px 18px;
+}
+
+.slide-menu ul ul.etfChildList.active li a.slide-menu-control:hover, .slide-menu ul ul.gblChildList.active li a.slide-menu-control:hover, .slide-menu ul ul.fxdChildList.active li a.slide-menu-control:hover {
+  background: #fff !important;
+  color: #00b9ff !important;
+}
+
+.slide-menu {
+  background: transparent;
+  color: #333;
+}
+
+.slide-menu .slider {
+  top: 48px;
+}
+
+.slide-menu .controls {
+  overflow: hidden;
+}
+
+.slide-menu a {
+  color: #fff;
+}
+
+.slide-menu a:hover {
+  background: #3c9793;
+}
+
+.slide-menu .btn {
+  float: right;
+  color: #fff;
+  background: #34817e;
+  padding: 8px;
+}
+
+.slide-menu .btn:hover {
+  background: #2b6b68;
+}
+
+.slide-menu .btn + .btn {
+  margin-right: 1px;
+}
+
+#test-menu-left {
+  padding: 16px;
+}

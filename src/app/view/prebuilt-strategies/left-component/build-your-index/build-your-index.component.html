@@ -1,0 +1,69 @@
+<div class="buildYourIndex__sec pl1rem pt1rem">
+  <div class="iconleft__select">
+    <div class="__selectIco d-flex align-items-center" [class.selected]="!viewFactsheet" (click)="leftTabClick(false)">
+      <span class="ico material-icons-outlined">
+        dns
+      </span>
+      <div class="r_sec">
+        <span>Strategy</span>
+        <p>NAA Index Strategy</p>
+      </div>
+    </div>
+    <!--Factsheet Menu Permission-->
+    @if(sharedData.checkMenuPer(4,108) == 'Y' && !checkDisableIcon()){
+    <div class="__selectIco d-flex align-items-center mt1rem" [class.selected]="viewFactsheet" (click)="leftTabClick(true)">
+      <span class="ico material-icons-outlined">
+        newspaper
+      </span>
+      <div class="r_sec">
+        <span>View</span>
+        <p>Factsheet</p>
+      </div>
+    </div>
+    }@else if(sharedData.checkMenuPer(4,108) == 'D' || checkDisableIcon()){
+    <div class="__selectIco d-flex align-items-center disableMenu mt1rem">
+      <span class="ico material-icons-outlined">
+        newspaper
+      </span>
+      <div class="r_sec">
+        <span>View</span>
+        <p>Factsheet</p>
+      </div>
+    </div>
+    }
+    <!--Factsheet Menu Permission-->
+
+  </div>
+  @if(sharedData.checkShowLeftTab(3) == 'A' || sharedData.checkShowLeftTab(3) == 'D'){
+  <div class="select__steps__details top_bg tool_cust mt1rem disabledMenu" style="padding: 1rem 0.5rem 1rem 1rem;">
+    <div class="d-flex align-items-center">
+      <span class="icon_bg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="196" height="50" viewBox="0 0 196 197" fill="none">
+          <path d="M95.5329 8.34609C119.397 7.69171 142.544 16.5441 159.881 32.9558C177.218 49.3675 187.325 71.9941 187.98 95.8581" stroke="url(#paint0_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+          <path d="M182.556 129.191C176.452 145.914 165.525 160.452 151.158 170.966C136.792 181.479 119.63 187.497 101.843 188.257C84.0562 189.017 66.4436 184.485 51.2322 175.235C36.0209 165.986 23.8941 152.433 16.3852 136.291" stroke="url(#paint1_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+          <path d="M7.98706 98.3255C7.98706 80.6917 13.1665 63.4463 22.8823 48.7305C32.5981 34.0147 46.4223 22.4767 62.6383 15.5492" stroke="url(#paint2_linear_699_114074)" stroke-width="15.43" stroke-linecap="round"></path>
+          <path d="M63.4756 98.3235H78.8198V132.848H63.4756V98.3235ZM117.18 82.9793H132.525V132.848H117.18V82.9793ZM90.328 59.9629H105.672V132.848H90.328V59.9629Z" fill="#5A5A89"></path>
+          <defs>
+            <linearGradient id="paint0_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#E323FF"></stop>
+              <stop offset="1" stop-color="#7517F8"></stop>
+            </linearGradient>
+            <linearGradient id="paint1_linear_699_114074" x1="98.0003" y1="196.054" x2="98.0003" y2="0.59728" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8AFF6C"></stop>
+              <stop offset="1" stop-color="#02C751"></stop>
+            </linearGradient>
+            <linearGradient id="paint2_linear_699_114074" x1="0.272066" y1="147.19" x2="190.856" y2="147.027" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FFD422"></stop>
+              <stop offset="1" stop-color="#FF7D05"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <div>
+        <p>Customization</p>
+        <h5>Tool</h5>
+      </div>
+    </div>
+  </div>
+  }
+</div>

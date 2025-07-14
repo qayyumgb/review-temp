@@ -1,0 +1,2443 @@
+<div class="trade_Page">
+  <div class="dialog-content h-100">
+    <div class="split-mod-l h-100">
+      <div class="split-mod-right h-100">
+        <div class="close-l" (click)="closeModal()"><span class="material-icons">close</span></div>
+        <div class="content-top">
+          <p>
+            Trade
+          </p>
+        </div>
+        <div class="trade_subTop">
+          <ul>
+            <li *ngIf="clickedListHeader != undefined">
+              <p class="mb0">{{clickedListHeader.name}} ({{clickedListHeader.shortname}})</p>
+            </li>
+            <li *ngIf="sharedData.tradeTiming['showTradeTime'] && showTradeBtn">
+              <p class="mb0">Trade times: <span class="TRtimes">{{sharedData.tradeTiming['tradeTimes']}}</span></p>
+            </li>
+            <li *ngIf="(sharedData.tradeTiming['showCount'] && sharedData.tradeTiming['tradeEnd'])" class="tradeStart_time">
+              <p class="mb0">Trade ends in: <span class="TRtimes">{{sharedData.tradeTiming['tradeCount']}}</span></p>
+            </li>
+            <li *ngIf="(sharedData.tradeTiming['showCount'] && sharedData.tradeTiming['tradeStart'])" class="tradeStart_time">
+              <p class="mb0">Trade start in: <span class="TRtimes">{{sharedData.tradeTiming['tradeCount']}}</span></p>
+            </li>
+            <li *ngIf="!showTradeBtn">
+              <p class="mb0"><span class="material-symbols-outlined material-icons TRtimes market-info">info</span> <span>{{showTradetxt}}</span></p>
+            </li>
+            <!--<li *ngIf="sharedData.tradeTiming['tradeTimes'] && sharedData.tradeTiming['showTradeTime'] == false">
+              <p class="mb0">Trade times: <span class="TRtimes">{{sharedData.tradeTiming['tradeTimes']}}</span></p>
+            </li>-->
+          </ul>
+        </div>
+
+        <div class="TRContainer pl1rem pr1rem d-flex h-100" [style.display]="indexRulesData.length > 0?'block':'none'">
+          <div class="TL_leftSec">
+            <p *ngIf="checktradeAll" class="mb1rem">Strategy</p>
+            <p *ngIf="!checktradeAll" class="mb1rem">Account</p>
+            <div class="box" *ngIf="!sharedData._immediateLiquidate">
+              <p class="mb0 cp" *ngIf="checktradeAll" [class.active]="checkActiveAcc({accountId:0})"
+                 (click)="showMainTradeList('main');loadAccDt({accountId:0});selTab = 'trade'">
+                <span class="ellips">{{clickedList.name}}</span> ({{clickedList.shortname}})</p>
+              <ul *ngIf="currentAccList.length>0">
+                <ng-container *ngFor="let it of currentAccList">
+                  <li [class.active]="checkActiveAcc(it)" (click)="showMainTradeList('acc1');loadAccDt(it)">
+                    <span class="material-icons">radio_button_unchecked</span> {{it['accountNo']}}
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+            <div class="box" *ngIf="sharedData._immediateLiquidate && currentAccList.length == 1">            
+              <ul><li class="active">  <span class="material-icons">radio_button_unchecked</span> {{currentAccList[0]['accountVan']}}</li></ul>
+            </div>
+          </div>
+         
+          <div class="TL_rightSec">
+            <div>
+              <!---- Based On Parent Click---->
+              <ul class="nav container nav-pills parentTab" role="tablist" *ngIf="showMainTradeSection">
+                <li class="nav-item">
+                  <a class="nav-link active" data-bs-toggle="pill" href="#tradeList_main"
+                    (click)="selTab = 'trade';tradeTrack('Trade List')">Trade List</a>
+                </li>
+                <li *ngIf="checkNavLiq()" class="nav-item">
+                  <a class="nav-link " data-bs-toggle="pill" href="#index_main"
+                    (click)="selTab = 'construction';scrollLeft('');tradeTrack('Index Construction')">Index
+                    Construction</a>
+                </li>
+                <li *ngIf="checkNavLiq()" class="nav-item">
+                  <a class="nav-link" data-bs-toggle="pill" href="#factsheet_main"
+                    (click)="selTab = 'moveFactsheet';reviewfactsheetloadChart();tradeTrack('Factsheet')">Factsheet</a>
+                </li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content" id="pills-tabContent" *ngIf="showMainTradeSection">
+                <div id="tradeList_main" class="container tab-pane active">
+                  <div class="sH100 p-rel">
+                    <div class="acc_loader refresh_loader justify-content-center align-items-center"
+                      [style.display]="(timeOutCount==0 && reloadBtnSH) ?'flex':'none'" style="height: calc(100vh - 15rem);">
+                      <span class="d-flex align-items-center">
+                        <span class="ref_text">Refreshing trade list </span>
+                        <span class="pulse-loader-dots" [style.width]="'1.5rem'" [style.height]="'0.5rem'"
+                          [style.color]="'var(--prim-button-color)'">
+                          <span></span><span></span><span></span>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="d-flex justify-content-end dwnld-section mt0_5rem mb0_5rem">
+                      <div class="d-flex align-items-center dwnld-section">
+                        <a class="dialog_btn_P mr1rem D_btn c-pointer" (click)="tradeDownloadList()"
+                          *ngIf="checkShowMatTableTradeList(tradeCompanydataSource)">
+                          <span class="material-icons"
+                            style="font-size: 1rem; padding-right: 0.25rem;">file_download</span>
+                          Download
+                        </a>
+                        <span>Count: <b>{{tradeCompanydataSource.data.length | numWithComma:',.2f'}}</b></span>
+                        <span class="ml0_5rem">Net value: <b>{{netValue(tradeCompanydataSource.data,'value')}}</b></span>
+                      </div>
+                    </div>
+                    <div class="tab-content" [style.opacity]="(timeOutCount==0 && reloadBtnSH) ?'0':'1'">
+                      <div id="Current-trade_main" class="tab-pane active" >
+                        <div class="split-mod-right">
+                          <div class="content-btm p0" style="position:relative">
+                            <div class="w-100">
+                              <div class="scrollbox">
+                                <table class="table global_table"
+                                  *ngIf="!checkShowMatTableTradeList(tradeCompanydataSource)">
+                                  <thead >
+                                    <tr>
+                                      <th>Company Name</th>
+                                      <th style="text-align: left">Ticker</th>
+                                      <th style="text-align:right">Action</th>
+                                      <th style="text-align:right">Order Type</th>
+                                      <th style="text-align:right">Price ($)</th>
+                                      <th style="text-align:right">Quantity</th>
+                                      <th style="text-align:right">Value</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr style=" height: 12rem;border:none">
+                                      <td style=" color: var(--leftSideText); text-align: center; font-size: 0.8rem;vertical-align: middle;border: 0;"
+                                        colspan="7">Contemporary trade list are being updated. Please check again
+                                        shortly.</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <ng-container *ngIf="checkShowMatTableTradeList(tradeCompanydataSource)">
+                                  <ng-scrollbar #scrollable class="scroll-event scrollbox1 tablescrollbox1"
+                                    thumbClass="white-scrollbars">
+                                    <ng-container>
+                                      <mat-table matSort matSortActive="Ticker" matSortDisableClear="true"
+                                        matSortDirection="asc" (matSortChange)="tradeListsortChange($event)"
+                                        [dataSource]="tradeCompanydataSource" [trackBy]="TradeListTrackBy"
+                                        class="global_mat_table tblHeightTR" style="background: transparent;">
+                                        <ng-container matColumnDef="Company Name">
+                                          <mat-header-cell mat-sort-header style="min-width: 40%; align-items: center;"
+                                            *matHeaderCellDef>
+                                            Company Name
+                                          </mat-header-cell>
+                                          <mat-cell style="min-width: 40%;"
+                                            *matCellDef="let element">{{element.companyName |
+                                            nullDashPipe:''}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Ticker">
+                                          <mat-header-cell mat-sort-header style="text-align: left;align-items: center;"
+                                            *matHeaderCellDef>
+                                            Ticker
+                                          </mat-header-cell>
+                                          <mat-cell style="text-align: left" *matCellDef="let element">
+                                            <span
+                                              class="badge badge-light-primary tickerbadge">{{element.ticker}}</span>
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Action">
+                                          <mat-header-cell mat-sort-header style="text-align:right;align-items: center;"
+                                            *matHeaderCellDef>
+                                            Action
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element;let i = index"
+                                            [style.color]="element.buyOrSell == 'Buy'?'var(--successColor)':'var(--errorColor)'">
+                                            {{element.buyOrSell}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Order Type">
+                                          <mat-header-cell style="align-items: center;" *matHeaderCellDef>
+                                            Order Type
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element">{{'Market'}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Price ($)">
+                                          <mat-header-cell mat-sort-header class="row_reverse" style="align-items: center;"
+                                            *matHeaderCellDef>
+                                            Price ($)
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" *matCellDef="let element;let i = index">{{element.price |
+                                            priceFormat:'$,.2f'}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Quantity">
+                                          <mat-header-cell class="row_reverse" mat-sort-header style="align-items: center;"
+                                            *matHeaderCellDef>
+                                            Quantity
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" *matCellDef="let element;let i = index">{{element.noofShares |
+                                            numWithComma:','}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Value">
+                                          <mat-header-cell class="row_reverse" style="padding-right: 1rem; min-width: 12%;"
+                                            *matHeaderCellDef>
+                                            Value
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" style="padding-right: 1rem; min-width: 12%; white-space: nowrap"
+                                            *matCellDef="let element;let i = index"
+                                            [style.color]="checkTL_ValueColor(element)?'var(--successColor)':'var(--errorColor)'">{{checkTL_ValueColor(element)
+                                            ? checkValPrice(element.value):'-
+                                            '+checkValPrice(element.value)}}</mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedTradeColumns"></mat-header-row>
+                                        <mat-row style="background: var(--primary-color);"
+                                          *matRowDef="let row; columns: displayedTradeColumns"></mat-row>
+                                      </mat-table>
+                                    </ng-container>
+                                  </ng-scrollbar>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="index_main" class="container tab-pane fade">
+                  <div class="review_fact sH100 p-rel" style="margin: 1rem 0; min-height: calc(100vh - 16rem);"
+                    *ngIf="indexRulesData.length <= 0">
+                    <div class="acc_loader" style="display:block;z-index:9">
+                      <mat-spinner class="reviewloader-spinner"></mat-spinner>
+                    </div>
+                  </div>
+                  <div *ngIf="indexRulesData.length <= 0" class="noDataIndexConst">
+                    <p>No data available.</p>
+                  </div>
+                  <div class="d-flex" style="margin:1rem 0" *ngIf="indexRulesData.length > 0">
+                    <div class="indexConstruction" id="indexRulesModalInner_T">
+                      <div>
+                        <div class="scrollbox build-my-sec-l">
+                          <div class="indexTimeline-content" style="padding-right: 0.5rem;"
+                            *ngIf="indexRulesData.length > 0">
+                            <div class="pe-3 mb-1 indexTimelinetext">
+                              <h4>Filters</h4>
+                            </div>
+                            <div *ngIf="factorsGrp.length > 0">
+                              <ng-container *ngFor="let f_data of factorsGrp">
+                                <ng-container *ngIf="f_data.factorid == 18">
+                                  <div class="overflow-auto">
+                                    <div class="filtersList avoidFilter">
+                                      <span class="timelinetitle">{{checkfactorName(f_data.factorid)}}</span>
+                                      <!---- percentage -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 0">
+                                        <div class="popuprangeSliderT">
+                                          <div class="progress-container">
+                                            <div class="progress" [ngStyle]="{'width.%':(f_data.startval)}"></div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(f_data.startval)-3}">
+                                              <div class="percentage">{{f_data.startval}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex">
+                                            <span>0%</span>
+                                            <span>100%</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- percentage -->
+                                      <!---- value -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 1">
+                                        <div class="popuprangeSliderT">
+                                          <div class="progress-container">
+                                            <div class="progress" [ngStyle]="{'width.%':(100-f_data.eRange)}"></div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(100-f_data.eRange)-3}">
+                                              <div class="percentage">{{convert2digits(f_data.endval*100,
+                                                f_data.factorid)}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex">
+                                            <span>{{convert2digits(f_data.dmax*100, f_data.factorid) | number:'1.0-0'}}%</span>
+                                            <span>{{convert2digits(f_data.dmin*100, f_data.factorid) | number:'1.0-0'}}%</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- value -->
+                                    </div>
+                                  </div>
+                                </ng-container>
+                              </ng-container>
+                            </div>
+                            <div class="">
+                              <div class="overflow-auto" *ngIf="indexrulesCmpy.length > 0">
+                                <div class="filtersList avoidFilter">
+                                  @if(indexrulesCmpy.length>1){
+                                  <span class="timelinetitle">
+                                    {{indexrulesCmpy.length}} Companies <span style="font-size: 0.6rem;color: var(--leftSideText);font-family: var(--ff-medium);opacity: .6;float: right;">(Excluded)</span>
+                                  </span>
+                                  }@else{
+                                  <span class="timelinetitle">
+                                    {{indexrulesCmpy.length}} Company <span style="font-size: 0.6rem;color: var(--leftSideText);font-family: var(--ff-medium);opacity: .6;float: right;">(Excluded)</span>
+                                  </span>
+                                  }
+                                  <div class="indexTimeline-ticker scrollbox">
+                                    <div *ngFor="let item of indexrulesCmpy" class="example-item"
+                                         style="padding-right: 0.2rem; margin: 0; margin-top: 0.2rem;">
+                                      <div class="mat-CusVirTable gridlist-e">
+                                        <div class="d-flex">
+                                          <div class="details-e border-d">
+                                            <div class="top-e">{{item.name}}</div>
+                                            <div class="bottm-e">
+                                              <span class="tick-l-e">{{item.ticker}}</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" style="" *ngIf="indexrulesGICS.length > 0">
+                                <div class="filtersList avoidFilter">
+                                  <span class="timelinetitle">
+                                    Sector(s) (GICS) <span
+                                      style="font-size: 0.6rem;color: var(--leftSideText);opacity: .6;    float: right;">(Excluded)</span>
+                                  </span>
+                                  <div class="indexTimeline-ticker scrollbox">
+                                    <div class="grid-list-T w-100 excGicsList" style="padding-top: 0rem ">
+                                      <ul style=" margin: 0; margin-top: 0.2rem;">
+                                        <li *ngFor="let data of indexrulesGICS" style="cursor:default !important;">
+                                          <span class="D_list"
+                                            style="cursor:default !important;">
+                                            <span class="d-flex w-100 align-items-center justify-content-between">
+                                              <span style="cursor:default !important;">{{data.name}}</span>
+                                              <!--<span class="med-l" [style.background]="cl(data.med)" style="width: auto !important; color: #fff !important;" *ngIf="index_const_weight == 'ERF' || index_const_select == 'ERF'">{{data.med  }}</span>-->
+                                            </span>
+                                          </span>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--<div class="overflow-auto" *ngIf="indexrulesCategory.length > 0">
+                              <div class="filtersList">
+                                <span class="timelinetitle d-block mb-1">
+                                  ESG Category <span style="
+                                 font-size: 0.6rem;
+                                 color: var(--leftSideText);
+                                 
+                                 opacity: .6;
+                                 float: right;
+                             ">(Excluded)</span>
+                                </span>
+                                <div class="indexTimeline-ticker full">
+                                  <div style="display: flex; flex-wrap: wrap;">
+                                    <ng-container *ngFor="let data of indexrulesCategory">
+                                      <span class="badge" style="margin-right:0.2rem">{{data.name}}</span>
+                                    </ng-container>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>-->
+                            <!--<ng-container *ngIf="indexRulesData.length > 0">
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].rating != ''">
+                                <div class="filtersList rangeFlier">
+                                  <span class="timelinetitle">
+                                    ESG Range <span style="
+                                 font-size: 0.6rem;
+                                 color: var(--leftSideText);
+                                 
+                                 opacity: .6;
+                                 float: right;">(Excluded)</span>
+                                  </span>
+                                  <div class="indexTimeline-ticker Range" style="display: flex;">
+                                    <div class="popuprangeSliderT">
+                                      <div class="progress-container steps">
+                                        <div class="progress" [ngStyle]="{'width.%':ratingIndexnumber}"></div>
+                                        <div class="range-flex" [ngStyle]="{'left.%':(ratingIndexnumber)-3}">
+                                          <div class="percentage">{{indexRulesData[0].rating}}</div>
+                                          <span class="range-round"></span>
+                                        </div>
+                                      </div>
+                                      <div class="rangeFlex">
+                                        <span>D-</span>
+                                        <span>D</span>
+                                        <span>D+</span>
+                                        <span>C-</span>
+                                        <span>C</span>
+                                        <span>C+</span>
+                                        <span>B-</span>
+                                        <span>B</span>
+                                        <span>B+</span>
+                                        <span>A-</span>
+                                        <span>A</span>
+                                        <span>A+</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-container>-->
+                            <div *ngIf="factorsGrp.length > 0">
+                              <ng-container *ngFor="let f_data of factorsGrp">
+                                <ng-container *ngIf="f_data.factorid != 18">
+                                  <div class="overflow-auto">
+                                    <div class="filtersList avoidFilter">
+                                      <span class="timelinetitle">{{checkfactorName(f_data.factorid)}}</span>
+                                      <!---- percentage -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 0">
+                                        <div class="popuprangeSliderT">
+                                          <div class="progress-container factors"
+                                            [style.width]="functionPercentage(f_data.endval-2) ? '99%':'90%'">
+                                            <div class="progress"
+                                              [ngStyle]="{'width.%':((f_data.endval) - f_data.startval),'left.%':(f_data.startval+3)}">
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':f_data.startval}">
+                                              <div class="percentage">{{f_data.startval}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(f_data.endval-2)}">
+                                              <div class="percentage">{{f_data.endval}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex">
+                                            <span>0%</span>
+                                            <span>100%</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- percentage -->
+                                      <!---- value -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 1">
+                                        <div class="popuprangeSliderT">
+                                          <div class="progress-container factors"
+                                            [style.width]="function(f_data.eRange-2) ? '99%':'90%'">
+                                            <div class="progress"
+                                              [ngStyle]="{'width.%':convert2width(f_data.eRange, f_data.sRange),'left.%':(f_data.sRange+3)}">
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':f_data.sRange}">
+                                              <div class="percentage">
+                                                {{convert2digits(f_data.startval, f_data.factorid)}}<span class="perc"
+                                                  *ngIf="checkFac_per(f_data.factorid)">%</span>
+                                              </div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(f_data.eRange-2)}">
+                                              <div class="percentage">{{convert2digits(f_data.endval,
+                                                f_data.factorid)}}<span class="perc"
+                                                  *ngIf="checkFac_per(f_data.factorid)">%</span></div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex" *ngIf="MK == true">
+                                            <span>{{convert2digits(f_data.dmin, f_data.factorid)}}<span class="perc"
+                                                *ngIf="checkFac_per(f_data.factorid)">%</span></span>
+                                            <span>{{convert2digits(f_data.dmax, f_data.factorid)}}<span class="perc"
+                                                *ngIf="checkFac_per(f_data.factorid)">%</span></span>
+                                          </div>
+                                          <div class="rangeFlex" *ngIf="MK == false">
+                                            <span>{{convert2digits(f_data.dmin, f_data.factorid) | number:'1.0-0'}}<span class="perc">%</span></span>
+                                            <span>{{convert2digits(f_data.dmax, f_data.factorid) | number:'1.0-0'}}<span class="perc">%</span></span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- value -->
+                                    </div>
+                                  </div>
+                                </ng-container>
+                              </ng-container>
+                            </div>
+                            <div class="overflow-auto ng-star-inserted" *ngIf="!checkconst_filters()">
+                              <div class="filtersList"><span class="timelinetitle text-center">No filters
+                                  selected</span></div>
+                            </div>
+                            <div class="indexTimeline-content" *ngIf="indexRulesData.length > 0">
+                              <div class="pr1rem mb1rem indexTimelinetext"
+                                *ngIf="indexRulesData[0].selectBy.length > 0 || indexRulesData[0].noofComp != null || indexRulesData[0].weightBy.length > 0 || indexRulesData[0].taxEffAwareness != null">
+                                <h4 class="mt1rem">Selection & Weighting</h4>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].selectBy.length > 0">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Selected by</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge">{{indexRulesData[0].selectBy[0].Name}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].noofComp != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Number of components</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge">{{indexRulesData[0].noofComp}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto"
+                                *ngIf="indexRulesData[0].cashTarget != null || indexRulesData[0].cashTarget != undefined">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Cash Target</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge">{{indexRulesData[0].cashTarget}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].weightBy.length > 0">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Weighted by</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge">{{indexRulesData[0].weightBy[0].Name}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="checkWeightflags(indexRulesData)">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Maximum security weight</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge">{{indexRulesData[0]['strData'].weightlimit}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].taxEffAwareness != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Tax Optimization</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge" *ngIf="indexRulesData[0].taxEffAwareness == 'Y'">Yes</span>
+                                    <span class="badge" *ngIf="indexRulesData[0].taxEffAwareness == 'N'">No</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].strData != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Rebalance</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span
+                                      class="badge">{{sharedData.checkRebalanceType(indexRulesData[0]['strData'])}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-centers" id="indexRulesModalT" style="width:70%;padding-top:1.5rem">
+                      <div class="w-100">
+                        <div class="w-100 h-100">
+                          <div class="split-mod-l">
+                            <div class="split-mod-right">
+                              <div class="content-btm  scrollbox d-flex justify-content-center align-items-center"
+                                style="background: transparent; border: none;">
+                                <div class="tab-content" style="padding: 0; width: 90%;">
+                                  <div id="Construction" class="indexConstruction_R">
+                                    <div class="d-flex justify-content-between construction-rules"
+                                      *ngIf="indexRulesData.length > 0">
+                                      <div class="univ-chart">
+                                        <div class="box-c"></div>
+                                        <div class="box-d">
+                                          <span class="text-c" style="">
+                                            Universe
+                                          </span>
+                                        </div>
+                                        <div class="text-b">
+                                          <p><span>{{cuselindName}} </span> {{cuselindTicker}}</p>
+                                        </div>
+                                      </div>
+                                      <div class="calc-chart">
+                                        <div class="box-c"></div>
+                                        <div class="box-d">
+                                          <span class="text-c" style="">
+                                            Calculation
+                                          </span>
+                                        </div>
+                                        <div class="text-b">
+                                          <p *ngIf="index_const_calcu > 0" class="d-flex" style="flex-wrap:wrap;">
+                                            Removed <b>&nbsp;{{index_const_calcu}}&nbsp;</b>stocks <span
+                                              *ngIf="checkconst_filters()">
+                                              <span style="margin-right: 0.4rem;">using</span>
+                                              <span *ngIf="(accord_losers_length > 0 )"
+                                                    style="margin-right: 0.2rem;">Avoid the Losers (h-factor)</span>
+                                              <span *ngIf="(indexRulesData[0].strStockkey.length>0)"
+                                                style="margin-right: 0.4rem;">Company</span><span
+                                                *ngIf="(indexRulesData[0].strSector.length>0)"
+                                                style="margin-right: 0.4rem;">Sectors (GICS)</span>
+                                              <ng-container *ngFor="let f_data of factorsGrp">
+                                                <span
+                                                  style="margin-right: 0.2rem;">{{checkfactorName(f_data.factorid)}}</span>
+                                              </ng-container>
+                                              <span>filters.</span>
+                                            </span>
+                                          </p>
+                                          <p *ngIf="index_const_calcu == 0">Removed 0 stocks</p>
+                                        </div>
+                                      </div>
+                                      <div class="weight-chart">
+                                        <div class="box-c"></div>
+                                        <div class="box-d">
+                                          <span class="text-c" style="">
+                                            Weighting
+                                          </span>
+                                        </div>
+                                        <div class="text-b" *ngIf="indexRulesData.length > 0">
+                                          <p>
+                                            Selected by <b>{{index_const_select}}</b> Scores.
+                                          </p>
+                                          <hr />
+                                          <p>
+                                            Weighted by <b>{{index_const_weight}}</b> Scores.
+                                          </p>
+                                          <hr />
+                                          <p>
+                                            No of components <b>{{indexRulesData[0].noofComp}}</b>.
+                                          </p>
+                                          <hr *ngIf="index_const_tax == 'Yes'">
+                                          <p *ngIf="index_const_tax == 'Yes'">
+                                            <b>Yes</b> Tax Optimization.
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="factsheet_main" class="container tab-pane fade">
+                  <div class="review_fact sH100 p-rel mt0_5rem" style="">
+                    <div class="acc_loader" style="display:none;z-index:99"
+                         [style.display]="((bldMyIndexMntHPortfolioData.length > 0 && GetETFStrData.length > 0 ) || !showSpinner_trade ?'none':'flex')">
+                      <mat-spinner class="reviewloader-spinner"></mat-spinner>
+                    </div>
+                    @if(factsheetError){
+                    <div class="factsheetErrorMsg" style=" text-align: center; padding-top: 5rem; color: var(--leftSideText); font-size: 0.85rem;">No data found!</div>
+                    }@else{
+                    <div class="reviewFact__inner">
+                      <div class="reviewFact__inner__left scrollbox">
+                        <div class="d-flex justify-content-between">
+                          <div class="lh_D mb1rem">
+                            <h3 class="m0">Review Factsheet:</h3>
+                            <span class="perfDate">
+                              Performance as of:
+                              <span style="color: var(--leftSideText-B);">
+                                <b>{{asOfDate}}</b>
+                              </span>
+                            </span>
+                          </div>
+                          <div class="reviewFact__dropdown pr1rem" *ngIf="checkSHaccInfo()">
+                            <div id="account_Exclusions" class="mb1rem enable_trading_check text-right">
+                              <p class="mb0">Account: <span><b>{{C_FullAccountDetails.accountId}}</b></span></p>
+                              <p class="mb0">
+                                Market Value:
+                                <span *ngIf="C_AccountDetails.marketvalue!=null"><b>${{C_AccountDetails.marketvalue | number: '1.2-2'}}</b></span>
+                                <span *ngIf="C_AccountDetails.marketvalue==null">-</span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- all Table -->
+                        <div class="scrollableDiv scrollbox">
+                          <div class="reviewFact__inner__table p1rem mb1rem">
+                            <!-- Performance Annualized Trailing Returns -->
+                            <div>
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Performance Annualized Trailing Returns (Gross of fees) </span>
+                              </div>
+                              <div class="reviewFact__inner__table_data" id="account_Exclusions">
+
+                                <table class="table-grid" *ngIf="GetETFStrData.length>0">
+                                  <tbody>
+                                    <tr class="table-grid-row">
+                                      <td style="">Product Name</td>
+                                      <td>
+                                        YTD
+                                      </td>
+                                      <td>1 Year</td>
+                                      <td>3 Years</td>
+                                      <td>5 Years</td>
+                                      <!--<td>7 Years</td>-->
+                                      <td>10 Years</td>
+                                    </tr>
+                                    <tr *ngIf="GetETFStrData.length>0" class="table-grid-row"
+                                        [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                      <td *ngIf="taxOptFactSheet"
+                                          [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <span class="d-flex">
+                                          <span class="ellips">
+                                            {{indexName}}
+                                          </span>
+                                          <span class="text-nowrap padl-025">(Before Tax)</span>
+                                        </span>
+                                      </td>
+                                      <td *ngIf="!taxOptFactSheet">{{indexName}}</td>
+                                      <td>{{GetETFStrData[0]['ytdReturn']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['y1Return'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['y3Return'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['y5Return'] | percentFormat}}</td>
+                                      <!--<td>{{GetETFStrData[0]['y7Return'] | percentFormat}}</td>-->
+                                      <td>{{GetETFStrData[0]['y10Return']| percentFormat}}</td>
+                                    </tr>
+                                    <tr *ngIf="GetETFStrData.length>2 && taxOptFactSheet" class="table-grid-row"
+                                        [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                      <td [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <span class="d-flex">
+                                          <span class="ellips">
+                                            {{indexName}}
+                                          </span>
+                                          <span class="text-nowrap padl-025">(After Tax)</span>
+                                        </span>
+                                      </td>
+                                      <td>{{GetETFStrData[2]['ytdReturn']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[2]['y1Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[2]['y3Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[2]['y5Return']| percentFormat}}</td>
+                                      <!--<td>{{GetETFStrData[2]['y7Return']| percentFormat}}</td>-->
+                                      <td>{{GetETFStrData[2]['y10Return']| percentFormat}}</td>
+                                    </tr>
+                                    <tr *ngIf="GetETFStrData.length>1" class="table-grid-row">
+                                      <td class="d-flex"><span class="ellips ellipsWidth">{{perfName}}</span><span class="text-nowrap padl-025">{{cusindexNameTicker}}</span></td>
+                                      <td>{{GetETFStrData[1]['ytdReturn']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[1]['y1Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[1]['y3Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[1]['y5Return']| percentFormat}}</td>
+                                      <!--<td>{{GetETFStrData[1]['y7Return']| percentFormat}}</td>-->
+                                      <td>{{GetETFStrData[1]['y10Return']| percentFormat}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- Performance Annualized Trailing Returns End -->
+                            <!-- Calendar Year Returns -->
+                            <div class="mt2rem position-relative">
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Calendar Year Returns (Gross of fees) </span>
+                                <div id="TradeArrowWrap" class="text-right tableNav">
+                                  <a class="nav-prev arrow scrollBtn" id="calLeftArrow" (click)="scrollLeft('calendarYearReturnsLeft')">
+                                    <span class="material-icons">chevron_left</span>
+                                  </a>
+                                  <a class="nav-next arrow ml0_5rem" id="calRightArrow" (click)="scrollRight('calendarYearReturnsRight')">
+                                    <span class="material-icons">chevron_right</span>
+                                  </a>
+                                </div>
+                              </div>
+                              <div>
+                                <div class="reviewFact__inner__table_data reviewFact__inner__table_fixed_data reviewFact__inner__table_data_calendar TradecalendarYearReturns" #calendarYearReturns (scroll)="onScroll($event,'calendarYearReturns')" id="account_Exclusions" *ngIf="perfData.years.length>0">
+                                  <table class="table-grid">
+                                    <tbody>
+                                      <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                                        <td class="">Product Name</td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r">{{d}}</td>
+                                      </tr>
+                                      <tr *ngIf="checkEmptyObj(perfData.Uindex)" class="table-grid-row"
+                                          [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <td *ngIf="taxOptFactSheet" class="pr0_5rem"
+                                            [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'"
+                                            [class.darkbg]="taxOptFactSheet">
+                                          <span class="d-flex">
+                                            <span class="ellips">
+                                              {{indexName}}
+                                            </span>
+                                            <span class="text-nowrap padl-025">(Before Tax)</span>
+                                          </span>
+                                        </td>
+                                        <td *ngIf="!taxOptFactSheet" class="wi_4r d">{{indexName}}</td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r d">{{perfData.Uindex[d] | weightFormat :'per'}}</td>
+                                      </tr>
+                                      <tr *ngIf="checkEmptyObj(perfData.AUindex) && taxOptFactSheet" class="table-grid-row"
+                                          [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <td [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'" class="pr0_5rem">
+                                          <span class="d-flex">
+                                            <span class="ellips">
+                                              {{indexName}}
+                                            </span>
+                                            <span class="text-nowrap padl-025">(After Tax)</span>
+                                          </span>
+                                        </td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r d">
+                                          {{perfData.AUindex[d]| weightFormat:'per'}}
+                                        </td>
+                                      </tr>
+                                      <tr *ngIf="checkEmptyObj(perfData.ETFind)" class="table-grid-row">
+                                        <td>
+                                          <!-- {{perfName}} -->
+                                          <span class="d-flex">
+                                            <span class="ellips ellipsWidth">
+                                              {{perfName}}
+                                            </span>
+                                            <span class="text-nowrap padl-025">{{cusindexNameTicker}}</span>
+                                          </span>
+                                        </td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r d">
+                                          {{perfData.ETFind[d]| weightFormat:'per'}}
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div *ngIf="perfData.years.length == 0" class="noData">
+                                  <p>No data available.</p>
+                                </div>
+                              </div>
+
+                            </div>
+                            <!-- Calendar Year Returns End-->
+                          </div>
+                          <!-- Tax Gain / Loss -->
+                          <div *ngIf="taxOptFactSheet" class="reviewFact__inner__table p1rem mb1rem">
+                            <div class="position-relative">
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Tax Gain / Loss </span>
+                                <div id="TradetableNavBuy" class="text-right tableNav">
+                                  <a class="nav-prev arrow scrollBtn" id="taxLeftArrow" (click)="scrollLeft('taxGainLossLeft')">
+                                    <span class="material-icons">chevron_left</span>
+                                  </a>
+                                  <a class="nav-next arrow ml0_5rem" id="taxRightArrow" (click)="scrollRight('taxGainLossRight')">
+                                    <span class="material-icons">chevron_right</span>
+                                  </a>
+                                </div>
+                              </div>
+                              <div>
+                                <div *ngIf="taxGainLossData.length>0"
+                                     class="reviewFact__inner__table_data  reviewFact__inner__table_fixed_data_taxGain TradetaxGainLoss" #taxGainLoss (scroll)="onScrolltaxGainLoss($event,'taxGainLoss')">
+                                  <table class="table-grid">
+                                    <tbody>
+                                      <tr class="table-grid-row" style="border-bottom: 2px solid var(--border);">
+                                        <td>Strategy Name</td>
+                                        <td *ngFor="let d of taxGainLossData" class="wi_4r">
+                                          {{d.year}}
+                                        </td>
+                                      </tr>
+                                      <tr *ngIf="taxGainLossData.length>0" class="table-grid-row">
+                                        <td>
+                                          <span class="ellips"
+                                                style="text-overflow: ellipsis; white-space: normal; overflow: auto; max-width: 15rem;">
+                                            {{perfName}}
+                                          </span>
+                                        </td>
+                                        <td *ngFor="let d of taxGainLossData" class="wi_4r"
+                                            style="text-align:end;white-space:nowrap;">
+                                          {{taxgainlossFormat(d)}}
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div *ngIf="taxGainLossData.length == 0" class="noData">
+                                  <p>No data available.</p>
+                                </div>
+                                <span *ngIf="taxGainLossData.length>0"
+                                      style="font-size: 0.7rem; color: #636376; font-style: italic;  width: 100%; display: block; text-align: left;">
+                                  * Based on market value
+                                </span>
+                              </div>
+                              <!--<div>
+              <div *ngIf="perfData.years.length>0"
+                class="reviewFact__inner__table_data reviewFact__inner__table_fixed_data reviewFact__inner__table_fixed_data_taxGain" #taxGainLoss (scroll)="onScrolltaxGainLoss($event,'taxGainLoss')">
+                <table  class="table-grid">
+                  <tbody>
+                    <tr class="table-grid-row">
+                      <td *ngFor="let data of perfData.years; let i = index"
+                        style="text-align:end;">{{data['year']}}</td>
+                    </tr>
+                    <tr class="table-grid-row">
+                      <td *ngFor="let data of perfData.years; let i = index"
+                        style="text-align:end;">{{data['BMVal']}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="perfData.years.length == 0" class="noData">
+                <p>No data</p>
+              </div>
+            </div>-->
+
+                            </div>
+                          </div>
+                          <!-- Tax Gain / Loss End-->
+                          <!-- Portfolio Characteristics-->
+                          <div class="reviewFact__inner__table p1rem mb1rem">
+                            <div class="position-relative">
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Portfolio Characteristics</span>
+                              </div>
+                              <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_portfolio overflow_auto">
+                                <table *ngIf="GetETFStrData.length>0 || selFSIndPerfData.length >0" class="table-grid">
+                                  <tbody>
+                                    <tr class="table-grid-row" style="border-bottom: 2px solid var(--border);">
+                                      <td>Annualized <br>Alpha</td>
+                                      <td>Information <br>Ratio</td>
+                                      <td>Beta</td>
+                                      <td>Upside <br>Capture</td>
+                                      <td>Downside <br>Capture</td>
+                                      <td>Correlation</td>
+                                      <td *ngIf="GetETFStrData.length>0 && sharedData.checkDivYield(GetETFStrData[0])">Yield</td>
+                                      <td>Batting <br>Average</td>
+                                      <td>Standard <br>Deviation</td>
+                                      <td>Tracking <br>Error</td>
+                                      <td>Turnover</td>
+                                    </tr>
+                                    <tr class="table-grid-row">
+                                      <td>{{GetETFStrData[0]['annulaizedAlpha'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['informationRatio'] | numValFormat}}</td>
+                                      <td>{{GetETFStrData[0]['beta'] | numValFormat}}</td>
+                                      <td>{{GetETFStrData[0]['upsideCapture'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['downSideCapture'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['correlation'] | numValFormat}}</td>
+                                      <td *ngIf="sharedData.checkDivYield(GetETFStrData[0])">{{GetETFStrData[0]['divYield'] | weightFormat:'per'}}</td>
+                                      <td>{{GetETFStrData[0]['battingAverage'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['stdDeviation'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['trackingError'] | weightFormat:'per'}}</td>
+                                      <td>{{GetETFStrData[0]['turnOver'] | weightFormat:'per'}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Portfolio Characteristics End-->
+                          <!-- Chart -->
+                          <div class="reviewFact__inner__table p1rem mb1rem">
+                            <div class="position-relative">
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Chart</span>
+                              </div>
+                              <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_portfolio">
+                                <div style="width:100%;" id="lineChartBuyModel_Trade"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Chart End-->
+                          <!-- Top Security Weights-->
+                          <div class="reviewFact__inner__table p1rem pb2rem">
+                            <div class="d-flex justify-content-between overflow_auto">
+                              <div class="position-relative w-100 pr2rem">
+                                <div class="reviewFact__inner__table_title mb1rem">
+                                  <span class="title">Top Security Weights</span>
+                                </div>
+                                <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_top_security">
+                                  <table class="table-grid" *ngIf="bldMyIndexMntHPortfolioData.length > 0">
+                                    <tbody>
+                                      <tr class="table-grid-row" style="border-bottom: 2px solid var(--border);">
+                                        <td>Security</td>
+                                        <td>Weight </td>
+                                      </tr>
+                                      <tr *ngFor="let data of bldMyIndexMntHPortfolioData.slice(0, 10)" class="table-grid-row">
+                                        <td>{{data.compname | changeCamelCase}}</td>
+                                        <td>{{data | weightFormatWithKey:'per'}}</td>
+                                      </tr>
+                                      <!-- <tr class="table-grid-row">
+                      <td>Dummy</td>
+                      <td>Dummy</td>
+                    </tr> -->
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="position-relative w-100">
+                                <div class="reviewFact__inner__table_title mb1rem">
+                                  <span class="title">Sector Weights</span>
+                                </div>
+                                <div style="width: 100%; min-height: 400px; max-height: 500px; " id="barChartBuyModel_popup_Trade" class="factsheetChartresize"></div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <!-- Top Security Weights End-->
+                        </div>
+                        <!-- All TableEnd -->
+                      </div>
+                      <div class="reviewFact__inner__right pl0_5rem">
+                        <div class="top__section lh_D">
+                          <div class="d-flex justify-content-between align-items-center mb_p_5">
+                            <p *ngIf="top10HoldingCheck()">Top 10 Components</p>
+                            <p *ngIf="!top10HoldingCheck()">
+                              Components <span *ngIf="!top10HoldingCheck()"
+                                                 class="count">{{bldMyIndexMntHPortfolioData.length}}</span>
+                            </p>
+                            <a class="d-flex align-items-center refreshBt"
+                               (click)="refreshMonthlyTrade()">
+                              <span class="material-icons">refresh</span>Refresh
+                            </a>
+                          </div>
+                          <span class="perfDate" *ngIf="sharedData.checkPriceAsof(bldMyIndexMntHPortfolioData)">
+                            Price as of:
+                            <span>
+                              {{sharedData.checkPriceDate(bldMyIndexMntHPortfolioData[0])}}
+                            </span>
+                          </span>
+                        </div>
+                        <div class="bottom__section scrollbox mt0_5rem" *ngIf="bldMyIndexMntHPortfolioData.length > 0">
+                          <ng-scrollbar class="scroll-event1 scrollbox2" thumbClass="white-scrollbars">
+                            <div class="list__view" *ngFor="let data of bldMyIndexMntHPortfolioData">
+                              <p class="ind__name">{{data.compname | changeCamelCase}}</p>
+                              <div class="d-flex align-items-center">
+                                <span class="ticker text-left">{{data.ticker}}</span>
+                                <span class="price text-right">{{data.price == null ? '' : '$'+data.price}}</span>
+                                <span class="price text-right">{{data | weightFormatWithKey:'per'}}</span>
+
+                              </div>
+                            </div>
+                          </ng-scrollbar>
+                        </div>
+                        <h4 class="C_TR d-flex align-items-center" *ngIf="!checkSHaccInfo() && C_AccountDetails == undefined">
+                          <span class="d-flex align-items-center justify-content-between" style="width: 78%;" *ngIf="indexRulesData[0].noofComp != null">
+                            <span class="d-flex align-items-center" style="border: none;">Cash Target: </span> <span class="d-flex align-items-center" style="border: none;">
+                              {{indexRulesData[0].cashTarget}}%
+                            </span>
+                          </span>
+                        </h4>
+                      </div>
+                    </div>
+                    }
+                  </div>
+                </div>
+              </div>
+              <!---- Based On Parent Click---->
+              <!---- Based On Account Click---->
+              <ul class="nav nav-pills container parentTab" role="tablist" *ngIf="!showMainTradeSection">
+                <li class="nav-item">
+                  <a class="nav-link active" data-bs-toggle="pill" href="#tradeList"
+                    (click)="selTab = 'trade';tradeTrack('Trade List')">Trade List</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="pill" href="#holding"
+                    (click)="selTab = 'moveHoldings';scrollLeft('');tradeTrack('Holdings')">Holdings</a>
+                </li>
+                <li *ngIf="checkNavLiq()" class="nav-item">
+                  <a class="nav-link " data-bs-toggle="pill" href="#index"
+                    (click)="selTab = 'construction';scrollLeft('');tradeTrack('Index Construction')">Index
+                    Construction</a>
+                </li>
+                <li *ngIf="checkNavLiq()" class="nav-item">
+                  <a class="nav-link" data-bs-toggle="pill" href="#factsheet"
+                    (click)="selTab = 'moveFactsheet';reviewfactsheetloadChart();tradeTrack('Factsheet')">Factsheet</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent" [class.child_acc_active]="checktradeAll"
+                *ngIf="!showMainTradeSection">
+                <div id="tradeList" class="container tab-pane active">
+                  <div class="sH100 p-rel tradeLoadHeight" style="min-height: calc(100vh - 17rem);">
+                    @if(!showMainTradeSection && currentAccList.length==1){
+                    <div class="acc_loader justify-content-center align-items-center" [style.display]="(timeOutCount==0 && reloadBtnSH) ?'flex':'none'">
+                      <span class="d-flex align-items-center">
+                        <span class="ref_text">Refreshing trade list</span>
+                        <span class="pulse-loader-dots" [style.width]="'1.5rem'" [style.height]="'0.5rem'"
+                              [style.color]="'var(--prim-button-color)'">
+                          <span></span><span></span><span></span>
+                        </span>
+                      </span>
+                    </div>
+                    }
+                    <div class="d-flex justify-content-end align-items-center mt0_5rem mb0_5rem">
+                    
+                      <div class="d-flex align-items-center dwnld-section"
+                           style="color: var(--leftSideText-B);font-size: 0.8rem;">
+                        <a *ngIf="checkShowMatTableTradeList(tradeCompanydataSource)"
+                           class="dialog_btn_P mr1rem D_btn c-pointer" (click)="tradeDownloadList()">
+                          <span class="material-icons"
+                                style="font-size: 1rem; padding-right: 0.25rem;">file_download</span>
+                          Download
+                        </a>
+                        <span>
+                          Count: <b>
+                            {{tradeCompanydataSource.data.length | numWithComma:',.2f' }}
+                          </b>
+                        </span>
+                        <span class="ml0_5rem">
+                          Net value:
+                          <b>{{netValue(tradeCompanydataSource.data,'value')}}</b>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="tab-content" [style.opacity]="(timeOutCount==0 && reloadBtnSH) ?'0':'1'">
+                      <div id="Current-trade" class="tab-pane active">
+                        <div class="split-mod-right">
+                          <div class="content-btm p0" style="position:relative">
+                            <div class="w-100">
+                              <div class="scrollbox">
+                                <table class="table global_table"
+                                       *ngIf="!checkShowMatTableTradeList(tradeCompanydataSource)">
+                                  <thead >
+                                    <tr>
+                                      <th>Company Name</th>
+                                      <th style="text-align: left">Ticker</th>
+                                      <th style="text-align:right">Action</th>
+                                      <th style="text-align:right">Order Type</th>
+                                      <th style="text-align:right">Price ($)</th>
+                                      <th style="text-align:right">Quantity</th>
+                                      <th style="text-align:right">Value</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr style=" height: 12rem;border:none">
+                                      <td style=" color: var(--leftSideText); text-align: center; font-size: 0.8rem;vertical-align: middle;border: 0;"
+                                          colspan="7">
+                                        Contemporary trade list are being updated. Please check again
+                                        shortly.
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <ng-container *ngIf="checkShowMatTableTradeList(tradeCompanydataSource)">
+                                  <ng-scrollbar #scrollable class="scroll-event scrollbox1 tablescrollbox1"
+                                                thumbClass="white-scrollbars">
+                                    <ng-container>
+                                      <mat-table matSort matSortActive="Ticker" matSortDisableClear="true"
+                                                 matSortDirection="asc" (matSortChange)="tradeListsortChange($event)"
+                                                 [dataSource]="tradeCompanydataSource" [trackBy]="TradeListTrackBy"
+                                                 class="global_mat_table" style="background: transparent;height: calc(100vh - 18rem); overflow: auto;">
+                                        <ng-container matColumnDef="Company Name">
+                                          <mat-header-cell mat-sort-header style="min-width: 40%; align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Company Name
+                                          </mat-header-cell>
+                                          <mat-cell style="min-width: 40%;"
+                                                    *matCellDef="let element">
+                                            {{element.companyName | nullDashPipe:'' }}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Ticker">
+                                          <mat-header-cell mat-sort-header style="text-align: left;align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Ticker
+                                          </mat-header-cell>
+                                          <mat-cell style="text-align: left" *matCellDef="let element">
+                                            <span class="badge badge-light-primary tickerbadge">{{element.ticker}}</span>
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Action">
+                                          <mat-header-cell mat-sort-header style="text-align:right;align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Action
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element;let i = index"
+                                                    [style.color]="element.buyOrSell == 'Buy'?'var(--successColor)':'var(--errorColor)'">
+                                            {{element.buyOrSell}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Order Type">
+                                          <mat-header-cell style="align-items: center;" *matHeaderCellDef>
+                                            Order Type
+                                          </mat-header-cell>
+                                          <mat-cell *matCellDef="let element">{{'Market'}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Price ($)">
+                                          <mat-header-cell class="row_reverse" mat-sort-header style="align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Price ($)
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" *matCellDef="let element;let i = index">
+                                            {{element.price | priceFormat:'$,.2f' }}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Quantity">
+                                          <mat-header-cell class="row_reverse" mat-sort-header style="align-items: center;"
+                                                           *matHeaderCellDef>
+                                            Quantity
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" *matCellDef="let element;let i = index">
+                                            {{element.noofShares| numWithComma:','}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Value">
+                                          <mat-header-cell class="row_reverse" style="align-items: center; padding-right: 1rem;"
+                                                           *matHeaderCellDef>
+                                            Value
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" *matCellDef="let element;let i = index"
+                                                    style="padding-right: 1rem; white-space: nowrap"
+                                                    [style.color]="checkTL_ValueColor(element)?'var(--successColor)':'var(--errorColor)'">
+                                            {{checkTL_ValueColor(element) ? checkValPrice(element.value):'- '+checkValPrice(element.value) }}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedTradeColumns;sticky:true"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedTradeColumns"></mat-row>
+                                      </mat-table>
+                                    </ng-container>
+                                  </ng-scrollbar>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="index" class="container tab-pane fade">
+                  <div class="review_fact sH100 p-rel" style="margin: 1rem 0; min-height: calc(100vh - 16rem);"
+                    *ngIf="indexRulesData.length <= 0">
+                    <div class="acc_loader" style="display:block;z-index:9">
+                      <mat-spinner class="reviewloader-spinner"></mat-spinner>
+                    </div>
+                  </div>
+                  <div class="d-flex" *ngIf="indexRulesData.length > 0">
+                    <div class="indexConstruction" id="indexRulesModalInner_T">
+                      <div>
+                        <div class="scrollbox build-my-sec-l" [class.ICHeight]="showMainTradeSection == false && checktradeAll == true">
+                          <div class="indexTimeline-content pr1rem">
+                            <div class="pr1rem mb1rem indexTimelinetext">
+                              <h4 class="mt1rem">Filters</h4>
+                            </div>
+                            <div *ngIf="factorsGrp.length > 0">
+                              <!--<div class="pe-3 mb-1 indexTimelinetext" *ngIf="indexRulesData[0].range != '100'"><h4>Expectation Risk Factor <span style="font-size: 0.6rem;color: var(--leftSideText);opacity: .6;float: right;">(Excluded)</span></h4></div>-->
+                              <ng-container *ngFor="let f_data of factorsGrp">
+                                <ng-container *ngIf="f_data.factorid == 18">
+                                  <div class="overflow-auto">
+                                    <div class="filtersList avoidFilter">
+                                      <span class="timelinetitle">{{checkfactorName(f_data.factorid)}}</span>
+                                      <!---- percentage -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 0">
+                                        <div class="popuprangeSliderT erfBar">
+                                          <div class="progress-container">
+                                            <div class="progress" [ngStyle]="{'width.%':(f_data.startval)}"></div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(f_data.startval)-3}">
+                                              <div class="percentage" style="background: #343553">{{f_data.startval}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex">
+                                            <span>0%</span>
+                                            <span>100%</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- percentage -->
+                                      <!---- value -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 1">
+                                        <div class="popuprangeSliderT">
+                                          <div class="progress-container">
+                                            <div class="progress" [ngStyle]="{'width.%':(100-f_data.eRange)}"></div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(100-f_data.eRange)-3}">
+                                              <div class="percentage">{{convert2digits(f_data.endval*100,
+                                                f_data.factorid)}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex">
+                                            <span>{{convert2digits(f_data.dmax*100, f_data.factorid) | number:'1.0-0'}}%</span>
+                                            <span>{{convert2digits(f_data.dmin*100, f_data.factorid) | number:'1.0-0'}}%</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- value -->
+                                    </div>
+                                  </div>
+                                </ng-container>
+                              </ng-container>
+                            </div>
+                            <div class="">
+                              <div class="overflow-auto" *ngIf="indexrulesCmpy.length > 0">
+                                <div class="filtersList avoidFilter">
+                                  <span class="timelinetitle">
+                                    Companies <span
+                                      style="font-size: 0.6rem;color: var(--leftSideText);opacity: .6;float: right;">(Excluded)</span>
+                                  </span>
+                                  <div class="indexTimeline-ticker scrollbox">
+                                    <div *ngFor="let item of indexrulesCmpy" class="example-item"
+                                      style="padding-right: 0.2rem; margin: 0; margin-top: 0.2rem;">
+                                      <div class="mat-CusVirTable gridlist-e">
+                                        <div class="d-flex">
+                                          <div class="details-e border-d">
+                                            <div class="top-e">{{item.name}}</div>
+                                            <div class="bottm-e">
+                                              <span class="tick-l-e">{{item.ticker}}</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" style="" *ngIf="indexrulesGICS.length > 0">
+                                <div class="filtersList avoidFilter">
+                                  <span class="timelinetitle">
+                                    Sectors (GICS) <span
+                                      style="font-size: 0.6rem;color: var(--leftSideText);opacity: .6;float: right;">(Excluded)</span>
+                                  </span>
+                                  <div class="indexTimeline-ticker scrollbox">
+                                    <div class="grid-list-T w-100 excGicsList" style="padding-top: 0rem ">
+                                      <ul style=" margin: 0; margin-top: 0.2rem;">
+                                        <li *ngFor="let data of indexrulesGICS" style="cursor:default !important;">
+                                          <span class="D_list"
+                                            style="cursor:default !important;">
+                                            <span class="d-flex w-100 align-items-center justify-content-between">
+                                              <span style="cursor:default !important;">{{data.name}}</span>
+                                              <!--<span class="med-l" [style.background]="cl(data.med)" style="width: auto !important; color: #fff !important;" *ngIf="index_const_weight == 'ERF' || index_const_select == 'ERF'">{{data.med  }}</span>-->
+                                            </span>
+                                          </span>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--<div class="pe-3 mb-1 indexTimelinetext" *ngIf="indexrulesCategory.length > 0 || indexRulesData[0].rating != ''"><h4>ESG <span style="font-size: 0.6rem;color: var(--leftSideText);opacity: .6;float: right;">(Excluded)</span></h4></div>-->
+                            
+                            <div *ngIf="factorsGrp.length > 0">
+                              <!--<div class="pe-3 mb-1 indexTimelinetext" *ngIf="indexRulesData[0].range != '100'"><h4>Expectation Risk Factor <span style="font-size: 0.6rem;color: var(--leftSideText);opacity: .6;float: right;">(Excluded)</span></h4></div>-->
+                              <ng-container *ngFor="let f_data of factorsGrp">
+                                <ng-container *ngIf="f_data.factorid != 18">
+                                  <div class="overflow-auto">
+                                    <div class="filtersList avoidFilter">
+                                      <span class="timelinetitle">{{checkfactorName(f_data.factorid)}}</span>
+                                      <!---- percentage -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 0">
+                                        <div class="popuprangeSliderT">
+                                          <div class="progress-container factors"
+                                            [style.width]="functionPercentage(f_data.endval-2) ? '90%':'99%'">
+                                            <div class="progress"
+                                              [ngStyle]="{'width.%':((f_data.endval) - f_data.startval),'left.%':(f_data.startval+3)}">
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':f_data.startval}">
+                                              <div class="percentage">{{f_data.startval}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(f_data.endval-2)}">
+                                              <div class="percentage">{{f_data.endval}}%</div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex">
+                                            <span>0%</span>
+                                            <span>100%</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- percentage -->
+                                      <!---- value -->
+                                      <div class="indexTimeline-ticker Losers" style="display: flex;"
+                                        *ngIf="f_data.perorval == 1">
+                                        <div class="popuprangeSliderT">
+                                          <div class="progress-container factors"
+                                            [style.width]="function(f_data.eRange-2) ? '99%':'90%'">
+                                            <div class="progress"
+                                              [ngStyle]="{'width.%':convert2width(f_data.eRange, f_data.sRange),'left.%':(f_data.sRange+3)}">
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':f_data.sRange}">
+                                              <div class="percentage">
+                                                {{convert2digits(f_data.startval, f_data.factorid)}}<span class="perc"
+                                                  *ngIf="checkFac_per(f_data.factorid)">%</span>
+                                              </div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                            <div class="range-flex" [ngStyle]="{'left.%':(f_data.eRange-2)}">
+                                              <div class="percentage">{{convert2digits(f_data.endval,
+                                                f_data.factorid)}}<span class="perc"
+                                                  *ngIf="checkFac_per(f_data.factorid)">%</span></div>
+                                              <span class="range-round"></span>
+                                            </div>
+                                          </div>
+                                          <div class="rangeFlex" *ngIf="MK == true">
+                                            <span>{{convert2digits(f_data.dmin, f_data.factorid)}}<span class="perc"
+                                                *ngIf="checkFac_per(f_data.factorid)">%</span></span>
+                                            <span>{{convert2digits(f_data.dmax, f_data.factorid)}}<span class="perc"
+                                                *ngIf="checkFac_per(f_data.factorid)">%</span></span>
+                                          </div>
+                                          <div class="rangeFlex" *ngIf="MK == false">
+                                            <span>{{convert2digits(f_data.dmin, f_data.factorid) | number: '1.2-2'}}<span class="perc">%</span></span>
+                                            <span>{{convert2digits(f_data.dmax, f_data.factorid) | number: '1.2-2'}}<span class="perc">%</span></span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!---- value -->
+                                    </div>
+                                  </div>
+                                </ng-container>
+                              </ng-container>
+                            </div>
+                            <div class="overflow-auto ng-star-inserted" *ngIf="!checkconst_filters()">
+                              <div class="filtersList"><span class="timelinetitle text-center">No filters
+                                  selected</span></div>
+                            </div>
+                            <div class="indexTimeline-content" *ngIf="indexRulesData.length > 0">
+                              <div class="pr1rem mb1rem indexTimelinetext"
+                                   *ngIf="indexRulesData[0].selectBy.length > 0 || indexRulesData[0].noofComp != null || indexRulesData[0].weightBy.length > 0 || indexRulesData[0].taxEffAwareness != null">
+                                <h4 class="mt1rem">Selection & Weighting</h4>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].selectBy.length > 0">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Selected by</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{indexRulesData[0].selectBy[0].Name}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].noofComp != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Number of components</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{indexRulesData[0].noofComp}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].weightBy.length > 0">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Weighted by</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{indexRulesData[0].weightBy[0].Name}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="checkWeightflags(indexRulesData)">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Maximum security weight</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge">{{indexRulesData[0]['strData'].weightlimit}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].taxEffAwareness != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Tax Optimization</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0" *ngIf="indexRulesData[0].taxEffAwareness == 'Y'">Yes</span>
+                                    <span class="badge mb0" *ngIf="indexRulesData[0].taxEffAwareness == 'N'">No</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].strData != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Rebalance</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{sharedData.checkRebalanceType(indexRulesData[0]['strData'])}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="indexTimeline-content" *ngIf="checkSHaccInfo() && indexRulesData.length > 0">
+                              <div class="pr1rem mb1rem indexTimelinetext" *ngIf="C_AccountDetails != undefined">
+                                <h4 class="mt1rem">Account Settings</h4>
+                              </div>
+                              <div class="overflow-auto" *ngIf="C_AccountDetails != undefined">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Market Value</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">$ {{C_AccountDetails.marketvalue==null ? '-' :
+                                      C_AccountDetails.marketvalue | number: '1.2-2'}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="C_AccountDetails != undefined">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Transition Duration</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{sharedData.checkDate(C_AccountDetails)}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="C_AccountDetails != undefined">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Cash Target</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{C_AccountDetails.cashTarget}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto"
+                                *ngIf="C_AccountDetails != undefined && indexRulesData[0].taxEffAwareness == 'Y'">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Tax {{checkGainType(C_AccountDetails.taxType)}}
+                                    Target</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{checkAccSelNull(C_AccountDetails.taxTarget) | number:'1.0-0'}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto"
+                                *ngIf="C_AccountDetails != undefined && indexRulesData[0].taxEffAwareness == 'Y'">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Buffer {{checkGainType(C_AccountDetails.taxType)}}
+                                    Target</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span
+                                      class="badge mb0">{{checkAccSelNull(C_AccountDetails.taxBufferGainTarget)}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto"
+                                *ngIf="C_AccountDetails != undefined && indexRulesData[0].taxEffAwareness == 'Y'">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Long Term Tax Rate</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{checkAccSelNull(C_AccountDetails.longterm)}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto"
+                                *ngIf="C_AccountDetails != undefined && indexRulesData[0].taxEffAwareness == 'Y'">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Short Term Tax Rate</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{checkAccSelNull(C_AccountDetails.shortterm)}}%</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].restrictedList != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Restricted List</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{indexRulesData[0].restrictedList}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="overflow-auto" *ngIf="indexRulesData[0].dontSell != null">
+                                <div class="filtersList">
+                                  <span class="timelinetitle full">Don't Sell</span>
+                                  <div class="indexTimeline-ticker full">
+                                    <span class="badge mb0">{{indexRulesData[0].dontSell}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-centers" id="indexRulesModalT" style="width:70%;padding-top:1.5rem">
+                      <div class="w-100">
+                        <div class="w-100 h-100">
+                          <div class="split-mod-l">
+                            <div class="split-mod-right">
+                              <div class="content-btm p0 p0 scrollbox d-flex justify-content-center align-items-center"
+                                style="background: transparent; border: none;">
+                                <div class="tab-content" style="width: 100%;display: flex; justify-content: center;">
+                                  <div id="Construction" class="indexConstruction_R">
+                                    <div class="d-flex justify-content-between construction-rules"
+                                      *ngIf="indexRulesData.length > 0">
+                                      <div class="univ-chart">
+                                        <div class="box-c"></div>
+                                        <div class="box-d">
+                                          <span class="text-c" style="">
+                                            Universe
+                                          </span>
+                                        </div>
+                                        <div class="text-b">
+                                          <p><span>{{cuselindName}} </span> {{cuselindTicker}}</p>
+                                        </div>
+                                      </div>
+                                      <div class="calc-chart">
+                                        <div class="box-c"></div>
+                                        <div class="box-d">
+                                          <span class="text-c" style="">
+                                            Calculation
+                                          </span>
+                                        </div>
+                                        <div class="text-b">
+                                          <p *ngIf="index_const_calcu > 0" class="d-flex" style="flex-wrap:wrap;">
+                                            Removed <b>&nbsp;{{index_const_calcu}}&nbsp;</b>stocks <span
+                                              *ngIf="checkconst_filters()">
+                                              <span style="margin-right: 0.4rem;">using</span>
+                                              <span *ngIf="(accord_losers_length > 0 )"
+                                                    style="margin-right: 0.2rem;">Avoid the Losers (h-factor)</span>
+                                              <span *ngIf="(indexRulesData[0].strStockkey.length>0)"
+                                                style="margin-right: 0.4rem;">Company</span><span
+                                                *ngIf="(indexRulesData[0].strSector.length>0)"
+                                                style="margin-right: 0.4rem;">Sectors (GICS)</span>
+                                              <ng-container *ngFor="let f_data of factorsGrp">
+                                                <span
+                                                  style="margin-right: 0.2rem;">{{checkfactorName(f_data.factorid)}}</span>
+                                              </ng-container>
+                                              <span>filters.</span>
+                                            </span>
+                                          </p>
+                                          <p *ngIf="index_const_calcu == 0">Removed 0 stocks</p>
+                                        </div>
+                                      </div>
+                                      <div class="weight-chart">
+                                        <div class="box-c"></div>
+                                        <div class="box-d">
+                                          <span class="text-c" style="">
+                                            Weighting
+                                          </span>
+                                        </div>
+                                        <div class="text-b" *ngIf="indexRulesData.length > 0">
+                                          <p>
+                                            Selected by <b>{{index_const_select}}</b> Scores.
+                                          </p>
+                                          <hr />
+                                          <p>
+                                            Weighted by <b>{{index_const_weight}}</b> Scores.
+                                          </p>
+                                          <hr />
+                                          <p>
+                                            No of components <b>{{indexRulesData[0].noofComp}}</b>.
+                                          </p>
+                                          <hr *ngIf="index_const_tax == 'Yes'">
+                                          <p *ngIf="index_const_tax == 'Yes'">
+                                            <b>Yes</b> Tax Optimization.
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="factsheet" class="container tab-pane fade">
+                  <div class="review_fact sH100 p-rel tradeLoadHeight" style="margin: 1rem 0; min-height: calc(100vh - 17rem); ">
+                    <div class="acc_loader" style="display:none;z-index:9"
+                         [style.display]="(bldMyIndexMntHPortfolioData.length > 0 && GetETFStrData.length > 0 || !showSpinner_trade ?'none':'flex')">
+                      <mat-spinner class="reviewloader-spinner"></mat-spinner>
+                    </div>
+                    @if(factsheetError){
+                    <div class="factsheetErrorMsg" style=" text-align: center; padding-top: 5rem; color: var(--leftSideText); font-size: 0.85rem;">No data found!</div>
+                    }@else{
+                    <div class="reviewFact__inner">
+                      <div class="reviewFact__inner__left scrollbox">
+                        <div class="d-flex justify-content-between">
+                          <div class="lh_D mb1rem">
+                            <h3 class="m0">Review Factsheet:</h3>
+                            <span class="perfDate">
+                              Performance as of:
+                              <span style="color: var(--leftSideText-B);">
+                                <b>{{asOfDate}}</b>
+                              </span>
+                            </span>
+                          </div>
+                          <div class="reviewFact__dropdown pr1rem" *ngIf="checkSHaccInfo()">
+                            <div id="account_Exclusions" class="mb1rem enable_trading_check text-right">
+                              <p class="mb0">Account: <span><b>{{C_FullAccountDetails.accountId}}</b></span></p>
+                              <p class="mb0">
+                                Market Value: <span><b>
+                            ${{C_AccountDetails.marketvalue==null ? '-' : C_AccountDetails.marketvalue | number: '1.2-2'}}
+                          </b></span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="scrollableDiv scrollbox" [class.FactsheetHeight]="showMainTradeSection == false">
+                          <div class="reviewFact__inner__table p1rem mb1rem">
+                            <!-- Performance Annualized Trailing Returns -->
+                            <div>
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Performance Annualized Trailing Returns (Gross of fees) </span>
+                              </div>
+                              <div class="reviewFact__inner__table_data overflow_auto" id="account_Exclusions">
+                                <table class="table-grid" *ngIf="GetETFStrData.length>0">
+                                  <tbody>
+                                    <tr class="table-grid-row">
+                                      <td style="">Product Name</td>
+                                      <td>
+                                        YTD
+                                      </td>
+                                      <td>1 Year</td>
+                                      <td>3 Years</td>
+                                      <td>5 Years</td>
+                                      <!--<td>7 Years</td>-->
+                                      <td>10 Years</td>
+                                    </tr>
+                                    <tr *ngIf="GetETFStrData.length>0"
+                                        [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'"
+                                        class="table-grid-row">
+                                      <td *ngIf="taxOptFactSheet"
+                                          [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <span class="d-flex">
+                                          <span class="ellips">
+                                            {{indexName}}
+                                          </span>
+                                          <span class="text-nowrap padl-025" *ngIf="taxOptFactSheet">(Before Tax)</span>
+                                        </span>
+                                      </td>
+                                      <td *ngIf="!taxOptFactSheet">{{indexName}}</td>
+                                      <td>{{GetETFStrData[0]['ytdReturn']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['y1Return'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['y3Return'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['y5Return'] | percentFormat}}</td>
+                                      <!--<td>{{GetETFStrData[0]['y7Return'] | percentFormat}}</td>-->
+                                      <td>{{GetETFStrData[0]['y10Return']| percentFormat}}</td>
+                                    </tr>
+                                    <tr *ngIf="GetETFStrData.length>2 && taxOptFactSheet"
+                                        [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'"
+                                        class="table-grid-row">
+                                      <td [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <span class="d-flex">
+                                          <span class="ellips">
+                                            {{indexName}}
+                                          </span>
+                                          <span class="text-nowrap padl-025" *ngIf="taxOptFactSheet">(After Tax)</span>
+                                        </span>
+                                      </td>
+                                      <td>{{GetETFStrData[2]['ytdReturn']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[2]['y1Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[2]['y3Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[2]['y5Return']| percentFormat}}</td>
+                                      <!--<td>{{GetETFStrData[2]['y7Return']| percentFormat}}</td>-->
+                                      <td>{{GetETFStrData[2]['y10Return']| percentFormat}}</td>
+                                    </tr>
+                                    <tr *ngIf="GetETFStrData.length>1" class="table-grid-row">
+                                      <td class="d-flex"><span class="ellips ellipsWidth">{{perfName}}</span><span class="text-nowrap padl-025">{{cusindexNameTicker}}</span></td>
+                                      <td>{{GetETFStrData[1]['ytdReturn']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[1]['y1Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[1]['y3Return']| percentFormat}}</td>
+                                      <td>{{GetETFStrData[1]['y5Return']| percentFormat}}</td>
+                                      <!--<td>{{GetETFStrData[1]['y7Return']| percentFormat}}</td>-->
+                                      <td>{{GetETFStrData[1]['y10Return']| percentFormat}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <!-- Performance Annualized Trailing Returns End -->
+                            <!-- Calendar Year Returns -->
+                            <div class="mt2rem position-relative">
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Calendar Year Returns (Gross of fees) </span>
+                                <div id="TradeArrowWrap2" class="text-right tableNav">
+                                  <a class="nav-prev arrow scrollBtn" id="calLeftArrow"
+                                     (click)="scrollLeft('calendarYearReturnsLeft')">
+                                    <span class="material-icons">chevron_left</span>
+                                  </a>
+                                  <a class="nav-next arrow ml0_5rem" id="calRightArrow"
+                                     (click)="scrollRight('calendarYearReturnsRight')">
+                                    <span class="material-icons">chevron_right</span>
+                                  </a>
+                                </div>
+                              </div>
+                              <div>
+                                <div class="reviewFact__inner__table_data reviewFact__inner__table_fixed_data reviewFact__inner__table_data_calendar TradecalendarYearReturns"
+                                     #calendarYearReturns (scroll)="onScroll($event,'calendarYearReturns')"
+                                     id="account_Exclusions" *ngIf="perfData.years.length>0">
+                                  <table class="table-grid">
+                                    <tbody>
+                                      <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                                        <td class="pr0_5rem">Product Name</td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r">{{d}}</td>
+                                      </tr>
+                                      <tr class="table-grid-row" *ngIf="checkEmptyObj(perfData.Uindex)"
+                                          [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <td *ngIf="taxOptFactSheet" class="pr0_5rem"
+                                            [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'"
+                                            [class.darkbg]="taxOptFactSheet">
+                                          <span class="d-flex">
+                                            <span class="ellips">
+                                              {{indexName}}
+                                            </span>
+                                            <span class="text-nowrap padl-025">(Before Tax)</span>
+                                          </span>
+                                        </td>
+                                        <td *ngIf="!taxOptFactSheet" class="wi_4r d" [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">{{indexName}}</td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r d" [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">{{perfData.Uindex[d]| weightFormat :'per'}}</td>
+                                      </tr>
+                                      <tr class="table-grid-row"
+                                          *ngIf="checkEmptyObj(perfData.AUindex) && taxOptFactSheet"
+                                          [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'">
+                                        <td [style.background]="taxOptFactSheet ? 'var(--modalBodyColor)':'var(--topNavbar)'" class="pr0_5rem">
+                                          <span class="d-flex">
+                                            <span class="ellips">
+                                              {{indexName}}
+                                            </span>
+                                            <span class="text-nowrap padl-025">(After Tax)</span>
+                                          </span>
+                                        </td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r d">{{perfData.AUindex[d]| weightFormat :'per'}}</td>
+                                      </tr>
+                                      <tr *ngIf="checkEmptyObj(perfData.ETFind)" class="table-grid-row">
+                                        <td class="pr0_5rem">
+                                          <span class="d-flex">
+                                            <span class="ellips ellipsWidth">
+                                              {{perfName}}
+                                            </span>
+                                            <span class="text-nowrap padl-025">{{cusindexNameTicker}}</span>
+                                          </span>
+                                        </td>
+                                        <td *ngFor="let d of perfData.years" class="wi_4r">
+                                          {{perfData.ETFind[d]| weightFormat :'per' }}
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div *ngIf="perfData.years.length == 0" class="noData">
+                                  <p>No data available.</p>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Calendar Year Returns End-->
+                          </div>
+                          <!-- Tax Gain / Loss -->
+                          <div *ngIf="taxOptFactSheet" class="reviewFact__inner__table p1rem mb1rem">
+                            <div class="position-relative">
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Tax Gain / Loss </span>
+                                <div id="TradetableNavBuy2" class="text-right tableNav">
+                                  <a class="nav-prev arrow scrollBtn" id="taxLeftArrow"
+                                     (click)="scrollLeft('taxGainLossLeft')">
+                                    <span class="material-icons">chevron_left</span>
+                                  </a>
+                                  <a class="nav-next arrow ml0_5rem" id="taxRightArrow"
+                                     (click)="scrollRight('taxGainLossRight')">
+                                    <span class="material-icons">chevron_right</span>
+                                  </a>
+                                </div>
+                              </div>
+                              <div>
+                                <div *ngIf="taxGainLossData.length>0"
+                                     class="reviewFact__inner__table_data  reviewFact__inner__table_fixed_data_taxGain TradetaxGainLoss" id="TaxGainPerfName"
+                                     #taxGainLoss (scroll)="onScrolltaxGainLoss($event,'taxGainLoss')">
+                                  <table class="table-grid">
+                                    <tbody>
+                                      <tr class="table-grid-row" style="border-bottom: 3px solid var(--border);">
+                                        <td>Strategy Name</td>
+                                        <td *ngFor="let d of taxGainLossData" class="wi_4r">{{d.year}}</td>
+                                      </tr>
+                                      <tr *ngIf="taxGainLossData.length>0" class="table-grid-row">
+                                        <td>
+                                          <span class="ellips">
+                                            {{perfName}}
+                                          </span>
+                                        </td>
+                                        <td *ngFor="let d of taxGainLossData" class="wi_4r">{{taxgainlossFormat(d)}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <div *ngIf="taxGainLossData.length == 0" class="noData">
+                                <p>No data available.</p>
+                              </div>
+                              <span *ngIf="taxGainLossData.length>0"
+                                    style="font-size: 0.7rem; color: #636376; font-style: italic;  width: 100%; display: block; text-align: left;">
+                                * Based on market value
+                              </span>
+                              <!--<div>
+              <div *ngIf="perfData.years.length>0 && perfData.years[0]['BMVal'] != undefined"
+                   class="reviewFact__inner__table_data reviewFact__inner__table_fixed_data reviewFact__inner__table_fixed_data_taxGain" id="TaxGainBMVAL"
+                   #taxGainLoss (scroll)="onScrolltaxGainLoss($event,'taxGainLoss')">
+                <table class="table-grid">
+                  <tbody>
+                    <tr class="table-grid-row">
+                      <td *ngFor="let data of perfData.years; let i = index"
+                          style="text-align:end;">
+                        {{data['year']}}
+                      </td>
+                    </tr>
+                    <tr class="table-grid-row">
+                      <td *ngFor="let data of perfData.years; let i = index"
+                          style="text-align:end;">
+                        {{data['BMVal']}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="perfData.years.length == 0" class="noData">
+                  <p>No data</p>
+                </div>
+              </div>
+            </div>-->
+                            </div>
+                          </div>
+                          <!-- Tax Gain / Loss End-->
+                          <!-- Portfolio Characteristics-->
+                          <div class="reviewFact__inner__table p1rem mb1rem">
+                            <div class="position-relative">
+                              <div class="reviewFact__inner__table_title mb1rem">
+                                <span class="title">Portfolio Characteristics</span>
+                              </div>
+                              <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_portfolio">
+                                <table *ngIf="GetETFStrData.length>0 || selFSIndPerfData.length >0" class="table-grid">
+                                  <tbody>
+                                    <tr class="table-grid-row" style="border-bottom: 2px solid var(--border);">
+                                      <td>Annualized <br>Alpha</td>
+                                      <td>Information <br>Ratio</td>
+                                      <td>Beta</td>
+                                      <td>Upside <br>Capture</td>
+                                      <td>Downside <br>Capture</td>
+                                      <td>Correlation</td>
+                                      <td *ngIf="GetETFStrData.length>0 && sharedData.checkDivYield(GetETFStrData[0])">Yield</td>
+                                      <td>Batting <br>Average</td>
+                                      <td>Standard <br>Deviation</td>
+                                      <td>Tracking <br>Error</td>
+                                      <td>Turnover</td>
+                                    </tr>
+                                    <tr class="table-grid-row">
+                                      <td>{{GetETFStrData[0]['annulaizedAlpha'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['informationRatio'] | numValFormat}}</td>
+                                      <td>{{GetETFStrData[0]['beta'] | numValFormat}}</td>
+                                      <td>{{GetETFStrData[0]['upsideCapture'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['downSideCapture'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['correlation'] | numValFormat}}</td>
+                                      <td *ngIf="sharedData.checkDivYield(GetETFStrData[0])">{{GetETFStrData[0]['divYield'] | weightFormat:'per'}}</td>
+                                      <td>{{GetETFStrData[0]['battingAverage'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['stdDeviation'] | percentFormat}}</td>
+                                      <td>{{GetETFStrData[0]['trackingError'] | weightFormat:'per'}}</td>
+                                      <td>{{GetETFStrData[0]['turnOver'] | weightFormat:'per'}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Portfolio Characteristics End-->
+                          <!-- Chart -->
+                          <div class="reviewFact__inner__table p1rem mb1rem">
+                            <div class="reviewFact__inner__table_title mb1rem">
+                              <span class="title">Chart</span>
+                            </div>
+                            <div style="width:100%;">
+                              <div style="width:100%;" id="lineChartBuyModel_Trade"></div>
+                            </div>
+                          </div>
+                          <!-- Chart End-->
+                          <!-- Top Security Weights-->
+                          <div class="reviewFact__inner__table p1rem pb2rem">
+                            <div class="d-flex justify-content-between">
+                              <div class="position-relative w-100 pr2rem">
+                                <div class="reviewFact__inner__table_title mb1rem">
+                                  <span class="title">Top Security Weights</span>
+                                </div>
+                                <div class="reviewFact__inner__table_data  reviewFact__inner__table_data_top_security">
+
+                                  <table class="table-grid" *ngIf="bldMyIndexMntHPortfolioData.length > 0">
+                                    <tbody>
+                                      <tr class="table-grid-row" style="border-bottom: 2px solid var(--border);">
+                                        <td>Security</td>
+                                        <td>Weight </td>
+                                      </tr>
+                                      <tr *ngFor="let data of bldMyIndexMntHPortfolioData.slice(0, 10)" class="table-grid-row">
+                                        <td>{{data.compname | changeCamelCase}}</td>
+                                        <td>{{data | weightFormatWithKey:'per'}}</td>
+                                      </tr>
+                                      <!-- <tr class="table-grid-row">
+                      <td>Dummy</td>
+                      <td>Dummy</td>
+                    </tr> -->
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="position-relative w-100">
+                                <div class="reviewFact__inner__table_title mb1rem">
+                                  <span class="title">Sector Weights</span>
+                                </div>
+                                <div class="tradeChart">
+                                  <div style="width: 100%; min-height: 400px; max-height: 500px;" id="barChartBuyModel_popup_Trade" class="factsheetChartresize"></div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <!-- Top Security Weights End-->
+                        </div>
+                      </div>
+                      <div class="reviewFact__inner__right pl0_5rem">
+                        <div class="top__section lh_D">
+                          <div class="d-flex justify-content-between">
+                            <p *ngIf="top10HoldingCheck()">Top 10 Components</p>
+                            <p *ngIf="!top10HoldingCheck()">
+                              Components <span *ngIf="!top10HoldingCheck()"
+                                                 class="count">{{bldMyIndexMntHPortfolioData.length}}</span>
+                            </p>
+                            <a class="d-flex align-items-center refreshBt align-items-center mb_p_5"
+                               (click)="refreshMonthlyTrade()">
+                              <span class="material-icons">refresh</span>
+                              Refresh
+                            </a>
+                          </div>
+                          <span class="perfDate" *ngIf="sharedData.checkPriceAsof(bldMyIndexMntHPortfolioData)">
+                            Price as of:
+                            <span>
+                              {{sharedData.checkPriceDate(bldMyIndexMntHPortfolioData[0])}}
+                            </span>
+                          </span>
+                        </div>
+                        <div class="bottom__section scrollbox mt0_5rem" *ngIf="bldMyIndexMntHPortfolioData.length > 0">
+                          <ng-scrollbar class="scroll-event1 scrollbox2" thumbClass="white-scrollbars">
+                            <div class="list__view" *ngFor="let data of bldMyIndexMntHPortfolioData">
+                              <p class="ind__name">{{data.compname | changeCamelCase}}</p>
+                              <div class="d-flex align-items-center">
+                                <span class="ticker text-left">{{data.ticker}}</span>
+                                <span class="price text-right">{{data.price == null ? '' : '$'+data.price}}</span>
+                                <span class="price text-right">{{data | weightFormatWithKey:'per'}}</span>
+
+                              </div>
+                            </div>
+                          </ng-scrollbar>
+                        </div>
+                        <div class="d-flex align-items-center C_TR"
+                             *ngIf="(C_AccountDetails != undefined && checkSHaccInfo())">
+                          <span class="d-flex align-items-center justify-content-between" style="width: 78%;">
+                            <span class="d-flex align-items-center" style="border: none;">Cash Target: </span> <span class="d-flex align-items-center">
+                              {{C_AccountDetails.cashTarget}}%
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    }
+                  </div>
+                </div>
+                <div id="holding" class="container tab-pane fade">
+                  <div class="sH100 p-rel tradeLoadHeight" style="min-height: calc(100vh - 17rem);">
+                    <div class="d-flex justify-content-between align-items-center mt0_5rem mb0_5rem">
+                      <ul class="nav nav-pills childTab" role="tablist">
+                        <li class="nav-item active">
+                          <a (click)="(folioSelTab='current')" class="nav-link active" data-bs-toggle="pill"
+                            href="#Current" style=" margin-left: 0;">Current portfolio</a>
+                        </li>
+                        <li class="nav-item"><a (click)="(folioSelTab='previous')" class="nav-link "
+                            data-bs-toggle="pill" href="#old">Previous portfolio</a></li>
+                      </ul>
+                      <div class="d-flex align-items-center dwnld-section">
+                        <a *ngIf="(checkShowMatTable(prevCompanydataSource) || checkShowMatTable(companydataSource))"
+                          (click)="downloadView()" class="dialog_btn_P mr1rem D_btn c-pointer">
+                          <span class="material-icons">file_download</span>
+                          Download
+                        </a>
+                        <span>Count: <b>{{checkCount()|
+                            numWithCommaRtnNullDash:',.2f'}}</b></span>
+                        <span class="ml0_5rem">Value: <b>${{checkMarketVal() |
+                            numWithCommaRtnNullDash:',.2f'}}</b></span>
+                      </div>
+                    </div>
+                    <div class="tab-content">
+                      <div id="Current" class="tab-pane active">
+                        <div class="split-mod-right">
+                          <div class="content-btm p0" style="position:relative">
+                            <div class="w-100">
+                              <div class="scrollbox">
+                                <table class="table global_table" *ngIf="!checkShowMatTable(companydataSource)">
+                                  <thead >
+                                    <tr>
+                                      <th>Company Name</th>
+                                      <th style="text-align: left">Ticker</th>
+                                      <th style="text-align:right">Weight</th>
+                                      <th style="text-align:right">Price</th>
+                                      <th style="text-align:right">Quantity</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr style=" height: 12rem;border:none">
+                                      <td style=" color: var(--leftSideText); text-align: center; font-size: 0.8rem;border: 0;vertical-align: middle;"
+                                        colspan="5">Contemporary portfolio holdings are being updated. Please check
+                                        again shortly.</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <!-- mat table -->
+                                <ng-container *ngIf="checkShowMatTable(companydataSource)">
+                                  <ng-scrollbar #scrollable class="scroll-event scrollbox1 tablescrollbox1"
+                                    thumbClass="white-scrollbars">
+                                    <ng-container>
+                                      <mat-table matSort matSortDisableClear="true" matSortActive="Ticker"
+                                        matSortDirection="asc" [dataSource]="companydataSource"
+                                        class="global_mat_table tblHeightCR" style="background: transparent;"
+                                        (matSortChange)="companysortChange($event)">
+                                        <ng-container matColumnDef="CompanyName">
+                                          <mat-header-cell style="min-width: 45%; align-items: center;"
+                                            *matHeaderCellDef mat-sort-header>
+                                            Company Name
+                                          </mat-header-cell>
+                                          <mat-cell style="min-width: 45%;"
+                                            *matCellDef="let element">{{element.companyName|
+                                            nullDashPipe:''}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Ticker">
+                                          <mat-header-cell style="text-align: left;align-items: center;"
+                                            *matHeaderCellDef mat-sort-header>
+                                            Ticker
+                                          </mat-header-cell>
+                                          <mat-cell style="text-align: left" *matCellDef="let element">
+                                            <span class="badge badge-light-primary tickerbadge">
+                                              {{element.ticker}}</span>
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Weight">
+                                          <mat-header-cell class="CelltradeToolTipPar row_reverse" style="text-align:right;align-items: center;"
+                                           *matHeaderCellDef mat-sort-header>
+                                            Weight
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse CelltradeToolTipPar" *matCellDef="let element">
+                                            <!--<div [matTooltip]="element.weight" [matTooltipPosition]="'above'"
+                                                 matTooltipClass="frequentlyOpenToolTip" #tooltip="matTooltip"
+                                                 class="dashboardTooltipText"></div>-->
+                                            {{element.weight | weightFormat :'per'}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Price">
+                                          <mat-header-cell class="row_reverse" style="align-items: center;" *matHeaderCellDef
+                                            mat-sort-header>
+                                            Price
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" *matCellDef="let element">
+                                          {{element.price | priceFormat:'$,.2f'}}
+                                          </mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="Quantity">
+                                          <mat-header-cell class="row_reverse" 
+                                            style="text-align: right; align-items: center; padding-right: 1rem"
+                                            *matHeaderCellDef mat-sort-header>
+                                            Quantity
+                                          </mat-header-cell>
+                                          <mat-cell class="row_reverse" style="text-align: right; padding-right: 1rem"
+                                            *matCellDef="let element">{{element.noofShares|
+                                            numWithComma:','}}</mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                                      </mat-table>
+                                    </ng-container>
+                                  </ng-scrollbar>
+                                </ng-container>
+                                <!-- mat table -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="old" class="tab-pane">
+                        <div class="split-mod-right">
+                          <div class="content-btm p0" style="position:relative">
+                            <div class="w-100">
+                              <div class="scrollbox">
+                                <table class="table global_table" style="margin-top:0rem;"
+                                  *ngIf="!checkShowMatTable(prevCompanydataSource)">
+                                  <thead >
+                                    <tr>
+                                      <th>Company Name</th>
+                                      <th style="text-align: left">Ticker</th>
+                                      <th style="text-align:right">Weight</th>
+                                      <th style="text-align:right">Price</th>
+                                      <th style="text-align:right">Quantity</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr style=" height: 12rem; border-bottom: 0px dashed var(--border) !important;">
+                                      <td style=" color: var(--leftSideText); text-align: center; font-size: 0.8rem;border: 0;vertical-align: middle;"
+                                        colspan="5">Your previous portfolio holdings are being revised. Please expet the
+                                        updated details to be available shortly.</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <!-- mat table -->
+                                <ng-container *ngIf="checkShowMatTable(prevCompanydataSource)">
+                                  <ng-scrollbar #scrollable class="scroll-event scrollbox1 tablescrollbox1"
+                                    thumbClass="white-scrollbars">
+                                    <mat-table matSort matSortDisableClear="true" matSortActive="Ticker"
+                                      matSortDirection="asc" [dataSource]="prevCompanydataSource"
+                                      class="global_mat_table "
+                                      (matSortChange)="prevCompanysortChange($event)" style="background: transparent;height: calc(100vh - 18rem);overflow: auto;">
+                                      <ng-container matColumnDef="CompanyName">
+                                        <mat-header-cell style="min-width: 45%; align-items: center;" *matHeaderCellDef
+                                          mat-sort-header>
+                                          Company Name
+                                        </mat-header-cell>
+                                        <mat-cell style="min-width: 45%;"
+                                          *matCellDef="let element">{{element.companyName| nullDashPipe:''}}</mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Ticker">
+                                        <mat-header-cell style="text-align: left;align-items: center;" *matHeaderCellDef
+                                          mat-sort-header>
+                                          Ticker
+                                        </mat-header-cell>
+                                        <mat-cell style="text-align: left" *matCellDef="let element">
+                                          <span class="badge badge-light-primary tickerbadge"> {{element.ticker}}</span>
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Weight">
+                                        <mat-header-cell style="text-align:right;align-items: center;"
+                                          class="row_reverse CelltradeToolTipPar" *matHeaderCellDef mat-sort-header>
+                                          Weight
+                                        </mat-header-cell>
+                                        <mat-cell class="row_reverse CelltradeToolTipPar" *matCellDef="let element">
+                                          <!--<div [matTooltip]="element.weight" [matTooltipPosition]="'above'"
+                                               matTooltipClass="frequentlyOpenToolTip" #tooltip="matTooltip"
+                                               class="dashboardTooltipText"></div>-->
+                                          {{element.weight | weightFormat :'per'}}
+                                        </mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Price">
+                                        <mat-header-cell class="row_reverse" style="align-items: center;" *matHeaderCellDef mat-sort-header>
+                                          Price
+                                        </mat-header-cell>
+                                        <mat-cell class="row_reverse" *matCellDef="let element">{{element.price| priceFormat:'$,.2f'}}</mat-cell>
+                                      </ng-container>
+                                      <ng-container matColumnDef="Quantity">
+                                        <mat-header-cell class="row_reverse" 
+                                          style="text-align: right; align-items: center; padding-right: 1rem"
+                                          *matHeaderCellDef mat-sort-header>
+                                          Quantity
+                                        </mat-header-cell>
+                                        <mat-cell class="row_reverse" style="text-align: right; padding-right: 1rem"
+                                          *matCellDef="let element"> {{element.noofShares |
+                                          numWithComma:','}}</mat-cell>
+                                      </ng-container>
+                                      <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+                                      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                                    </mat-table>
+                                  </ng-scrollbar>
+                                </ng-container>
+                                <!-- mat table -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="acc_loader" id="view_load_spinner" style="display:none"
+                      [style.display]="(showSpinner_account?'flex':'none')">
+                      <mat-spinner class="reviewloader-spinner"></mat-spinner>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--- Single Account--->
+            </div>
+          </div>
+        </div>
+        <!---- Based On Account Click---->
+        
+        <div class="tradeBtnGrp" *ngIf="showMainTradeSection && currentAccList.length>0">
+          <p>{{sharedData.checkMyAppMessage(6,105)}}</p>
+          <div class="d-flex">
+            <div class="btmBtn">
+              <a style="color: #fff;font-size: 0.7rem;margin: 0.5rem;">
+                <ng-container *ngIf="(timeOutCount==0 && reloadBtnSH)">
+                  <span style="display: flex;align-items: center;">
+                    <span style="margin: 0rem 0.3rem;">Fetching trade list </span>
+                    <span class="pulse-loader-dots" [style.width]="'1.5rem'" [style.height]="'0.5rem'"
+                      [style.color]="'var(--leftSideText)'">
+                      <span></span><span></span><span></span>
+                    </span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="timeOutCount>0 && showTradeBtn">Time out in: {{timeOutCount}}s</ng-container>
+              </a>
+              <a *ngIf="showTradeBtn && (checkShowMatTable(tradeCompanydataSource)) && !tradeBuyClicked && timeOutCount>0 && selTab == 'trade'"
+                data-bs-toggle="modal" data-bs-target="#tradeCompAlert" class="dialog_btn_P cursor-pointer">Confirm</a>
+              <a *ngIf="!showTradeBtn && (checkShowMatTable(tradeCompanydataSource)) && !tradeBuyClicked && timeOutCount>0 && selTab == 'trade'"
+                class="dialog_btn_P disabled">Confirm</a>
+              <a *ngIf="!checkShowMatTable(tradeCompanydataSource)"
+                class="dialog_btn_P disabled">Confirm</a>
+            </div>
+          </div>
+        </div>
+        <!--- Single Account--->
+        <div class=" tradeBtnGrp" *ngIf="!showMainTradeSection && currentAccList.length==1">
+          <p>{{sharedData.checkMyAppMessage(6,105)}}</p>
+          <div class="d-flex">
+            <div class="btmBtn d-flex">
+              <a class="d-flex fetchList">
+                <ng-container *ngIf="(timeOutCount==0 && reloadBtnSH)">
+                  <span class="d-flex align-items-center">
+                    <span style="margin: 0rem 0.3rem;">Fetching trade list </span>
+                    <span class="pulse-loader-dots" [style.width]="'1.5rem'" [style.height]="'0.5rem'"
+                      [style.color]="'var(--leftSideText)'">
+                      <span></span><span></span><span></span>
+                    </span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="timeOutCount>0 && showTradeBtn">Time out in: {{timeOutCount}}s</ng-container>
+              </a>
+              <a *ngIf="showTradeBtn &&(checkShowMatTable(tradeCompanydataSource)) && !tradeBuyClicked && timeOutCount>0 && selTab == 'trade'"
+                data-bs-toggle="modal" data-bs-target="#tradeCompAlert" class="dialog_btn_P cp d-flex align-items-center">Confirm</a>
+              <a *ngIf="!showTradeBtn &&(checkShowMatTable(tradeCompanydataSource)) && !tradeBuyClicked && timeOutCount>0 && selTab == 'trade'"
+                class="dialog_btn_P disabled d-flex align-items-center">Confirm</a>
+              <a *ngIf="(!checkShowMatTable(tradeCompanydataSource) || tradeBuyClicked) "
+                class="dialog_btn_P disabled d-flex align-items-center">Confirm</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<div class="trade_top">-->
+    <div id="showMatLoaderTrades"
+      style=" height: 95vh; display: none; top: 0px; position: absolute; background: transparent; width: 100%; left: 0px; overflow: hidden; border-radius: 0.465rem; z-index: 999;">
+      <mat-progress-bar mode="indeterminate"
+        style="position: absolute;top: 0px;left: 0px;display: block;height: 2px;width: 100%;overflow: hidden;"></mat-progress-bar>
+    </div>
+  <!--</div>-->
+  <!---- Loader Modal ----->
+  <div class="rev_main_tradeLoad" [style.display]="(showSpinner_factsheet?'flex':'none')" id="factsheet_loaderT"
+    style="position: absolute; top: 0px; height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; z-index: 999; background: var(--cardsHighlightColorDark); ">
+    <div class="common-prog-loader per-loader"
+      style="width: 20rem; height: auto;padding:0.5rem;display: flex; align-items: center; justify-content: center; flex-direction: column; border-radius: 0.465rem; margin-top: -4rem;">
+      <span class="div_n">Loading 
+        <span>{{factsheet_progress}}</span></span>
+      <mat-progress-bar mode="determinate" [value]="0"
+        style="padding-left: 10px; padding-right: 10px;margin-right:10px; width: 80%; transition: all .10s"></mat-progress-bar>
+      <span class="div_n div_n_load"
+        style="margin-top: 0.5rem; padding: 0; opacity: .5;">Implementing filtering and
+        selection</span>
+    </div>
+  </div>
+  <!---- Loader Modal ----->
+</div>
+<div class="modal fade" id="myTradeErrorModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+  aria-hidden="true" data-backdrop="static" style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:25%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="color: var(--btn-border);opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 576 575" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M287.625 574.933C445.918 574.933 575.092 445.761 575.092 287.467C575.092 129.173 445.914 0 287.625 0C129.336 0 0.158203 129.177 0.158203 287.467C0.158203 445.756 129.336 574.933 287.625 574.933ZM287.625 37.3333C425.758 37.3333 537.758 149.333 537.758 287.467C537.758 425.6 425.758 537.6 287.625 537.6C149.492 537.6 37.4915 425.6 37.4915 287.467C37.4915 149.333 149.492 37.3333 287.625 37.3333Z"
+                    fill="#E32755" />
+                  <path
+                    d="M184.585 390.507C188.32 394.241 192.799 395.736 198.023 395.736C203.252 395.736 207.731 394.241 211.46 390.507L287.627 313.6L364.533 390.507C368.268 394.241 372.747 395.736 377.971 395.736C383.2 395.736 387.679 394.241 391.408 390.507C398.877 383.038 398.877 371.095 391.408 364.371L313.763 287.464L390.669 210.557C398.138 203.089 398.138 191.145 390.669 184.421C383.201 176.953 371.257 176.953 364.533 184.421L287.627 261.328L210.72 184.421C203.251 176.953 191.308 176.953 184.584 184.421C177.115 191.89 177.115 203.833 184.584 210.557L261.491 287.464L184.584 364.371C177.12 371.09 177.12 383.037 184.584 390.507H184.585Z"
+                    fill="#E32755" />
+                </svg>
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(13,114)}}</p>
+            <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+            <div class="foot-l" style="text-align: center;">
+              <button type="button" class="btn btn-theme-alt" data-bs-dismiss="modal" style="
+              margin: 0;margin-left: 0.5rem;border-radius: 0.2rem;">
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="myTradeListErrorModal" tabindex="-1" role="dialog"
+  aria-labelledby="deleteModalLabel" aria-hidden="true" data-backdrop="static" style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:25%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="color: var(--btn-border);opacity: .75;">
+                <svg width="45" height="45" viewBox="0 0 576 575" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M287.625 574.933C445.918 574.933 575.092 445.761 575.092 287.467C575.092 129.173 445.914 0 287.625 0C129.336 0 0.158203 129.177 0.158203 287.467C0.158203 445.756 129.336 574.933 287.625 574.933ZM287.625 37.3333C425.758 37.3333 537.758 149.333 537.758 287.467C537.758 425.6 425.758 537.6 287.625 537.6C149.492 537.6 37.4915 425.6 37.4915 287.467C37.4915 149.333 149.492 37.3333 287.625 37.3333Z"
+                    fill="#E32755" />
+                  <path
+                    d="M184.585 390.507C188.32 394.241 192.799 395.736 198.023 395.736C203.252 395.736 207.731 394.241 211.46 390.507L287.627 313.6L364.533 390.507C368.268 394.241 372.747 395.736 377.971 395.736C383.2 395.736 387.679 394.241 391.408 390.507C398.877 383.038 398.877 371.095 391.408 364.371L313.763 287.464L390.669 210.557C398.138 203.089 398.138 191.145 390.669 184.421C383.201 176.953 371.257 176.953 364.533 184.421L287.627 261.328L210.72 184.421C203.251 176.953 191.308 176.953 184.584 184.421C177.115 191.89 177.115 203.833 184.584 210.557L261.491 287.464L184.584 364.371C177.12 371.09 177.12 383.037 184.584 390.507H184.585Z"
+                    fill="#E32755" />
+                </svg>
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">Trade list preview could not be loaded.</p>
+            <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+            <div class="foot-l" style="text-align: center;">
+              <button type="button" class="btn btn-theme-alt" data-bs-dismiss="modal" style="
+              margin: 0;margin-left: 0.5rem;border-radius: 0.2rem;">
+                Ok
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="myCustomIndErrorModal_review" tabindex="-1" role="dialog"
+  aria-labelledby="myCustomIndErrorModal_review" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false"
+  style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:35%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <!--<div class="close-l" data-dismiss="modal"><span class="material-icons">close</span></div>-->
+          <!--<div class="content-top"><p>Access Denied</p></div>-->
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(5,34)}}</p>
+            <p style="font-size: 0.9rem; text-align: center;">Please try again later.</p>
+            <div class="foot-l" style="text-align: center;">
+              <button type="button" class="mod-foot-btn-activeP" data-bs-dismiss="modal"
+                (click)="forceClosereviewind();closeModal()">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade warningautoModel" id="tradeCompAlert" tabindex="-1" role="dialog"
+  aria-labelledby="tradeCompAlert" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false"
+  style="background: #000000bf !important;">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:30%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="close-l" data-bs-dismiss="modal" aria-label="Close" style="z-index:9;"
+            (click)="tradeBuyClicked = false"><span class="material-icons">close</span></div>
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem; color: var(--warningColor); opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <h3>Trade confirmation</h3>
+            <p>{{sharedData.checkMyAppMessage(13,117)}}</p>
+            <p style="border-top: 1px dashed var(--border);padding-top: 1rem;margin-top: 0.5rem;">
+              {{sharedData.checkMyAppMessage(6,105)}}
+            </p>
+            <div class="foot-l">
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" (click)="tradeBuy()" data-bs-dismiss="modal"
+                *ngIf="!tradeBuyClicked">Execute</button>
+              <button type="button" class="mod-foot-btn-activeP mr_p_5" disabled style="opacity:0.5"
+                *ngIf="tradeBuyClicked">Execute</button>
+              <button style="padding: 0.5rem 1rem;" type="button" class="mod-foot-btn-activeS" data-bs-dismiss="modal"
+                (click)="tradeBuyClicked = false">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="warningautoModel modal fade" id="API_lockmodal" tabindex="-1" role="dialog"
+  aria-labelledby="deleteModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false"
+  style="background: #00000080 !important">
+  <div class="modal-dialog modal-dialog-centered delete-stat-modal" role="document" style="max-width:35%">
+    <div class="modal-content">
+      <div class="split-mod-l">
+        <div class="split-mod-right">
+          <div class="content-btm" style="border-radius: 0.5rem !important; border: none; text-align: center; ">
+            <p style="text-align: center;">
+              <span class="material-icons" style="font-size: 3rem;color: var(--btn-border);opacity: .75;">
+                error_outline
+              </span>
+            </p>
+            <p style="font-size: 0.9rem; text-align: center;">{{sharedData.checkMyAppMessage(13,118)}}</p>
+            <div class="foot-l" style="text-align: center;margin-bottom:1rem">
+              <button type="button" class="mod-foot-btn-activeP" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
